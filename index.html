@@ -24,11 +24,31 @@
             flcBorder: "#E5E7EB",
           },
           fontFamily: {
-            heading: ["'Playfair Display'", "serif"],
-            body: ["Inter", "system-ui", "sans-serif"],
+            heading: ["'Playfair Display'", "Georgia", "serif"],
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
           },
           letterSpacing: {
             widePlus: "0.18em",
+            tighter: "-0.02em",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'scale-in': 'scaleIn 0.4s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
           },
         },
       },
@@ -37,130 +57,197 @@
 
   <!-- Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
+  
+  <style>
+    /* Premium Typography */
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Subtle Fade-in on Load */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Card Hover Effects */
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 42, 92, 0.12), 0 8px 16px -8px rgba(0, 42, 92, 0.08);
+    }
+    
+    /* Premium Link Underline */
+    .link-underline {
+      position: relative;
+      text-decoration: none;
+    }
+    
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s ease;
+    }
+    
+    .link-underline:hover::after {
+      width: 100%;
+    }
+    
+    /* Staggered Animation */
+    .stagger-item {
+      animation: slideUp 0.5s ease-out backwards;
+    }
+    
+    .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* Button Hover Effect */
+    .btn-premium {
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-premium::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+    
+    .btn-premium:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
 </head>
 <body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
   <main class="min-h-screen">
     <!-- Outer container -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <!-- Page Header -->
-      <header class="border-b border-flcBorder pb-8 mb-10 lg:mb-12">
-        <p
-          class="text-[11px] tracking-widePlus uppercase text-flcGold font-semibold"
-        >
+      <header class="border-b border-flcBorder/50 pb-12 mb-16 lg:mb-20 fade-in-section is-visible">
+        <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6">
           FLC Publishing House
         </p>
-        <div class="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div class="max-w-3xl">
-            <h1
-              class="text-3xl sm:text-4xl lg:text-5xl font-heading font-semibold text-flcNavy leading-tight"
-            >
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-flcNavy leading-[1.1] tracking-tighter mb-6">
               Sermon Notes, Bible Studies &amp; Resources
             </h1>
-            <p class="mt-4 text-sm sm:text-base text-flcCharcoal/80 leading-relaxed">
+            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light max-w-2xl">
               A curated home for teaching from Freedom Life Church—crafted notes,
               study guides, and resources designed to help you sit with the Word,
               not just listen to it once on Sunday.
             </p>
           </div>
-          <div class="flex flex-col items-start gap-2 text-xs sm:text-sm text-flcCharcoal/70">
-            <span class="uppercase tracking-widePlus">Curated by</span>
-            <span class="font-medium text-flcCharcoal">Freedom Life Church</span>
-            <span class="text-flcCharcoal/60">Edmonton, Alberta</span>
+          <div class="flex flex-col items-start gap-2 text-xs text-flcCharcoal/60 border-l-2 border-flcGold/30 pl-4">
+            <span class="uppercase tracking-widePlus text-[10px] font-semibold">Curated by</span>
+            <span class="font-medium text-flcCharcoal text-sm">Freedom Life Church</span>
+            <span class="text-flcCharcoal/50">Edmonton, Alberta</span>
           </div>
         </div>
       </header>
 
       <!-- Top Layout: Featured + Latest -->
-      <section class="mb-12 lg:mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+      <section class="mb-16 lg:mb-20 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <!-- Featured Collection -->
-        <article
-          class="bg-white border border-flcBorder rounded-xl shadow-sm px-6 py-6 sm:px-8 sm:py-7 flex flex-col justify-between"
-        >
+        <article class="bg-white border border-flcBorder/50 rounded-2xl shadow-sm px-8 py-8 sm:px-10 sm:py-10 flex flex-col justify-between card-hover fade-in-section is-visible">
           <div>
-            <p
-              class="text-[11px] tracking-widePlus uppercase text-flcGold font-semibold"
-            >
+            <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-5">
               Featured Collection
             </p>
-            <h2
-              class="mt-3 text-2xl sm:text-3xl font-heading font-semibold text-flcNavy"
-            >
+            <h2 class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy leading-tight tracking-tighter mb-5">
               When Compassion Costs You Sleep
             </h2>
-            <p class="mt-3 text-sm sm:text-base text-flcCharcoal/80 leading-relaxed">
+            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light">
               A series by Pastor Rohan Samuels exploring what it means to carry the
               burdens of others with Jesus—when compassion stretches your comfort,
               your schedule, and your sleep.
             </p>
-            <dl class="mt-4 grid gap-3 text-xs sm:text-sm text-flcCharcoal/70">
-              <div class="flex gap-2">
-                <dt class="w-20 uppercase tracking-widePlus">Format</dt>
-                <dd>Full sermon notes, key quotes, and reflection questions.</dd>
+            <dl class="mt-6 space-y-4 text-sm text-flcCharcoal/60">
+              <div class="flex gap-4">
+                <dt class="w-24 uppercase tracking-widePlus text-[11px] font-semibold text-flcCharcoal/50">Format</dt>
+                <dd class="flex-1 font-light">Full sermon notes, key quotes, and reflection questions.</dd>
               </div>
-              <div class="flex gap-2">
-                <dt class="w-20 uppercase tracking-widePlus">Passages</dt>
-                <dd>Matthew 26:36–46 and related texts on compassion and calling.</dd>
+              <div class="flex gap-4">
+                <dt class="w-24 uppercase tracking-widePlus text-[11px] font-semibold text-flcCharcoal/50">Passages</dt>
+                <dd class="flex-1 font-light">Matthew 26:36–46 and related texts on compassion and calling.</dd>
               </div>
             </dl>
           </div>
-          <div class="mt-6 flex flex-wrap gap-3 text-sm">
-            <a
-              href="#"
-              class="inline-flex items-center px-4 py-2 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[11px] hover:bg-flcCharcoal transition"
-            >
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[10px] hover:bg-flcCharcoal">
               View collection
               <span aria-hidden="true" class="ml-2">→</span>
             </a>
-            <a
-              href="#"
-              class="inline-flex items-center px-4 py-2 rounded-full border border-flcBorder text-flcCharcoal/80 font-medium text-[11px] tracking-widePlus uppercase hover:border-flcNavy hover:text-flcNavy transition"
-            >
-              Download series PDF
+            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full border border-flcBorder/60 text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:border-flcNavy hover:text-flcNavy">
+              Download PDF
             </a>
           </div>
         </article>
 
         <!-- Latest Releases (Sermon + Study) -->
-        <aside
-          class="bg-flcCream/80 border border-flcBorder rounded-xl px-5 py-5 sm:px-6 sm:py-6 flex flex-col gap-5"
-        >
+        <aside class="bg-flcCream/60 border border-flcBorder/40 rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible" style="animation-delay: 0.2s;">
           <div class="flex items-center justify-between gap-4">
-            <h3 class="text-sm font-semibold tracking-widePlus uppercase text-flcCharcoal/80">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
               Latest releases
             </h3>
-            <a
-              href="#"
-              class="text-xs font-medium text-flcNavy hover:text-flcGold transition"
-            >
-              View entire library →
+            <a href="#" class="text-xs font-medium text-flcNavy hover:text-flcGold link-underline">
+              View library →
             </a>
           </div>
 
           <!-- Item 1 -->
-          <article class="border-t border-flcBorder pt-4">
-            <p
-              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
-            >
+          <article class="border-t border-flcBorder/30 pt-5">
+            <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
               Sermon Notes · Nov 10, 2025
             </p>
-            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+            <h4 class="text-base font-heading font-semibold text-flcNavy mb-2">
               When Compassion Costs You Sleep
             </h4>
-            <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
-              Structured notes, Scripture callouts, and space for personal
-              application.
+            <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
+              Structured notes, Scripture callouts, and space for personal application.
             </p>
-            <div class="mt-3 flex flex-wrap gap-3 text-xs">
-              <a
-                href="#"
-                class="underline underline-offset-4 decoration-flcNavy/40 hover:decoration-flcNavy"
-              >
+            <div class="mt-4 flex flex-wrap gap-3 text-xs">
+              <a href="#" class="text-flcNavy font-medium hover:text-flcGold link-underline">
                 Open notes
               </a>
-              <span class="text-flcCharcoal/60">PDF · Discussion questions</span>
+              <span class="text-flcCharcoal/50">PDF · Discussion questions</span>
             </div>
           </article>
 
@@ -217,54 +304,40 @@
       </section>
 
       <!-- Main Library Sections -->
-      <section class="space-y-10 lg:space-y-12">
+      <section class="space-y-16 lg:space-y-20">
         <!-- Sermon Notes Library -->
-        <section aria-labelledby="sermon-notes-heading">
-          <div class="flex items-baseline justify-between gap-4 mb-4">
+        <section aria-labelledby="sermon-notes-heading" class="fade-in-section">
+          <div class="flex items-baseline justify-between gap-4 mb-8">
             <div>
-              <h2
-                id="sermon-notes-heading"
-                class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy"
-              >
+              <h2 id="sermon-notes-heading" class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy tracking-tighter mb-3">
                 Sermon Notes Library
               </h2>
-              <p class="mt-1 text-sm text-flcCharcoal/70">
+              <p class="text-base text-flcCharcoal/60 font-light">
                 Clean, structured notes to revisit what God spoke on Sunday.
               </p>
             </div>
-            <a
-              href="#"
-              class="hidden sm:inline text-xs font-medium text-flcNavy hover:text-flcGold transition"
-            >
-              Browse all sermon notes →
+            <a href="#" class="hidden sm:inline text-sm font-medium text-flcNavy hover:text-flcGold link-underline">
+              Browse all →
             </a>
           </div>
 
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <!-- Card Template 1 -->
-            <article
-              class="bg-white border border-flcBorder rounded-lg p-5 flex flex-col justify-between"
-            >
+            <article class="stagger-item bg-white border border-flcBorder/50 rounded-xl p-6 flex flex-col justify-between card-hover">
               <header>
-                <p
-                  class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
-                >
+                <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
                   Series · Compassion
                 </p>
-                <h3 class="mt-2 text-lg font-heading font-semibold text-flcNavy">
+                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
                   When Compassion Costs You Sleep
                 </h3>
-                <p class="mt-2 text-sm text-flcCharcoal/80">
-                  Full manuscript-style notes with Scripture pull-quotes and
-                  journaling prompts.
+                <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
+                  Full manuscript-style notes with Scripture pull-quotes and journaling prompts.
                 </p>
               </header>
-              <footer class="mt-4 flex items-center justify-between text-xs">
-                <span class="text-flcCharcoal/60">PDF · 12 pages</span>
-                <a
-                  href="#"
-                  class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold transition"
-                >
+              <footer class="mt-5 flex items-center justify-between text-xs">
+                <span class="text-flcCharcoal/50 font-light">PDF · 12 pages</span>
+                <a href="#" class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold link-underline">
                   View notes
                   <span aria-hidden="true" class="ml-1">→</span>
                 </a>
@@ -272,45 +345,34 @@
             </article>
 
             <!-- Card Template 2 -->
-            <article
-              class="bg-white border border-flcBorder rounded-lg p-5 flex flex-col justify-between"
-            >
+            <article class="stagger-item bg-white border border-flcBorder/50 rounded-xl p-6 flex flex-col justify-between card-hover">
               <header>
-                <p
-                  class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
-                >
+                <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
                   Standalone
                 </p>
-                <h3 class="mt-2 text-lg font-heading font-semibold text-flcNavy">
+                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
                   Anointed in Unwillingness
                 </h3>
-                <p class="mt-2 text-sm text-flcCharcoal/80">
-                  Key points, application questions, and space for personal
-                  commitments.
+                <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
+                  Key points, application questions, and space for personal commitments.
                 </p>
               </header>
-              <footer class="mt-4 flex items-center justify-between text-xs">
-                <span class="text-flcCharcoal/60">Outline · PDF</span>
-                <a
-                  href="#"
-                  class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold transition"
-                >
+              <footer class="mt-5 flex items-center justify-between text-xs">
+                <span class="text-flcCharcoal/50 font-light">Outline · PDF</span>
+                <a href="#" class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold link-underline">
                   View notes
                   <span aria-hidden="true" class="ml-1">→</span>
                 </a>
               </footer>
             </article>
 
-            <!-- Card Template 3 (example) -->
-            <article
-              class="bg-white border border-dashed border-flcBorder/70 rounded-lg p-5 flex flex-col justify-center items-start text-sm text-flcCharcoal/70"
-            >
-              <p class="font-medium text-flcCharcoal">
+            <!-- Card Template 3 -->
+            <article class="stagger-item bg-white border border-dashed border-flcBorder/60 rounded-xl p-6 flex flex-col justify-center items-start text-sm text-flcCharcoal/60">
+              <p class="font-semibold text-flcCharcoal mb-2">
                 Future series placeholder
               </p>
-              <p class="mt-2">
-                As new sermons are preached, add them here as part of the library
-                without redesigning the page—just duplicate one of the cards.
+              <p class="font-light leading-relaxed">
+                As new sermons are preached, add them here as part of the library without redesigning the page—just duplicate one of the cards.
               </p>
             </article>
           </div>
@@ -379,9 +441,36 @@
         </section>
 
         <!-- Additional Resources -->
-        <section aria-labelledby="resources-heading" class="border-t border-flcBorder pt-8">
-          <h2
-            id="resources-heading"
-            class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy mb-4"
-          >
-            Additional
+        <section aria-labelledby="resources-heading" class="border-t border-flcBorder/30 pt-12 fade-in-section">
+          <h2 id="resources-heading" class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy tracking-tighter mb-6">
+            Additional Resources
+          </h2>
+          <p class="text-base text-flcCharcoal/60 font-light mb-8">
+            Tools and materials to support your spiritual journey.
+          </p>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    // Fade-in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
