@@ -50,6 +50,13 @@
               '100%': { transform: 'scale(1)', opacity: '1' },
             },
           },
+          boxShadow: {
+            'soft': '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)',
+            'medium': '0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04)',
+            'hard': '0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06)',
+            'lift': '0 12px 32px rgba(0, 42, 92, 0.15), 0 6px 12px rgba(0, 42, 92, 0.08)',
+            'inner-glow': 'inset 0 0 0 1px rgba(198, 146, 20, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)',
+          },
         },
       },
     };
@@ -89,11 +96,52 @@
     /* Card Hover Effects */
     .card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06);
     }
     
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 24px -8px rgba(0, 42, 92, 0.12), 0 8px 16px -8px rgba(0, 42, 92, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 42, 92, 0.15), 0 6px 16px rgba(0, 42, 92, 0.1), 0 2px 4px rgba(0, 42, 92, 0.06);
+    }
+    
+    /* Layered Elevation System */
+    .elevation-1 {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    
+    .elevation-2 {
+      box-shadow: 0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04);
+    }
+    
+    .elevation-3 {
+      box-shadow: 0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06);
+    }
+    
+    /* Gradient Overlays */
+    .gradient-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gradient-shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .gradient-shine:hover::before {
+      left: 100%;
+    }
+    
+    /* Layered Border Effect */
+    .border-layered {
+      border: 1px solid rgba(229, 231, 235, 0.5);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
     /* Premium Link Underline */
@@ -155,12 +203,13 @@
     }
   </style>
 </head>
-<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+<body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
   <main class="min-h-screen">
     <!-- Outer container -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <!-- Page Header -->
-      <header class="border-b border-flcBorder/50 pb-12 mb-16 lg:mb-20 fade-in-section is-visible">
+      <header class="border-b border-flcBorder/50 pb-12 mb-16 lg:mb-20 fade-in-section is-visible relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-flcGold/5 via-transparent to-transparent opacity-50 -z-10"></div>
         <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6">
           FLC Publishing House
         </p>
@@ -186,8 +235,9 @@
       <!-- Top Layout: Featured + Latest -->
       <section class="mb-16 lg:mb-20 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <!-- Featured Collection -->
-        <article class="bg-white border border-flcBorder/50 rounded-2xl shadow-sm px-8 py-8 sm:px-10 sm:py-10 flex flex-col justify-between card-hover fade-in-section is-visible">
-          <div>
+        <article class="bg-white border-layered rounded-2xl px-8 py-8 sm:px-10 sm:py-10 flex flex-col justify-between card-hover fade-in-section is-visible elevation-2 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-24 -mt-24"></div>
+          <div class="relative z-10">
             <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-5">
               Featured Collection
             </p>
@@ -211,7 +261,7 @@
             </dl>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[10px] hover:bg-flcCharcoal">
+            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[10px] hover:bg-flcCharcoal shadow-md hover:shadow-lg">
               View collection
               <span aria-hidden="true" class="ml-2">→</span>
             </a>
@@ -219,10 +269,11 @@
               Download PDF
             </a>
           </div>
+          </div>
         </article>
 
         <!-- Latest Releases (Sermon + Study) -->
-        <aside class="bg-flcCream/60 border border-flcBorder/40 rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible" style="animation-delay: 0.2s;">
+        <aside class="bg-gradient-to-br from-flcCream/60 to-flcCream/40 border-layered rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible elevation-1 backdrop-blur-sm" style="animation-delay: 0.2s;">
           <div class="flex items-center justify-between gap-4">
             <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
               Latest releases
@@ -323,7 +374,7 @@
 
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <!-- Card Template 1 -->
-            <article class="stagger-item bg-white border border-flcBorder/50 rounded-xl p-6 flex flex-col justify-between card-hover">
+            <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
               <header>
                 <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
                   Series · Compassion
@@ -345,7 +396,7 @@
             </article>
 
             <!-- Card Template 2 -->
-            <article class="stagger-item bg-white border border-flcBorder/50 rounded-xl p-6 flex flex-col justify-between card-hover">
+            <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
               <header>
                 <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
                   Standalone
@@ -367,7 +418,7 @@
             </article>
 
             <!-- Card Template 3 -->
-            <article class="stagger-item bg-white border border-dashed border-flcBorder/60 rounded-xl p-6 flex flex-col justify-center items-start text-sm text-flcCharcoal/60">
+            <article class="stagger-item bg-gradient-to-br from-white to-flcCream/30 border border-dashed border-flcBorder/60 rounded-xl p-6 flex flex-col justify-center items-start text-sm text-flcCharcoal/60 elevation-1">
               <p class="font-semibold text-flcCharcoal mb-2">
                 Future series placeholder
               </p>
@@ -402,10 +453,9 @@
 
           <div class="space-y-4">
             <!-- Guide 1 -->
-            <article
-              class="bg-white border border-flcBorder rounded-lg px-5 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            >
-              <div>
+            <article class="bg-white border-layered rounded-lg px-5 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 card-hover elevation-2 relative overflow-hidden">
+              <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-flcNavy/5 to-transparent rounded-full blur-2xl -ml-16 -mb-16"></div>
+              <div class="relative z-10 flex-1">
                 <h3 class="text-base sm:text-lg font-heading font-semibold text-flcNavy">
                   Matthew 26:36–46 — Gethsemane
                 </h3>
@@ -414,10 +464,10 @@
                   observation, interpretation, and application questions.
                 </p>
               </div>
-              <div class="flex flex-wrap gap-3 text-xs sm:text-sm">
+              <div class="flex flex-wrap gap-3 text-xs sm:text-sm relative z-10">
                 <a
                   href="#"
-                  class="px-3 py-1.5 rounded-full border border-flcNavy text-flcNavy font-medium tracking-widePlus uppercase text-[11px] hover:bg-flcNavy hover:text-white transition"
+                  class="px-3 py-1.5 rounded-full border border-flcNavy text-flcNavy font-medium tracking-widePlus uppercase text-[11px] hover:bg-flcNavy hover:text-white transition shadow-sm hover:shadow-md"
                 >
                   Download PDF
                 </a>
@@ -431,9 +481,7 @@
             </article>
 
             <!-- Guide placeholder -->
-            <article
-              class="border border-dashed border-flcBorder/70 rounded-lg px-5 py-4 text-xs sm:text-sm text-flcCharcoal/70"
-            >
+            <article class="border border-dashed border-flcBorder/70 rounded-lg px-5 py-4 text-xs sm:text-sm text-flcCharcoal/70 bg-gradient-to-r from-flcCream/30 to-transparent elevation-1">
               Add more studies by duplicating this pattern—keep title, short
               description, and clear calls to action for each guide.
             </article>
