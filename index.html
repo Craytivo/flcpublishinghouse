@@ -278,52 +278,87 @@
 </head>
 <body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
   <main class="min-h-screen">
-    <!-- Outer container -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      <!-- Page Header -->
-      <header class="border-b border-flcBorder/50 pb-12 mb-16 lg:mb-20 fade-in-section is-visible relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-flcGold/5 via-transparent to-transparent opacity-50 -z-10"></div>
-        <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6">
-          FLC Publishing House
-        </p>
-        <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div class="max-w-3xl">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-[1.1] tracking-tighter mb-6 gradient-text">
-              Sermon Notes, Bible Studies &amp; Resources
+    <!-- Hero Header - Full Bleed Split -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-flcNavy via-flcNavyLight to-flcNavy/90 text-white">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 right-10 w-96 h-96 bg-flcGold rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-64 h-64 bg-flcGoldLight rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+        <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
+          <div class="fade-in-section is-visible">
+            <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6 inline-flex items-center gap-2">
+              <span class="w-8 h-px bg-flcGold"></span>
+              FLC Publishing House
+            </p>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tighter mb-8">
+              Sermon Notes,<br>
+              <span class="text-flcGoldLight">Bible Studies</span><br>
+              &amp; Resources
             </h1>
-            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light max-w-2xl accent-bar">
+            <p class="text-lg sm:text-xl text-white/80 leading-relaxed font-light max-w-xl mb-10">
               A curated home for teaching from Freedom Life Church—crafted notes,
               study guides, and resources designed to help you sit with the Word,
               not just listen to it once on Sunday.
             </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#sermon-notes" class="btn-premium inline-flex items-center px-8 py-4 rounded-full bg-flcGold text-flcNavy font-semibold tracking-widePlus uppercase text-[11px] hover:bg-flcGoldLight shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5 transition-all">
+                Explore Library
+                <span aria-hidden="true" class="ml-2">↓</span>
+              </a>
+              <a href="https://freedomlifechurch.ca/" class="btn-premium inline-flex items-center px-8 py-4 rounded-full border-2 border-white/30 text-white font-medium text-[11px] tracking-widePlus uppercase hover:bg-white/10 hover:border-white/50 backdrop-blur-sm">
+                ← Back to Church
+              </a>
+            </div>
           </div>
-          <div class="flex flex-col items-start gap-2 text-xs text-flcCharcoal/60 pl-4 relative">
-            <div class="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-flcGold/40 via-flcGold/20 to-transparent rounded-full"></div>
-            <span class="uppercase tracking-widePlus text-[10px] font-semibold">Curated by</span>
-            <span class="font-medium text-flcCharcoal text-sm">Freedom Life Church</span>
-            <span class="text-flcCharcoal/50">Edmonton, Alberta</span>
+          <div class="hidden lg:flex flex-col gap-4 fade-in-section is-visible" style="animation-delay: 0.2s;">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6">
+              <p class="text-[10px] uppercase tracking-widePlus text-flcGold font-semibold mb-3">Latest Release</p>
+              <h3 class="text-xl font-heading font-bold mb-2">When Compassion Costs You Sleep</h3>
+              <p class="text-sm text-white/70">Complete sermon series with notes & study guides</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-flcGold/20 backdrop-blur-sm border border-flcGold/30 rounded-xl p-4 text-center">
+                <p class="text-3xl font-heading font-bold text-flcGoldLight">24+</p>
+                <p class="text-xs text-white/60 mt-1">Sermon Notes</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+                <p class="text-3xl font-heading font-bold">12+</p>
+                <p class="text-xs text-white/60 mt-1">Study Guides</p>
+              </div>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
+    </section>
 
-      <!-- Top Layout: Featured + Latest -->
-      <section class="mb-16 lg:mb-20 grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <!-- Featured Collection -->
-        <article class="bg-white border-layered rounded-2xl px-8 py-8 sm:px-10 sm:py-10 flex flex-col justify-between card-hover fade-in-section is-visible elevation-2 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-24 -mt-24"></div>
+    <!-- Main Content Container -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+
+      <!-- Bento Box Layout -->
+      <section class="mb-20 lg:mb-28">
+        <div class="grid gap-6 lg:grid-cols-12 lg:grid-rows-[auto_auto] auto-rows-fr">
+          <!-- Featured Collection - Large Span -->
+          <article class="lg:col-span-8 lg:row-span-2 bg-white border-layered rounded-3xl p-8 sm:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group">rflow-hidden group">
+          <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-36 -mt-36 group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-flcNavy/5 rounded-full blur-2xl"></div>
           <div class="relative z-10">
-            <p class="text-[10px] tracking-[0.2em] uppercase font-semibold mb-5 gradient-text-gold">
-              Featured Collection
-            </p>
-            <h2 class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy leading-tight tracking-tighter mb-5 color-block">
-              When Compassion Costs You Sleep
+            <div class="inline-flex items-center gap-2 mb-6">
+              <span class="w-1 h-8 bg-gradient-to-b from-flcGold to-flcGoldDark rounded-full"></span>
+              <p class="text-[10px] tracking-[0.2em] uppercase font-semibold gradient-text-gold">
+                Featured Collection
+              </p>
+            </div>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-flcNavy leading-[1.05] tracking-tighter mb-6">
+              When Compassion<br class="hidden sm:block"> Costs You Sleep
             </h2>
-            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light">
+            <div class="w-16 h-1 bg-gradient-to-r from-flcGold to-transparent rounded-full mb-6"></div>
+            <p class="text-lg sm:text-xl text-flcCharcoal/70 leading-relaxed font-light max-w-2xl">
               A series by Pastor Rohan Samuels exploring what it means to carry the
               burdens of others with Jesus—when compassion stretches your comfort,
               your schedule, and your sleep.
             </p>
-            <dl class="mt-6 space-y-4 text-sm text-flcCharcoal/60">
+            <dl class="mt-8 space-y-5 text-sm text-flcCharcoal/60">
               <div class="flex gap-4">
                 <dt class="w-24 uppercase tracking-widePlus text-[11px] font-semibold text-flcCharcoal/50">Format</dt>
                 <dd class="flex-1 font-light">Full sermon notes, key quotes, and reflection questions.</dd>
@@ -346,16 +381,35 @@
           </div>
         </article>
 
-        <!-- Latest Releases (Sermon + Study) -->
-        <aside class="bg-gradient-to-br from-flcCream/60 to-flcCream/40 border-layered rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible elevation-1 backdrop-blur-sm duotone" style="animation-delay: 0.2s;">
-          <div class="flex items-center justify-between gap-4">
-            <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
-              Latest releases
+        <!-- Latest Releases - Stacked Cards -->
+        <div class="lg:col-span-4 lg:row-span-1 flex flex-col gap-6">
+          <!-- Quick Stats Card -->
+          <aside class="bg-gradient-to-br from-flcNavy/5 to-flcGold/5 border-layered rounded-2xl p-6 fade-in-section is-visible elevation-1" style="animation-delay: 0.2s;">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60 mb-6">
+              Library Overview
             </h3>
-            <a href="#" class="text-xs font-medium text-flcNavy hover:text-flcGold link-underline">
-              View library →
-            </a>
-          </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-3xl font-heading font-bold text-flcNavy">24</p>
+                <p class="text-xs text-flcCharcoal/60 mt-1">Sermon Notes</p>
+              </div>
+              <div>
+                <p class="text-3xl font-heading font-bold text-flcGold">12</p>
+                <p class="text-xs text-flcCharcoal/60 mt-1">Study Guides</p>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Latest Item Card -->
+          <aside class="bg-white border-layered rounded-2xl p-6 card-hover elevation-2 fade-in-section is-visible" style="animation-delay: 0.3s;">
+            <div class="flex items-center justify-between gap-4 mb-5">
+              <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
+                Latest Release
+              </h3>
+              <a href="#" class="text-xs font-medium text-flcNavy hover:text-flcGold link-underline">
+                View all →
+              </a>
+            </div>
 
           <!-- Item 2 -->
           <article class="border-t border-flcBorder/30 pt-5">
@@ -426,27 +480,31 @@
             </div>
           </article>
         </aside>
+        </div>
       </section>
 
       <!-- Main Library Sections -->
-      <section class="space-y-16 lg:space-y-20">
+      <section class="space-y-20 lg:space-y-28">
         <!-- Sermon Notes Library -->
-        <section aria-labelledby="sermon-notes-heading" class="fade-in-section">
-          <div class="flex items-baseline justify-between gap-4 mb-8">
-            <div>
-              <h2 id="sermon-notes-heading" class="text-3xl sm:text-4xl font-heading font-bold tracking-tighter mb-3 gradient-text">
+        <section id="sermon-notes" aria-labelledby="sermon-notes-heading" class="fade-in-section relative">
+          <div class="absolute -left-4 top-0 w-1 h-32 bg-gradient-to-b from-flcGold via-flcGold/50 to-transparent rounded-full"></div>
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+            <div class="max-w-2xl">
+              <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-4">Browse Collection</p>
+              <h2 id="sermon-notes-heading" class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tighter mb-4 gradient-text">
                 Sermon Notes Library
               </h2>
-              <p class="text-base text-flcCharcoal/60 font-light accent-bar">
+              <p class="text-lg text-flcCharcoal/60 font-light">
                 Clean, structured notes to revisit what God spoke on Sunday.
               </p>
             </div>
-            <a href="#" class="hidden sm:inline text-sm font-medium text-flcNavy hover:text-flcGold link-underline">
-              Browse all →
+            <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-flcNavy/5 text-flcNavy font-medium text-sm hover:bg-flcNavy/10 transition-colors">
+              Browse all
+              <span aria-hidden="true">→</span>
             </a>
           </div>
 
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
             <!-- Card Template 1 -->
             <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
               <header>
@@ -491,37 +549,57 @@
               </footer>
             </article>
 
-            <!-- Card Template 3 -->
-            <article class="stagger-item bg-gradient-to-br from-white to-flcCream/30 border border-dashed border-flcBorder/60 rounded-xl p-6 flex flex-col justify-center items-start text-sm text-flcCharcoal/60 elevation-1">
-              <p class="font-semibold text-flcCharcoal mb-2">
-                Future series placeholder
-              </p>
-              <p class="font-light leading-relaxed">
-                As new sermons are preached, add them here as part of the library without redesigning the page—just duplicate one of the cards.
-              </p>
+            <!-- Tall Accent Card -->
+            <article class="stagger-item lg:row-span-2 bg-gradient-to-br from-flcNavy to-flcNavyDark text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group elevation-3">
+              <div class="absolute top-0 right-0 w-48 h-48 bg-flcGold/20 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-125 transition-transform duration-700"></div>
+              <div class="relative z-10">
+                <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6">
+                  New Series
+                </p>
+                <h3 class="text-2xl font-heading font-bold leading-tight mb-4">
+                  More Teaching Coming Soon
+                </h3>
+                <p class="text-sm text-white/70 font-light leading-relaxed">
+                  We're constantly adding new sermon notes and study materials. Check back regularly or subscribe for updates.
+                </p>
+              </div>
+              <a href="#" class="relative z-10 mt-8 inline-flex items-center gap-2 text-sm font-medium text-flcGold hover:text-flcGoldLight transition-colors">
+                Get notified
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+
+            <!-- Stats Showcase Card -->
+            <article class="stagger-item bg-gradient-to-br from-flcGold/10 via-flcGoldLight/5 to-transparent border-2 border-flcGold/20 rounded-2xl p-8 flex flex-col items-center justify-center text-center elevation-2">
+              <p class="text-5xl font-heading font-bold text-flcGold mb-2">100+</p>
+              <p class="text-sm text-flcCharcoal/70 font-light mb-4">Hours of Teaching</p>
+              <p class="text-xs text-flcCharcoal/50">Available for free download</p>
             </article>
           </div>
         </section>
 
         <!-- Bible Study Guides -->
-        <section aria-labelledby="bible-study-heading">
-          <div class="flex items-baseline justify-between gap-4 mb-4">
-            <div>
+        <section aria-labelledby="bible-study-heading" class="relative">
+          <div class="absolute -left-4 top-0 w-1 h-24 bg-gradient-to-b from-flcNavy via-flcNavy/50 to-transparent rounded-full"></div>
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+            <div class="max-w-2xl">
+              <p class="text-[10px] tracking-[0.2em] uppercase text-flcNavy/60 font-semibold mb-4">Go Deeper</p>
               <h2
                 id="bible-study-heading"
-                class="text-xl sm:text-2xl font-heading font-semibold mb-1 gradient-text"
+                class="text-4xl sm:text-5xl font-heading font-bold tracking-tighter mb-4 gradient-text"
               >
                 Bible Study Guides
               </h2>
-              <p class="mt-1 text-sm text-flcCharcoal/70 accent-bar">
+              <p class="text-lg text-flcCharcoal/60 font-light">
                 Studies for small groups, families, and personal devotion.
               </p>
             </div>
             <a
               href="#"
-              class="hidden sm:inline text-xs font-medium text-flcNavy hover:text-flcGold transition"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-flcNavy/5 text-flcNavy font-medium text-sm hover:bg-flcNavy/10 transition-colors"
             >
-              Browse all study guides →
+              Browse all study guides
+              <span aria-hidden="true">→</span>
             </a>
           </div>
 
