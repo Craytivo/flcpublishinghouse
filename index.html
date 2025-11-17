@@ -16,18 +16,18 @@
       theme: {
         extend: {
           colors: {
-            flcNavy: "#002A5C",
-            flcGold: "#C69214",
-            flcCharcoal: "#1E1E1E",
-            flcCream: "#FDF8EE",
-            flcOffWhite: "#F8F7F2",
-            flcBorder: "#E5E7EB",
-            // Sophisticated color additions
-            flcNavyLight: "#003875",
-            flcNavyDark: "#001D3D",
-            flcGoldLight: "#D4A530",
-            flcGoldDark: "#9D7410",
-            flcAccent: "#8B7355",
+            flcNavy: "#1A3A52",
+            flcGold: "#9A7B4F",
+            flcCharcoal: "#2C2C2C",
+            flcCream: "#F5F1E8",
+            flcOffWhite: "#FAFAF8",
+            flcBorder: "#E8E6E1",
+            // Sophisticated muted additions
+            flcNavyLight: "#2A4A62",
+            flcNavyDark: "#0F2838",
+            flcGoldLight: "#B8956A",
+            flcGoldDark: "#7A6240",
+            flcAccent: "#8B7965",
           },
           fontFamily: {
             heading: ["'Playfair Display'", "Georgia", "serif"],
@@ -152,14 +152,14 @@
     
     /* Sophisticated Color Treatments */
     .gradient-text {
-      background: linear-gradient(135deg, #002A5C 0%, #003875 50%, #C69214 100%);
+      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 50%, #9A7B4F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
     .gradient-text-gold {
-      background: linear-gradient(135deg, #D4A530 0%, #C69214 50%, #9D7410 100%);
+      background: linear-gradient(135deg, #B8956A 0%, #9A7B4F 50%, #7A6240 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -177,7 +177,7 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: linear-gradient(to bottom, #C69214, #D4A530);
+      background: linear-gradient(to bottom, #9A7B4F, #B8956A);
       border-radius: 2px;
     }
     
@@ -193,7 +193,7 @@
       right: 0;
       width: 4px;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(198, 146, 20, 0.3), rgba(198, 146, 20, 0));
+      background: linear-gradient(to bottom, rgba(154, 123, 79, 0.2), rgba(154, 123, 79, 0));
     }
     
     /* Duotone Effect */
@@ -205,7 +205,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(0, 42, 92, 0.1) 0%, rgba(198, 146, 20, 0.1) 100%);
+      background: linear-gradient(135deg, rgba(26, 58, 82, 0.08) 0%, rgba(154, 123, 79, 0.08) 100%);
       mix-blend-mode: multiply;
       pointer-events: none;
     }
@@ -289,7 +289,7 @@
       width: 0;
       height: 0;
       border-radius: 50%;
-      background: rgba(198, 146, 20, 0.3);
+      background: rgba(154, 123, 79, 0.2);
       transform: translate(-50%, -50%);
       transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
       opacity: 0;
@@ -315,7 +315,7 @@
     }
     
     .glow-on-hover:hover {
-      box-shadow: 0 0 20px rgba(198, 146, 20, 0.4), 0 0 40px rgba(198, 146, 20, 0.2);
+      box-shadow: 0 0 20px rgba(154, 123, 79, 0.2), 0 0 40px rgba(154, 123, 79, 0.1);
     }
     
     .magnetic-hover {
@@ -362,8 +362,8 @@
     
     /* Pulse animation for new items */
     @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(198, 146, 20, 0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(198, 146, 20, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(154, 123, 79, 0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(154, 123, 79, 0); }
     }
     
     .pulse-new {
@@ -374,21 +374,21 @@
 <body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
   <main class="min-h-screen">
     <!-- Hero Header - Full Bleed Split -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-flcNavy via-flcNavyLight to-flcNavy/90 text-white">
-      <div class="absolute inset-0 opacity-10">
+    <section class="relative overflow-hidden bg-gradient-to-br from-flcNavy via-flcNavyLight to-flcNavyDark text-white">
+      <div class="absolute inset-0 opacity-[0.07]">
         <div class="absolute top-20 right-10 w-96 h-96 bg-flcGold rounded-full blur-3xl"></div>
         <div class="absolute bottom-20 left-20 w-64 h-64 bg-flcGoldLight rounded-full blur-3xl"></div>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
         <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
           <div class="fade-in-section is-visible">
-            <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6 inline-flex items-center gap-2">
-              <span class="w-8 h-px bg-flcGold"></span>
+            <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold/90 font-semibold mb-6 inline-flex items-center gap-2">
+              <span class="w-8 h-px bg-flcGold/70"></span>
               FLC Publishing House
             </p>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tighter mb-8">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tighter mb-8 text-white/95">
               Sermon Notes,<br>
-              <span class="text-flcGoldLight">Bible Studies</span><br>
+              <span class="text-flcGold/80">Bible Studies</span><br>
               &amp; Resources
             </h1>
             <p class="text-lg sm:text-xl text-white/80 leading-relaxed font-light max-w-xl mb-10">
@@ -397,27 +397,27 @@
               not just listen to it once on Sunday.
             </p>
             <div class="flex flex-wrap gap-4">
-              <a href="#sermon-notes" class="btn-premium inline-flex items-center px-8 py-4 rounded-full bg-flcGold text-flcNavy font-semibold tracking-widePlus uppercase text-[11px] hover:bg-flcGoldLight shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5 transition-all">
+              <a href="#sermon-notes" class="btn-premium inline-flex items-center px-8 py-4 rounded-full bg-flcGold/90 text-flcNavy font-semibold tracking-widePlus uppercase text-[11px] hover:bg-flcGold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
                 Explore Library
                 <span aria-hidden="true" class="ml-2">↓</span>
               </a>
-              <a href="https://freedomlifechurch.ca/" class="btn-premium inline-flex items-center px-8 py-4 rounded-full border-2 border-white/30 text-white font-medium text-[11px] tracking-widePlus uppercase hover:bg-white/10 hover:border-white/50 backdrop-blur-sm">
+              <a href="https://freedomlifechurch.ca/" class="btn-premium inline-flex items-center px-8 py-4 rounded-full border-2 border-white/20 text-white/90 font-medium text-[11px] tracking-widePlus uppercase hover:bg-white/10 hover:border-white/40 backdrop-blur-sm">
                 ← Back to Church
               </a>
             </div>
           </div>
           <div class="hidden lg:flex flex-col gap-4 fade-in-section is-visible" style="animation-delay: 0.2s;">
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6">
-              <p class="text-[10px] uppercase tracking-widePlus text-flcGold font-semibold mb-3">Latest Release</p>
+            <div class="bg-white/[0.08] backdrop-blur-md border border-white/[0.12] rounded-2xl p-6">
+              <p class="text-[10px] uppercase tracking-widePlus text-flcGold/80 font-semibold mb-3">Latest Release</p>
               <h3 class="text-xl font-heading font-bold mb-2">When Compassion Costs You Sleep</h3>
               <p class="text-sm text-white/70">Complete sermon series with notes & study guides</p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-              <div class="bg-flcGold/20 backdrop-blur-sm border border-flcGold/30 rounded-xl p-4 text-center">
-                <p class="text-3xl font-heading font-bold text-flcGoldLight">24+</p>
-                <p class="text-xs text-white/60 mt-1">Sermon Notes</p>
+              <div class="bg-flcGold/[0.12] backdrop-blur-sm border border-flcGold/20 rounded-xl p-4 text-center">
+                <p class="text-3xl font-heading font-bold text-flcGold/90">24+</p>
+                <p class="text-xs text-white/50 mt-1">Sermon Notes</p>
               </div>
-              <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+              <div class="bg-white/[0.08] backdrop-blur-sm border border-white/[0.12] rounded-xl p-4 text-center">
                 <p class="text-3xl font-heading font-bold">12+</p>
                 <p class="text-xs text-white/60 mt-1">Study Guides</p>
               </div>
@@ -428,10 +428,10 @@
     </section>
 
     <!-- Main Content Container -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-20">
 
       <!-- Search & Filter Bar -->
-      <div class="mb-12 fade-in-section is-visible">
+      <div class="mb-12 fade-in-section is-visible relative z-20 bg-flcOffWhite/95 backdrop-blur-sm -mx-4 px-4 py-6 sm:mx-0 sm:px-0 sm:bg-transparent">
         <div class="max-w-4xl mx-auto">
           <!-- Search Input -->
           <div class="relative mb-6">
@@ -487,19 +487,19 @@
         <div class="grid gap-6 lg:grid-cols-12 lg:grid-rows-[auto_auto] auto-rows-fr">
           <!-- Featured Collection - Large Span -->
           <article class="resource-card lg:col-span-8 lg:row-span-2 bg-white border-layered rounded-3xl p-8 sm:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group glow-on-hover" data-type="series sermon" data-tags="compassion pastor-rohan matthew">
-          <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-36 -mt-36 group-hover:scale-110 transition-transform duration-700"></div>
-          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-flcNavy/5 rounded-full blur-2xl"></div>
+          <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-flcGold/[0.06] to-transparent rounded-full blur-3xl -mr-36 -mt-36 group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-flcNavy/[0.03] rounded-full blur-2xl"></div>
           <div class="relative z-10">
             <div class="inline-flex items-center gap-2 mb-6">
-              <span class="w-1 h-8 bg-gradient-to-b from-flcGold to-flcGoldDark rounded-full"></span>
+              <span class="w-1 h-8 bg-gradient-to-b from-flcGold/80 to-flcGoldDark/70 rounded-full"></span>
               <p class="text-[10px] tracking-[0.2em] uppercase font-semibold gradient-text-gold">
                 Featured Collection
               </p>
             </div>
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-flcNavy leading-[1.05] tracking-tighter mb-6">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-flcNavy/95 leading-[1.05] tracking-tighter mb-6">
               When Compassion<br class="hidden sm:block"> Costs You Sleep
             </h2>
-            <div class="w-16 h-1 bg-gradient-to-r from-flcGold to-transparent rounded-full mb-6"></div>
+            <div class="w-16 h-1 bg-gradient-to-r from-flcGold/70 to-transparent rounded-full mb-6"></div>
             <p class="text-lg sm:text-xl text-flcCharcoal/70 leading-relaxed font-light max-w-2xl">
               A series by Pastor Rohan Samuels exploring what it means to carry the
               burdens of others with Jesus—when compassion stretches your comfort,
@@ -534,17 +534,17 @@
         <!-- Latest Releases - Stacked Cards -->
         <div class="lg:col-span-4 lg:row-span-1 flex flex-col gap-6">
           <!-- Quick Stats Card -->
-          <aside class="bg-gradient-to-br from-flcNavy/5 to-flcGold/5 border-layered rounded-2xl p-6 fade-in-section is-visible elevation-1" style="animation-delay: 0.2s;">
+          <aside class="bg-gradient-to-br from-flcNavy/[0.04] to-flcGold/[0.04] border-layered rounded-2xl p-6 fade-in-section is-visible elevation-1" style="animation-delay: 0.2s;">
             <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60 mb-6">
               Library Overview
             </h3>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <p class="text-3xl font-heading font-bold text-flcNavy">24</p>
+                <p class="text-3xl font-heading font-bold text-flcNavy/90">24</p>
                 <p class="text-xs text-flcCharcoal/60 mt-1">Sermon Notes</p>
               </div>
               <div>
-                <p class="text-3xl font-heading font-bold text-flcGold">12</p>
+                <p class="text-3xl font-heading font-bold text-flcGold/90">12</p>
                 <p class="text-xs text-flcCharcoal/60 mt-1">Study Guides</p>
               </div>
             </div>
