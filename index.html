@@ -22,6 +22,12 @@
             flcCream: "#FDF8EE",
             flcOffWhite: "#F8F7F2",
             flcBorder: "#E5E7EB",
+            // Sophisticated color additions
+            flcNavyLight: "#003875",
+            flcNavyDark: "#001D3D",
+            flcGoldLight: "#D4A530",
+            flcGoldDark: "#9D7410",
+            flcAccent: "#8B7355",
           },
           fontFamily: {
             heading: ["'Playfair Display'", "Georgia", "serif"],
@@ -144,6 +150,73 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
+    /* Sophisticated Color Treatments */
+    .gradient-text {
+      background: linear-gradient(135deg, #002A5C 0%, #003875 50%, #C69214 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .gradient-text-gold {
+      background: linear-gradient(135deg, #D4A530 0%, #C69214 50%, #9D7410 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .accent-bar {
+      position: relative;
+      padding-left: 1rem;
+    }
+    
+    .accent-bar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #C69214, #D4A530);
+      border-radius: 2px;
+    }
+    
+    .color-block {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .color-block::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(198, 146, 20, 0.3), rgba(198, 146, 20, 0));
+    }
+    
+    /* Duotone Effect */
+    .duotone {
+      position: relative;
+    }
+    
+    .duotone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 42, 92, 0.1) 0%, rgba(198, 146, 20, 0.1) 100%);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    
+    /* Color-rich Borders */
+    .border-gradient {
+      border: 2px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, rgba(0, 42, 92, 0.2), rgba(198, 146, 20, 0.3)) border-box;
+    }
+    
     /* Premium Link Underline */
     .link-underline {
       position: relative;
@@ -215,16 +288,17 @@
         </p>
         <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div class="max-w-3xl">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-flcNavy leading-[1.1] tracking-tighter mb-6">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-[1.1] tracking-tighter mb-6 gradient-text">
               Sermon Notes, Bible Studies &amp; Resources
             </h1>
-            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light max-w-2xl">
+            <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light max-w-2xl accent-bar">
               A curated home for teaching from Freedom Life Church—crafted notes,
               study guides, and resources designed to help you sit with the Word,
               not just listen to it once on Sunday.
             </p>
           </div>
-          <div class="flex flex-col items-start gap-2 text-xs text-flcCharcoal/60 border-l-2 border-flcGold/30 pl-4">
+          <div class="flex flex-col items-start gap-2 text-xs text-flcCharcoal/60 pl-4 relative">
+            <div class="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-flcGold/40 via-flcGold/20 to-transparent rounded-full"></div>
             <span class="uppercase tracking-widePlus text-[10px] font-semibold">Curated by</span>
             <span class="font-medium text-flcCharcoal text-sm">Freedom Life Church</span>
             <span class="text-flcCharcoal/50">Edmonton, Alberta</span>
@@ -238,10 +312,10 @@
         <article class="bg-white border-layered rounded-2xl px-8 py-8 sm:px-10 sm:py-10 flex flex-col justify-between card-hover fade-in-section is-visible elevation-2 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-24 -mt-24"></div>
           <div class="relative z-10">
-            <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-5">
+            <p class="text-[10px] tracking-[0.2em] uppercase font-semibold mb-5 gradient-text-gold">
               Featured Collection
             </p>
-            <h2 class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy leading-tight tracking-tighter mb-5">
+            <h2 class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy leading-tight tracking-tighter mb-5 color-block">
               When Compassion Costs You Sleep
             </h2>
             <p class="text-base sm:text-lg text-flcCharcoal/70 leading-relaxed font-light">
@@ -261,11 +335,11 @@
             </dl>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[10px] hover:bg-flcCharcoal shadow-md hover:shadow-lg">
+            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-medium tracking-widePlus uppercase text-[10px] hover:from-flcNavyLight hover:to-flcNavy shadow-md hover:shadow-lg">
               View collection
               <span aria-hidden="true" class="ml-2">→</span>
             </a>
-            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full border border-flcBorder/60 text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:border-flcNavy hover:text-flcNavy">
+            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full border-gradient text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:text-flcNavy">
               Download PDF
             </a>
           </div>
@@ -273,7 +347,7 @@
         </article>
 
         <!-- Latest Releases (Sermon + Study) -->
-        <aside class="bg-gradient-to-br from-flcCream/60 to-flcCream/40 border-layered rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible elevation-1 backdrop-blur-sm" style="animation-delay: 0.2s;">
+        <aside class="bg-gradient-to-br from-flcCream/60 to-flcCream/40 border-layered rounded-2xl px-6 py-6 sm:px-7 sm:py-7 flex flex-col gap-6 fade-in-section is-visible elevation-1 backdrop-blur-sm duotone" style="animation-delay: 0.2s;">
           <div class="flex items-center justify-between gap-4">
             <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
               Latest releases
@@ -283,10 +357,10 @@
             </a>
           </div>
 
-          <!-- Item 1 -->
+          <!-- Item 2 -->
           <article class="border-t border-flcBorder/30 pt-5">
-            <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
-              Sermon Notes · Nov 10, 2025
+            <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
+              Sermon Notes · Oct 27, 2025
             </p>
             <h4 class="text-base font-heading font-semibold text-flcNavy mb-2">
               When Compassion Costs You Sleep
@@ -305,7 +379,7 @@
           <!-- Item 2 -->
           <article class="border-t border-flcBorder pt-4">
             <p
-              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+              class="text-[11px] uppercase tracking-widePlus font-semibold gradient-text-gold"
             >
               Sermon Notes · Oct 27, 2025
             </p>
@@ -330,7 +404,7 @@
           <!-- Item 3 -->
           <article class="border-t border-flcBorder pt-4">
             <p
-              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+              class="text-[11px] uppercase tracking-widePlus font-semibold gradient-text-gold"
             >
               Bible Study Guide
             </p>
@@ -360,10 +434,10 @@
         <section aria-labelledby="sermon-notes-heading" class="fade-in-section">
           <div class="flex items-baseline justify-between gap-4 mb-8">
             <div>
-              <h2 id="sermon-notes-heading" class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy tracking-tighter mb-3">
+              <h2 id="sermon-notes-heading" class="text-3xl sm:text-4xl font-heading font-bold tracking-tighter mb-3 gradient-text">
                 Sermon Notes Library
               </h2>
-              <p class="text-base text-flcCharcoal/60 font-light">
+              <p class="text-base text-flcCharcoal/60 font-light accent-bar">
                 Clean, structured notes to revisit what God spoke on Sunday.
               </p>
             </div>
@@ -376,7 +450,7 @@
             <!-- Card Template 1 -->
             <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
               <header>
-                <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
+                <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
                   Series · Compassion
                 </p>
                 <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
@@ -398,7 +472,7 @@
             <!-- Card Template 2 -->
             <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
               <header>
-                <p class="text-[10px] uppercase tracking-[0.2em] text-flcGold font-semibold mb-3">
+                <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
                   Standalone
                 </p>
                 <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
@@ -435,11 +509,11 @@
             <div>
               <h2
                 id="bible-study-heading"
-                class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy"
+                class="text-xl sm:text-2xl font-heading font-semibold mb-1 gradient-text"
               >
                 Bible Study Guides
               </h2>
-              <p class="mt-1 text-sm text-flcCharcoal/70">
+              <p class="mt-1 text-sm text-flcCharcoal/70 accent-bar">
                 Studies for small groups, families, and personal devotion.
               </p>
             </div>
