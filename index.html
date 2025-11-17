@@ -274,6 +274,101 @@
       width: 300px;
       height: 300px;
     }
+    
+    /* Micro-interactions */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ripple::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(198, 146, 20, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+      opacity: 0;
+    }
+    
+    .ripple:active::after {
+      width: 200px;
+      height: 200px;
+      opacity: 1;
+      transition: 0s;
+    }
+    
+    .scale-hover {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .scale-hover:hover {
+      transform: scale(1.05);
+    }
+    
+    .glow-on-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .glow-on-hover:hover {
+      box-shadow: 0 0 20px rgba(198, 146, 20, 0.4), 0 0 40px rgba(198, 146, 20, 0.2);
+    }
+    
+    .magnetic-hover {
+      transition: transform 0.2s ease-out;
+    }
+    
+    /* Search & Filter UI */
+    .search-bar {
+      transition: all 0.3s ease;
+    }
+    
+    .search-bar:focus-within {
+      box-shadow: 0 0 0 3px rgba(0, 42, 92, 0.1), 0 4px 12px rgba(0, 42, 92, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .filter-btn {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .filter-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .filter-btn.active {
+      background: linear-gradient(135deg, #002A5C, #003875);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 42, 92, 0.3);
+    }
+    
+    .resource-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .resource-card.hidden {
+      opacity: 0;
+      transform: scale(0.9);
+      height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    /* Pulse animation for new items */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(198, 146, 20, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(198, 146, 20, 0); }
+    }
+    
+    .pulse-new {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
@@ -335,11 +430,63 @@
     <!-- Main Content Container -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
 
+      <!-- Search & Filter Bar -->
+      <div class="mb-12 fade-in-section is-visible">
+        <div class="max-w-4xl mx-auto">
+          <!-- Search Input -->
+          <div class="relative mb-6">
+            <div class="search-bar relative">
+              <input
+                type="text"
+                id="resourceSearch"
+                placeholder="Search sermon notes, Bible studies, topics..."
+                class="w-full px-6 py-4 pl-14 rounded-2xl border-2 border-flcBorder/50 bg-white focus:outline-none focus:border-flcNavy/30 text-flcCharcoal placeholder:text-flcCharcoal/40 font-light"
+              />
+              <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <button
+                id="clearSearch"
+                class="absolute right-5 top-1/2 -translate-y-1/2 text-flcCharcoal/40 hover:text-flcNavy transition-colors hidden"
+                aria-label="Clear search"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Filter Buttons -->
+          <div class="flex flex-wrap gap-3 justify-center">
+            <button class="filter-btn active px-5 py-2.5 rounded-full border-2 border-flcNavy/20 bg-flcNavy text-white font-medium text-sm ripple" data-filter="all">
+              All Resources
+            </button>
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="sermon">
+              Sermon Notes
+            </button>
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="study">
+              Bible Studies
+            </button>
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="series">
+              Series
+            </button>
+          </div>
+          
+          <!-- Results Counter -->
+          <div class="mt-6 text-center">
+            <p id="resultsCounter" class="text-sm text-flcCharcoal/60 font-light">
+              <span id="resultCount" class="font-semibold text-flcNavy">12</span> resources found
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Bento Box Layout -->
       <section class="mb-20 lg:mb-28">
         <div class="grid gap-6 lg:grid-cols-12 lg:grid-rows-[auto_auto] auto-rows-fr">
           <!-- Featured Collection - Large Span -->
-          <article class="lg:col-span-8 lg:row-span-2 bg-white border-layered rounded-3xl p-8 sm:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group">
+          <article class="resource-card lg:col-span-8 lg:row-span-2 bg-white border-layered rounded-3xl p-8 sm:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group glow-on-hover" data-type="series sermon" data-tags="compassion pastor-rohan matthew">
           <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-flcGold/10 to-transparent rounded-full blur-3xl -mr-36 -mt-36 group-hover:scale-110 transition-transform duration-700"></div>
           <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-flcNavy/5 rounded-full blur-2xl"></div>
           <div class="relative z-10">
@@ -370,11 +517,14 @@
             </dl>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-medium tracking-widePlus uppercase text-[10px] hover:from-flcNavyLight hover:to-flcNavy shadow-md hover:shadow-lg">
+            <a href="#" class="btn-premium ripple inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-medium tracking-widePlus uppercase text-[10px] hover:from-flcNavyLight hover:to-flcNavy shadow-md hover:shadow-lg">
               View collection
-              <span aria-hidden="true" class="ml-2">→</span>
+              <span aria-hidden="true" class="ml-2 transition-transform group-hover:translate-x-1">→</span>
             </a>
-            <a href="#" class="btn-premium inline-flex items-center px-6 py-3 rounded-full border-gradient text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:text-flcNavy">
+            <a href="#" class="btn-premium ripple inline-flex items-center px-6 py-3 rounded-full border-gradient text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:text-flcNavy">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
               Download PDF
             </a>
           </div>
@@ -401,22 +551,25 @@
           </aside>
 
           <!-- Latest Item Card -->
-          <aside class="bg-white border-layered rounded-2xl p-6 card-hover elevation-2 fade-in-section is-visible" style="animation-delay: 0.3s;">
+          <aside class="bg-white border-layered rounded-2xl p-6 card-hover elevation-2 fade-in-section is-visible pulse-new" style="animation-delay: 0.3s;">
             <div class="flex items-center justify-between gap-4 mb-5">
-              <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
-                Latest Release
-              </h3>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-flcGold rounded-full animate-pulse"></span>
+                <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-flcCharcoal/60">
+                  Latest Release
+                </h3>
+              </div>
               <a href="#" class="text-xs font-medium text-flcNavy hover:text-flcGold link-underline">
                 View all →
               </a>
             </div>
 
           <!-- Item 2 -->
-          <article class="border-t border-flcBorder/30 pt-5">
+          <article class="resource-card border-t border-flcBorder/30 pt-5 magnetic-hover" data-type="sermon" data-tags="compassion">
             <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
               Sermon Notes · Oct 27, 2025
             </p>
-            <h4 class="text-base font-heading font-semibold text-flcNavy mb-2">
+            <h4 class="text-base font-heading font-semibold text-flcNavy mb-2 group-hover:text-flcGold transition-colors">
               When Compassion Costs You Sleep
             </h4>
             <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
@@ -431,13 +584,13 @@
           </article>
 
           <!-- Item 2 -->
-          <article class="border-t border-flcBorder pt-4">
+          <article class="resource-card border-t border-flcBorder pt-4 magnetic-hover" data-type="sermon" data-tags="unwillingness obedience">
             <p
               class="text-[11px] uppercase tracking-widePlus font-semibold gradient-text-gold"
             >
               Sermon Notes · Oct 27, 2025
             </p>
-            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy group-hover:text-flcGold transition-colors">
               Anointed in Unwillingness
             </h4>
             <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
@@ -456,13 +609,13 @@
           </article>
 
           <!-- Item 3 -->
-          <article class="border-t border-flcBorder pt-4">
+          <article class="resource-card border-t border-flcBorder pt-4 magnetic-hover" data-type="study" data-tags="matthew gethsemane prayer">
             <p
               class="text-[11px] uppercase tracking-widePlus font-semibold gradient-text-gold"
             >
               Bible Study Guide
             </p>
-            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy group-hover:text-flcGold transition-colors">
               Matthew 26:36–46 — Gethsemane
             </h4>
             <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
@@ -506,12 +659,12 @@
 
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
             <!-- Card Template 1 -->
-            <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
+            <article class="resource-card stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2 glow-on-hover scale-hover" data-type="sermon series" data-tags="compassion pastor-rohan">
               <header>
                 <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
                   Series · Compassion
                 </p>
-                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
+                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3 group-hover:text-flcGold transition-colors">
                   When Compassion Costs You Sleep
                 </h3>
                 <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
@@ -528,12 +681,12 @@
             </article>
 
             <!-- Card Template 2 -->
-            <article class="stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2">
+            <article class="resource-card stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover gradient-shine elevation-2 glow-on-hover scale-hover" data-type="sermon" data-tags="unwillingness obedience anointing">
               <header>
                 <p class="text-[10px] uppercase tracking-[0.2em] font-semibold mb-3 gradient-text-gold">
                   Standalone
                 </p>
-                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3">
+                <h3 class="text-lg font-heading font-bold text-flcNavy leading-tight mb-3 group-hover:text-flcGold transition-colors">
                   Anointed in Unwillingness
                 </h3>
                 <p class="text-sm text-flcCharcoal/60 font-light leading-relaxed">
@@ -670,6 +823,143 @@
 
     document.querySelectorAll('.fade-in-section').forEach(el => {
       observer.observe(el);
+    });
+
+    // Search and Filter Functionality
+    const searchInput = document.getElementById('resourceSearch');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const resourceCards = document.querySelectorAll('.resource-card');
+    const resultCount = document.getElementById('resultCount');
+    
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      clearSearchBtn.classList.toggle('hidden', currentSearch === '');
+      filterResources();
+    });
+
+    // Clear search
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      currentSearch = '';
+      clearSearchBtn.classList.add('hidden');
+      filterResources();
+      searchInput.focus();
+    });
+
+    // Filter functionality
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        currentFilter = btn.getAttribute('data-filter');
+        filterResources();
+      });
+    });
+
+    // Main filter function
+    function filterResources() {
+      let visibleCount = 0;
+      
+      resourceCards.forEach(card => {
+        const cardType = card.getAttribute('data-type') || '';
+        const cardTags = card.getAttribute('data-tags') || '';
+        const cardText = card.textContent.toLowerCase();
+        
+        // Check filter match
+        const filterMatch = currentFilter === 'all' || 
+                           cardType.includes(currentFilter);
+        
+        // Check search match
+        const searchMatch = currentSearch === '' || 
+                           cardText.includes(currentSearch) ||
+                           cardTags.includes(currentSearch);
+        
+        // Show/hide card
+        if (filterMatch && searchMatch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      
+      // Update counter
+      resultCount.textContent = visibleCount;
+      
+      // Animate counter
+      resultCount.style.transform = 'scale(1.2)';
+      setTimeout(() => {
+        resultCount.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Magnetic hover effect
+    document.querySelectorAll('.magnetic-hover').forEach(element => {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const moveX = x * 0.1;
+        const moveY = y * 0.1;
+        
+        element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        element.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Ripple effect for buttons
+    document.querySelectorAll('.ripple').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple-effect');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add subtle parallax to hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('section[class*="bg-gradient-to-br from-flcNavy"]');
+      if (hero && scrolled < window.innerHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // Remove pulse animation after 5 seconds
+    setTimeout(() => {
+      document.querySelectorAll('.pulse-new').forEach(el => {
+        el.classList.remove('pulse-new');
+      });
+    }, 5000);
+
+    // Initialize result count on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      resultCount.textContent = resourceCards.length;
     });
   </script>
 </body>
