@@ -252,27 +252,13 @@
     
     /* Button Hover Effect */
     .btn-premium {
-      transition: all 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
       position: relative;
-      overflow: hidden;
+      will-change: transform;
     }
     
-    .btn-premium::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-    }
-    
-    .btn-premium:hover::before {
-      width: 300px;
-      height: 300px;
+    .btn-premium:active {
+      transform: scale(0.98);
     }
     
     /* Micro-interactions */
@@ -281,25 +267,9 @@
       overflow: hidden;
     }
     
-    .ripple::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(154, 123, 79, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
-      opacity: 0;
-    }
-    
-    .ripple:active::after {
-      width: 200px;
-      height: 200px;
-      opacity: 1;
-      transition: 0s;
+    .ripple:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
     }
     
     .scale-hover {
@@ -523,7 +493,7 @@
               </svg>
               Watch Sermon
             </a>
-            <a href="When Comppassion Costs You Sleep - 11.8.pdf" download class="btn-premium ripple inline-flex items-center px-6 py-3 rounded-full border-gradient text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:text-flcNavy">
+            <a href="When Comppassion Costs You Sleep - 11.8.pdf" download class="btn-premium inline-flex items-center px-6 py-3 rounded-full border-gradient text-flcCharcoal/80 font-medium text-[10px] tracking-widePlus uppercase hover:text-flcNavy transition-colors">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
