@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FLC Publishing House | Freedom Life Church</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="FLC Publishing House – curated sermon notes, Bible study guides, and resources from Freedom Life Church."
+  />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            flcNavy: "#002A5C",
+            flcGold: "#C69214",
+            flcCharcoal: "#1E1E1E",
+            flcCream: "#FDF8EE",
+            flcOffWhite: "#F8F7F2",
+            flcBorder: "#E5E7EB",
+          },
+          fontFamily: {
+            heading: ["'Playfair Display'", "serif"],
+            body: ["Inter", "system-ui", "sans-serif"],
+          },
+          letterSpacing: {
+            widePlus: "0.18em",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+  <main class="min-h-screen">
+    <!-- Outer container -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Page Header -->
+      <header class="border-b border-flcBorder pb-8 mb-10 lg:mb-12">
+        <p
+          class="text-[11px] tracking-widePlus uppercase text-flcGold font-semibold"
+        >
+          FLC Publishing House
+        </p>
+        <div class="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-3xl">
+            <h1
+              class="text-3xl sm:text-4xl lg:text-5xl font-heading font-semibold text-flcNavy leading-tight"
+            >
+              Sermon Notes, Bible Studies &amp; Resources
+            </h1>
+            <p class="mt-4 text-sm sm:text-base text-flcCharcoal/80 leading-relaxed">
+              A curated home for teaching from Freedom Life Church—crafted notes,
+              study guides, and resources designed to help you sit with the Word,
+              not just listen to it once on Sunday.
+            </p>
+          </div>
+          <div class="flex flex-col items-start gap-2 text-xs sm:text-sm text-flcCharcoal/70">
+            <span class="uppercase tracking-widePlus">Curated by</span>
+            <span class="font-medium text-flcCharcoal">Freedom Life Church</span>
+            <span class="text-flcCharcoal/60">Edmonton, Alberta</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Top Layout: Featured + Latest -->
+      <section class="mb-12 lg:mb-14 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <!-- Featured Collection -->
+        <article
+          class="bg-white border border-flcBorder rounded-xl shadow-sm px-6 py-6 sm:px-8 sm:py-7 flex flex-col justify-between"
+        >
+          <div>
+            <p
+              class="text-[11px] tracking-widePlus uppercase text-flcGold font-semibold"
+            >
+              Featured Collection
+            </p>
+            <h2
+              class="mt-3 text-2xl sm:text-3xl font-heading font-semibold text-flcNavy"
+            >
+              When Compassion Costs You Sleep
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-flcCharcoal/80 leading-relaxed">
+              A series by Pastor Rohan Samuels exploring what it means to carry the
+              burdens of others with Jesus—when compassion stretches your comfort,
+              your schedule, and your sleep.
+            </p>
+            <dl class="mt-4 grid gap-3 text-xs sm:text-sm text-flcCharcoal/70">
+              <div class="flex gap-2">
+                <dt class="w-20 uppercase tracking-widePlus">Format</dt>
+                <dd>Full sermon notes, key quotes, and reflection questions.</dd>
+              </div>
+              <div class="flex gap-2">
+                <dt class="w-20 uppercase tracking-widePlus">Passages</dt>
+                <dd>Matthew 26:36–46 and related texts on compassion and calling.</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3 text-sm">
+            <a
+              href="#"
+              class="inline-flex items-center px-4 py-2 rounded-full bg-flcNavy text-white font-medium tracking-widePlus uppercase text-[11px] hover:bg-flcCharcoal transition"
+            >
+              View collection
+              <span aria-hidden="true" class="ml-2">→</span>
+            </a>
+            <a
+              href="#"
+              class="inline-flex items-center px-4 py-2 rounded-full border border-flcBorder text-flcCharcoal/80 font-medium text-[11px] tracking-widePlus uppercase hover:border-flcNavy hover:text-flcNavy transition"
+            >
+              Download series PDF
+            </a>
+          </div>
+        </article>
+
+        <!-- Latest Releases (Sermon + Study) -->
+        <aside
+          class="bg-flcCream/80 border border-flcBorder rounded-xl px-5 py-5 sm:px-6 sm:py-6 flex flex-col gap-5"
+        >
+          <div class="flex items-center justify-between gap-4">
+            <h3 class="text-sm font-semibold tracking-widePlus uppercase text-flcCharcoal/80">
+              Latest releases
+            </h3>
+            <a
+              href="#"
+              class="text-xs font-medium text-flcNavy hover:text-flcGold transition"
+            >
+              View entire library →
+            </a>
+          </div>
+
+          <!-- Item 1 -->
+          <article class="border-t border-flcBorder pt-4">
+            <p
+              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+            >
+              Sermon Notes · Nov 10, 2025
+            </p>
+            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+              When Compassion Costs You Sleep
+            </h4>
+            <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
+              Structured notes, Scripture callouts, and space for personal
+              application.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-3 text-xs">
+              <a
+                href="#"
+                class="underline underline-offset-4 decoration-flcNavy/40 hover:decoration-flcNavy"
+              >
+                Open notes
+              </a>
+              <span class="text-flcCharcoal/60">PDF · Discussion questions</span>
+            </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="border-t border-flcBorder pt-4">
+            <p
+              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+            >
+              Sermon Notes · Oct 27, 2025
+            </p>
+            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+              Anointed in Unwillingness
+            </h4>
+            <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
+              How God meets us in hesitation and still calls us into obedient,
+              compassionate service.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-3 text-xs">
+              <a
+                href="#"
+                class="underline underline-offset-4 decoration-flcNavy/40 hover:decoration-flcNavy"
+              >
+                Open notes
+              </a>
+              <span class="text-flcCharcoal/60">Outline · Reflection prompts</span>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="border-t border-flcBorder pt-4">
+            <p
+              class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+            >
+              Bible Study Guide
+            </p>
+            <h4 class="mt-2 text-sm sm:text-base font-heading font-semibold text-flcNavy">
+              Matthew 26:36–46 — Gethsemane
+            </h4>
+            <p class="mt-1 text-xs sm:text-sm text-flcCharcoal/80">
+              A guided study for small groups walking through Jesus' night in the
+              garden.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-3 text-xs">
+              <a
+                href="#"
+                class="underline underline-offset-4 decoration-flcNavy/40 hover:decoration-flcNavy"
+              >
+                Download PDF
+              </a>
+              <span class="text-flcCharcoal/60">Group &amp; personal use</span>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <!-- Main Library Sections -->
+      <section class="space-y-10 lg:space-y-12">
+        <!-- Sermon Notes Library -->
+        <section aria-labelledby="sermon-notes-heading">
+          <div class="flex items-baseline justify-between gap-4 mb-4">
+            <div>
+              <h2
+                id="sermon-notes-heading"
+                class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy"
+              >
+                Sermon Notes Library
+              </h2>
+              <p class="mt-1 text-sm text-flcCharcoal/70">
+                Clean, structured notes to revisit what God spoke on Sunday.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="hidden sm:inline text-xs font-medium text-flcNavy hover:text-flcGold transition"
+            >
+              Browse all sermon notes →
+            </a>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Card Template 1 -->
+            <article
+              class="bg-white border border-flcBorder rounded-lg p-5 flex flex-col justify-between"
+            >
+              <header>
+                <p
+                  class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+                >
+                  Series · Compassion
+                </p>
+                <h3 class="mt-2 text-lg font-heading font-semibold text-flcNavy">
+                  When Compassion Costs You Sleep
+                </h3>
+                <p class="mt-2 text-sm text-flcCharcoal/80">
+                  Full manuscript-style notes with Scripture pull-quotes and
+                  journaling prompts.
+                </p>
+              </header>
+              <footer class="mt-4 flex items-center justify-between text-xs">
+                <span class="text-flcCharcoal/60">PDF · 12 pages</span>
+                <a
+                  href="#"
+                  class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold transition"
+                >
+                  View notes
+                  <span aria-hidden="true" class="ml-1">→</span>
+                </a>
+              </footer>
+            </article>
+
+            <!-- Card Template 2 -->
+            <article
+              class="bg-white border border-flcBorder rounded-lg p-5 flex flex-col justify-between"
+            >
+              <header>
+                <p
+                  class="text-[11px] uppercase tracking-widePlus text-flcGold font-semibold"
+                >
+                  Standalone
+                </p>
+                <h3 class="mt-2 text-lg font-heading font-semibold text-flcNavy">
+                  Anointed in Unwillingness
+                </h3>
+                <p class="mt-2 text-sm text-flcCharcoal/80">
+                  Key points, application questions, and space for personal
+                  commitments.
+                </p>
+              </header>
+              <footer class="mt-4 flex items-center justify-between text-xs">
+                <span class="text-flcCharcoal/60">Outline · PDF</span>
+                <a
+                  href="#"
+                  class="inline-flex items-center text-flcNavy font-medium hover:text-flcGold transition"
+                >
+                  View notes
+                  <span aria-hidden="true" class="ml-1">→</span>
+                </a>
+              </footer>
+            </article>
+
+            <!-- Card Template 3 (example) -->
+            <article
+              class="bg-white border border-dashed border-flcBorder/70 rounded-lg p-5 flex flex-col justify-center items-start text-sm text-flcCharcoal/70"
+            >
+              <p class="font-medium text-flcCharcoal">
+                Future series placeholder
+              </p>
+              <p class="mt-2">
+                As new sermons are preached, add them here as part of the library
+                without redesigning the page—just duplicate one of the cards.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Bible Study Guides -->
+        <section aria-labelledby="bible-study-heading">
+          <div class="flex items-baseline justify-between gap-4 mb-4">
+            <div>
+              <h2
+                id="bible-study-heading"
+                class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy"
+              >
+                Bible Study Guides
+              </h2>
+              <p class="mt-1 text-sm text-flcCharcoal/70">
+                Studies for small groups, families, and personal devotion.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="hidden sm:inline text-xs font-medium text-flcNavy hover:text-flcGold transition"
+            >
+              Browse all study guides →
+            </a>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Guide 1 -->
+            <article
+              class="bg-white border border-flcBorder rounded-lg px-5 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            >
+              <div>
+                <h3 class="text-base sm:text-lg font-heading font-semibold text-flcNavy">
+                  Matthew 26:36–46 — Gethsemane
+                </h3>
+                <p class="mt-1 text-sm text-flcCharcoal/80 max-w-xl">
+                  A guided study on Jesus in the garden, with structured
+                  observation, interpretation, and application questions.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-3 text-xs sm:text-sm">
+                <a
+                  href="#"
+                  class="px-3 py-1.5 rounded-full border border-flcNavy text-flcNavy font-medium tracking-widePlus uppercase text-[11px] hover:bg-flcNavy hover:text-white transition"
+                >
+                  Download PDF
+                </a>
+                <a
+                  href="#"
+                  class="px-3 py-1.5 rounded-full border border-flcBorder text-flcCharcoal/80 font-medium text-[11px] tracking-widePlus uppercase hover:border-flcNavy/40 transition"
+                >
+                  View questions
+                </a>
+              </div>
+            </article>
+
+            <!-- Guide placeholder -->
+            <article
+              class="border border-dashed border-flcBorder/70 rounded-lg px-5 py-4 text-xs sm:text-sm text-flcCharcoal/70"
+            >
+              Add more studies by duplicating this pattern—keep title, short
+              description, and clear calls to action for each guide.
+            </article>
+          </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section aria-labelledby="resources-heading" class="border-t border-flcBorder pt-8">
+          <h2
+            id="resources-heading"
+            class="text-xl sm:text-2xl font-heading font-semibold text-flcNavy mb-4"
+          >
+            Additional
