@@ -431,7 +431,7 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-20">
 
       <!-- Search & Filter Bar -->
-      <div class="mb-12 fade-in-section is-visible relative z-20 bg-flcOffWhite/95 backdrop-blur-sm -mx-4 px-4 py-6 sm:mx-0 sm:px-0 sm:bg-transparent">
+      <div class="mb-12 fade-in-section is-visible relative z-30 bg-flcOffWhite rounded-2xl -mx-4 px-4 py-8 sm:mx-0 sm:px-6 shadow-sm">
         <div class="max-w-4xl mx-auto">
           <!-- Search Input -->
           <div class="relative mb-6">
@@ -440,7 +440,7 @@
                 type="text"
                 id="resourceSearch"
                 placeholder="Search sermon notes, Bible studies, topics..."
-                class="w-full px-6 py-4 pl-14 rounded-2xl border-2 border-flcBorder/50 bg-white focus:outline-none focus:border-flcNavy/30 text-flcCharcoal placeholder:text-flcCharcoal/40 font-light"
+                class="w-full px-6 py-4 pl-14 rounded-2xl border-2 border-flcBorder bg-white focus:outline-none focus:border-flcNavy/40 text-flcCharcoal placeholder:text-flcCharcoal/50 font-light shadow-sm"
               />
               <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -459,16 +459,16 @@
           
           <!-- Filter Buttons -->
           <div class="flex flex-wrap gap-3 justify-center">
-            <button class="filter-btn active px-5 py-2.5 rounded-full border-2 border-flcNavy/20 bg-flcNavy text-white font-medium text-sm ripple" data-filter="all">
+            <button class="filter-btn active px-5 py-2.5 rounded-full border-2 border-flcNavy bg-flcNavy text-white font-medium text-sm ripple shadow-sm" data-filter="all">
               All Resources
             </button>
-            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="sermon">
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/30 bg-white text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5 shadow-sm" data-filter="sermon">
               Sermon Notes
             </button>
-            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="study">
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/30 bg-white text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5 shadow-sm" data-filter="study">
               Bible Studies
             </button>
-            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/20 text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5" data-filter="series">
+            <button class="filter-btn px-5 py-2.5 rounded-full border-2 border-flcNavy/30 bg-white text-flcNavy font-medium text-sm ripple hover:bg-flcNavy/5 shadow-sm" data-filter="series">
               Series
             </button>
           </div>
@@ -483,7 +483,7 @@
       </div>
 
       <!-- Bento Box Layout -->
-      <section class="mb-20 lg:mb-28">
+      <section class="mb-20 lg:mb-28 relative z-20">
         <div class="grid gap-6 lg:grid-cols-12 lg:grid-rows-[auto_auto] auto-rows-fr">
           <!-- Featured Collection - Large Span -->
           <article class="resource-card lg:col-span-8 lg:row-span-2 bg-white border-layered rounded-3xl p-8 sm:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group glow-on-hover" data-type="series sermon" data-tags="compassion pastor-rohan matthew">
@@ -637,9 +637,9 @@
       </section>
 
       <!-- Main Library Sections -->
-      <section class="space-y-20 lg:space-y-28">
+      <section class="space-y-20 lg:space-y-28 relative z-20">
         <!-- Sermon Notes Library -->
-        <section id="sermon-notes" aria-labelledby="sermon-notes-heading" class="fade-in-section relative">
+        <section id="sermon-notes" aria-labelledby="sermon-notes-heading" class="fade-in-section relative bg-flcOffWhite/50 backdrop-blur-sm rounded-3xl p-8 -mx-4 sm:mx-0">
           <div class="absolute -left-4 top-0 w-1 h-32 bg-gradient-to-b from-flcGold via-flcGold/50 to-transparent rounded-full"></div>
           <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
             <div class="max-w-2xl">
