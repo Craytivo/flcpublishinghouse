@@ -600,8 +600,14 @@
     
     @media (max-width: 640px) {
       .hero-background {
-        padding-top: 2rem;
+        padding-top: 1rem;
         padding-bottom: 2rem;
+        min-height: auto !important;
+      }
+      
+      .hero-background > div {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
       }
       
       .hero-title {
@@ -974,7 +980,7 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 15px;
       position: relative;
-      padding: 0.5rem 0;
+      padding: 0.5rem 1rem;
       letter-spacing: 0.3px;
     }
     
@@ -1213,11 +1219,28 @@
         </div>
       </div>
       <!-- Navigation Links -->
-      <div class="flex items-center gap-10 flex-shrink-0">
+      <div class="nav-links items-center gap-10 flex-shrink-0">
         <a href="library.html" class="nav-link text-lg font-normal">Library</a>
         <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
         <a href="resources.html" class="nav-link text-lg font-normal">Resources</a>
         <a href="#subscribe" class="nav-link text-lg font-normal" id="navSubscribe">Subscribe</a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="flex flex-col py-4">
+        <a href="library.html" class="nav-link">Library</a>
+        <a href="devotionals.html" class="nav-link">Devotionals</a>
+        <a href="resources.html" class="nav-link">Resources</a>
+        <a href="#subscribe" class="nav-link" id="navSubscribeMobile">Subscribe</a>
       </div>
     </div>
   </nav>

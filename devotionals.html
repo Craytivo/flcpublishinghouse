@@ -220,6 +220,56 @@
     .fade-in:nth-child(3) { animation-delay: 0.3s; }
     .fade-in:nth-child(4) { animation-delay: 0.4s; }
     
+    /* Navigation Styles */
+    nav {
+      position: relative;
+    }
+    
+    .nav-links {
+      display: flex;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.1), rgba(154, 123, 79, 0.05));
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      cursor: pointer;
+      padding: 0.5rem;
+      color: #2C2C2C;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .mobile-menu-btn:hover {
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.15), rgba(154, 123, 79, 0.08));
+      border-color: rgba(154, 123, 79, 0.3);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
+      box-shadow: 0 10px 25px rgba(26, 58, 82, 0.1);
+      z-index: 50;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu .nav-link {
+      display: block;
+      padding: 1rem 1.5rem;
+      margin: 0.25rem 1rem;
+    }
+    
     @media (max-width: 640px) {
       .sermon-header { padding: 2.5rem 2rem; border-radius: 1.5rem; }
       .content-section { padding: 2rem; }
@@ -301,10 +351,26 @@
         </div>
       </div>
       <!-- Navigation Links -->
-      <div class="flex items-center gap-10 flex-shrink-0">
+      <div class="nav-links items-center gap-10 flex-shrink-0">
         <a href="library.html" class="nav-link text-lg font-normal">Library</a>
         <a href="devotionals.html" class="nav-link active text-lg font-normal">Devotionals</a>
         <a href="resources.html" class="nav-link text-lg font-normal">Resources</a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="flex flex-col py-4">
+        <a href="library.html" class="nav-link">Library</a>
+        <a href="devotionals.html" class="nav-link active">Devotionals</a>
+        <a href="resources.html" class="nav-link">Resources</a>
       </div>
     </div>
   </nav>
