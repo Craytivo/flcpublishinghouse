@@ -84,10 +84,99 @@
       text-decoration-thickness: 2px;
       color: #9A7B4F;
     }
+    
+    .nav-links {
+      display: flex;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.1), rgba(154, 123, 79, 0.05));
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      cursor: pointer;
+      padding: 0.5rem;
+      color: #2C2C2C;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
+      box-shadow: 0 10px 25px rgba(26, 58, 82, 0.1);
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu .nav-link {
+      display: block;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 0.25rem 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex !important;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    
+    /* Mobile Header Optimizations */
+    @media (max-width: 640px) {
+      /* Header Layout */
+      nav > div {
+        padding: 0.75rem 1rem !important;
+        gap: 0.5rem !important;
+      }
+      
+      /* Logo Optimization */
+      nav .text-3xl {
+        font-size: 1.125rem;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      
+      nav .w-10 {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+      
+      /* Hide Search on Mobile */
+      .search-bar {
+        display: none !important;
+      }
+      
+      /* Mobile Menu Touch Targets */
+      .mobile-menu .nav-link {
+        padding: 1rem 1.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <nav id="mainNav">
+  <nav id="mainNav" class="relative">
     <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
       <!-- Logo -->
       <a href="index.html" class="flex items-center gap-3 group flex-shrink-0">
@@ -120,13 +209,41 @@
         </div>
       </div>
       <!-- Navigation Links -->
-      <div class="flex items-center gap-10 flex-shrink-0">
+      <div class="nav-links items-center gap-10 flex-shrink-0">
         <a href="library.html" class="nav-link text-lg font-normal">Library</a>
         <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
         <a href="resources.html" class="nav-link active text-lg font-normal">Resources</a>
       </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="flex flex-col py-4">
+        <a href="library.html" class="nav-link">Library</a>
+        <a href="devotionals.html" class="nav-link">Devotionals</a>
+        <a href="resources.html" class="nav-link active">Resources</a>
+      </div>
     </div>
   </nav>
+  
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+      });
+    }
+  </script>
   <main class="max-w-4xl mx-auto px-4 md:px-0 py-12">
     <h1 class="text-4xl md:text-5xl font-heading font-bold text-flcNavy mb-8">Downloadable Resources</h1>
     <div class="grid gap-8">

@@ -1131,7 +1131,48 @@
       }
       
       .mobile-menu-btn {
-        display: block;
+        display: flex !important;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+    }
+    
+    /* Mobile Header Optimizations */
+    @media (max-width: 640px) {
+      /* Header Layout */
+      nav > div {
+        padding: 0.75rem 1rem !important;
+        gap: 0.5rem !important;
+      }
+      
+      /* Logo Optimization */
+      nav .text-3xl {
+        font-size: 1.125rem;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      
+      nav .w-10 {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+      
+      /* Hide Search on Mobile */
+      .search-bar {
+        display: none !important;
+      }
+      
+      /* Mobile Menu Touch Targets */
+      .mobile-menu .nav-link {
+        padding: 1rem 1.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
       }
     }
   </style>

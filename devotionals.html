@@ -224,6 +224,45 @@
       .sermon-header { padding: 2.5rem 2rem; border-radius: 1.5rem; }
       .content-section { padding: 2rem; }
       .download-btn { padding: 0.75rem 1.5rem; }
+      
+      /* Header Layout */
+      nav > div {
+        padding: 0.75rem 1rem !important;
+        gap: 0.5rem !important;
+      }
+      
+      /* Logo Optimization */
+      nav .text-3xl {
+        font-size: 1.125rem;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      
+      nav .w-10 {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+      
+      /* Hide Search on Mobile */
+      .search-bar {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex !important;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
     }
   </style>
 </head>

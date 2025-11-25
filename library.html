@@ -105,33 +105,58 @@
       transform: translateY(0);
     }
     
-    /* Card Hover Effects */
+    /* Standardized Card Hover Effects */
     .card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .card-hover:hover {
-      transform: scale(1.02);
+      transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(26, 58, 82, 0.15), 0 6px 12px rgba(26, 58, 82, 0.08);
     }
     
-    /* Layered Elevation System */
-    .elevation-1 {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-    }
-    
-    .elevation-2 {
+    /* Unified Resource Card Styles */
+    .resource-card {
+      background: white;
+      border-radius: 1.25rem;
+      padding: 1.5rem;
       box-shadow: 0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04);
-    }
-    
-    .elevation-3 {
-      box-shadow: 0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06);
-    }
-    
-    /* Layered Border Effect */
-    .border-layered {
       border: 1px solid rgba(229, 231, 235, 0.5);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26, 58, 82, 0.15), 0 6px 12px rgba(26, 58, 82, 0.08);
+    }
+    
+    /* Stats Card (Hero sidebar) */
+    .stats-card {
+      background: linear-gradient(135deg, rgba(26, 58, 82, 0.95), rgba(42, 74, 98, 0.95));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 24px rgba(26, 58, 82, 0.25), 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(26, 58, 82, 0.3), 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Responsive Card Padding */
+    @media (min-width: 640px) {
+      .resource-card {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .resource-card.featured-card {
+        padding: 3rem;
+      }
     }
     
     /* Sophisticated Color Treatments */
@@ -197,6 +222,105 @@
     .stagger-item:nth-child(4) { animation-delay: 0.4s; }
     .stagger-item:nth-child(5) { animation-delay: 0.5s; }
     .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+    
+    /* Search Enhancement Styles */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    #searchResultBadge {
+      box-shadow: 0 2px 8px rgba(154, 123, 79, 0.3);
+    }
+    
+    #emptyState {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    /* Search input focus effect */
+    #resourceSearch:focus {
+      box-shadow: 0 0 0 4px rgba(154, 123, 79, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Search Dropdown Styles */
+    #searchDropdown {
+      animation: slideDown 0.3s ease-out;
+      backdrop-filter: blur(10px);
+    }
+    
+    #searchDropdown::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #searchDropdown::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    #searchDropdown::-webkit-scrollbar-thumb {
+      background: #9A7B4F;
+      border-radius: 3px;
+    }
+    
+    #searchDropdown::-webkit-scrollbar-thumb:hover {
+      background: #7A6240;
+    }
+    
+    .search-result-item {
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid rgba(229, 224, 216, 0.5);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+    
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+    
+    .search-result-item:hover {
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.05), rgba(184, 149, 106, 0.08));
+      padding-left: 1.5rem;
+    }
+    
+    .search-result-item:active {
+      background: rgba(154, 123, 79, 0.1);
+    }
+    
+    .search-highlight {
+      background: rgba(154, 123, 79, 0.2);
+      font-weight: 600;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
     
     /* Button Hover Effect */
     .btn-premium {
@@ -1060,6 +1184,12 @@
       color: #2C2C2C;
       border-radius: 8px;
       transition: all 0.3s ease;
+      flex-shrink: 0;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .mobile-menu-btn:hover {
@@ -1107,8 +1237,12 @@
     .mobile-menu .nav-link {
       padding: 1rem 1.5rem;
       border-radius: 8px;
-      margin: 0 1rem;
+      margin: 0.25rem 1rem;
       transition: all 0.3s ease;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
     }
     
     .mobile-menu .nav-link:hover {
@@ -1130,7 +1264,222 @@
       }
       
       .mobile-menu-btn {
-        display: block;
+        display: flex !important;
+      }
+    }
+    
+    /* Mobile Optimizations */
+    @media (max-width: 640px) {
+      /* Navigation Mobile */
+      nav .flex {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
+      
+      nav .text-3xl {
+        font-size: 1.125rem;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      
+      nav .w-10 {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+      
+      /* Hide Search Bar on Mobile */
+      .search-bar {
+        display: none !important;
+      }
+      
+      /* Adjust nav layout without search */
+      nav > div > .flex-1 {
+        flex: 0 1 auto;
+      }
+      
+      /* Hero Section Mobile */
+      .hero-background {
+        min-height: auto;
+        padding: 3rem 0;
+      }
+      
+      .hero-title {
+        font-size: 2rem !important;
+        line-height: 1.1;
+      }
+      
+      .hero-title .block:first-child {
+        font-size: 1.75rem !important;
+      }
+      
+      .hero-title .block:nth-child(2) {
+        font-size: 1.5rem !important;
+      }
+      
+      .hero-badge {
+        padding: 0.5rem 1rem;
+        font-size: 10px;
+      }
+      
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .hero-cta-group .btn-premium {
+        width: 100%;
+        justify-content: center;
+        font-size: 12px;
+        padding: 1rem 1.5rem;
+      }
+      
+      /* Cards Mobile - Larger Touch Targets */
+      .resource-card {
+        padding: 1.25rem;
+        min-height: 44px; /* iOS minimum touch target */
+      }
+      
+      .stats-card {
+        padding: 1.25rem;
+      }
+      
+      .resource-card h3 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+      }
+      
+      .resource-card p {
+        font-size: 0.875rem;
+        line-height: 1.6;
+      }
+      
+      /* Button Touch Targets */
+      .btn-premium, button, a {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      .bookmark-btn {
+        width: 44px;
+        height: 44px;
+        top: 0.75rem;
+        right: 0.75rem;
+      }
+      
+      /* Typography Mobile */
+      h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+      
+      h2 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+      }
+      
+      h3 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+      }
+      
+      /* Grid Mobile - Single Column */
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Spacing Mobile */
+      .gap-10 {
+        gap: 1.5rem;
+      }
+      
+      .gap-8 {
+        gap: 1.25rem;
+      }
+      
+      .gap-6 {
+        gap: 1rem;
+      }
+      
+      /* Search Dropdown Mobile */
+      #searchDropdown {
+        max-height: 70vh;
+        font-size: 14px;
+      }
+      
+      .search-result-item {
+        padding: 1rem;
+      }
+      
+      .search-result-item h4 {
+        font-size: 0.9375rem;
+      }
+      
+      .search-result-item p {
+        font-size: 0.8125rem;
+      }
+      
+      /* FAB Mobile */
+      .quick-jump-fab {
+        bottom: 5rem;
+        right: 1rem;
+        padding: 0.75rem 1rem;
+        font-size: 12px;
+      }
+      
+      .quick-jump-fab span {
+        display: none;
+      }
+      
+      .scroll-top-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+      }
+      
+      /* Modal Mobile */
+      .modal-content {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+        padding: 1.5rem;
+      }
+      
+      /* Remove hover effects on touch devices */
+      @media (hover: none) {
+        .card-hover:hover {
+          transform: none;
+        }
+        
+        .resource-card:hover {
+          transform: none;
+        }
+        
+        .stats-card:hover {
+          transform: none;
+        }
+      }
+    }
+    
+    /* Tablet Optimizations */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .hero-title {
+        font-size: 3rem !important;
+      }
+      
+      .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      .resource-card {
+        padding: 1.5rem;
       }
     }
   </style>
@@ -1154,20 +1503,35 @@
             type="text"
             id="resourceSearch"
             placeholder="Search sermons and studies..."
-            class="w-full px-5 py-3 pl-12 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md"
+            autocomplete="off"
+            class="w-full px-5 py-3 pl-12 pr-20 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md transition-all duration-300"
           />
-          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="searchIcon" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
+          <!-- Searching Spinner -->
+          <svg id="searchSpinner" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold hidden animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <!-- Result Count Badge -->
+          <div id="searchResultBadge" class="absolute right-14 top-1/2 -translate-y-1/2 bg-flcGold text-white text-xs font-semibold px-2.5 py-1 rounded-full hidden transition-all">
+            <span id="resultCount">0</span>
+          </div>
           <button
             id="clearSearch"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-colors hidden"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-all duration-200 hover:scale-110 hidden"
             aria-label="Clear search"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
+          
+          <!-- Search Results Dropdown -->
+          <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-flcGold/20 max-h-96 overflow-y-auto z-50">
+            <div id="searchResults" class="py-2"></div>
+          </div>
         </div>
       </div>
       <!-- Navigation Links -->
@@ -1307,7 +1671,7 @@
           </div>
           <div class="flex flex-col gap-4 sm:gap-6 fade-in-section is-visible lg:mt-0 mt-8 sm:mt-12" style="animation-delay: 0.2s;">
             <!-- Library Feature Card -->
-            <div class="stats-card rounded-2xl p-5 sm:p-6 relative overflow-hidden group">
+            <div class="stats-card rounded-2xl p-6 relative overflow-hidden group">
               <div class="absolute top-0 right-0 w-32 h-32 bg-flcGold/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
               <div class="relative z-10">
                 <div class="flex items-center gap-2 mb-4">
@@ -1325,7 +1689,7 @@
               </div>
             </div>
             <!-- Library Devotional Card -->
-            <a href="devotionals.html" class="resource-card stats-card rounded-2xl p-5 sm:p-6 relative overflow-hidden group block transition-all duration-300 hover:scale-[1.02]" data-type="devotional" data-tags="advent hope love peace joy december christmas">
+            <a href="devotionals.html" class="stats-card rounded-2xl p-6 relative overflow-hidden group block" data-type="devotional" data-tags="advent hope love peace joy december christmas">
               <div class="absolute top-0 right-0 w-32 h-32 bg-flcGold/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
               <div class="relative z-10">
                 <div class="flex items-center gap-2 mb-3">
@@ -1382,7 +1746,7 @@
       <section class="mb-16 lg:mb-24 relative z-20">
         <div class="flex flex-col lg:flex-row gap-10 items-start justify-center">
           <!-- Featured Collection - Large Span -->
-          <article class="resource-card w-full lg:max-w-4xl bg-white border-layered rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 flex flex-col justify-between card-hover fade-in-section is-visible elevation-3 relative overflow-hidden group" data-type="series sermon" data-tags="compassion pastor-rohan matthew" data-resource-id="sermon-1" style="max-width: 100%;">
+          <article class="resource-card featured-card w-full lg:max-w-4xl flex flex-col justify-between fade-in-section is-visible relative group" data-type="series sermon" data-tags="compassion pastor-rohan matthew" data-resource-id="sermon-1" style="max-width: 100%;">
           <button class="bookmark-btn" data-resource-id="sermon-1" aria-label="Bookmark this resource">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
@@ -1526,7 +1890,7 @@
 
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
             <!-- Card Template 1 -->
-            <article class="resource-card stagger-item bg-white border-layered rounded-xl p-6 flex flex-col justify-between card-hover elevation-2 glow-on-hover scale-hover relative" data-type="sermon series" data-tags="compassion pastor-rohan" data-resource-id="sermon-2">
+            <article class="resource-card stagger-item flex flex-col justify-between relative group" data-type="sermon series" data-tags="compassion pastor-rohan" data-resource-id="sermon-2">
               <button class="bookmark-btn" data-resource-id="sermon-2" aria-label="Bookmark this resource">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
@@ -1567,7 +1931,7 @@
             <!-- Removed Anointed in Unwillingness card -->
 
             <!-- Tall Accent Card -->
-            <article class="stagger-item lg:row-span-2 bg-gradient-to-br from-flcNavy to-flcNavyDark text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group elevation-3">
+            <article class="stats-card stagger-item lg:row-span-2 bg-gradient-to-br from-flcNavy to-flcNavyDark text-white rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group">
               <div class="absolute top-0 right-0 w-48 h-48 bg-flcGold/20 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-125 transition-transform duration-700"></div>
               <div class="relative z-10">
                 <p class="text-[10px] tracking-[0.2em] uppercase text-flcGold font-semibold mb-6">
@@ -1587,7 +1951,7 @@
             </article>
 
             <!-- Stats Showcase Card -->
-            <article class="stagger-item bg-gradient-to-br from-flcGold/10 via-flcGoldLight/5 to-transparent border-2 border-flcGold/20 rounded-2xl p-8 flex flex-col items-center justify-center text-center elevation-2">
+            <article class="resource-card stagger-item bg-gradient-to-br from-flcGold/10 via-flcGoldLight/5 to-transparent border-2 border-flcGold/20 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
               <p class="text-5xl font-heading font-bold text-flcGold mb-2">35</p>
               <p class="text-sm text-flcCharcoal/70 font-light mb-4">Minutes of Teaching</p>
               <p class="text-xs text-flcCharcoal/50">Available for free download</p>
@@ -1632,6 +1996,11 @@
     // Search and Filter Functionality
     const searchInput = document.getElementById('resourceSearch');
     const clearSearchBtn = document.getElementById('clearSearch');
+    const searchIcon = document.getElementById('searchIcon');
+    const searchSpinner = document.getElementById('searchSpinner');
+    const searchResultBadge = document.getElementById('searchResultBadge');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchResults = document.getElementById('searchResults');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const resourceCards = document.querySelectorAll('.resource-card');
     const resultCount = document.getElementById('resultCount');
@@ -1639,26 +2008,88 @@
     let currentFilter = 'all';
     let currentSearch = '';
     let searchTimeout;
+    
+    // Build searchable index from resource cards
+    const searchIndex = Array.from(resourceCards).map(card => {
+      const title = card.querySelector('h2, h3')?.textContent || '';
+      const description = card.querySelector('p')?.textContent || '';
+      const tags = card.getAttribute('data-tags') || '';
+      const type = card.getAttribute('data-type') || '';
+      const link = card.getAttribute('href') || card.querySelector('a')?.getAttribute('href') || '#';
+      
+      return {
+        title,
+        description,
+        tags,
+        type,
+        link,
+        element: card
+      };
+    });
 
-    // Search functionality with debouncing
+    // Search functionality with dropdown results
     searchInput.addEventListener('input', (e) => {
       currentSearch = e.target.value.toLowerCase().trim();
       clearSearchBtn.classList.toggle('hidden', currentSearch === '');
       
+      // Show searching state
+      if (currentSearch !== '') {
+        searchIcon.classList.add('hidden');
+        searchSpinner.classList.remove('hidden');
+        searchInput.classList.add('border-flcGold');
+      } else {
+        searchIcon.classList.remove('hidden');
+        searchSpinner.classList.add('hidden');
+        searchInput.classList.remove('border-flcGold');
+        searchResultBadge.classList.add('hidden');
+        searchDropdown.classList.add('hidden');
+      }
+      
       // Debounce search for better performance
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
-        filterResources();
-      }, 150);
+        // Hide spinner, show icon
+        searchSpinner.classList.add('hidden');
+        searchIcon.classList.remove('hidden');
+        performSearch();
+      }, 300);
     });
 
     // Clear search
-    clearSearchBtn.addEventListener('click', () => {
+    const clearSearchAction = () => {
       searchInput.value = '';
       currentSearch = '';
       clearSearchBtn.classList.add('hidden');
-      filterResources();
+      searchResultBadge.classList.add('hidden');
+      searchDropdown.classList.add('hidden');
+      searchInput.classList.remove('border-flcGold');
       searchInput.focus();
+    };
+    
+    clearSearchBtn.addEventListener('click', clearSearchAction);
+    
+    // Keyboard shortcut: Escape to clear search
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        clearSearchAction();
+      }
+    });
+    
+    // Global keyboard shortcut: Ctrl/Cmd + K to focus search
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+        searchDropdown.classList.add('hidden');
+      }
     });
 
     // Filter functionality
@@ -1674,41 +2105,94 @@
       });
     });
 
-    // Main filter function
-    function filterResources() {
-      let visibleCount = 0;
+    // Perform search and show dropdown results
+    function performSearch() {
+      if (currentSearch === '') {
+        searchDropdown.classList.add('hidden');
+        return;
+      }
       
+      const results = searchIndex.filter(item => {
+        const searchableText = `${item.title} ${item.description} ${item.tags}`.toLowerCase();
+        return searchableText.includes(currentSearch);
+      });
+      
+      // Update result count
+      resultCount.textContent = results.length;
+      searchResultBadge.classList.remove('hidden');
+      searchResultBadge.style.animation = 'scaleIn 0.3s ease-out';
+      
+      if (results.length === 0) {
+        searchResults.innerHTML = `
+          <div class="px-6 py-8 text-center">
+            <svg class="w-12 h-12 text-flcGold/40 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-flcCharcoal/60 text-sm">No results found for "<span class="font-semibold text-flcNavy">${currentSearch}</span>"</p>
+          </div>
+        `;
+        searchDropdown.classList.remove('hidden');
+        return;
+      }
+      
+      // Build results HTML with highlighted search terms
+      const highlightText = (text, query) => {
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<span class="search-highlight">$1</span>');
+      };
+      
+      searchResults.innerHTML = results.slice(0, 8).map(item => {
+        const highlightedTitle = highlightText(item.title, currentSearch);
+        const highlightedDesc = highlightText(item.description.substring(0, 100), currentSearch);
+        const typeLabel = item.type.split(' ')[0] || 'Resource';
+        
+        return `
+          <a href="${item.link}" class="search-result-item">
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-flcGold/10 flex items-center justify-center mt-0.5">
+                <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-semibold uppercase text-flcGold tracking-wider">${typeLabel}</span>
+                </div>
+                <h4 class="text-sm font-semibold text-flcNavy mb-1 line-clamp-1">${highlightedTitle}</h4>
+                <p class="text-xs text-flcCharcoal/60 line-clamp-2">${highlightedDesc}...</p>
+              </div>
+              <svg class="w-5 h-5 text-flcGold/40 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+        `;
+      }).join('');
+      
+      // Show "View all results" if more than 8
+      if (results.length > 8) {
+        searchResults.innerHTML += `
+          <div class="px-6 py-3 bg-flcGold/5 text-center border-t border-flcGold/10">
+            <p class="text-xs text-flcCharcoal/60">Showing 8 of ${results.length} results</p>
+          </div>
+        `;
+      }
+      
+      searchDropdown.classList.remove('hidden');
+    }
+    
+    // Filter functionality (for filter buttons if they exist)
+    function filterResources() {
       resourceCards.forEach(card => {
         const cardType = card.getAttribute('data-type') || '';
-        const cardTags = card.getAttribute('data-tags') || '';
-        const cardText = card.textContent.toLowerCase();
+        const filterMatch = currentFilter === 'all' || cardType.includes(currentFilter);
         
-        // Check filter match
-        const filterMatch = currentFilter === 'all' || 
-                           cardType.includes(currentFilter);
-        
-        // Check search match
-        const searchMatch = currentSearch === '' || 
-                           cardText.includes(currentSearch) ||
-                           cardTags.includes(currentSearch);
-        
-        // Show/hide card
-        if (filterMatch && searchMatch) {
+        if (filterMatch) {
           card.classList.remove('hidden');
-          visibleCount++;
         } else {
           card.classList.add('hidden');
         }
       });
-      
-      // Update counter
-      resultCount.textContent = visibleCount;
-      
-      // Animate counter
-      resultCount.style.transform = 'scale(1.2)';
-      setTimeout(() => {
-        resultCount.style.transform = 'scale(1)';
-      }, 200);
     }
 
     // Ripple effect for buttons
