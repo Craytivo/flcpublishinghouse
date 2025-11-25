@@ -1365,7 +1365,7 @@
             
             <!-- Enhanced CTA Buttons -->
             <div class="hero-cta-group flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-              <a href="#sermon-notes" class="btn-premium inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-gradient-to-r from-flcGold to-flcGoldLight text-flcNavyDark font-bold tracking-wide sm:tracking-widePlus uppercase text-sm hover:from-flcGoldLight hover:to-flcGold shadow-2xl hover:shadow-flcGold/50 transform hover:-translate-y-1 hover:scale-105 transition-all">
+              <a href="library.html" class="btn-premium inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-gradient-to-r from-flcGold to-flcGoldLight text-flcNavyDark font-bold tracking-wide sm:tracking-widePlus uppercase text-sm hover:from-flcGoldLight hover:to-flcGold shadow-2xl hover:shadow-flcGold/50 transform hover:-translate-y-1 hover:scale-105 transition-all">
                 Explore Library
               </a>
               <button id="heroSubscribeBtn" class="btn-premium inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 rounded-full border-2 border-white/30 bg-white/5 text-white font-semibold text-sm tracking-wide uppercase hover:bg-white/15 hover:border-white/50 backdrop-blur-md shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
@@ -1589,6 +1589,25 @@
         mainNav.classList.remove('scrolled');
       }
     });
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking a link
+      mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        });
+      });
+    }
   </script>
 </body>
 <script>
