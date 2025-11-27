@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>I'm Under Pressure - FLC Publishing House</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="FLC Publishing House – curated sermon notes and resources from Freedom Life Church."
+  />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            flcNavy: "#1A3A52",
+            flcGold: "#9A7B4F",
+            flcCharcoal: "#2C2C2C",
+            flcCream: "#F5F1E8",
+            flcOffWhite: "#FAFAF8",
+            flcBorder: "#E8E6E1",
+            // Sophisticated muted additions
+            flcNavyLight: "#2A4A62",
+            flcNavyDark: "#0F2838",
+            flcGoldLight: "#B8956A",
+            flcGoldDark: "#7A6240",
+            flcAccent: "#8B7965",
+          },
+          fontFamily: {
+            heading: ["'Playfair Display'", "Georgia", "serif"],
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+          },
+          letterSpacing: {
+            widePlus: "0.18em",
+            tighter: "-0.02em",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'scale-in': 'scaleIn 0.4s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'soft': '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)',
+            'medium': '0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04)',
+            'hard': '0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06)',
+            'lift': '0 12px 32px rgba(0, 42, 92, 0.15), 0 6px 12px rgba(0, 42, 92, 0.08)',
+            'inner-glow': 'inset 0 0 0 1px rgba(198, 146, 20, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      overflow-x: hidden;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #FAFAF8 0%, #F5F1E8 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(154, 123, 79, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(26, 58, 82, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .sermon-header {
+      background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);
+      color: white;
+      border-radius: 1.5rem;
+      padding: 3.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 25px 50px rgba(26, 58, 82, 0.25), 0 10px 20px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(154, 123, 79, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sermon-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(154, 123, 79, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .sermon-header > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(229, 224, 216, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .content-section:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .scripture-callout {
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.08), rgba(184, 149, 106, 0.12));
+      border-left: 4px solid #9A7B4F;
+      padding: 1.75rem;
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(154, 123, 79, 0.08);
+      border-right: 1px solid rgba(154, 123, 79, 0.1);
+      border-top: 1px solid rgba(154, 123, 79, 0.1);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.1);
+    }
+    
+    .note-space {
+      background: linear-gradient(135deg, #F5F1E8, #F8F5ED);
+      border: 2px dashed rgba(154, 123, 79, 0.3);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      min-height: 150px;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    
+    .note-space:focus-within {
+      background: #FAFAF8;
+      border-color: rgba(154, 123, 79, 0.5);
+      box-shadow: 0 0 0 3px rgba(154, 123, 79, 0.08);
+    }
+    
+    .note-space textarea {
+      width: 100%;
+      min-height: 120px;
+      background: transparent;
+      border: none;
+      resize: vertical;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: #2C2C2C;
+      line-height: 1.6;
+      outline: none;
+    }
+    
+    .note-space textarea::placeholder {
+      color: rgba(44, 44, 44, 0.3);
+    }
+    
+    .video-container {
+      background: linear-gradient(135deg, #ffffff, #fdfcfa);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+      margin-bottom: 2rem;
+      border: 1px solid rgba(229, 224, 216, 0.6);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 0.75rem;
+    }
+    
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #9A7B4F, #B8956A);
+      color: white;
+      padding: 0.875rem 1.75rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(154, 123, 79, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(154, 123, 79, 0.35), 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(135deg, #B8956A, #9A7B4F);
+    }
+    
+    @media (max-width: 640px) {
+      .sermon-header {
+        padding: 2rem 1.5rem;
+        border-radius: 1rem;
+      }
+      
+      .content-section {
+        padding: 1.5rem;
+      }
+      
+      .video-container {
+        padding: 1rem;
+      }
+    }
+    
+    /* Navigation Styles */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+    
+    nav.scrolled {
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.99) 0%, rgba(245, 241, 232, 0.99) 100%);
+      box-shadow: 0 4px 20px rgba(26, 58, 82, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
+    }
+    
+    .nav-link {
+      color: #2C2C2C;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 15px;
+      position: relative;
+      padding: 0.5rem 1rem;
+      letter-spacing: 0.3px;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #9A7B4F 0%, #B8956A 100%);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .nav-link:hover {
+      color: #9A7B4F;
+      transform: translateY(-1px);
+    }
+    
+    .nav-link:hover::before {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.1), rgba(154, 123, 79, 0.05));
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      cursor: pointer;
+      padding: 0.5rem;
+      color: #2C2C2C;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.15), rgba(154, 123, 79, 0.08));
+      border-color: rgba(154, 123, 79, 0.3);
+      transform: scale(1.05);
+    }
+    
+    .mobile-menu-btn svg {
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-menu-btn.active svg {
+      transform: rotate(90deg);
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
+      box-shadow: 0 10px 25px rgba(26, 58, 82, 0.1);
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu .nav-link {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 0 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu .nav-link:hover {
+      background: rgba(154, 123, 79, 0.08);
+      transform: translateX(8px);
+    }
+    
+    .mobile-menu .nav-link::before {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: flex !important;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      nav > div {
+        padding: 0.75rem 1rem !important;
+        gap: 0.5rem !important;
+      }
+      
+      nav .text-3xl {
+        font-size: 1.125rem;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+      
+      nav .w-10 {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+      
+      .search-bar {
+        display: none !important;
+      }
+      
+      .mobile-menu .nav-link {
+        padding: 1rem 1.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+      }
+    }
+    
+    h2 {
+      position: relative;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #9A7B4F, transparent);
+      border-radius: 2px;
+    }
+    
+    .sermon-header span {
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .sermon-header span:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
+      <a href="index.html" class="flex items-center gap-3 group flex-shrink-0">
+        <svg class="w-10 h-10 text-flcGold group-hover:scale-110 transition-transform drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+        </svg>
+        <span class="text-3xl font-heading font-extrabold text-flcNavy tracking-tight drop-shadow-sm">FLC Publishing</span>
+      </a>
+      <div class="flex-1 flex justify-center">
+        <div class="search-bar relative w-full max-w-md">
+          <input
+            type="text"
+            id="resourceSearch"
+            placeholder="Search sermons and studies..."
+            class="w-full px-5 py-3 pl-12 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md"
+          />
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <button
+            id="clearSearch"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-colors hidden"
+            aria-label="Clear search"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="nav-links items-center gap-10 flex-shrink-0">
+        <a href="library.html" class="nav-link text-lg font-normal">Library</a>
+        <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
+        <a href="resources.html" class="nav-link text-lg font-normal">Resources</a>
+        <a href="#subscribe" class="nav-link text-lg font-normal" id="navSubscribe">Subscribe</a>
+      </div>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="flex flex-col py-4">
+        <a href="library.html" class="nav-link">Library</a>
+        <a href="devotionals.html" class="nav-link">Devotionals</a>
+        <a href="resources.html" class="nav-link">Resources</a>
+        <a href="#subscribe" class="nav-link" id="navSubscribeMobile">Subscribe</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12" style="position: relative; z-index: 1;">
+    
+    <header class="sermon-header">
+      <div class="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <p class="text-flcGold text-sm font-semibold uppercase tracking-widest mb-3 opacity-90">Sermon Notes</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-4 leading-tight">I'm Under Pressure</h1>
+          <p class="text-white/80 text-lg sm:text-xl font-medium">Pastor Rohan Samuels</p>
+          <div class="text-flcGold/90 text-base font-normal mt-2 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            November 24, 2024
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2.5 mt-6">
+        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm font-medium tracking-wide">Pressure</span>
+        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm font-medium tracking-wide">Faith</span>
+        <span class="px-4 py-1.5 bg-white/10 rounded-full text-sm font-medium tracking-wide">Perseverance</span>
+      </div>
+    </header>
+
+    <!-- Video Player -->
+    <div class="video-container">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-flcNavy flex items-center gap-2">
+          <svg class="w-5 h-5 text-flcGold" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+          </svg>
+          Watch Sermon
+        </h3>
+      </div>
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/kBFOH2pxS4A" 
+          title="I'm Under Pressure - Pastor Rohan Samuels"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Download Section -->
+    <div class="content-section">
+      <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">Download Resources</h2>
+      <div class="flex flex-wrap gap-3">
+        <a href="assets/pdfs/Sermon Handout - I'm Under Pressure.pdf" class="download-btn" download>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- Additional Notes -->
+    <div class="content-section">
+      <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">Sermon Notes</h2>
+      <div class="note-space" style="min-height: 400px;">
+        <textarea class="note-textarea" data-note="main-notes" placeholder="Take your sermon notes here..." style="min-height: 370px;"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const mainNav = document.getElementById('mainNav');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      mobileMenuBtn.classList.toggle('active');
+    });
+    
+    mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        mainNav.classList.add('scrolled');
+      } else {
+        mainNav.classList.remove('scrolled');
+      }
+    });
+  </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sermonId = 'sermon-im-under-pressure';
+      const textareas = document.querySelectorAll('.note-textarea');
+      
+      textareas.forEach(textarea => {
+        const noteId = textarea.getAttribute('data-note');
+        const savedNote = localStorage.getItem(`${sermonId}-${noteId}`);
+        if (savedNote) {
+          textarea.value = savedNote;
+        }
+      });
+      
+      textareas.forEach(textarea => {
+        textarea.addEventListener('input', function() {
+          const noteId = this.getAttribute('data-note');
+          localStorage.setItem(`${sermonId}-${noteId}`, this.value);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
