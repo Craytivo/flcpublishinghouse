@@ -1,39 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>When Compassion Costs You Sleep - FLC Publishing House</title>
-  
-  <!-- Tailwind CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="FLC Publishing House – curated sermon notes and resources from Freedom Life Church."
+  />
+
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            'heading': ['Playfair Display', 'serif'],
-            'sans': ['Inter', 'sans-serif']
-          },
           colors: {
-            flcNavy: '#1A3A52',
-            flcGold: '#9A7B4F',
-            flcGoldLight: '#B8956A',
-            flcCharcoal: '#2C2C2C',
-            flcCream: '#F5F1E8',
-            flcOffWhite: '#FAFAF8',
-            flcBorder: '#E5E0D8'
-          }
-        }
-      }
-    }
+            flcNavy: "#1A3A52",
+            flcGold: "#9A7B4F",
+            flcCharcoal: "#2C2C2C",
+            flcCream: "#F5F1E8",
+            flcOffWhite: "#FAFAF8",
+            flcBorder: "#E8E6E1",
+            // Sophisticated muted additions
+            flcNavyLight: "#2A4A62",
+            flcNavyDark: "#0F2838",
+            flcGoldLight: "#B8956A",
+            flcGoldDark: "#7A6240",
+            flcAccent: "#8B7965",
+          },
+          fontFamily: {
+            heading: ["'Playfair Display'", "Georgia", "serif"],
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+          },
+          letterSpacing: {
+            widePlus: "0.18em",
+            tighter: "-0.02em",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'scale-in': 'scaleIn 0.4s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'soft': '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)',
+            'medium': '0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04)',
+            'hard': '0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06)',
+            'lift': '0 12px 32px rgba(0, 42, 92, 0.15), 0 6px 12px rgba(0, 42, 92, 0.08)',
+            'inner-glow': 'inset 0 0 0 1px rgba(198, 146, 20, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)',
+          },
+        },
+      },
+    };
   </script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
   
   <style>
     * {
@@ -316,7 +355,7 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 15px;
       position: relative;
-      padding: 0.5rem 0;
+      padding: 0.5rem 1rem;
       letter-spacing: 0.3px;
     }
     
