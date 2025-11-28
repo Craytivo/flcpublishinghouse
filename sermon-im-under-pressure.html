@@ -560,6 +560,182 @@
       background: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
     }
+    
+    /* Table of Contents Sidebar */
+    .toc-sidebar {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #FFFFFF 0%, #FCFBF9 100%);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px rgba(26, 58, 82, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      max-width: 240px;
+      max-height: 70vh;
+      overflow-y: auto;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    .toc-sidebar h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #1A3A52;
+      margin: 0 0 1rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .toc-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .toc-sidebar li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .toc-sidebar a {
+      color: #2C2C2C;
+      text-decoration: none;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .toc-sidebar a:hover {
+      background: rgba(154, 123, 79, 0.08);
+      border-left-color: #9A7B4F;
+      transform: translateX(4px);
+    }
+    
+    .toc-sidebar a.active {
+      background: rgba(154, 123, 79, 0.12);
+      border-left-color: #9A7B4F;
+      color: #1A3A52;
+      font-weight: 600;
+    }
+    
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: linear-gradient(135deg, #9A7B4F, #B8956A);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 16px rgba(154, 123, 79, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1);
+      z-index: 99;
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(154, 123, 79, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .scroll-top svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: white;
+    }
+    
+    /* Reading Time Tracker */
+    .reading-stats {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Font Size Adjuster */
+    .font-adjuster {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #FFFFFF 0%, #FCFBF9 100%);
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 8px 32px rgba(26, 58, 82, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .font-adjuster button {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      background: rgba(154, 123, 79, 0.1);
+      color: #1A3A52;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1.125rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    
+    .font-adjuster button:hover {
+      background: rgba(154, 123, 79, 0.2);
+      transform: scale(1.05);
+    }
+    
+    /* Print Styles */
+    @media print {
+      .reading-progress,
+      .toc-sidebar,
+      .font-adjuster,
+      .scroll-top,
+      nav,
+      .download-btn,
+      footer {
+        display: none !important;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .sermon-header {
+        background: #1A3A52;
+        color: white;
+        page-break-after: avoid;
+      }
+      
+      .content-section {
+        page-break-inside: avoid;
+      }
+      
+      .scripture-callout {
+        page-break-inside: avoid;
+        border: 2px solid #9A7B4F;
+      }
+    }
   </style>
 </head>
 <body>
