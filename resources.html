@@ -34,49 +34,126 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #FAFAF8 0%, #F5F1E8 100%);
+      background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #F0EBE0 100%);
       min-height: 100vh;
+      position: relative;
     }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(154, 123, 79, 0.03) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(26, 58, 82, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    main {
+      position: relative;
+      z-index: 1;
+    }
+    
     .resource-card {
       background: white;
-      border-radius: 1.25rem;
-      box-shadow: 0 4px 24px rgba(26,58,82,0.07);
-      border: 1.5px solid #E5E0D8;
-      transition: box-shadow 0.2s;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(26,58,82,0.06), 0 1px 4px rgba(0,0,0,0.04);
+      border: 1px solid rgba(229, 224, 216, 0.6);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
+    
+    .resource-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #9A7B4F 0%, #B8956A 50%, #9A7B4F 100%);
+      background-size: 200% 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
     .resource-card:hover {
-      box-shadow: 0 8px 32px rgba(154,123,79,0.13);
-      border-color: #B8956A;
+      box-shadow: 0 12px 40px rgba(26,58,82,0.1), 0 4px 16px rgba(154,123,79,0.08);
+      border-color: rgba(184, 149, 106, 0.4);
+      transform: translateY(-4px);
     }
+    
+    .resource-card:hover::before {
+      opacity: 1;
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
     .download-btn {
-      background: linear-gradient(90deg, #9A7B4F 0%, #B8956A 100%);
+      background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
       color: white;
       font-weight: 600;
-      border-radius: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      transition: box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0 2px 8px rgba(154,123,79,0.08);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(154,123,79,0.2), 0 1px 2px rgba(0,0,0,0.05);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       text-decoration: none;
+      font-size: 0.875rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
     }
+    
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
     .download-btn:hover {
-      box-shadow: 0 6px 18px rgba(154,123,79,0.18);
-      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(154,123,79,0.3), 0 2px 8px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
     }
+    
+    .download-btn:hover::before {
+      left: 100%;
+    }
+    
+    .download-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(154,123,79,0.2);
+    }
+    
     .audio-player {
-      background: #F5F1E8;
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.5rem;
-      margin-top: 1.5rem;
+      background: linear-gradient(135deg, #F5F1E8 0%, #F0EBE0 100%);
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
+      border: 1px solid rgba(154, 123, 79, 0.1);
+      box-shadow: inset 0 1px 2px rgba(154, 123, 79, 0.05);
     }
+    
     .audio-player audio {
       width: 100%;
       outline: none;
+      height: 40px;
     }
     .nav-link.active {
       text-decoration: underline;
@@ -244,44 +321,87 @@
       });
     }
   </script>
-  <main class="max-w-4xl mx-auto px-4 md:px-0 py-12">
-    <h1 class="text-4xl md:text-5xl font-heading font-bold text-flcNavy mb-8">Downloadable Resources</h1>
-    <div class="grid gap-8">
+  <main class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
+    <!-- Hero Section -->
+    <div class="text-center mb-12 md:mb-16">
+      <p class="text-flcGold text-sm font-semibold uppercase tracking-widest mb-4">Digital Library</p>
+      <h1 class="text-4xl md:text-6xl font-heading font-bold text-flcNavy mb-4">Downloadable Resources</h1>
+      <p class="text-lg text-flcCharcoal/70 max-w-2xl mx-auto">Access our complete collection of sermon notes, audio recordings, and study materials</p>
+    </div>
+    
+    <div class="grid gap-6 md:gap-8">
       <!-- Resource Card: I'm Under Pressure -->
-      <div class="resource-card p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div class="flex-1">
-          <h2 class="text-2xl font-heading font-semibold text-flcNavy mb-2">I'm Under Pressure</h2>
-          <p class="text-flcCharcoal mb-4">Sermon notes and video from the message "I'm Under Pressure." Download the PDF or watch the video.</p>
-          <div class="flex flex-wrap gap-4 mb-2">
-            <a href="assets/pdfs/Sermon Handout - I'm Under Pressure.pdf" class="download-btn" download>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 4v12"/></svg>
-              Download PDF
-            </a>
-            <a href="https://www.youtube.com/watch?v=kBFOH2pxS4A" target="_blank" rel="noopener noreferrer" class="download-btn">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
-              Watch Video
-            </a>
+      <div class="resource-card group">
+        <div class="p-6 md:p-8">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
+                  Sermon
+                </span>
+                <span class="text-sm text-flcCharcoal/50">November 23, 2024</span>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">I'm Under Pressure</h2>
+              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">A powerful message about handling life's pressures with faith and perseverance. Learn from Noah's example of building under pressure that nobody sees.</p>
+            </div>
+          </div>
+          
+          <div class="border-t border-flcBorder pt-6">
+            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="assets/pdfs/Sermon Handout - I'm Under Pressure.pdf" class="download-btn" download>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                PDF Handout
+              </a>
+              <a href="https://www.youtube.com/watch?v=kBFOH2pxS4A" target="_blank" rel="noopener noreferrer" class="download-btn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                Watch Video
+              </a>
+              <a href="sermon-im-under-pressure.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                View Notes
+              </a>
+            </div>
           </div>
         </div>
       </div>
       
       <!-- Resource Card: When Compassion Costs You Sleep -->
-      <div class="resource-card p-8 flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div class="flex-1">
-          <h2 class="text-2xl font-heading font-semibold text-flcNavy mb-2">When Compassion Costs You Sleep</h2>
-          <p class="text-flcCharcoal mb-4">Sermon notes and audio from the message "When Compassion Costs You Sleep." Download the PDF or listen to the audio below.</p>
-          <div class="flex flex-wrap gap-4 mb-2">
-            <a href="assets/pdfs/when-compassion-costs-you-sleep.pdf" class="download-btn" download>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 4v12"/></svg>
-              Download PDF
-            </a>
+      <div class="resource-card group">
+        <div class="p-6 md:p-8">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
+                  Sermon
+                </span>
+                <span class="text-sm text-flcCharcoal/50">November 2, 2024</span>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">When Compassion Costs You Sleep</h2>
+              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Explore the depth of compassion and the cost of truly caring for others. A message about sacrificial love and servant leadership.</p>
+            </div>
           </div>
-          <div class="audio-player mt-4">
-            <svg class="w-7 h-7 text-flcGold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-2v13"/></svg>
-            <audio controls preload="none">
-              <source src="assets/audio/when-compassion-costs-you-sleep.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
+          
+          <div class="border-t border-flcBorder pt-6">
+            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
+            <div class="flex flex-wrap gap-3 mb-6">
+              <a href="assets/pdfs/when-compassion-costs-you-sleep.pdf" class="download-btn" download>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                PDF Handout
+              </a>
+              <a href="sermon-when-compassion-costs-you-sleep.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                View Notes
+              </a>
+            </div>
+            
+            <div class="audio-player">
+              <svg class="w-6 h-6 text-flcGold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+              <audio controls preload="none">
+                <source src="assets/audio/when-compassion-costs-you-sleep.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
           </div>
         </div>
       </div>
