@@ -549,6 +549,16 @@
   </style>
 </head>
 <body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+  
+  <!-- Font Size Adjuster -->
+  <div class="font-adjuster">
+    <button id="fontIncrease" title="Increase font size" aria-label="Increase font size">A+</button>
+    <button id="fontDecrease" title="Decrease font size" aria-label="Decrease font size">A-</button>
+    <button id="fontReset" title="Reset font size" aria-label="Reset font size">A</button>
+  </div>
+  
   <!-- Navigation -->
   <nav id="mainNav">
     <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
@@ -606,6 +616,19 @@
 
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12" style="position: relative; z-index: 1;">
     
+    <!-- Table of Contents -->
+    <div class="toc-sidebar" id="tocSidebar">
+      <h4>Contents</h4>
+      <ul>
+        <li><a href="#introduction" class="toc-link">Introduction</a></li>
+        <li><a href="#days-of-noah" class="toc-link">Days of Noah</a></li>
+        <li><a href="#obeying-without-understanding" class="toc-link">Obeying Without Understanding</a></li>
+        <li><a href="#building-under-scrutiny" class="toc-link">Building Under Scrutiny</a></li>
+        <li><a href="#building-with-unseen" class="toc-link">Building with Unseen Resources</a></li>
+        <li><a href="#reflection" class="toc-link">Reflection Questions</a></li>
+      </ul>
+    </div>
+    
     <header class="sermon-header">
       <div class="flex items-start justify-between gap-4 mb-5">
         <div>
@@ -617,6 +640,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             November 23, 2024
+            <span class="reading-stats">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span id="readingTime">35 min read</span>
+            </span>
           </div>
         </div>
       </div>
@@ -646,7 +675,7 @@
     </div>
 
     <!-- Download Section -->
-    <div class="content-section">
+    <div class="content-section" id="introduction">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">Download Resources</h2>
       <div class="flex flex-wrap gap-3">
         <a href="assets/pdfs/Sermon Handout - I'm Under Pressure.pdf" class="download-btn" download>
@@ -697,7 +726,7 @@
       </div>
     </div>
 
-    <div class="content-section">
+    <div class="content-section" id="days-of-noah">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">1. The Days of Noah and the Days We're Living In</h2>
       <p class="mb-3"><strong>Scripture:</strong> Genesis 6:5-9</p>
       
@@ -865,6 +894,13 @@
     });
   </script>
   
+  <!-- Scroll to Top Button -->
+  <div class="scroll-top" id="scrollTop">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </div>
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const sermonId = 'sermon-im-under-pressure';
@@ -885,6 +921,101 @@
         });
       });
     });
+  </script>
+  
+  <script>
+    // Reading Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('readingProgress').style.width = scrolled + '%';
+    });
+    
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Table of Contents Active State
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = document.querySelectorAll('[id]');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+    
+    // Smooth Scroll for TOC
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Font Size Adjuster
+    let currentFontSize = 100;
+    const contentAreas = document.querySelectorAll('.content-section, .media-container, .scripture-callout');
+    
+    document.getElementById('fontIncrease').addEventListener('click', () => {
+      if (currentFontSize < 150) {
+        currentFontSize += 10;
+        applyFontSize();
+      }
+    });
+    
+    document.getElementById('fontDecrease').addEventListener('click', () => {
+      if (currentFontSize > 80) {
+        currentFontSize -= 10;
+        applyFontSize();
+      }
+    });
+    
+    document.getElementById('fontReset').addEventListener('click', () => {
+      currentFontSize = 100;
+      applyFontSize();
+    });
+    
+    function applyFontSize() {
+      contentAreas.forEach(area => {
+        area.style.fontSize = currentFontSize + '%';
+      });
+      localStorage.setItem('sermon-font-size', currentFontSize);
+    }
+    
+    // Load saved font size
+    const savedFontSize = localStorage.getItem('sermon-font-size');
+    if (savedFontSize) {
+      currentFontSize = parseInt(savedFontSize);
+      applyFontSize();
+    }
   </script>
 </body>
 </html>
