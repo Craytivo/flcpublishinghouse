@@ -320,18 +320,56 @@
         mobileMenu.classList.toggle('active');
       });
     }
+    
+    // Calculate total reading time
+    function updateTotalMinutes() {
+      const resourceCards = document.querySelectorAll('.resource-card[data-reading-time]');
+      let totalMinutes = 0;
+      
+      resourceCards.forEach(card => {
+        const readingTime = parseInt(card.getAttribute('data-reading-time')) || 0;
+        totalMinutes += readingTime;
+      });
+      
+      const totalMinutesElement = document.getElementById('totalMinutes');
+      if (totalMinutesElement) {
+        // Animate the counter
+        let currentValue = 0;
+        const increment = totalMinutes / 30; // 30 steps for animation
+        const timer = setInterval(() => {
+          currentValue += increment;
+          if (currentValue >= totalMinutes) {
+            currentValue = totalMinutes;
+            clearInterval(timer);
+          }
+          totalMinutesElement.textContent = Math.round(currentValue);
+        }, 20);
+      }
+    }
+    
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', updateTotalMinutes);
   </script>
   <main class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
     <!-- Hero Section -->
     <div class="text-center mb-12 md:mb-16">
       <p class="text-flcGold text-sm font-semibold uppercase tracking-widest mb-4">Digital Library</p>
       <h1 class="text-4xl md:text-6xl font-heading font-bold text-flcNavy mb-4">Downloadable Resources</h1>
-      <p class="text-lg text-flcCharcoal/70 max-w-2xl mx-auto">Access our complete collection of sermon notes, audio recordings, and study materials</p>
+      <p class="text-lg text-flcCharcoal/70 max-w-2xl mx-auto mb-8">Access our complete collection of sermon notes, audio recordings, and study materials</p>
+      
+      <!-- Stats Counter -->
+      <div class="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-lg border border-flcBorder">
+        <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-2xl font-bold text-flcNavy" id="totalMinutes">45</span>
+        <span class="text-sm font-medium text-flcCharcoal/60">minutes of teaching</span>
+      </div>
     </div>
     
     <div class="grid gap-6 md:gap-8">
       <!-- Resource Card: I'm Under Pressure -->
-      <div class="resource-card group">
+      <div class="resource-card group" data-reading-time="35">
         <div class="p-6 md:p-8">
           <div class="flex items-start justify-between mb-4">
             <div class="flex-1">
@@ -340,6 +378,7 @@
                   Sermon
                 </span>
                 <span class="text-sm text-flcCharcoal/50">November 23, 2024</span>
+                <span class="text-sm text-flcCharcoal/50">• 35 min read</span>
               </div>
               <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">I'm Under Pressure</h2>
               <p class="text-flcCharcoal/70 mb-6 leading-relaxed">A powerful message about handling life's pressures with faith and perseverance. Learn from Noah's example of building under pressure that nobody sees.</p>
@@ -367,7 +406,7 @@
       </div>
       
       <!-- Resource Card: When Compassion Costs You Sleep -->
-      <div class="resource-card group">
+      <div class="resource-card group" data-reading-time="10">
         <div class="p-6 md:p-8">
           <div class="flex items-start justify-between mb-4">
             <div class="flex-1">
@@ -376,6 +415,7 @@
                   Sermon
                 </span>
                 <span class="text-sm text-flcCharcoal/50">November 2, 2024</span>
+                <span class="text-sm text-flcCharcoal/50">• 10 min read</span>
               </div>
               <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">When Compassion Costs You Sleep</h2>
               <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Explore the depth of compassion and the cost of truly caring for others. A message about sacrificial love and servant leadership.</p>
