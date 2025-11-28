@@ -75,6 +75,19 @@
   />
   
   <style>
+    /* Reading Progress Bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, #9A7B4F, #B8956A, #9A7B4F);
+      z-index: 9999;
+      transition: width 0.1s ease;
+      box-shadow: 0 2px 8px rgba(154, 123, 79, 0.3);
+    }
+    
     * {
       margin: 0;
       padding: 0;
@@ -86,7 +99,8 @@
     }
     
     body {
-      font-family: 'Inter', sans-serif;
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       background: linear-gradient(180deg, #FAFAF8 0%, #F5F1E8 50%, #EDE8DC 100%);
       background-attachment: fixed;
       overflow-x: hidden;
