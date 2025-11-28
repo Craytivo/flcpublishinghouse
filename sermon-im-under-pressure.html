@@ -752,7 +752,7 @@
   <!-- Navigation -->
   <nav id="mainNav">
     <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
-      <a href="../index.html" class="flex items-center gap-3 group flex-shrink-0">
+      <a href="index.html" class="flex items-center gap-3 group flex-shrink-0">
         <svg class="w-10 h-10 text-flcGold group-hover:scale-110 transition-transform drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
         </svg>
@@ -781,9 +781,9 @@
         </div>
       </div>
       <div class="nav-links items-center gap-10 flex-shrink-0">
-        <a href="../pages/library.html" class="nav-link text-lg font-normal">Library</a>
-        <a href="../pages/devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
-        <a href="../pages/resources.html" class="nav-link text-lg font-normal">Resources</a>
+        <a href="library.html" class="nav-link text-lg font-normal">Library</a>
+        <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
+        <a href="resources.html" class="nav-link text-lg font-normal">Resources</a>
         <a href="#subscribe" class="nav-link text-lg font-normal" id="navSubscribe">Subscribe</a>
       </div>
       
@@ -796,9 +796,9 @@
     
     <div class="mobile-menu" id="mobileMenu">
       <div class="flex flex-col py-4">
-        <a href="../pages/library.html" class="nav-link">Library</a>
-        <a href="../pages/devotionals.html" class="nav-link">Devotionals</a>
-        <a href="../pages/resources.html" class="nav-link">Resources</a>
+        <a href="library.html" class="nav-link">Library</a>
+        <a href="devotionals.html" class="nav-link">Devotionals</a>
+        <a href="resources.html" class="nav-link">Resources</a>
         <a href="#subscribe" class="nav-link" id="navSubscribeMobile">Subscribe</a>
       </div>
     </div>
@@ -949,7 +949,7 @@
       </div>
     </div>
 
-    <div class="content-section" id="obeying-without-understanding">
+    <div class="content-section">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">2. The Pressure of Obeying Without Understanding</h2>
       <p class="mb-3"><strong>Scripture:</strong> Genesis 6:14–22</p>
       <ul class="list-disc pl-6 space-y-2 text-flcCharcoal mb-6">
@@ -979,7 +979,7 @@
       </ul>
     </div>
 
-    <div class="content-section" id="building-under-scrutiny">
+    <div class="content-section">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">3. The Pressure of Building Under Public Scrutiny</h2>
       <p class="mb-3"><strong>Scripture:</strong> Genesis 6:22</p>
       <ul class="list-disc pl-6 space-y-2 text-flcCharcoal mb-6">
@@ -1000,7 +1000,7 @@
       </ul>
     </div>
 
-    <div class="content-section" id="building-with-unseen">
+    <div class="content-section">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">4. The Pressure of Building with Unseen Resources</h2>
       <ul class="list-disc pl-6 space-y-2 text-flcCharcoal mb-6">
         <li>The Bible never tells us where Noah got the wood, pitch, or tools.</li>
@@ -1039,7 +1039,7 @@
       </div>
     </div>
 
-    <div class="content-section" id="reflection" style="background: linear-gradient(135deg, rgba(184, 149, 106, 0.08), rgba(184, 149, 106, 0.12));">
+    <div class="content-section" style="background: linear-gradient(135deg, rgba(184, 149, 106, 0.08), rgba(184, 149, 106, 0.12));">
       <h2 class="text-2xl font-heading font-bold text-flcNavy mb-4">Reflection & Notes</h2>
       <ol class="list-decimal pl-6 space-y-3 text-flcCharcoal">
         <li>Where do you feel pressure, nobody sees?</li>
@@ -1165,9 +1165,7 @@
         const targetId = link.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          const navHeight = document.getElementById('mainNav').offsetHeight;
-          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
-          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
