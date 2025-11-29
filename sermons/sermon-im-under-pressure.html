@@ -705,6 +705,14 @@
       transform: scale(1.05);
     }
     
+    /* Hide font adjuster and TOC on mobile/tablet */
+    @media (max-width: 1023px) {
+      .font-adjuster,
+      .toc-sidebar {
+        display: none !important;
+      }
+    }
+    
     /* Print Styles */
     @media print {
       .reading-progress,

@@ -532,6 +532,14 @@
       transform: scale(1.05);
     }
     
+    /* Hide font adjuster and TOC on mobile/tablet */
+    @media (max-width: 1023px) {
+      .font-adjuster,
+      .toc-sidebar {
+        display: none !important;
+      }
+    }
+    
     @media (max-width: 640px) {
       .sermon-header {
         padding: 2rem 1.5rem;
