@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 4: The Light of Love - Advent Devotional</title>
+  <title>Week 4: The Light of Joy - Advent Devotional</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -71,29 +71,11 @@
     }
     
     .week-header {
-      background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);
-      color: white;
+      background: linear-gradient(135deg, #2A4A62 0%, #1A3A52 50%, #15394E 100%);
       border-radius: 2rem;
-      padding: 4rem 3rem;
-      margin-bottom: 4rem;
-      box-shadow: 0 24px 48px rgba(26, 58, 82, 0.25);
-      position: relative;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 60px rgba(26, 58, 82, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
       overflow: hidden;
-    }
-    
-    .week-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: 
-        radial-gradient(circle at 20% 30%, rgba(154, 123, 79, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(154, 123, 79, 0.08) 0%, transparent 50%);
-      opacity: 0.6;
-    }
-    
-    .week-header > * {
-      position: relative;
-      z-index: 1;
     }
     
     .day-card {
@@ -150,19 +132,14 @@
     }
     
     @media (max-width: 640px) {
-      .week-header {
-        padding: 2.5rem 2rem;
-        border-radius: 1.5rem;
-      }
-      
       .day-card {
-        padding: 2rem;
+        padding: 1.5rem;
       }
       
       .scripture-box,
       .prayer-box,
       .action-box {
-        padding: 1.5rem;
+        padding: 1.25rem;
       }
     }
     
@@ -430,39 +407,43 @@
     
     <!-- Week Header -->
     <header class="week-header">
-      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
-        <div class="flex items-center gap-3">
-          <svg class="w-8 h-8 text-flcGold" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
-          </svg>
-          <p class="text-flcGold/80 text-lg font-semibold uppercase tracking-wider">Week 4 • December 22-28</p>
+      <div class="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-0">
+        <!-- Featured Image -->
+        <div class="relative overflow-hidden rounded-l-2xl lg:rounded-l-2xl lg:rounded-r-none">
+          <img src="../assets/images/Light of Joy.webp" alt="The Light of Joy" class="w-full h-full object-cover" style="min-height: 300px; max-height: 600px;">
         </div>
-        <div class="flex items-center gap-2 text-white/70">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span class="text-sm font-medium">16 min read</span>
+
+        <!-- Content -->
+        <div class="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-5 h-5 text-flcGold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
+            </svg>
+            <p class="text-flcGold/90 text-xs sm:text-sm font-semibold uppercase tracking-wider">Week 4 • December 21-28</p>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 leading-tight">
+            The Light<br class="hidden sm:block"/>of Joy
+          </h1>
+          <p class="text-base sm:text-lg text-white/80 mb-6 leading-relaxed">
+            The good news proclaimed to the shepherds brings deep, enduring gladness rooted in God's faithfulness and redemption.
+          </p>
+          <p class="text-xs sm:text-sm text-white/60 mb-6 flex items-center gap-2">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <span>By Jarrel Oliveira</span>
+          </p>
+          <div class="bg-white/5 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-4 sm:p-6">
+            <p class="font-semibold text-flcGold mb-2 text-sm">Scripture</p>
+            <p class="text-white/90 leading-relaxed italic text-sm sm:text-base">
+              "In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. 
+              Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. 
+              But the angel said to them, "Don't be afraid, for look, I proclaim to you good news of great joy that will be 
+              for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord." 
+              — Luke 2:8–11
+            </p>
+          </div>
         </div>
-      </div>
-      <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-4">The Light of Joy</h1>
-      <p class="text-xl text-white/80 mb-4">
-        The good news proclaimed to the shepherds brings deep, enduring gladness rooted in God's faithfulness and redemption.
-      </p>
-      <p class="text-sm text-white/60 mb-6 flex items-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        <span>By Jarrel Oliveira</span>
-      </p>
-      <div class="scripture-box bg-white/10 border-flcGold">
-        <p class="font-semibold text-flcGold mb-2">Scripture</p>
-        <p class="text-white/90 leading-relaxed italic text-lg">
-          "In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. 
-          Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. 
-          But the angel said to them, "Don't be afraid, for look, I proclaim to you good news of great joy that will be 
-          for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord." 
-          — Luke 2:8–11
-        </p>
       </div>
     </header>
 
