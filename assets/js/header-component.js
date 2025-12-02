@@ -160,5 +160,21 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.classList.toggle('hidden');
       });
     }
+    
+    // Connect subscribe buttons to modal
+    setTimeout(function() {
+      const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+      subscribeButtons.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const modal = document.getElementById('subscriptionModal');
+          if (modal) {
+            modal.style.display = '';
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+    }, 100);
   }
 });
