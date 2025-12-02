@@ -75,6 +75,84 @@
   />
   
   <style>
+    /* Page Transition Overlay */
+    .page-transition-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1A3A52 0%, #0F2838 100%);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .page-transition-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .page-transition-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(154, 123, 79, 0.2);
+      border-top-color: #9A7B4F;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Lazy Loading Images */
+    img[data-src] {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    
+    img.lazy-loaded {
+      opacity: 1;
+    }
+    
+    /* Skeleton Loaders */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 0.5rem;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .skeleton-text {
+      height: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    
+    .skeleton-title {
+      height: 2rem;
+      width: 60%;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+    
+    .skeleton-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
     /* Premium Typography */
     body {
       -webkit-font-smoothing: antialiased;
@@ -1484,81 +1562,17 @@
   </style>
 </head>
 <body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
-  <!-- Navigation -->
-  <nav id="mainNav">
-    <!-- Premium Header Layout with Aligned Search -->
-    <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
-      <!-- Logo -->
-      <a href="../index.html" class="flex items-center gap-3 group flex-shrink-0">
-        <svg class="w-10 h-10 text-flcGold group-hover:scale-110 transition-transform drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-        </svg>
-        <span class="text-3xl font-heading font-extrabold text-flcNavy tracking-tight drop-shadow-sm">FLC Publishing</span>
-      </a>
-      <!-- Premium Search Bar (centered) -->
-      <div class="flex-1 flex justify-center">
-        <div class="search-bar relative w-full max-w-md">
-          <input
-            type="text"
-            id="resourceSearch"
-            placeholder="Search sermons and studies..."
-            autocomplete="off"
-            class="w-full px-5 py-3 pl-12 pr-20 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md transition-all duration-300"
-          />
-          <svg id="searchIcon" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <!-- Searching Spinner -->
-          <svg id="searchSpinner" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold hidden animate-spin" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          <!-- Result Count Badge -->
-          <div id="searchResultBadge" class="absolute right-14 top-1/2 -translate-y-1/2 bg-flcGold text-white text-xs font-semibold px-2.5 py-1 rounded-full hidden transition-all">
-            <span id="resultCount">0</span>
-          </div>
-          <button
-            id="clearSearch"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-all duration-200 hover:scale-110 hidden"
-            aria-label="Clear search"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          
-          <!-- Search Results Dropdown -->
-          <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-flcGold/20 max-h-96 overflow-y-auto z-50">
-            <div id="searchResults" class="py-2"></div>
-          </div>
-        </div>
-      </div>
-      <!-- Navigation Links -->
-      <div class="nav-links items-center gap-10 flex-shrink-0">
-        <a href="library.html" class="nav-link active text-lg font-normal">Library</a>
-        <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
-        <a href="resources.html" class="nav-link text-lg font-normal">Resources</a>
-        <a href="#subscribe" class="nav-link text-lg font-normal" id="navSubscribe">Subscribe</a>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="flex flex-col py-4">
-        <a href="library.html" class="nav-link active">Library</a>
-        <a href="devotionals.html" class="nav-link">Devotionals</a>
-        <a href="resources.html" class="nav-link">Resources</a>
-        <a href="#subscribe" class="nav-link" id="navSubscribeMobile">Subscribe</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay" id="pageTransition">
+    <div class="page-transition-spinner"></div>
+  </div>
+  
+  <!-- Header Container -->
+  <div id="headerContainer" 
+       data-config='{"currentPage": "library", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "library.html", "devotionalsPath": "devotionals.html", "resourcesPath": "resources.html", "logoHeight": "105px"}'></div>
+  
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
 
   <!-- Quick Jump to Latest FAB -->
   <button class="quick-jump-fab visible" id="quickJumpFab">
@@ -1597,7 +1611,7 @@
         <p class="text-flcCharcoal/70">Get notified when new sermon notes and Bible studies are published</p>
       </div>
       
-      <form id="subscriptionForm" class="space-y-4">
+      <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-4">
         <div>
           <label for="subName" class="block text-sm font-medium text-flcCharcoal mb-2">Full Name</label>
           <input type="text" id="subName" name="name" required class="form-input" placeholder="John Doe">
@@ -1654,26 +1668,26 @@
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 relative z-10 w-full">
         <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
-          <div class="fade-in-section is-visible space-y-8">
+          <div class="fade-in-section is-visible space-y-6 sm:space-y-8 text-center lg:text-left">
             <!-- Library Badge -->
-            <div class="hero-badge">
+            <div class="hero-badge inline-block">
               <span class="text-flcGold/90">FLC Library</span>
             </div>
 
             <!-- Library Title -->
-            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[0.9] tracking-tighter max-w-full overflow-hidden">
-              <span class="block text-white mb-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">The Library</span>
-              <span class="block text-flcGoldLight mb-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Sermons &amp; Studies</span>
+            <h1 class="hero-title font-heading font-bold leading-tight tracking-tight max-w-full overflow-hidden">
+              <span class="block text-white mb-1 text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">The Library</span>
+              <span class="block text-flcGoldLight mb-1 text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl">Sermons &amp; Studies</span>
             </h1>
             <!-- Library Description -->
             <div class="space-y-3 sm:space-y-4 lg:space-y-6">
-              <p class="text-base sm:text-lg md:text-xl text-white leading-relaxed font-light max-w-2xl">
+              <p class="text-base sm:text-lg lg:text-xl text-white leading-relaxed font-light max-w-2xl mx-auto lg:mx-0">
                 Sermon notes, Bible studies, and devotionals to help you grow.
               </p>
             </div>
 
             <!-- Library CTA Buttons -->
-            <div class="hero-cta-group flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <div class="hero-cta-group flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
               <a href="#sermon-notes" class="btn-premium inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-gradient-to-r from-flcGold to-flcGoldLight text-flcNavyDark font-bold tracking-wide sm:tracking-widePlus uppercase text-sm hover:from-flcGoldLight hover:to-flcGold shadow-2xl hover:shadow-flcGold/50 transform hover:-translate-y-1 hover:scale-105 transition-all">
                 Browse Sermon Notes
               </a>
@@ -2859,7 +2873,7 @@
         closeSubscriptionModal();
       }
     });
-    subscriptionForm.addEventListener('submit', (e) => {
+    subscriptionForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(subscriptionForm);
       const data = {
@@ -2871,11 +2885,25 @@
         },
         subscribedAt: new Date().toISOString()
       };
-      localStorage.setItem('flc_subscription', JSON.stringify(data));
-      showToast(`Welcome ${data.name}! You're now subscribed. 🎉`, 'success', 4000);
-      closeSubscriptionModal();
-      subscriptionForm.reset();
-      console.log('New subscription:', data);
+      
+      try {
+        const response = await fetch(subscriptionForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          localStorage.setItem('flc_subscription', JSON.stringify(data));
+          showToast(`Welcome ${data.name}! You're now subscribed. 🎉`, 'success', 4000);
+          closeSubscriptionModal();
+          subscriptionForm.reset();
+        } else {
+          showToast('Subscription failed. Please try again.', 'error', 4000);
+        }
+      } catch (error) {
+        showToast('Network error. Please try again.', 'error', 4000);
+      }
     });
     // Show subscription prompt after 30s if not subscribed
     if (!localStorage.getItem('flc_subscription')) {
@@ -2936,6 +2964,9 @@
       }
     });
   </script>
+  
+  <!-- Page Transitions & Performance Enhancements -->
+  <script src="../assets/js/page-transitions.js"></script>
 </body>
 </html>
 <script>

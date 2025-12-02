@@ -32,6 +32,84 @@
     }
   </script>
   <style>
+    /* Page Transition Overlay */
+    .page-transition-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1A3A52 0%, #0F2838 100%);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .page-transition-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .page-transition-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(154, 123, 79, 0.2);
+      border-top-color: #9A7B4F;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Lazy Loading Images */
+    img[data-src] {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    
+    img.lazy-loaded {
+      opacity: 1;
+    }
+    
+    /* Skeleton Loaders */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 0.5rem;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .skeleton-text {
+      height: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    
+    .skeleton-title {
+      height: 2rem;
+      width: 60%;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+    
+    .skeleton-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #F0EBE0 100%);
@@ -55,6 +133,17 @@
     main {
       position: relative;
       z-index: 1;
+    }
+    
+    /* Premium Hero Section */
+    .hero-header {
+      background: linear-gradient(135deg, rgba(26, 58, 82, 0.98) 0%, rgba(15, 40, 56, 0.98) 100%);
+      border-radius: 2rem;
+      padding: 4rem 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(26, 58, 82, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
     }
     
     .resource-card {
@@ -260,62 +349,17 @@
   </style>
 </head>
 <body>
-  <nav id="mainNav" class="relative">
-    <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
-      <!-- Logo -->
-      <a href="../index.html" class="flex items-center gap-3 group flex-shrink-0">
-        <svg class="w-10 h-10 text-flcGold group-hover:scale-110 transition-transform drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-        </svg>
-        <span class="text-3xl font-heading font-extrabold text-flcNavy tracking-tight drop-shadow-sm">FLC Publishing</span>
-      </a>
-      <!-- Premium Search Bar (centered) -->
-      <div class="flex-1 flex justify-center">
-        <div class="search-bar relative w-full max-w-md">
-          <input
-            type="text"
-            id="resourceSearch"
-            placeholder="Search sermons and studies..."
-            class="w-full px-5 py-3 pl-12 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md"
-          />
-          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <button
-            id="clearSearch"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-colors hidden"
-            aria-label="Clear search"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <!-- Navigation Links -->
-      <div class="nav-links items-center gap-10 flex-shrink-0">
-        <a href="library.html" class="nav-link text-lg font-normal">Library</a>
-        <a href="devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
-        <a href="resources.html" class="nav-link active text-lg font-normal">Resources</a>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="flex flex-col py-4">
-        <a href="library.html" class="nav-link">Library</a>
-        <a href="devotionals.html" class="nav-link">Devotionals</a>
-        <a href="resources.html" class="nav-link active">Resources</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay" id="pageTransition">
+    <div class="page-transition-spinner"></div>
+  </div>
+  
+  <!-- Header Container -->
+  <div id="headerContainer" 
+       data-config='{"currentPage": "resources", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "library.html", "devotionalsPath": "devotionals.html", "resourcesPath": "resources.html", "logoHeight": "105px"}'></div>
+  
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
   
   <script>
     // Mobile menu toggle
@@ -338,11 +382,11 @@
         totalMinutes += readingTime;
       });
       
+      // Update mobile counter
       const totalMinutesElement = document.getElementById('totalMinutes');
       if (totalMinutesElement) {
-        // Animate the counter
         let currentValue = 0;
-        const increment = totalMinutes / 30; // 30 steps for animation
+        const increment = totalMinutes / 30;
         const timer = setInterval(() => {
           currentValue += increment;
           if (currentValue >= totalMinutes) {
@@ -352,29 +396,214 @@
           totalMinutesElement.textContent = Math.round(currentValue);
         }, 20);
       }
+      
+      // Update desktop counter
+      const totalMinutesDesktop = document.getElementById('totalMinutesDesktop');
+      if (totalMinutesDesktop) {
+        let currentValue = 0;
+        const increment = totalMinutes / 30;
+        const timer = setInterval(() => {
+          currentValue += increment;
+          if (currentValue >= totalMinutes) {
+            currentValue = totalMinutes;
+            clearInterval(timer);
+          }
+          totalMinutesDesktop.textContent = Math.round(currentValue);
+        }, 20);
+      }
     }
     
     // Run on page load
     document.addEventListener('DOMContentLoaded', updateTotalMinutes);
   </script>
-  <main class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
-    <!-- Hero Section -->
-    <div class="text-center mb-12 md:mb-16">
-      <p class="text-flcGold text-sm font-semibold uppercase tracking-widest mb-4">Digital Library</p>
-      <h1 class="text-4xl md:text-6xl font-heading font-bold text-flcNavy mb-4">Downloadable Resources</h1>
-      <p class="text-lg text-flcCharcoal/70 max-w-2xl mx-auto mb-8">Access our complete collection of sermon notes, audio recordings, and study materials</p>
-      
-      <!-- Stats Counter -->
-      <div class="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-lg border border-flcBorder">
-        <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span class="text-2xl font-bold text-flcNavy" id="totalMinutes">45</span>
-        <span class="text-sm font-medium text-flcCharcoal/60">minutes of teaching</span>
+  <main class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
+    <!-- Hero Section - Immersive Visual Design -->
+    <header class="hero-header relative overflow-hidden min-h-[320px] lg:min-h-[400px] mt-6 sm:mt-8 lg:mt-10">
+      <!-- Dynamic Background with Depth -->
+      <div class="absolute inset-0">
+        <!-- Base Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0d2338] via-[#1A3A52] to-[#0a1921]"></div>
+        
+        <!-- Animated Glow Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-flcGold/20 rounded-full blur-[120px] animate-pulse" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-orange-400/15 rounded-full blur-[100px] animate-pulse" style="animation-duration: 5s; animation-delay: 1s;"></div>
+        
+        <!-- Layered Texture -->
+        <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239A7B4F\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
       </div>
-    </div>
+      
+      <!-- Content Wrapper -->
+      <div class="relative z-10 h-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+          
+          <!-- Mobile/Tablet Centered Layout -->
+          <div class="lg:hidden text-center space-y-4">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/20 backdrop-blur-xl rounded-full border border-flcGold/40 shadow-2xl">
+              <svg class="w-4 h-4 text-flcGold" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+              </svg>
+              <span class="text-flcGold text-xs font-bold uppercase tracking-widest">Digital Library</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl font-heading font-bold text-white leading-tight">
+              Downloadable<br/><span class="text-flcGold">Resources</span>
+            </h1>
+            
+            <p class="text-white/80 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+              Access sermon notes, audio teachings, and study materials from Freedom Life Church
+            </p>
+            
+            <!-- Stats Counter -->
+            <div class="inline-flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-xl">
+              <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-2xl font-bold text-white" id="totalMinutes">45</span>
+              <span class="text-sm font-medium text-white/70">mins teaching</span>
+            </div>
+          </div>
+          
+          <!-- Desktop Split Layout with Visual Impact -->
+          <div class="hidden lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
+            
+            <!-- Left Column: Content (7 cols) -->
+            <div class="lg:col-span-7 space-y-5">
+              <!-- Badge -->
+              <div class="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-flcGold/25 to-flcGold/15 backdrop-blur-xl rounded-full border border-flcGold/50 shadow-2xl hover:shadow-flcGold/20 hover:border-flcGold/70 transition-all duration-300 group">
+                <svg class="w-5 h-5 text-flcGold group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+                </svg>
+                <span class="text-flcGold text-[13px] font-extrabold uppercase tracking-[0.25em] group-hover:tracking-[0.3em] transition-all">Digital Library</span>
+              </div>
+              
+              <!-- Title -->
+              <div class="space-y-3">
+                <h1 class="text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem] font-heading font-bold text-white leading-[1.1] tracking-tight">
+                  Downloadable<br/>
+                  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a870] via-flcGold to-[#7d6038] inline-block mt-1">Resources</span>
+                </h1>
+                <div class="flex items-center gap-3">
+                  <div class="w-16 h-1 bg-gradient-to-r from-flcGold via-flcGoldLight to-transparent rounded-full"></div>
+                  <div class="w-2 h-2 bg-flcGold rounded-full animate-pulse"></div>
+                </div>
+              </div>
+              
+              <!-- Description -->
+              <p class="text-white/75 text-base xl:text-lg leading-relaxed font-light max-w-xl">
+                Access sermon notes, audio teachings, and study materials from Freedom Life Church
+              </p>
+              
+              <!-- Stats Cards -->
+              <div class="flex items-center gap-5 xl:gap-6">
+                <div class="flex items-center gap-3 group cursor-pointer">
+                  <div class="w-12 h-12 bg-gradient-to-br from-flcGold/25 to-flcGold/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-flcGold/40 group-hover:border-flcGold/60 transition-all shadow-lg group-hover:shadow-flcGold/20">
+                    <svg class="w-6 h-6 text-flcGold group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Resources</p>
+                    <p class="text-flcGold font-bold text-[15px] tracking-wide">2 Sermons</p>
+                  </div>
+                </div>
+                
+                <div class="h-12 w-px bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
+                
+                <div class="flex items-center gap-3 group cursor-pointer">
+                  <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:border-white/40 transition-all shadow-lg">
+                    <svg class="w-6 h-6 text-white/90 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Total Time</p>
+                    <p class="text-white font-bold text-sm"><span id="totalMinutesDesktop">45</span> Minutes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Column: Visual Feature (5 cols) -->
+            <div class="lg:col-span-5 relative">
+              <!-- Hero Visual Card -->
+              <div class="relative group">
+                <!-- Main Card -->
+                <div class="relative bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-3xl rounded-[24px] border-2 border-white/20 p-6 shadow-2xl overflow-hidden hover:scale-[1.02] hover:border-white/30 transition-all duration-500">
+                  <!-- Glow Effect -->
+                  <div class="absolute inset-0 bg-gradient-to-br from-flcGold/20 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <!-- Content -->
+                  <div class="relative z-10 space-y-5">
+                    <!-- Icon -->
+                    <div class="w-16 h-16 bg-gradient-to-br from-flcGold/40 to-flcGold/10 rounded-2xl flex items-center justify-center border-2 border-flcGold/50 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                      </svg>
+                    </div>
+                    
+                    <!-- Quick Info -->
+                    <div class="space-y-5">
+                      <div class="flex items-center justify-between">
+                        <span class="text-white/70 text-[15px] font-semibold tracking-wide">Available Formats</span>
+                      </div>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div class="relative h-px">
+                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-flcGold/20 to-transparent blur-sm"></div>
+                    </div>
+                    
+                    <!-- Format Grid -->
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                      <div class="space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                        <svg class="w-6 h-6 text-flcGold mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">PDF Notes</p>
+                      </div>
+                      <div class="space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                        <svg class="w-6 h-6 text-flcGold mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Audio</p>
+                      </div>
+                      <div class="space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                        <svg class="w-6 h-6 text-flcGold mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path>
+                        </svg>
+                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Video</p>
+                      </div>
+                      <div class="space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                        <svg class="w-6 h-6 text-flcGold mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Online</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Floating Accent Elements -->
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-flcGold/25 rounded-full blur-3xl animate-pulse" style="animation-duration: 3s;"></div>
+                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-orange-400/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s; animation-delay: 0.5s;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
     
-    <div class="grid gap-6 md:gap-8">
+    <!-- Resources Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Available Resources</h2>
+        <p class="text-flcCharcoal/60">Browse our collection of teachings and materials</p>
+      </div>
+      
+      <div class="grid gap-6 md:gap-8">
       <!-- Resource Card: I'm Under Pressure -->
       <div class="resource-card group" data-reading-time="35">
         <div class="p-6 md:p-8">
@@ -453,6 +682,7 @@
         </div>
       </div>
       <!-- Add more resource cards here as needed -->
+      </div>
     </div>
   </main>
 </body>
@@ -473,7 +703,7 @@
         <h3 class="text-2xl font-heading font-bold text-flcNavy mb-2">Never Miss a Sermon</h3>
         <p class="text-flcCharcoal/70">Get notified when new sermon notes and Bible studies are published</p>
       </div>
-      <form id="subscriptionForm" class="space-y-4">
+      <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-4">
         <div>
           <label for="subName" class="block text-sm font-medium text-flcCharcoal mb-2">Full Name</label>
           <input type="text" id="subName" name="name" required class="form-input" placeholder="John Doe">
@@ -536,13 +766,32 @@
       }
     });
     if (subscriptionForm) {
-      subscriptionForm.addEventListener('submit', function(e) {
+      subscriptionForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        // Simulate subscription logic
-        closeSubscriptionModal();
-        subscriptionForm.reset();
+        const formData = new FormData(subscriptionForm);
+        
+        try {
+          const response = await fetch(subscriptionForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          
+          if (response.ok) {
+            alert('Thank you for subscribing!');
+            closeSubscriptionModal();
+            subscriptionForm.reset();
+          } else {
+            alert('Subscription failed. Please try again.');
+          }
+        } catch (error) {
+          alert('Network error. Please try again.');
+        }
       });
     }
   });
 </script>
+
+<!-- Page Transitions & Performance Enhancements -->
+<script src="../assets/js/page-transitions.js"></script>
 </html>

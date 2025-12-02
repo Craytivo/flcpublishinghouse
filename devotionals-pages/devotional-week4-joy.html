@@ -366,41 +366,13 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav id="mainNav">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <a href="../index.html" class="logo-link flex items-center gap-2 group">
-          <svg class="w-8 h-8 text-flcGold group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-          </svg>
-          <span class="text-lg font-heading font-bold text-flcNavy">FLC Publishing</span>
-        </a>
-        
-        <!-- Desktop Navigation Links -->
-        <div class="nav-links hidden md:flex items-center gap-8">
-          <a href="../pages/library.html" class="nav-link">Library</a>
-          <a href="../pages/devotionals.html" class="nav-link active">Devotionals</a>
-        </div>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Mobile Menu -->
-      <div class="mobile-menu" id="mobileMenu">
-        <div class="flex flex-col py-4 space-y-4">
-          <a href="../pages/library.html" class="nav-link px-4 py-2">Library</a>
-          <a href="../pages/devotionals.html" class="nav-link active px-4 py-2">Devotionals</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <!-- Header Container -->
+  <div id="headerContainer" 
+       data-type="devotional"
+       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "logoHeight": "85px"}'></div>
+  
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
 
   <!-- Main Content -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
@@ -505,23 +477,49 @@
     </div>
 
     <!-- Week Navigation -->
-    <nav class="mt-12 pt-8 border-t border-flcBorder/30">
-      <div class="flex items-center justify-between gap-4">
-        <a href="devotional-week3-peace.html" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-flcNavy hover:text-flcGold transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          <span>Previous</span>
-        </a>
-        
-        <div class="text-center">
-          <span class="text-xs font-medium text-flcCharcoal/40 uppercase tracking-wider block">Week 4 of 4</span>
-          <a href="../pages/devotionals.html" class="text-xs text-flcGold hover:text-flcGoldLight font-medium transition-colors mt-1 inline-block">
-            View All
-          </a>
+    <!-- Week Navigation -->
+    <nav class="mt-16 pt-10 border-t-2 border-flcGold/20">
+      <div class="bg-flcOffWhite rounded-2xl p-6 sm:p-8 shadow-lg">
+        <!-- Progress Indicator -->
+        <div class="text-center mb-6">
+          <span class="inline-block text-xs font-bold text-flcGold/80 uppercase tracking-widest mb-2">Week 4 of 4 • Final Week</span>
+          <div class="w-full max-w-xs mx-auto h-1.5 bg-flcCream rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-flcGold to-flcGoldLight rounded-full" style="width: 100%"></div>
+          </div>
         </div>
         
-        <div class="w-24"></div>
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <a href="devotional-week3-peace.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-flcGold/30 hover:border-flcGold text-flcNavy hover:bg-flcGold/5 text-base font-semibold rounded-xl transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span>Previous</span>
+          </a>
+          
+          <button id="markCompleteBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Mark as Complete</span>
+          </button>
+        </div>
+        
+        <!-- Completion Message -->
+        <div class="text-center py-6 px-4 bg-gradient-to-br from-flcGold/10 to-flcGoldLight/10 rounded-xl border border-flcGold/20 mb-6">
+          <p class="text-flcNavy font-semibold mb-2">🎉 You've completed the Advent journey!</p>
+          <p class="text-sm text-flcCharcoal/70">May the hope, love, peace, and joy of Christ fill your heart this Christmas season.</p>
+        </div>
+        
+        <!-- Back Link -->
+        <div class="text-center pt-4 border-t border-flcGold/10">
+          <a href="../pages/devotionals.html" class="inline-flex items-center gap-2 text-sm font-semibold text-flcNavy hover:text-flcGold transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+            </svg>
+            <span>Back to All Weeks</span>
+          </a>
+        </div>
       </div>
     </nav>
 
@@ -563,6 +561,64 @@
       } else {
         mainNav.classList.remove('scrolled');
       }
+    });
+    
+    // ========================================
+    // PROGRESS TRACKING
+    // ========================================
+    
+    const STORAGE_KEY = 'flc_advent_progress';
+    const CURRENT_WEEK = 4;
+    
+    function loadProgress() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : { completed: [], lastRead: null };
+    }
+    
+    function saveProgress(progress) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
+    
+    function markWeekComplete() {
+      const progress = loadProgress();
+      if (!progress.completed.includes(CURRENT_WEEK)) {
+        progress.completed.push(CURRENT_WEEK);
+        progress.lastRead = CURRENT_WEEK;
+        saveProgress(progress);
+        updateCompleteButton();
+        
+        const btn = document.getElementById('markCompleteBtn');
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Completed!</span>';
+        btn.classList.add('bg-green-700');
+        btn.disabled = true;
+        
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('bg-green-700');
+          updateCompleteButton();
+        }, 2000);
+      }
+    }
+    
+    function updateCompleteButton() {
+      const progress = loadProgress();
+      const btn = document.getElementById('markCompleteBtn');
+      
+      if (progress.completed.includes(CURRENT_WEEK)) {
+        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Completed</span>';
+        btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+        btn.classList.add('bg-green-700', 'cursor-default');
+        btn.disabled = true;
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = loadProgress();
+      progress.lastRead = CURRENT_WEEK;
+      saveProgress(progress);
+      updateCompleteButton();
+      document.getElementById('markCompleteBtn').addEventListener('click', markWeekComplete);
     });
   </script>
 </body>

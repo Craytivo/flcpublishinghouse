@@ -757,60 +757,12 @@
     <button id="fontReset" title="Reset font size" aria-label="Reset font size">A</button>
   </div>
   
-  <!-- Navigation -->
-  <nav id="mainNav">
-    <div class="flex items-center justify-between py-6 gap-8 px-8 md:px-16 lg:px-24">
-      <a href="../index.html" class="flex items-center gap-3 group flex-shrink-0">
-        <svg class="w-10 h-10 text-flcGold group-hover:scale-110 transition-transform drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-        </svg>
-        <span class="text-3xl font-heading font-extrabold text-flcNavy tracking-tight drop-shadow-sm">FLC Publishing</span>
-      </a>
-      <div class="flex-1 flex justify-center">
-        <div class="search-bar relative w-full max-w-md">
-          <input
-            type="text"
-            id="resourceSearch"
-            placeholder="Search sermons and studies..."
-            class="w-full px-5 py-3 pl-12 rounded-full border-2 border-flcGold/40 bg-white focus:outline-none focus:border-flcGold text-base text-flcCharcoal placeholder:text-flcCharcoal/40 font-light shadow-md"
-          />
-          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcGold/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <button
-            id="clearSearch"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-flcGold/60 hover:text-flcNavy transition-colors hidden"
-            aria-label="Clear search"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="nav-links items-center gap-10 flex-shrink-0">
-        <a href="../pages/library.html" class="nav-link text-lg font-normal">Library</a>
-        <a href="../pages/devotionals.html" class="nav-link text-lg font-normal">Devotionals</a>
-        <a href="../pages/resources.html" class="nav-link text-lg font-normal">Resources</a>
-        <a href="#subscribe" class="nav-link text-lg font-normal" id="navSubscribe">Subscribe</a>
-      </div>
-      
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-    
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="flex flex-col py-4">
-        <a href="../pages/library.html" class="nav-link">Library</a>
-        <a href="../pages/devotionals.html" class="nav-link">Devotionals</a>
-        <a href="../pages/resources.html" class="nav-link">Resources</a>
-        <a href="#subscribe" class="nav-link" id="navSubscribeMobile">Subscribe</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Header Container -->
+  <div id="headerContainer" 
+       data-config='{"currentPage": "", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "logoHeight": "105px"}'></div>
+  
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
 
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12" style="position: relative; z-index: 1;">
     
