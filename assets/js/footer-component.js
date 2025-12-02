@@ -22,10 +22,7 @@ function createFooter() {
         
         <!-- Brand Section -->
         <div class="lg:col-span-1">
-          <div class="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-            <img src="${logoPath.replace('Logo.png', 'White Logo.png')}" alt="FLC Publishing House" class="h-10 sm:h-12 w-auto">
-          </div>
-          <h3 class="text-lg sm:text-xl font-heading font-bold mb-2 sm:mb-3 text-flcGold">FLC Publishing House</h3>
+          <h3 class="text-xl sm:text-2xl font-heading font-bold mb-3 sm:mb-4 text-flcGold">FLC Publishing House</h3>
           <p class="text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
             Equipping believers with biblical truth and practical resources for spiritual growth.
           </p>
