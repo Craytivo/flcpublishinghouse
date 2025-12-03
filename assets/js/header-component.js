@@ -21,12 +21,20 @@ function createHeader(config = {}) {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
         <!-- Logo -->
-        <a href="${homePath}" class="flex items-center group flex-shrink-0">
+        <a href="${homePath}" class="flex items-center group flex-shrink-0 absolute left-1/2 -translate-x-1/2 sm:static sm:translate-x-0">
           <img src="${logoPath}" alt="FLC Publishing House" class="w-auto group-hover:scale-105 transition-all duration-300 filter group-hover:brightness-110" style="height: ${logoHeight}; object-fit: contain;">
         </a>
         
         <!-- Center: Navigation Links (Large Desktop) -->
         <div class="nav-links hidden lg:flex items-center gap-1">
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
+            <span class="inline-flex items-center gap-1.5">
+              Church
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </span>
+          </a>
           <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'library' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Library</a>
           <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'devotionals' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Devotionals</a>
           <a href="${resourcesPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'resources' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Resources</a>
@@ -68,6 +76,12 @@ function createHeader(config = {}) {
     <!-- Mobile/Tablet Menu -->
     <div id="mobileMenu" class="hidden lg:hidden border-t border-flcGold/10 bg-flcCream/50 backdrop-blur-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1">
+        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">
+          <span>Church Website</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
         <a href="${libraryPath}" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium ${currentPage === 'library' ? 'bg-flcGold/10 text-flcGold font-semibold' : ''}">Library</a>
         <a href="${devotionalsPath}" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium ${currentPage === 'devotionals' ? 'bg-flcGold/10 text-flcGold font-semibold' : ''}">Devotionals</a>
         <a href="${resourcesPath}" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium ${currentPage === 'resources' ? 'bg-flcGold/10 text-flcGold font-semibold' : ''}">Resources</a>
@@ -112,12 +126,20 @@ function createDevotionalHeader(config = {}) {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
         <!-- Logo -->
-        <a href="${homePath}" class="logo-link flex items-center group">
+        <a href="${homePath}" class="logo-link flex items-center group absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
           <img src="${logoPath}" alt="FLC Publishing House" class="w-auto group-hover:scale-105 transition-all duration-300 filter group-hover:brightness-110" style="height: ${logoHeight}; object-fit: contain;">
         </a>
         
         <!-- Desktop Navigation Links -->
         <div class="nav-links hidden md:flex items-center gap-1">
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
+            <span class="inline-flex items-center gap-1.5">
+              Church
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </span>
+          </a>
           <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">Library</a>
           <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcGold bg-flcGold/5 font-semibold text-[15px] tracking-wide transition-all duration-200 rounded-lg">Devotionals</a>
         </div>
@@ -133,6 +155,12 @@ function createDevotionalHeader(config = {}) {
       <!-- Mobile Menu -->
       <div id="mobileMenu" class="hidden md:hidden border-t border-flcGold/10 bg-flcCream/50 backdrop-blur-lg">
         <div class="px-4 sm:px-6 py-4 space-y-1">
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">
+            <span>Church Website</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
           <a href="${libraryPath}" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Library</a>
           <a href="${devotionalsPath}" class="block py-3 px-4 text-flcGold bg-flcGold/10 rounded-lg font-semibold">Devotionals</a>
         </div>

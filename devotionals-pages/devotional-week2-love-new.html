@@ -54,9 +54,10 @@
     }
 
     /* Highlight Styles */
-    .highlight-yellow { background-color: #fef08a; padding: 2px 4px; border-radius: 3px; }
-    .highlight-green { background-color: #bbf7d0; padding: 2px 4px; border-radius: 3px; }
-    .highlight-pink { background-color: #fbcfe8; padding: 2px 4px; border-radius: 3px; }
+    .highlight-yellow { background-color: #fef3c7; padding: 2px 4px; border-radius: 3px; }
+    .highlight-green { background-color: #d1fae5; padding: 2px 4px; border-radius: 3px; }
+    .highlight-blue { background-color: #dbeafe; padding: 2px 4px; border-radius: 3px; }
+    .highlight-pink { background-color: #fce7f3; padding: 2px 4px; border-radius: 3px; }
 
     /* Selection Style */
     ::selection {
@@ -91,11 +92,10 @@
 
     /* Audio Player Styles */
     .audio-player {
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
       border-radius: 12px;
       padding: 16px;
       color: white;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
     }
 
     .audio-progress {
@@ -127,31 +127,28 @@
 
     /* Scripture Section */
     .scripture-section {
-      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
-      border-left: 4px solid #9A7B4F;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
       border-radius: 16px;
       padding: 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
 
     /* Reflection Section */
     .reflection-section {
-      background: linear-gradient(135deg, #F5F1E8 0%, #E8E6E1 100%);
-      border-left: 4px solid #2A4A62;
+      background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+      border-left: 4px solid #a855f7;
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
 
     /* Prayer Section */
     .prayer-section {
-      background: linear-gradient(135deg, #E8E6E1 0%, #FAFAF8 100%);
-      border-left: 4px solid #1A3A52;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left: 4px solid #3b82f6;
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
 
     /* Hover Effects */
@@ -189,54 +186,26 @@
       </a>
     </div>
 
-    <!-- Week Header with Image -->
-    <header class="mb-12">
-      <div class="rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
-        <!-- Image in top-left corner -->
-        <div class="float-left mr-6 mb-4 w-48 sm:w-64 lg:w-80">
-          <img src="../assets/images/Light of Love.webp" alt="The Light of Love" class="w-full h-auto object-contain rounded-lg">
+    <!-- Week Header -->
+    <header class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white rounded-2xl p-8 sm:p-12 mb-12 shadow-2xl">
+      <div class="text-center">
+        <div class="inline-block bg-yellow-400/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-yellow-400/30">
+          Week 2 of 4
         </div>
+        <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-4">The Light of Love</h1>
+        <p class="text-lg sm:text-xl text-blue-100 mb-6 max-w-2xl mx-auto">God's love does not remain distant—it reaches toward us and flows outward into the world</p>
         
-        <!-- Content -->
-        <div class="text-white">
-          <!-- Meta Info -->
-          <div class="flex flex-wrap items-center gap-3 mb-4">
-            <div class="inline-flex items-center gap-2 bg-flcGold/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-flcGold border border-flcGold/30">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
-              </svg>
-              <span class="hidden sm:inline">WEEK 2 • DECEMBER 7-13</span>
-              <span class="sm:hidden">WEEK 2</span>
-            </div>
-            <div class="inline-flex items-center gap-2 text-white/70 text-xs">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span>12 min</span>
-            </div>
-          </div>
-          
-          <!-- Title -->
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-3 leading-tight">The Light<br class="sm:hidden" /> of Love</h1>
-          
-          <!-- Description -->
-          <p class="text-base sm:text-lg text-white/90 mb-4 leading-relaxed">God's love does not remain distant—it reaches toward us and flows outward into the world</p>
-          
-          <!-- Author -->
-          <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-            </svg>
-            <span>By Jarrel Oliveira</span>
-          </div>
-          
-          <!-- Scripture Box -->
-          <div class="bg-white/10 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-5 clear-both">
-            <p class="text-flcGold font-bold text-sm mb-3">John 3:16</p>
-            <p class="text-white/90 italic text-sm leading-relaxed">
-              "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
-            </p>
-          </div>
+        <!-- Toolbar -->
+        <div class="flex flex-wrap justify-center gap-3 mt-8 no-print">
+          <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm border border-white/20">
+            <i class="fas fa-print mr-2"></i>Print
+          </button>
+          <button onclick="clearAllNotes()" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm border border-white/20">
+            <i class="fas fa-eraser mr-2"></i>Clear Notes
+          </button>
+          <button onclick="clearAllHighlights()" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm border border-white/20">
+            <i class="fas fa-highlighter mr-2"></i>Clear Highlights
+          </button>
         </div>
       </div>
     </header>
@@ -247,31 +216,41 @@
       <!-- Scripture Section -->
       <section class="scripture-section">
         <div class="flex items-start gap-4 mb-6">
-          <div class="section-icon bg-flcGold/10 border border-flcGold/20">
+          <div class="section-icon bg-amber-100">
             <span>📖</span>
           </div>
           <div class="flex-1">
             <h2 class="text-2xl font-heading font-bold text-gray-900 mb-1">Scripture</h2>
-            <p class="text-sm text-flcGold font-medium">Isaiah 9:6</p>
+            <p class="text-sm text-amber-800 font-medium">Isaiah 9:6</p>
           </div>
-          <div class="flex flex-wrap gap-2 no-print">
-            <span class="text-xs text-gray-500 font-medium mr-2 flex items-center">Highlight:</span>
-            <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium" title="Yellow Highlight">
-              <span class="w-3 h-3 rounded bg-yellow-400"></span>
-              Yellow
-            </button>
-            <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 hover:bg-green-200 rounded-lg border border-green-400 shadow-sm text-xs font-medium" title="Green Highlight">
-              <span class="w-3 h-3 rounded bg-green-400"></span>
-              Green
-            </button>
-            <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-100 hover:bg-pink-200 rounded-lg border border-pink-400 shadow-sm text-xs font-medium" title="Pink Highlight">
-              <span class="w-3 h-3 rounded bg-pink-400"></span>
-              Pink
-            </button>
+          <div class="flex gap-2 no-print">
+            <button onclick="highlightSelection('yellow')" class="highlight-btn w-8 h-8 bg-yellow-300 hover:bg-yellow-400 rounded-lg border-2 border-yellow-600 shadow-sm" title="Highlight Yellow"></button>
+            <button onclick="highlightSelection('green')" class="highlight-btn w-8 h-8 bg-green-300 hover:bg-green-400 rounded-lg border-2 border-green-600 shadow-sm" title="Highlight Green"></button>
+            <button onclick="highlightSelection('blue')" class="highlight-btn w-8 h-8 bg-blue-300 hover:bg-blue-400 rounded-lg border-2 border-blue-600 shadow-sm" title="Highlight Blue"></button>
+            <button onclick="highlightSelection('pink')" class="highlight-btn w-8 h-8 bg-pink-300 hover:bg-pink-400 rounded-lg border-2 border-pink-600 shadow-sm" title="Highlight Pink"></button>
           </div>
         </div>
 
-        <div class="prose prose-lg max-w-none mt-6">
+        <!-- Audio Player -->
+        <div class="audio-player mb-6 no-print">
+          <div class="flex items-center gap-4 mb-3">
+            <button onclick="toggleAudio('scripture-audio')" id="play-btn" class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition">
+              <i class="fas fa-play text-lg"></i>
+            </button>
+            <div class="flex-1">
+              <div class="text-sm font-medium mb-2">Listen to Scripture Reading</div>
+              <div class="audio-progress" onclick="seekAudio(event, 'scripture-audio')">
+                <div class="audio-progress-bar" id="progress-bar"></div>
+              </div>
+            </div>
+            <span class="text-sm font-mono" id="audio-time">0:00</span>
+          </div>
+          <audio id="scripture-audio" ontimeupdate="updateProgress()" onended="audioEnded()">
+            <source src="../assets/audio/week2-love-scripture.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+
+        <div class="prose prose-lg max-w-none">
           <div class="quote-decoration text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="scripture-text">
             <p>For a child will be born for us, a son will be given to us, and the government will be on his shoulders. He will be named Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace.</p>
           </div>
@@ -281,12 +260,31 @@
       <!-- Reflection Section -->
       <section class="reflection-section">
         <div class="flex items-start gap-4 mb-6">
-          <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
+          <div class="section-icon bg-purple-100">
             <span>💭</span>
           </div>
           <div class="flex-1">
             <h2 class="text-2xl font-heading font-bold text-gray-900">Reflection</h2>
           </div>
+        </div>
+
+        <!-- Audio Player for Reflection -->
+        <div class="audio-player mb-6 no-print" style="background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);">
+          <div class="flex items-center gap-4 mb-3">
+            <button onclick="toggleAudio('reflection-audio')" id="play-btn-reflection" class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition">
+              <i class="fas fa-play text-lg"></i>
+            </button>
+            <div class="flex-1">
+              <div class="text-sm font-medium mb-2">Listen to Reflection</div>
+              <div class="audio-progress" onclick="seekAudio(event, 'reflection-audio')">
+                <div class="audio-progress-bar" id="progress-bar-reflection"></div>
+              </div>
+            </div>
+            <span class="text-sm font-mono" id="audio-time-reflection">0:00</span>
+          </div>
+          <audio id="reflection-audio" ontimeupdate="updateProgressReflection()" onended="audioEndedReflection()">
+            <source src="../assets/audio/week2-love-reflection.mp3" type="audio/mpeg">
+          </audio>
         </div>
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
@@ -303,7 +301,7 @@
       <!-- Prayer Section -->
       <section class="prayer-section">
         <div class="flex items-start gap-4 mb-6">
-          <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
+          <div class="section-icon bg-blue-100">
             <span>🙏</span>
           </div>
           <div>
@@ -322,7 +320,7 @@
           <i class="fas fa-sticky-note text-flcGold text-2xl"></i>
           <h2 class="text-2xl font-heading font-bold text-gray-900">Personal Notes</h2>
         </div>
-        <p class="text-sm text-gray-600 mb-4"><strong>Note:</strong> Your notes, highlights, and reflections are saved locally on this device only. They are not synced or stored on any server.</p>
+        <p class="text-sm text-gray-600 mb-4">Write your thoughts, prayers, or personal reflections here. Your notes are saved automatically in your browser.</p>
         <textarea 
           id="personal-notes"
           class="note-area w-full p-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-flcGold focus:border-transparent transition-all"
