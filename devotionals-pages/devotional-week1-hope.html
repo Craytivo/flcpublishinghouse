@@ -8,6 +8,9 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,517 +39,367 @@
   </script>
   
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html {
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #FAFAF8 100%);
-      overflow-x: hidden;
-      max-width: 100vw;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.8;
     }
-    
-    .back-button {
+
+    /* Print Styles */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+      .day-card { page-break-inside: avoid; box-shadow: none !important; }
+      .scripture-section, .reflection-section, .prayer-section { page-break-inside: avoid; }
+    }
+
+    /* Highlight Styles */
+    .highlight-yellow { background-color: #fef08a; padding: 2px 4px; border-radius: 3px; }
+    .highlight-green { background-color: #bbf7d0; padding: 2px 4px; border-radius: 3px; }
+    .highlight-pink { background-color: #fbcfe8; padding: 2px 4px; border-radius: 3px; }
+
+    /* Selection Style */
+    ::selection {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    /* Quote Decoration */
+    .quote-decoration {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .quote-decoration::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-size: 4rem;
+      font-family: Georgia, serif;
+      color: #9A7B4F;
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    /* Note Area */
+    .note-area {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Text-to-Speech Button */
+    .audio-player-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: #1A3A52;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    
-    .back-button:hover {
-      color: #9A7B4F;
-      transform: translateX(-4px);
-    }
-    
-    .week-header {
-      background: linear-gradient(135deg, #2A4A62 0%, #1A3A52 50%, #15394E 100%);
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
       color: white;
-      border-radius: 1.5rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 20px 60px rgba(26, 58, 82, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      position: relative;
-    }
-    
-    @media (min-width: 768px) {
-      .week-header {
-        border-radius: 2rem;
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .week-header {
-        margin-bottom: 4rem;
-      }
-    }
-    
-    .week-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 80% 20%, rgba(154, 123, 79, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(154, 123, 79, 0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    
-    .day-card {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(229, 224, 216, 0.5);
-      border-left: 4px solid #9A7B4F;
-      transition: all 0.3s ease;
-    }
-    
-    .day-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 58, 82, 0.1);
-    }
-    
-    .scripture-box {
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.12), rgba(184, 149, 106, 0.08));
-      border-left: 4px solid #9A7B4F;
-      padding: 2rem;
-      border-radius: 1rem;
-      margin: 1.5rem 0;
-      box-shadow: 0 2px 8px rgba(154, 123, 79, 0.08);
-    }
-    
-    .reflection-space {
-      background: linear-gradient(135deg, #F5F1E8, #FAFAF8);
-      border: 2px dashed rgba(154, 123, 79, 0.3);
-      border-radius: 1rem;
-      padding: 2rem;
-      min-height: 120px;
-      margin: 1rem 0;
-    }
-    
-    .action-box {
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.08), rgba(184, 149, 106, 0.05));
-      border-left: 4px solid #9A7B4F;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .action-box:hover {
-      border-left-width: 6px;
-      transform: translateX(2px);
-    }
-    
-    .prayer-box {
-      background: linear-gradient(135deg, rgba(26, 58, 82, 0.05), rgba(26, 58, 82, 0.02));
-      border-radius: 1rem;
-      padding: 1.5rem;
-    }
-    
-    @media (max-width: 640px) {
-      .day-card {
-        padding: 1.5rem;
-      }
-      
-      .scripture-box,
-      .prayer-box,
-      .action-box {
-        padding: 1.25rem;
-      }
-    }
-    
-    /* Navigation Styles */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
-      backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid rgba(154, 123, 79, 0.15);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    }
-    
-    nav.scrolled {
-      background: linear-gradient(135deg, rgba(250, 250, 248, 0.99) 0%, rgba(245, 241, 232, 0.99) 100%);
-      box-shadow: 0 4px 20px rgba(26, 58, 82, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
-    }
-    
-    .nav-link {
-      color: #2C2C2C;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 15px;
-      position: relative;
-      padding: 0.5rem 0;
-      letter-spacing: 0.3px;
-    }
-    
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #9A7B4F 0%, #B8956A 100%);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-    
-    .nav-link:hover {
-      color: #9A7B4F;
-      transform: translateY(-1px);
-    }
-    
-    .nav-link:hover::before {
-      width: 100%;
-    }
-    
-    .nav-link.active {
-      color: #9A7B4F;
-      position: relative;
-    }
-    
-    .nav-link.active::before {
-      width: 100%;
-    }
-    
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 50%;
-      width: 4px;
-      height: 4px;
-      background: #9A7B4F;
-      border-radius: 50%;
-      transform: translateX(-50%);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
-      50% { opacity: 0.6; transform: translateX(-50%) scale(1.3); }
-    }
-    
-    .logo-link {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .logo-link::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(45deg, transparent, rgba(154, 123, 79, 0.2), transparent);
-      opacity: 0;
-      transition: opacity 0.5s;
+      border: none;
       border-radius: 8px;
-    }
-    
-    .logo-link:hover::after {
-      opacity: 1;
-      animation: shimmer 1.5s ease-in-out infinite;
-    }
-    
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) rotate(45deg); }
-    }
-    
-    .mobile-menu-btn {
-      display: none;
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.1), rgba(154, 123, 79, 0.05));
-      border: 1px solid rgba(154, 123, 79, 0.2);
+      font-size: 0.875rem;
+      font-weight: 500;
       cursor: pointer;
-      padding: 0.5rem;
-      color: #2C2C2C;
-      border-radius: 8px;
       transition: all 0.3s ease;
     }
-    
-    .mobile-menu-btn:hover {
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.15), rgba(154, 123, 79, 0.08));
-      border-color: rgba(154, 123, 79, 0.3);
-      transform: scale(1.05);
+
+    .audio-player-btn:hover {
+      background: linear-gradient(135deg, #2A4A62 0%, #1A3A52 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
     }
-    
-    .mobile-menu-btn svg {
-      transition: transform 0.3s ease;
+
+    .audio-player-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
-    
-    .mobile-menu-btn.active svg {
-      transform: rotate(90deg);
+
+    .audio-player-btn svg {
+      width: 1rem;
+      height: 1rem;
     }
-    
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
-      backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
-      box-shadow: 0 10px 25px rgba(26, 58, 82, 0.1);
-      animation: slideDown 0.3s ease-out;
+
+    /* Audio Player Styles */
+    .audio-player {
+      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
+      border-radius: 12px;
+      padding: 16px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
     }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+
+    .audio-progress {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
     }
-    
-    .mobile-menu.active {
-      display: block;
+
+    .audio-progress-bar {
+      height: 100%;
+      background: white;
+      width: 0%;
+      transition: width 0.1s;
     }
-    
-    .mobile-menu .nav-link {
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      margin: 0 1rem;
-      transition: all 0.3s ease;
+
+    /* Section Icons */
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
     }
-    
-    .mobile-menu .nav-link:hover {
-      background: rgba(154, 123, 79, 0.08);
-      transform: translateX(8px);
+
+    /* Scripture Section */
+    .scripture-section {
+      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
+      border-left: 4px solid #9A7B4F;
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
-    
-    .mobile-menu .nav-link::before {
-      display: none;
+
+    /* Reflection Section */
+    .reflection-section {
+      background: linear-gradient(135deg, #F5F1E8 0%, #E8E6E1 100%);
+      border-left: 4px solid #2A4A62;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
-    
-    .mobile-menu .nav-link.active {
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.12), rgba(154, 123, 79, 0.08));
+
+    /* Prayer Section */
+    .prayer-section {
+      background: linear-gradient(135deg, #E8E6E1 0%, #FAFAF8 100%);
+      border-left: 4px solid #1A3A52;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
     }
-    
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      
-      .mobile-menu-btn {
-        display: flex !important;
-        min-width: 44px;
-        min-height: 44px;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
+
+    /* Hover Effects */
+    .highlight-btn {
+      transition: all 0.2s;
+      cursor: pointer;
     }
-    
-    /* Mobile Header Optimizations */
-    @media (max-width: 640px) {
-      /* Header Layout */
-      nav > div {
-        padding: 0.75rem 1rem !important;
-        gap: 0.5rem !important;
-      }
-      
-      /* Logo Optimization */
-      nav .text-lg {
-        font-size: 1rem;
-        line-height: 1.2;
-        white-space: nowrap;
-      }
-      
-      nav .w-8 {
-        width: 1.5rem;
-        height: 1.5rem;
-        flex-shrink: 0;
-      }
-      
-      /* Mobile Menu Touch Targets */
-      .mobile-menu .nav-link {
-        padding: 1rem 1.5rem;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        font-size: 1rem;
-      }
+
+    .highlight-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .highlight-btn:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-50">
+  
   <!-- Header Container -->
   <div id="headerContainer" 
-       data-type="devotional"
-       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "logoHeight": "85px"}'></div>
-  
-  <!-- Load Header Component -->
+       data-config='{"logoPath": "../assets/images/Dark Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html"}'></div>
   <script src="../assets/js/header-component.js"></script>
 
   <!-- Main Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
     
-    <!-- Week Header Card -->
-    <header class="week-header">
-      <div class="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-0">
-        <!-- Featured Image -->
-        <div class="relative overflow-hidden rounded-l-2xl lg:rounded-l-2xl lg:rounded-r-none">
-          <img 
-            src="../assets/images/Light of Hope.webp" 
-            alt="The Light of Hope" 
-            class="w-full h-full object-cover"
-            style="min-height: 300px; max-height: 600px;"
-          />
-        </div>
+    <!-- Back Button -->
+    <div class="mb-6 no-print">
+      <a href="../pages/devotionals.html" class="inline-flex items-center text-flcNavy hover:text-flcGold transition-colors font-medium">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to All Weeks
+      </a>
+    </div>
 
+    <!-- Week Header with Image -->
+    <header class="mb-12">
+      <div class="rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
+        <!-- Image in top-left corner -->
+        <div class="float-left mr-6 mb-4 w-48 sm:w-64 lg:w-80">
+          <img src="../assets/images/Light of Hope.webp" alt="The Light of Hope" class="w-full h-auto object-contain rounded-lg">
+        </div>
+        
         <!-- Content -->
-        <div class="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+        <div class="text-white">
           <!-- Meta Info -->
-          <div class="flex flex-wrap items-center gap-4 mb-6">
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-flcGold" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <div class="inline-flex items-center gap-2 bg-flcGold/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-flcGold border border-flcGold/30">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
               </svg>
-              <span class="text-flcGold text-xs sm:text-sm font-semibold uppercase tracking-wider">Week 1 • November 30-December 6</span>
+              <span>WEEK 1 • NOVEMBER 30-DECEMBER 6</span>
             </div>
-            <div class="flex items-center gap-2 text-white/60">
+            <div class="inline-flex items-center gap-2 text-white/70 text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-xs sm:text-sm">15 min read</span>
+              <span>15 min read</span>
             </div>
           </div>
-
+          
           <!-- Title -->
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 leading-tight">
-            The Light<br class="hidden sm:block"/>of Hope
-          </h1>
-
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-3 leading-tight">The Light of Hope</h1>
+          
           <!-- Description -->
-          <p class="text-base sm:text-lg text-white/80 mb-6 leading-relaxed">
-            Exploring the prophecies of the Messiah and how God's promise of a Savior brought hope to a world waiting in darkness.
-          </p>
-
+          <p class="text-base sm:text-lg text-white/90 mb-4 leading-relaxed">Exploring the prophecies of the Messiah and how God's promise of a Savior brought hope to a world waiting in darkness.</p>
+          
           <!-- Author -->
-          <div class="flex items-center gap-2 text-white/60 text-sm mb-8">
+          <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
             <span>By Jarrel Oliveira</span>
           </div>
-
+          
           <!-- Scripture Box -->
-          <div class="bg-white/5 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-4 sm:p-6">
-            <p class="text-flcGold font-semibold text-sm mb-3">Scripture</p>
-            <p class="text-white/90 italic text-sm sm:text-base leading-relaxed">
-              "Paul, a servant of God and an apostle of Jesus Christ, for the faith of God's elect and their knowledge 
-              of the truth that leads to godliness, in the hope of eternal life that God, who cannot lie, promised before 
-              time began. In his own time he has revealed his word in the preaching with which I was entrusted by the 
-              command of God our Savior." — Titus 1:1–3
+          <div class="bg-white/10 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-5 clear-both">
+            <p class="text-flcGold font-bold text-sm mb-3">Titus 1:1–3</p>
+            <p class="text-white/90 italic text-sm leading-relaxed">
+              "Paul, a servant of God and an apostle of Jesus Christ, for the faith of God's elect and their knowledge of the truth that leads to godliness, in the hope of eternal life that God, who cannot lie, promised before time began. In his own time he has revealed his word in the preaching with which I was entrusted by the command of God our Savior."
             </p>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <article class="day-card">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-2xl font-heading font-bold text-flcNavy">Reflection</h2>
-        <span class="text-sm font-semibold text-flcGold">Week 1</span>
-      </div>
-
-
-      <div class="space-y-4 text-flcCharcoal/80">
-        <p class="leading-relaxed">
-          Fear has a way of exposing the truth about us. It shows us our limits, our vulnerability, and how deeply we long for something greater than ourselves. When the angel says, "Do not be afraid," it is not a dismissal of human emotion. It is God entering the very places where fear lives — our uncertainties about the future, our sense of inadequacy, our quiet worry about whether things will ever change. Advent reminds us that God does not shame us for carrying fear. He meets us in it, speaks into it, and gently leads us toward courage rooted in His presence.
-        </p>
-        <p class="leading-relaxed">
-          Across Scripture, sin is not a monster lurking outside human history; it is the condition of every human heart. From Genesis onward, we see sin unraveling God's good design—violence, idolatry, oppression, tribalism, exploitation, and spiritual confusion. We see people who have forgotten who they are and whose image they bear. Yet hope never disappears. Prophets, poets, and shepherds longed for the coming Messiah—One who would restore justice, heal creation, protect the vulnerable, forgive sins, and reconcile humanity to God.
-        </p>
-        <p class="leading-relaxed">
-          Paul's letter to Titus lifts our eyes even higher: hope was God's plan before time began. Before Adam and Eve fell, before humanity wandered, God had already prepared the way back. Hope is not an afterthought or divine improvisation—it is eternal.
-        </p>
-        <p class="leading-relaxed">
-          And at the appointed time, Hope took on flesh. The Son emptied Himself, entering our world as Immanuel—God with us—to restore the closeness humanity lost. Christ is hope embodied, the bridge over the chasm we could never cross. In Jesus, the promise of proximity, reconciliation, and eternal life is fulfilled.
-        </p>
-      </div>
-
-      <div class="prayer-box mt-6">
-        <div class="flex items-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-          </svg>
-          <p class="font-semibold text-flcNavy">Prayer</p>
-        </div>
-        <p class="text-flcCharcoal/80 leading-relaxed italic">
-          Father, I approach Your throne grateful that the coming of Your Son was a promise made before time itself. Thank You for refusing to abandon me to my sin or leave me to the consequences of my rebellion. In Christ, You built a bridge I could never build and invited me to cross freely into life. May hope in Jesus steady my heart in every season. In His name, amen.
-        </p>
-      </div>
-
-      <div class="action-box mt-6">
-        <div class="flex items-center gap-2 mb-3">
-          <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <p class="font-semibold text-flcNavy">Action Point</p>
-        </div>
-        <p class="text-flcCharcoal/80 leading-relaxed">
-          Hope becomes real when it becomes active. This week, identify one act of justice, compassion, or service you can offer in Christ's name. Let the hope you hold become hope someone else can see.
-        </p>
-      </div>
-    </article>
-
-    <!-- Week Navigation -->
-    <nav class="mt-16 pt-10 border-t-2 border-flcGold/20">
-      <div class="bg-flcOffWhite rounded-2xl p-6 sm:p-8 shadow-lg">
-        <!-- Progress Indicator -->
-        <div class="text-center mb-6">
-          <span class="inline-block text-xs font-bold text-flcGold/80 uppercase tracking-widest mb-2">Week 1 of 4</span>
-          <div class="w-full max-w-xs mx-auto h-1.5 bg-flcCream rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-flcGold to-flcGoldLight rounded-full" style="width: 25%"></div>
+    <!-- Content Container -->
+    <article class="space-y-12">
+      
+      <!-- Scripture Section -->
+      <section class="scripture-section">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="section-icon bg-flcGold/10 border border-flcGold/20">
+            <span>📖</span>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-heading font-bold text-gray-900 mb-1">Scripture</h2>
+            <p class="text-sm text-flcGold font-medium">Isaiah 9:2, 6-7</p>
           </div>
         </div>
-        
-        <!-- Actions -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-          <button id="markCompleteBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Mark as Complete</span>
+        <div class="flex flex-wrap gap-2 no-print mb-6">
+          <span class="text-xs text-gray-500 font-medium mr-2 flex items-center">Highlight:</span>
+          <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium" title="Yellow Highlight">
+            <span class="w-3 h-3 rounded bg-yellow-400"></span>
+            Yellow
           </button>
-          
-          <a href="devotional-week2-love.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-flcGold to-flcGoldLight hover:from-flcGoldLight hover:to-flcGold text-white text-base font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105">
-            <span>Next Week</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
+          <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 hover:bg-green-200 rounded-lg border border-green-400 shadow-sm text-xs font-medium" title="Green Highlight">
+            <span class="w-3 h-3 rounded bg-green-400"></span>
+            Green
+          </button>
+          <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-100 hover:bg-pink-200 rounded-lg border border-pink-400 shadow-sm text-xs font-medium" title="Pink Highlight">
+            <span class="w-3 h-3 rounded bg-pink-400"></span>
+            Pink
+          </button>
         </div>
-        
-        <!-- Back Link -->
-        <div class="text-center pt-4 border-t border-flcGold/10">
-          <a href="../pages/devotionals.html" class="inline-flex items-center gap-2 text-sm font-semibold text-flcNavy hover:text-flcGold transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            <span>Back to All Weeks</span>
+
+        <div class="prose prose-lg max-w-none">
+          <div class="quote-decoration text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="scripture-text">
+            <p><strong>Verse 2:</strong> The people who walked in darkness have seen a great light; those who dwelt in a land of deep darkness, on them has light shone.</p>
+            <p><strong>Verse 6-7:</strong> For to us a child is born, to us a son is given; and the government shall be upon his shoulder, and his name shall be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace. Of the increase of his government and of peace there will be no end, on the throne of David and over his kingdom, to establish it and to uphold it with justice and with righteousness from this time forth and forevermore. The zeal of the Lord of hosts will do this.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reflection Section -->
+      <section class="reflection-section">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
+            <span>💭</span>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-heading font-bold text-gray-900">Reflection</h2>
+          </div>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
+          <p>In a world often shrouded in darkness—whether through personal struggles, societal challenges, or spiritual doubts—the promise of hope shines brightly. Isaiah prophesied about a light that would break through the deepest darkness, a child who would bring salvation and peace.</p>
+          
+          <p>This hope is not wishful thinking but a confident expectation rooted in God's faithfulness. The names given to this child—Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace—reveal the fullness of who Jesus is and what He came to accomplish.</p>
+          
+          <p>As we begin this Advent journey, we're reminded that hope is not passive waiting but active trust in God's promises. Just as the Israelites anticipated the Messiah's coming, we too live in anticipation—not just of Christmas, but of Christ's ultimate return and the complete restoration of all things.</p>
+          
+          <p>The light has come. The light is here. The light will return. This is our hope.</p>
+        </div>
+      </section>
+
+      <!-- Prayer Section -->
+      <section class="prayer-section">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
+            <span>🙏</span>
+          </div>
+          <div>
+            <h2 class="text-2xl font-heading font-bold text-gray-900">Prayer</h2>
+          </div>
+        </div>
+
+        <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
+          <p>Heavenly Father, thank You for being the source of true hope. In seasons of darkness, help me to remember that Your light has already broken through. Jesus, You are my Wonderful Counselor, Mighty God, Everlasting Father, and Prince of Peace. I place my trust in You today. May Your hope sustain me, encourage me, and overflow from my life to touch others. In Your precious name, Amen.</p>
+        </div>
+      </section>
+
+      <!-- Personal Notes Section -->
+      <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200 no-print">
+        <div class="flex items-center gap-3 mb-4">
+          <i class="fas fa-sticky-note text-flcGold text-2xl"></i>
+          <h2 class="text-2xl font-heading font-bold text-gray-900">Personal Notes</h2>
+        </div>
+        <p class="text-sm text-gray-600 mb-4"><strong>Note:</strong> Your notes, highlights, and reflections are saved locally on this device only. They are not synced or stored on any server.</p>
+        <textarea 
+          id="personal-notes"
+          class="note-area w-full p-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-flcGold focus:border-transparent transition-all"
+          placeholder="Start writing your thoughts here..."
+          onchange="saveNotes()"
+        ></textarea>
+        <div class="flex items-center justify-between mt-3 text-xs text-gray-500">
+          <span><i class="fas fa-save mr-1"></i>Auto-saved</span>
+          <span id="note-count">0 characters</span>
+        </div>
+      </section>
+
+      <!-- Action Steps Section -->
+      <section class="bg-gradient-to-br from-flcGold/10 to-flcGoldLight/10 rounded-2xl p-6 sm:p-8 border-l-4 border-flcGold shadow-lg">
+        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">This Week's Focus</h2>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">1</span>
+            <span class="text-gray-800">Meditate on Isaiah 9:2, 6-7 daily this week</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">2</span>
+            <span class="text-gray-800">Share one way Christ has brought hope into your life with someone this week</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">3</span>
+            <span class="text-gray-800">Pray for someone you know who needs the light of hope</span>
+          </li>
+        </ul>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <nav class="mt-12 mb-12 no-print">
+      <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="../pages/devotionals.html" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl font-semibold transition text-center">
+            <i class="fas fa-arrow-left mr-2"></i>All Weeks
+          </a>
+          <button onclick="markComplete('week1')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+            <i class="fas fa-check-circle mr-2"></i>Mark Complete
+          </button>
+          <a href="devotional-week2-love.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight text-white px-6 py-3 rounded-xl font-semibold transition text-center">
+            Next Week<i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
       </div>
@@ -554,119 +407,273 @@
 
   </main>
 
+  <!-- Footer -->
+  <div id="footerContainer" data-config='{"logoPath": "../assets/images/White Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "../sermons/sermon-im-under-pressure.html"}'></div>
+  <script src="../assets/js/footer-component.js"></script>
+
+  <!-- Scripts -->
   <script>
-    // ========================================
-    // NAVIGATION
-    // ========================================
-    
-    const mainNav = document.getElementById('mainNav');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    // Toggle mobile menu
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      mobileMenuBtn.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking a link
-    mobileMenu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-      });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mainNav.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-      }
-    });
-    
-    // Add scrolled class to nav on scroll
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        mainNav.classList.add('scrolled');
-      } else {
-        mainNav.classList.remove('scrolled');
-      }
-    });
-    
-    // ========================================
-    // PROGRESS TRACKING
-    // ========================================
-    
-    const STORAGE_KEY = 'flc_advent_progress';
-    const CURRENT_WEEK = 1;
-    
-    // Load progress from localStorage
-    function loadProgress() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : { completed: [], lastRead: null };
-    }
-    
-    // Save progress to localStorage
-    function saveProgress(progress) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-    }
-    
-    // Mark week as complete
-    function markWeekComplete() {
-      const progress = loadProgress();
-      if (!progress.completed.includes(CURRENT_WEEK)) {
-        progress.completed.push(CURRENT_WEEK);
-        progress.lastRead = CURRENT_WEEK;
-        saveProgress(progress);
-        updateCompleteButton();
-        
-        // Show success message
-        const btn = document.getElementById('markCompleteBtn');
-        const originalContent = btn.innerHTML;
-        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Completed!</span>';
-        btn.classList.add('bg-green-700');
-        btn.disabled = true;
-        
-        setTimeout(() => {
-          btn.innerHTML = originalContent;
-          btn.classList.remove('bg-green-700');
-          updateCompleteButton();
-        }, 2000);
-      }
-    }
-    
-    // Update complete button state
-    function updateCompleteButton() {
-      const progress = loadProgress();
-      const btn = document.getElementById('markCompleteBtn');
+    // Highlighting functionality
+    function highlightSelection(color) {
+      const selection = window.getSelection();
+      if (!selection.rangeCount || selection.isCollapsed) return;
       
-      if (progress.completed.includes(CURRENT_WEEK)) {
-        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Completed</span>';
+      const range = selection.getRangeAt(0);
+      const span = document.createElement('span');
+      span.className = `highlight-${color}`;
+      
+      try {
+        range.surroundContents(span);
+        selection.removeAllRanges();
+        saveHighlights();
+      } catch (e) {
+        console.log('Could not highlight selection');
+      }
+    }
+
+    function saveHighlights() {
+      const scriptureHTML = document.getElementById('scripture-text').innerHTML;
+      const reflectionHTML = document.getElementById('reflection-text').innerHTML;
+      localStorage.setItem('week1-scripture-highlights', scriptureHTML);
+      localStorage.setItem('week1-reflection-highlights', reflectionHTML);
+    }
+
+    function loadHighlights() {
+      const scriptureHTML = localStorage.getItem('week1-scripture-highlights');
+      const reflectionHTML = localStorage.getItem('week1-reflection-highlights');
+      
+      if (scriptureHTML) {
+        document.getElementById('scripture-text').innerHTML = scriptureHTML;
+      }
+      if (reflectionHTML) {
+        document.getElementById('reflection-text').innerHTML = reflectionHTML;
+      }
+    }
+
+    function clearAllHighlights() {
+      if (confirm('Clear all highlights?')) {
+        localStorage.removeItem('week1-scripture-highlights');
+        localStorage.removeItem('week1-reflection-highlights');
+        location.reload();
+      }
+    }
+
+    // Notes functionality
+    function saveNotes() {
+      const notes = document.getElementById('personal-notes').value;
+      localStorage.setItem('week1-notes', notes);
+      updateNoteCount();
+    }
+
+    function loadNotes() {
+      const notes = localStorage.getItem('week1-notes');
+      if (notes) {
+        document.getElementById('personal-notes').value = notes;
+        updateNoteCount();
+      }
+    }
+
+    function updateNoteCount() {
+      const count = document.getElementById('personal-notes').value.length;
+      document.getElementById('note-count').textContent = `${count} characters`;
+    }
+
+    function clearAllNotes() {
+      if (confirm('Clear all notes? This cannot be undone.')) {
+        document.getElementById('personal-notes').value = '';
+        localStorage.removeItem('week1-notes');
+        updateNoteCount();
+      }
+    }
+
+    // Audio player controls
+    function toggleAudio(audioId) {
+      const audio = document.getElementById(audioId);
+      const btnId = audioId === 'scripture-audio' ? 'play-btn' : 'play-btn-reflection';
+      const btn = document.getElementById(btnId);
+      const icon = btn.querySelector('i');
+      
+      if (audio.paused) {
+        audio.play();
+        icon.classList.remove('fa-play');
+        icon.classList.add('fa-pause');
+      } else {
+        audio.pause();
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-play');
+      }
+    }
+
+    function updateProgress() {
+      const audio = document.getElementById('scripture-audio');
+      const progress = (audio.currentTime / audio.duration) * 100;
+      document.getElementById('progress-bar').style.width = progress + '%';
+      
+      const minutes = Math.floor(audio.currentTime / 60);
+      const seconds = Math.floor(audio.currentTime % 60);
+      document.getElementById('audio-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgressReflection() {
+      const audio = document.getElementById('reflection-audio');
+      const progress = (audio.currentTime / audio.duration) * 100;
+      document.getElementById('progress-bar-reflection').style.width = progress + '%';
+      
+      const minutes = Math.floor(audio.currentTime / 60);
+      const seconds = Math.floor(audio.currentTime % 60);
+      document.getElementById('audio-time-reflection').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function audioEnded() {
+      const btn = document.getElementById('play-btn');
+      const icon = btn.querySelector('i');
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
+      document.getElementById('progress-bar').style.width = '0%';
+    }
+
+    function audioEndedReflection() {
+      const btn = document.getElementById('play-btn-reflection');
+      const icon = btn.querySelector('i');
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
+      document.getElementById('progress-bar-reflection').style.width = '0%';
+    }
+
+    function seekAudio(event, audioId) {
+      const audio = document.getElementById(audioId);
+      const progressBar = event.currentTarget;
+      const clickX = event.offsetX;
+      const width = progressBar.offsetWidth;
+      const duration = audio.duration;
+      
+      audio.currentTime = (clickX / width) * duration;
+    }
+
+    // ========================================
+    // TEXT-TO-SPEECH
+    // ========================================
+    
+    let currentSpeech = null;
+    
+    function speakText(section) {
+      const btn = document.getElementById(`${section}Btn`);
+      const btnText = document.getElementById(`${section}BtnText`);
+      
+      // Stop if already speaking
+      if (currentSpeech && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        currentSpeech = null;
+        btnText.textContent = 'Listen';
+        btn.disabled = false;
+        return;
+      }
+      
+      // Get text content
+      let text = '';
+      if (section === 'scripture') {
+        const scriptureEl = document.querySelector('.scripture-section p:not(.text-flcGold)');
+        text = scriptureEl ? scriptureEl.textContent : '';
+      } else if (section === 'reflection') {
+        const reflectionEls = document.querySelectorAll('.reflection-section .space-y-4 p');
+        text = Array.from(reflectionEls).map(p => p.textContent).join(' ');
+      }
+      
+      if (!text) return;
+      
+      // Create speech
+      currentSpeech = new SpeechSynthesisUtterance(text);
+      currentSpeech.rate = 0.9;
+      currentSpeech.pitch = 1;
+      currentSpeech.volume = 1;
+      
+      // Update button on start
+      currentSpeech.onstart = () => {
+        btnText.textContent = 'Stop';
+      };
+      
+      // Reset button on end
+      currentSpeech.onend = () => {
+        btnText.textContent = 'Listen';
+        btn.disabled = false;
+        currentSpeech = null;
+      };
+      
+      // Handle errors
+      currentSpeech.onerror = () => {
+        btnText.textContent = 'Listen';
+        btn.disabled = false;
+        currentSpeech = null;
+      };
+      
+      // Speak
+      window.speechSynthesis.speak(currentSpeech);
+    }
+    
+    // Stop speech when page unloads
+    window.addEventListener('beforeunload', () => {
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
+    });
+
+    // Mark as complete
+    function markComplete(weekId) {
+      const progress = JSON.parse(localStorage.getItem('devotionalProgress') || '{"completed":[],"lastRead":0}');
+      const weekNum = 1;
+      
+      if (!progress.completed.includes(weekNum)) {
+        progress.completed.push(weekNum);
+        progress.lastRead = weekNum;
+        localStorage.setItem('devotionalProgress', JSON.stringify(progress));
+        
+        const btn = document.getElementById('complete-btn');
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Completed';
         btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-        btn.classList.add('bg-green-700', 'cursor-default');
+        btn.classList.add('bg-green-800', 'cursor-not-allowed');
+        btn.disabled = true;
+        
+        showNotification('Week 1 marked as complete!');
+      }
+    }
+
+    function checkCompletion() {
+      const progress = JSON.parse(localStorage.getItem('devotionalProgress') || '{"completed":[],"lastRead":0}');
+      if (progress.completed.includes(1)) {
+        const btn = document.getElementById('complete-btn');
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Completed';
+        btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+        btn.classList.add('bg-green-800', 'cursor-not-allowed');
         btn.disabled = true;
       }
     }
-    
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'fixed bottom-8 right-8 bg-green-600 text-white px-6 py-4 rounded-lg shadow-xl z-50 animate-bounce';
+      notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 3000);
+    }
+
+    // Auto-save notes
+    document.getElementById('personal-notes').addEventListener('input', () => {
+      saveNotes();
+    });
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-      // Update last read
-      const progress = loadProgress();
-      progress.lastRead = CURRENT_WEEK;
-      saveProgress(progress);
+      loadNotes();
+      loadHighlights();
+      checkCompletion();
       
-      // Update button state
-      updateCompleteButton();
-      
-      // Add click handler
-      document.getElementById('markCompleteBtn').addEventListener('click', markWeekComplete);
+      const progress = JSON.parse(localStorage.getItem('devotionalProgress') || '{"completed":[],"lastRead":0}');
+      progress.lastRead = 1;
+      localStorage.setItem('devotionalProgress', JSON.stringify(progress));
     });
   </script>
 
-  <!-- Footer Container -->
-  <div id="footerContainer"
-       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "../sermons/sermon-im-under-pressure.html"}'></div>
-  
-  <!-- Load Footer Component -->
-  <script src="../assets/js/footer-component.js"></script>
+  <script src="../assets/js/page-transitions.js"></script>
+
 </body>
 </html>
