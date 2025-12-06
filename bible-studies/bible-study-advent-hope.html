@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advent Bible Study: Hope - FLC Publishing House</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'heading': ['Playfair Display', 'serif'],
+            'sans': ['Inter', 'sans-serif']
+          },
+          colors: {
+            flcNavy: '#1A3A52',
+            flcGold: '#9A7B4F',
+            flcGoldLight: '#B8956A',
+            flcCharcoal: '#2C2C2C',
+            flcCream: '#F5F1E8',
+            flcOffWhite: '#FAFAF8',
+            flcBorder: '#E5E0D8'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #FAFAF8 100%);
+      line-height: 1.8;
+    }
+
+    /* Print Styles */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+      .study-card { page-break-inside: avoid; box-shadow: none !important; }
+    }
+
+    /* Highlight Styles */
+    .highlight-yellow { background-color: #fef08a; padding: 2px 4px; border-radius: 3px; }
+    .highlight-green { background-color: #bbf7d0; padding: 2px 4px; border-radius: 3px; }
+    .highlight-pink { background-color: #fbcfe8; padding: 2px 4px; border-radius: 3px; }
+
+    /* Selection Style */
+    ::selection {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    /* Note Area */
+    .note-area {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Section Cards */
+    .study-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
+      border: 1px solid #E5E0D8;
+    }
+
+    .scripture-verse {
+      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
+      border-left: 4px solid #9A7B4F;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .question-box {
+      background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 100%);
+      border-left: 4px solid #1A3A52;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+
+<body class="bg-flcOffWhite text-flcCharcoal">
+  
+  <!-- Header Container -->
+  <div id="headerContainer" 
+       data-config='{"currentPage": "", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "logoHeight": "105px"}'></div>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-flcNavy via-flcNavy to-[#0F2838] text-white py-16 md:py-24 overflow-hidden">
+    <!-- Decorative Background -->
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Back Button -->
+      <a href="../pages/library.html" class="no-print inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-8 group">
+        <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Library
+      </a>
+
+      <!-- Meta Info -->
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/20 backdrop-blur-sm rounded-full border border-flcGold/30 text-sm font-semibold">
+          <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+          Bible Study
+        </span>
+        <span class="text-white/70 text-sm">Pastor Rohan Samuels</span>
+        <span class="text-white/50">•</span>
+        <span class="text-white/70 text-sm">December 3, 2024</span>
+        <span class="text-white/50">•</span>
+        <span class="text-white/70 text-sm">Week 1 of Advent</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
+        Advent Study:<br/>The Light of <span class="text-flcGold">Hope</span>
+      </h1>
+
+      <p class="text-xl text-white/80 mb-8 leading-relaxed max-w-2xl">
+        Exploring God's eternal promise of hope through Titus 1:1-3
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap gap-4 no-print">
+        <a href="../assets/pdfs/Advent - Hope Handout.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-flcGold hover:bg-flcGoldLight text-white rounded-xl font-semibold transition-all hover:scale-105">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download PDF Handout
+        </a>
+        <a href="../devotionals-pages/devotional-week1-hope.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold border border-white/20 transition-all">
+          View Weekly Devotional
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold border border-white/20 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          Print Study
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    
+    <!-- Introduction -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcGold/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Introduction</h2>
+      </div>
+      
+      <p class="text-lg text-flcCharcoal/80 leading-relaxed mb-4">
+        Welcome to the first week of our Advent journey! This week, we focus on <strong class="text-flcGold">Hope</strong>—the confident expectation that God's promises are true and will be fulfilled.
+      </p>
+      
+      <p class="text-lg text-flcCharcoal/80 leading-relaxed">
+        In a world filled with uncertainty, God's plan for hope has existed from before time began. Through this study, we'll discover how this eternal hope transforms our daily lives and prepares our hearts for the celebration of Christ's birth.
+      </p>
+    </div>
+
+    <!-- Main Scripture -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcNavy/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Scripture Focus</h2>
+      </div>
+
+      <div class="scripture-verse">
+        <p class="text-sm font-semibold text-flcGold mb-4 tracking-wider">TITUS 1:1–3</p>
+        <p class="text-lg text-flcCharcoal leading-relaxed italic">
+          "Paul, a servant of God and an apostle of Jesus Christ, for the sake of the faith of God's elect and their knowledge of the truth, which accords with godliness, in hope of eternal life, which God, who never lies, promised before the ages began and at the proper time manifested in his word through the preaching with which I have been entrusted by the command of God our Savior."
+        </p>
+        <p class="text-sm text-flcCharcoal/60 mt-3 text-right">— ESV</p>
+      </div>
+
+      <p class="text-base text-flcCharcoal/80 leading-relaxed mt-6">
+        This passage reveals the foundation of our hope: God's unchanging character and His eternal plan. Before time began, God promised eternal life. He is faithful and cannot lie, which means our hope is not wishful thinking—it's an anchor for our souls.
+      </p>
+    </div>
+
+    <!-- Key Themes -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcGold/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Key Themes</h2>
+      </div>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-heading font-bold text-flcNavy mb-3">1. Hope Rooted in God's Character</h3>
+          <p class="text-base text-flcCharcoal/80 leading-relaxed mb-3">
+            Paul emphasizes that God "never lies." Our hope isn't based on circumstances or human promises, but on the unchanging nature of God Himself. He is faithful, true, and reliable.
+          </p>
+          <div class="question-box">
+            <p class="text-sm font-semibold text-flcNavy mb-2">Reflection Question:</p>
+            <p class="text-base text-flcCharcoal/80">How does knowing that God cannot lie strengthen your hope in difficult times?</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-heading font-bold text-flcNavy mb-3">2. Hope Promised Before Time</h3>
+          <p class="text-base text-flcCharcoal/80 leading-relaxed mb-3">
+            The phrase "before the ages began" shows us that God's plan for our salvation wasn't an afterthought or emergency response. It was His intention from eternity past. This reveals the depth of His love and the certainty of His promises.
+          </p>
+          <div class="question-box">
+            <p class="text-sm font-semibold text-flcNavy mb-2">Reflection Question:</p>
+            <p class="text-base text-flcCharcoal/80">What does it mean to you that God planned your salvation before the world began?</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-heading font-bold text-flcNavy mb-3">3. Hope Manifested in Christ</h3>
+          <p class="text-base text-flcCharcoal/80 leading-relaxed mb-3">
+            God's promise of hope was revealed "at the proper time" through Jesus Christ. The Advent season celebrates this manifestation—when hope took on flesh and dwelt among us. Jesus is the fulfillment of all God's promises.
+          </p>
+          <div class="question-box">
+            <p class="text-sm font-semibold text-flcNavy mb-2">Reflection Question:</p>
+            <p class="text-base text-flcCharcoal/80">How does the birth of Jesus demonstrate God's faithfulness to His eternal promises?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcNavy/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Living in Hope</h2>
+      </div>
+
+      <p class="text-lg text-flcCharcoal/80 leading-relaxed mb-6">
+        Biblical hope isn't passive waiting—it's an active, confident expectation that changes how we live today. Here are practical ways to live out this hope:
+      </p>
+
+      <div class="space-y-4">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold font-bold">1</div>
+          <div>
+            <h4 class="font-bold text-flcNavy mb-1">Anchor Your Heart Daily</h4>
+            <p class="text-flcCharcoal/80">Start each day reminding yourself of God's unchanging promises. When anxiety or fear creeps in, return to the truth that God "never lies."</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold font-bold">2</div>
+          <div>
+            <h4 class="font-bold text-flcNavy mb-1">Share Your Hope</h4>
+            <p class="text-flcCharcoal/80">Look for opportunities to encourage others with the hope you have in Christ. Your testimony of God's faithfulness can be a light in someone's darkness.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold font-bold">3</div>
+          <div>
+            <h4 class="font-bold text-flcNavy mb-1">Live with Eternal Perspective</h4>
+            <p class="text-flcCharcoal/80">Let the promise of eternal life shape your priorities, decisions, and relationships. What matters in light of eternity?</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold font-bold">4</div>
+          <div>
+            <h4 class="font-bold text-flcNavy mb-1">Cultivate Expectant Faith</h4>
+            <p class="text-flcCharcoal/80">Pray with confidence, knowing that God keeps His promises. Watch expectantly for how He will work in your life and circumstances.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discussion Questions -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcGold/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Group Discussion</h2>
+      </div>
+
+      <p class="text-base text-flcCharcoal/80 leading-relaxed mb-6">
+        Use these questions for personal reflection or small group discussion:
+      </p>
+
+      <div class="space-y-4">
+        <div class="question-box">
+          <p class="font-semibold text-flcNavy mb-2">1. Define Biblical Hope</p>
+          <p class="text-flcCharcoal/80">How is biblical hope different from worldly optimism or wishful thinking? What makes it reliable?</p>
+        </div>
+
+        <div class="question-box">
+          <p class="font-semibold text-flcNavy mb-2">2. God's Eternal Plan</p>
+          <p class="text-flcCharcoal/80">What does it reveal about God's character that He planned our salvation "before the ages began"? How does this impact your understanding of His love for you?</p>
+        </div>
+
+        <div class="question-box">
+          <p class="font-semibold text-flcNavy mb-2">3. Hope in Trials</p>
+          <p class="text-flcCharcoal/80">Share a time when God's faithfulness gave you hope in a difficult situation. How did this hope sustain you?</p>
+        </div>
+
+        <div class="question-box">
+          <p class="font-semibold text-flcNavy mb-2">4. Advent Connection</p>
+          <p class="text-flcCharcoal/80">How does celebrating Advent deepen your understanding of hope? What promises of God are you holding onto this season?</p>
+        </div>
+
+        <div class="question-box">
+          <p class="font-semibold text-flcNavy mb-2">5. Living Hope</p>
+          <p class="text-flcCharcoal/80">In what practical ways can you be a bearer of hope to others this week? Who in your life needs to hear about the hope found in Christ?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prayer -->
+    <div class="study-card">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcNavy/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Closing Prayer</h2>
+      </div>
+
+      <div class="bg-gradient-to-br from-flcNavy/5 to-flcGold/5 rounded-xl p-6 border-l-4 border-flcGold">
+        <p class="text-lg text-flcCharcoal/90 leading-relaxed italic">
+          Heavenly Father, thank You for being a God who never lies, whose promises are sure and steadfast. Thank You for planning our salvation before the world began—revealing Your deep, eternal love for us. This Advent season, help us to live in the confident hope that comes from knowing You. When circumstances shake us, anchor us in Your unchanging Word. When despair threatens, remind us of Your faithfulness throughout history. May we be carriers of Your hope to a world desperately searching for something solid to believe in. We celebrate Jesus, the ultimate manifestation of Your promise, the Light of Hope that pierces every darkness. In His name we pray, Amen.
+        </p>
+      </div>
+    </div>
+
+    <!-- Additional Resources -->
+    <div class="study-card bg-gradient-to-br from-flcOffWhite to-white">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-flcGold/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy">Continue Your Study</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="../devotionals-pages/devotional-week1-hope.html" class="flex items-center gap-3 p-4 bg-white rounded-xl border border-flcBorder hover:border-flcGold transition-all group">
+          <div class="w-10 h-10 rounded-lg bg-flcGold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-flcGold/20 transition-colors">
+            <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-flcNavy group-hover:text-flcGold transition-colors">Weekly Devotional</p>
+            <p class="text-sm text-flcCharcoal/60">Week 1: Hope</p>
+          </div>
+        </a>
+
+        <a href="../assets/pdfs/Advent - Hope Handout.pdf" download class="flex items-center gap-3 p-4 bg-white rounded-xl border border-flcBorder hover:border-flcGold transition-all group">
+          <div class="w-10 h-10 rounded-lg bg-flcGold/10 flex items-center justify-center flex-shrink-0 group-hover:bg-flcGold/20 transition-colors">
+            <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-flcNavy group-hover:text-flcGold transition-colors">PDF Handout</p>
+            <p class="text-sm text-flcCharcoal/60">Download & Print</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="mt-6 p-4 bg-flcNavy/5 rounded-xl">
+        <p class="text-sm text-flcCharcoal/70 leading-relaxed">
+          <strong class="text-flcNavy">Coming Next:</strong> Week 2 focuses on Love—exploring how God's love demonstrated in Christ gives us hope and transforms our relationships.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer Container -->
+  <div id="footerContainer"
+       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "../sermons/sermon-when-compassion-costs-you-sleep.html"}'></div>
+
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
+  
+  <!-- Load Footer Component -->
+  <script src="../assets/js/footer-component.js"></script>
+  
+  <!-- Load Page Transitions -->
+  <script src="../assets/js/page-transitions.js"></script>
+
+</body>
+</html>
