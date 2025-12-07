@@ -6,7 +6,7 @@
 function createHeader(config = {}) {
   const {
     currentPage = '',
-    logoPath = 'assets/images/Dark Logo.png',
+    logoPath = 'assets/images/Dark_Logo-removebg-preview.png',
     homePath = 'index.html',
     libraryPath = 'pages/library.html',
     devotionalsPath = 'pages/devotionals.html',

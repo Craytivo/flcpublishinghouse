@@ -41,8 +41,10 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #FAFAF8 100%);
-      line-height: 1.8;
+      background: #FAFAF8;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Print Styles */
@@ -54,9 +56,9 @@
     }
 
     /* Highlight Styles */
-    .highlight-yellow { background-color: #fef08a; padding: 2px 4px; border-radius: 3px; }
-    .highlight-green { background-color: #bbf7d0; padding: 2px 4px; border-radius: 3px; }
-    .highlight-pink { background-color: #fbcfe8; padding: 2px 4px; border-radius: 3px; }
+    .highlight-yellow { background-color: #fef08a; padding: 3px 6px; border-radius: 4px; transition: all 0.2s; }
+    .highlight-green { background-color: #bbf7d0; padding: 3px 6px; border-radius: 4px; transition: all 0.2s; }
+    .highlight-pink { background-color: #fbcfe8; padding: 3px 6px; border-radius: 4px; transition: all 0.2s; }
 
     /* Selection Style */
     ::selection {
@@ -127,31 +129,52 @@
 
     /* Scripture Section */
     .scripture-section {
-      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
-      border-left: 4px solid #9A7B4F;
-      border-radius: 16px;
-      padding: 24px;
+      background: white;
+      border-left: 5px solid #9A7B4F;
+      border-radius: 20px;
+      padding: 20px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .scripture-section:hover {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
     }
 
     /* Reflection Section */
     .reflection-section {
-      background: linear-gradient(135deg, #F5F1E8 0%, #E8E6E1 100%);
-      border-left: 4px solid #2A4A62;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
+      background: white;
+      border-left: 5px solid #2A4A62;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .reflection-section:hover {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
     }
 
     /* Prayer Section */
     .prayer-section {
-      background: linear-gradient(135deg, #E8E6E1 0%, #FAFAF8 100%);
-      border-left: 4px solid #1A3A52;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.08);
+      background: white;
+      border-left: 5px solid #1A3A52;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .prayer-section:hover {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    @media (min-width: 640px) {
+      .scripture-section, .reflection-section, .prayer-section {
+        padding: 28px;
+      }
     }
 
     /* Hover Effects */
@@ -173,7 +196,7 @@
   
   <!-- Header Container -->
   <div id="headerContainer" 
-       data-config='{"logoPath": "../assets/images/Dark Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html"}'></div>
+       data-config='{"logoPath": "../assets/images/Dark_Logo-removebg-preview.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html"}'></div>
   <script src="../assets/js/header-component.js"></script>
 
   <!-- Main Content -->
@@ -266,7 +289,7 @@
     </header>
 
     <!-- Content Container -->
-    <article class="space-y-12">
+    <article class="space-y-8 sm:space-y-12">
       
       <!-- Scripture Section -->
       <section class="scripture-section">
@@ -381,16 +404,16 @@
     </article>
 
     <!-- Navigation -->
-    <nav class="mt-12 mb-12 no-print">
-      <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="devotional-week2-love.html" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl font-semibold transition text-center">
+    <nav class="mt-8 sm:mt-12 mb-12 no-print">
+      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-200">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <a href="devotional-week2-love.html" class="flex-1 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
             <i class="fas fa-arrow-left mr-2"></i>Previous Week
           </a>
-          <button onclick="markComplete('week3')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+          <button onclick="markComplete('week3')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition touch-manipulation">
             <i class="fas fa-check-circle mr-2"></i>Mark Complete
           </button>
-          <a href="devotional-week4-joy.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight text-white px-6 py-3 rounded-xl font-semibold transition text-center">
+          <a href="devotional-week4-joy.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight active:bg-flcGoldLight/90 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
             Next Week<i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
