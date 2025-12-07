@@ -214,17 +214,17 @@
 
     <!-- Week Header with Image -->
     <header class="mb-12">
-      <div class="rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
-        <div class="flex flex-col sm:flex-row gap-6">
+      <div class="rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
+        <div class="flex flex-col md:flex-row items-stretch">
           <!-- Image -->
-          <div class="w-full sm:w-48 md:w-64 lg:w-80 flex-shrink-0">
-            <img src="../assets/images/Light of Joy.webp" alt="The Light of Joy" class="w-full h-auto object-contain rounded-lg">
+          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
+            <img src="../assets/images/Light of Joy.webp" alt="Joy to the World" class="w-full h-auto object-contain max-w-md rounded-xl">
           </div>
           
           <!-- Content -->
-          <div class="text-white flex-1">
+          <div class="text-white flex-1 p-6 sm:p-8 lg:p-12 flex flex-col">
           <!-- Meta Info -->
-          <div class="flex flex-wrap items-center gap-3 mb-4">
+          <div class="flex flex-wrap items-center gap-3 mb-6">
             <div class="inline-flex items-center gap-2 bg-flcGold/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-flcGold border border-flcGold/30">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
@@ -241,10 +241,10 @@
           </div>
           
           <!-- Title -->
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-3 leading-tight">The Light<br class="sm:hidden" /> of Joy</h1>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold mb-4 lg:mb-6 leading-tight">The Light<br class="sm:hidden" /> of Joy</h1>
           
           <!-- Description -->
-          <p class="text-base sm:text-lg text-white/90 mb-4 leading-relaxed">The good news proclaimed to the shepherds brings deep, enduring gladness rooted in God's faithfulness and redemption</p>
+          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">The good news proclaimed to the shepherds brings deep, enduring gladness rooted in God's faithfulness and redemption</p>
           
           <!-- Author -->
           <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
@@ -262,9 +262,10 @@
             </p>
           </div>
           </div>
-          
-          <!-- Toolbar -->
-          <div class="flex flex-wrap gap-2 no-print mt-6">
+        </div>
+        
+        <!-- Toolbar -->
+        <div class="flex flex-wrap gap-2 no-print p-6 sm:p-8 lg:p-12 pt-0">
             <button onclick="window.print()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition backdrop-blur-sm border border-white/20">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
@@ -293,15 +294,22 @@
       
       <!-- Scripture Section -->
       <section class="scripture-section">
-        <div class="flex items-start gap-4 mb-6">
+        <button onclick="toggleSection('scripture')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcGold/10 border border-flcGold/20">
-            <span>📖</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path>
+            </svg>
           </div>
           <div class="flex-1">
-            <h2 class="text-2xl font-heading font-bold text-gray-900 mb-1">Scripture</h2>
-            <p class="text-sm text-flcGold font-medium">Luke 2:8–11</p>
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900 mb-1">Scripture</h2>
+            <p class="text-xs sm:text-sm text-flcGold font-medium">Luke 2:8-11</p>
           </div>
-          <div class="flex flex-wrap gap-2 no-print">
+          <svg class="w-5 h-5 text-flcGold transition-all duration-300 sm:hidden" id="scripture-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+          </svg>
+        </button>
+        <div id="scripture-content" class="hidden sm:block">
+          <div class="flex flex-wrap gap-2 no-print mb-6">
             <span class="text-xs text-gray-500 font-medium mr-2 flex items-center">Highlight:</span>
             <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium" title="Yellow Highlight">
               <span class="w-3 h-3 rounded bg-yellow-400"></span>
@@ -323,18 +331,23 @@
             <p>In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. But the angel said to them, "Don't be afraid, for look, I proclaim to you good news of great joy that will be for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord."</p>
           </div>
         </div>
+        </div>
       </section>
 
       <!-- Reflection Section -->
       <section class="reflection-section">
-        <div class="flex items-start gap-4 mb-6">
+        <button onclick="toggleSection('reflection')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
-            <span>💭</span>
+            <span class="text-xl sm:text-2xl">💭</span>
           </div>
           <div class="flex-1">
-            <h2 class="text-2xl font-heading font-bold text-gray-900">Reflection</h2>
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Reflection</h2>
           </div>
-        </div>
+          <svg class="w-5 h-5 text-flcNavy transition-all duration-300 sm:hidden" id="reflection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+          </svg>
+        </button>
+        <div id="reflection-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
           <p>On a quiet night, as shepherds kept watch over their flocks, news of extraordinary significance broke into the stillness: the long-awaited promise of God had arrived in a newborn child. For generations, God's people had waited with longing, hope, and expectation. Now that waiting finds its fulfillment in a Savior who brings joy not as fleeting cheerfulness, but as a deep, enduring gladness rooted in God's faithfulness and His work of redemption. Advent reminds us that joy is not merely a feeling; it is the recognition that God is present, active, and working to restore what has been broken in our world and in our hearts.</p>
@@ -345,21 +358,29 @@
           
           <p>As we prepare to celebrate Christmas, may our hearts dwell in the joy of God's arrival. May it guide our words, inform our actions, and shape our outlook, so that every encounter becomes an opportunity to reflect the delight and hope that Christ brings to a world longing for light.</p>
         </div>
+        </div>
       </section>
 
       <!-- Prayer Section -->
       <section class="prayer-section">
-        <div class="flex items-start gap-4 mb-6">
+        <button onclick="toggleSection('prayer')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
-            <span>🙏</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+            </svg>
           </div>
-          <div>
-            <h2 class="text-2xl font-heading font-bold text-gray-900">Prayer</h2>
+          <div class="flex-1">
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Prayer</h2>
           </div>
-        </div>
+          <svg class="w-5 h-5 text-flcNavy transition-all duration-300 sm:hidden" id="prayer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+          </svg>
+        </button>
+        <div id="prayer-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
-          <p>Father of Lights, fill me with the joy that flows from Your presence. Let this joy sustain me in uncertainty, lift me in discouragement, and shape the words I speak to others. May my life radiate the gladness of Christ's coming and reflect the hope of His kingdom. Keep sorrow from consuming me, and anchor my heart in Your unshakable promises. In Jesus' name, amen.</p>
+          <p>Father of Lights, fill me with the joy that flows from Your presence. Let this joy sustain me in uncertainty, lift me in discouragement, and shape the words I speak to others. May my life radiate the gladness of Christ’s coming and reflect the hope of His kingdom. Keep sorrow from consuming me, and anchor my heart in Your unshakable promises. In Jesus’ name, amen.</p>
+        </div>
         </div>
       </section>
 
@@ -402,20 +423,65 @@
       </section>
 
       <!-- Christmas Blessing -->
-      <section class="bg-gradient-to-br from-flcNavyDark via-flcNavy to-flcNavyLight text-white rounded-2xl p-8 sm:p-12 shadow-xl text-center">
-        <div class="mb-6">
-          <span class="text-6xl">🎄</span>
+      <section class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 text-white rounded-2xl p-10 sm:p-16 shadow-2xl text-center relative overflow-hidden border-2 border-amber-400/20">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+          <div class="absolute top-8 left-8 text-6xl">✨</div>
+          <div class="absolute top-12 right-12 text-6xl">⭐</div>
+          <div class="absolute bottom-12 left-16 text-6xl">❄️</div>
+          <div class="absolute bottom-8 right-20 text-6xl">✨</div>
+          <div class="absolute top-1/2 left-1/4 text-5xl">🎄</div>
+          <div class="absolute top-1/3 right-1/4 text-5xl">🌟</div>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-6">Christmas Blessing</h2>
-        <div class="max-w-2xl mx-auto space-y-4 text-lg leading-relaxed">
-          <p class="italic">May the <strong class="text-flcGoldLight">Hope</strong> that was prophesied,</p>
-          <p class="italic">the <strong class="text-flcCream">Peace</strong> that was promised,</p>
-          <p class="italic">the <strong class="text-flcGold">Joy</strong> that was proclaimed,</p>
-          <p class="italic">and the <strong class="text-flcGoldLight">Love</strong> that was given</p>
-          <p class="text-xl font-semibold mt-6">fill your heart this Christmas season<br>and throughout the coming year.</p>
-        </div>
-        <div class="mt-8 pt-8 border-t border-white/20">
-          <p class="text-lg font-medium">Merry Christmas from FLC Publishing House! 🎅</p>
+        
+        <!-- Subtle shine overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent pointer-events-none"></div>
+        
+        <div class="relative z-10">
+          <div class="mb-8 inline-block">
+            <svg class="w-24 h-24 sm:w-28 sm:h-28 mx-auto drop-shadow-2xl" viewBox="0 0 100 120" fill="none">
+              <!-- Tree foliage layers -->
+              <path d="M50 10 L30 35 L35 35 L20 55 L28 55 L15 75 L85 75 L72 55 L80 55 L65 35 L70 35 Z" fill="#10B981" stroke="#047857" stroke-width="1.5"/>
+              <!-- Star on top -->
+              <path d="M50 2 L52 8 L58 8 L53 12 L55 18 L50 14 L45 18 L47 12 L42 8 L48 8 Z" fill="#FCD34D" stroke="#F59E0B" stroke-width="0.8"/>
+              <!-- Tree trunk -->
+              <rect x="45" y="75" width="10" height="15" fill="#92400E" stroke="#78350F" stroke-width="1"/>
+              <!-- Ornaments -->
+              <circle cx="50" cy="50" r="3" fill="#EF4444"/>
+              <circle cx="40" cy="60" r="3" fill="#3B82F6"/>
+              <circle cx="60" cy="58" r="3" fill="#FCD34D"/>
+              <circle cx="35" cy="68" r="2.5" fill="#A855F7"/>
+              <circle cx="65" cy="65" r="2.5" fill="#F472B6"/>
+            </svg>
+          </div>
+          
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-10 text-amber-100 tracking-wide" style="text-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3); letter-spacing: 0.02em;">
+            Christmas Blessing
+          </h2>
+          
+          <div class="max-w-3xl mx-auto space-y-6 text-xl sm:text-2xl leading-relaxed antialiased" style="font-variant-ligatures: common-ligatures;">
+            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+              May the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Hope</strong> that was prophesied,
+            </p>
+            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+              the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Love</strong> that was given,
+            </p>
+            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+              the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Peace</strong> that was promised,
+            </p>
+            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+              and the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Joy</strong> that was proclaimed
+            </p>
+            <p class="text-2xl sm:text-3xl font-semibold mt-10 text-amber-50 leading-snug tracking-tight" style="text-shadow: 0 3px 10px rgba(0,0,0,0.4); font-weight: 600;">
+              fill your heart this Christmas season<br class="hidden sm:block"><span class="sm:inline"> </span>and throughout the coming year.
+            </p>
+          </div>
+          
+          <div class="mt-12 pt-10 border-t-2 border-amber-400/30">
+            <p class="text-xl sm:text-2xl font-medium text-amber-100 tracking-wide" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+              🎁 Merry Christmas from FLC Publishing House! 🎁
+            </p>
+          </div>
         </div>
       </section>
 
@@ -446,6 +512,24 @@
 
   <!-- Scripts -->
   <script>
+    // Toggle section functionality for mobile
+    function toggleSection(section) {
+      if (window.innerWidth >= 640) return;
+      
+      const content = document.getElementById(`${section}-content`);
+      const icon = document.getElementById(`${section}-icon`);
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.querySelector('path').setAttribute('d', 'M5 12h14');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.querySelector('path').setAttribute('d', 'M12 4v16m8-8H4');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
     // Highlighting functionality
     function highlightSelection(color) {
       const selection = window.getSelection();

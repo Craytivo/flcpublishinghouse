@@ -214,17 +214,17 @@
 
     <!-- Week Header with Image -->
     <header class="mb-12">
-      <div class="rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
-        <div class="flex flex-col sm:flex-row gap-6">
+      <div class="rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
+        <div class="flex flex-col md:flex-row items-stretch">
           <!-- Image -->
-          <div class="w-full sm:w-48 md:w-64 lg:w-80 flex-shrink-0">
-            <img src="../assets/images/Light of Love.webp" alt="The Light of Love" class="w-full h-auto object-contain rounded-lg">
+          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
+            <img src="../assets/images/Light of Love.webp" alt="The Gift of Love" class="w-full h-auto object-contain max-w-md rounded-xl">
           </div>
           
           <!-- Content -->
-          <div class="text-white flex-1">
+          <div class="text-white flex-1 p-6 sm:p-8 lg:p-12 flex flex-col">
           <!-- Meta Info -->
-          <div class="flex flex-wrap items-center gap-3 mb-4">
+          <div class="flex flex-wrap items-center gap-3 mb-6">
             <div class="inline-flex items-center gap-2 bg-flcGold/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-flcGold border border-flcGold/30">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
@@ -241,10 +241,10 @@
           </div>
           
           <!-- Title -->
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-3 leading-tight">The Light<br class="sm:hidden" /> of Love</h1>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold mb-4 lg:mb-6 leading-tight">The Light<br class="sm:hidden" /> of Love</h1>
           
           <!-- Description -->
-          <p class="text-base sm:text-lg text-white/90 mb-4 leading-relaxed">God's love does not remain distant—it reaches toward us and flows outward into the world</p>
+          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">God's love does not remain distant—it reaches toward us and flows outward into the world</p>
           
           <!-- Author -->
           <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
@@ -261,6 +261,29 @@
               "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
             </p>
           </div>
+          </div>
+        </div>
+        
+        <!-- Toolbar -->
+        <div class="flex flex-wrap gap-2 no-print p-6 sm:p-8 lg:p-12 pt-0">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition backdrop-blur-sm border border-white/20">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+              </svg>
+              Print
+            </button>
+            <button onclick="clearAllNotes()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition backdrop-blur-sm border border-white/20">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+              </svg>
+              Clear Notes
+            </button>
+            <button onclick="clearAllHighlights()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition backdrop-blur-sm border border-white/20">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+              </svg>
+              Clear Highlights
+            </button>
           </div>
         </div>
       </div>
@@ -301,18 +324,25 @@
             <p>For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.</p>
           </div>
         </div>
+        </div>
       </section>
 
       <!-- Reflection Section -->
       <section class="reflection-section">
-        <div class="flex items-start gap-4 mb-6">
-          <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
-            <span>💭</span>
+        <button onclick="toggleSection('reflection')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
+          <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path>
+            </svg>
           </div>
           <div class="flex-1">
-            <h2 class="text-2xl font-heading font-bold text-gray-900">Reflection</h2>
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Reflection</h2>
           </div>
-        </div>
+          <svg class="w-5 h-5 text-flcNavy transition-all duration-300 sm:hidden" id="reflection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+          </svg>
+        </button>
+        <div id="reflection-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
           <p>Isaiah paints a vivid picture of the human condition: a people walking in profound darkness, blinded by sin, burdened by fear, and estranged from God's ways. Our hearts often long for light, yet we stumble in confusion and despair. Into this darkness, God sends a great illumination: a child is born, yet a Son—eternal and uncreated—is given. The Messiah is both divine and incarnate, entering the world not with worldly power but with a mission to restore, reconcile, and redeem a creation marred by violence, oppression, and the failures of human governance.</p>
@@ -327,17 +357,24 @@
 
       <!-- Prayer Section -->
       <section class="prayer-section">
-        <div class="flex items-start gap-4 mb-6">
+        <button onclick="toggleSection('prayer')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
-            <span>🙏</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+            </svg>
           </div>
-          <div>
-            <h2 class="text-2xl font-heading font-bold text-gray-900">Prayer</h2>
+          <div class="flex-1">
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Prayer</h2>
           </div>
-        </div>
+          <svg class="w-5 h-5 text-flcNavy transition-all duration-300 sm:hidden" id="prayer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+          </svg>
+        </button>
+        <div id="prayer-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
-          <p>Father, thank You for breaking down the walls of hostility that once kept me far from You. Through Christ, You have made peace where there was only rebellion. Let the reign of the Prince of Peace take root in my heart and flow outward into my relationships. Empower me to be an agent of reconciliation in a divided world. In Jesus' name, amen.</p>
+          <p>Father, thank You for breaking down the walls of hostility that once kept me far from You. Through Christ, You have made peace where there was only rebellion. Let the reign of the Prince of Peace take root in my heart and flow outward into my relationships. Empower me to be an agent of reconciliation in a divided world. In Jesus’ name, amen.</p>
+        </div>
         </div>
       </section>
 
@@ -406,6 +443,24 @@
 
   <!-- Scripts -->
   <script>
+    // Toggle section functionality for mobile
+    function toggleSection(section) {
+      if (window.innerWidth >= 640) return;
+      
+      const content = document.getElementById(`${section}-content`);
+      const icon = document.getElementById(`${section}-icon`);
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.querySelector('path').setAttribute('d', 'M5 12h14');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.querySelector('path').setAttribute('d', 'M12 4v16m8-8H4');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
     // Highlighting functionality
     function highlightSelection(color) {
       const selection = window.getSelection();
