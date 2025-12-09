@@ -204,17 +204,27 @@
     }
     
     .content-section {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FCFBF9 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 251, 249, 0.95) 100%);
+      backdrop-filter: blur(10px);
       border-radius: 1.5rem;
       padding: 3rem;
       margin-bottom: 2.5rem;
       box-shadow: 
-        0 8px 32px rgba(26, 58, 82, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(154, 123, 79, 0.12);
+        0 10px 40px rgba(26, 58, 82, 0.06),
+        0 2px 12px rgba(154, 123, 79, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(154, 123, 79, 0.08);
       position: relative;
       z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .content-section:hover {
+      box-shadow: 
+        0 12px 48px rgba(26, 58, 82, 0.08),
+        0 4px 16px rgba(154, 123, 79, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
     }
     
     .content-section::before {
@@ -230,17 +240,28 @@
     
     .scripture-callout {
       background: linear-gradient(135deg, rgba(154, 123, 79, 0.06), rgba(184, 149, 106, 0.08));
-      border-left: 5px solid #9A7B4F;
-      padding: 2rem 2.25rem;
+      border-left: 4px solid transparent;
+      padding: 2rem 2.5rem;
       border-radius: 1rem;
       margin: 2rem 0;
       box-shadow: 
-        0 4px 16px rgba(154, 123, 79, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      border-right: 1px solid rgba(154, 123, 79, 0.15);
-      border-top: 1px solid rgba(154, 123, 79, 0.15);
-      border-bottom: 1px solid rgba(154, 123, 79, 0.15);
+        0 6px 24px rgba(154, 123, 79, 0.08), 
+        0 2px 8px rgba(154, 123, 79, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-right: 1px solid rgba(154, 123, 79, 0.1);
+      border-top: 1px solid rgba(154, 123, 79, 0.1);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.1);
       position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .scripture-callout:hover {
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.08), rgba(184, 149, 106, 0.1));
+      box-shadow: 
+        0 8px 32px rgba(154, 123, 79, 0.12), 
+        0 3px 12px rgba(154, 123, 79, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      transform: translateX(4px);
     }
     
     .scripture-callout::before {
@@ -799,7 +820,7 @@
             <p class="text-flcGold text-xs font-bold uppercase tracking-[0.2em] opacity-90">Sermon Notes</p>
           </div>
           
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-4 leading-[1.1] tracking-tight bg-gradient-to-br from-white via-white to-white/80 bg-clip-text">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-[1.15] tracking-[-0.02em] text-white">
             I'm Under Pressure
           </h1>
           
@@ -810,19 +831,19 @@
               </svg>
             </div>
             <div>
-              <p class="text-white text-lg font-semibold leading-tight">Pastor Rohan Samuels</p>
-              <p class="text-white/60 text-sm">Freedom Life Church</p>
+              <p class="text-white text-lg font-semibold leading-tight tracking-[-0.01em]">Pastor Rohan Samuels</p>
+              <p class="text-white/70 text-sm leading-relaxed">Freedom Life Church</p>
             </div>
           </div>
           
-          <div class="flex items-center gap-4 mb-5 text-sm text-white/70">
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+          <div class="flex items-center gap-4 mb-6 text-sm text-white/80">
+            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 backdrop-blur-sm font-medium">
               <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               November 23, 2024
             </span>
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 backdrop-blur-sm font-medium">
               <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
@@ -855,7 +876,21 @@
       </div>
     </header>
 
-
+    <!-- Watch Full Sermon -->
+    <div class="content-section">
+      <h3 class="text-2xl font-heading font-bold text-flcNavy mb-4 text-center">Watch the Full Sermon</h3>
+      <p class="text-flcCharcoal/70 mb-6 text-center max-w-2xl mx-auto">Experience the complete message as Pastor Rohan Samuels addresses the pressure we all face and how faith sustains us.</p>
+      <div class="relative w-full" style="padding-bottom: 56.25%;">
+        <iframe 
+          class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
+          src="https://www.youtube.com/embed/kBFOH2pxS4A" 
+          title="I'm Under Pressure - Full Sermon" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
 
     <!-- Sermon Content -->
     <div class="content-section">
