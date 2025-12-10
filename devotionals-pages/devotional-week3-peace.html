@@ -481,6 +481,24 @@
 
   <!-- Scripts -->
   <script>
+    // Toggle section functionality for mobile
+    function toggleSection(section) {
+      if (window.innerWidth >= 640) return;
+      
+      const content = document.getElementById(`${section}-content`);
+      const icon = document.getElementById(`${section}-icon`);
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.querySelector('path').setAttribute('d', 'M5 12h14');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.querySelector('path').setAttribute('d', 'M12 4v16m8-8H4');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
     // Highlighting functionality
     function highlightSelection(color) {
       const selection = window.getSelection();
