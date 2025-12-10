@@ -44,6 +44,8 @@
             'fade-in': 'fadeIn 0.6s ease-out',
             'slide-up': 'slideUp 0.5s ease-out',
             'scale-in': 'scaleIn 0.4s ease-out',
+            'shimmer': 'shimmer 3s infinite',
+            'float': 'float 4s ease-in-out infinite',
           },
           keyframes: {
             fadeIn: {
@@ -57,6 +59,14 @@
             scaleIn: {
               '0%': { transform: 'scale(0.95)', opacity: '0' },
               '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            shimmer: {
+              '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+              '100%': { transform: 'translateX(200%) skewX(-12deg)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) translateX(0px)', opacity: '0.3' },
+              '50%': { transform: 'translateY(-20px) translateX(10px)', opacity: '0.6' },
             },
           },
           boxShadow: {
@@ -1428,9 +1438,14 @@
             </div>
             
             <!-- Advent Devotional Card (Premium Glassmorphism) -->
-            <a href="pages/devotionals.html" class="block bg-white/40 backdrop-blur-xl rounded-3xl shadow-2xl p-10 hover:shadow-3xl transition-all duration-500 group border border-white/60 relative lg:-translate-x-8 lg:rotate-[-1deg] z-30 hover:rotate-0 hover:-translate-y-4 hover:scale-[1.03] overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);">
-              <!-- Glassmorphism gradient overlay -->
-              <div class="absolute inset-0 bg-gradient-to-br from-flcGold/10 via-white/20 to-flcNavy/10"></div>
+            <a href="pages/devotionals.html" id="advent-card-link" class="block bg-white/40 backdrop-blur-xl rounded-3xl shadow-2xl p-10 hover:shadow-3xl transition-all duration-500 group border border-white/70 relative lg:-translate-x-8 lg:rotate-[-1deg] z-30 hover:rotate-0 hover:-translate-y-4 hover:scale-[1.03] overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%); box-shadow: 0 25px 50px -12px rgba(26, 58, 82, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;">
+              <!-- Glassmorphism gradient overlay with shimmer -->
+              <div class="absolute inset-0 bg-gradient-to-br from-flcGold/15 via-white/25 to-flcNavy/15"></div>
+              
+              <!-- Animated shimmer effect -->
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-shimmer"></div>
+              </div>
               
               <div class="relative z-10">
                 <!-- Header with Icon -->
@@ -1441,49 +1456,56 @@
                     </svg>
                   </div>
                   <div class="flex-1">
-                    <h3 class="text-3xl font-heading font-extrabold text-flcNavy leading-tight mb-2 tracking-tight drop-shadow-sm">
+                    <h3 class="text-3xl font-heading font-extrabold text-flcNavy leading-tight mb-2 tracking-tight drop-shadow-sm" id="advent-card-title">
                       Advent Devotional
                     </h3>
-                    <p class="text-flcGold text-sm font-semibold uppercase tracking-wide">Christmas Season 2025</p>
+                    <p class="text-flcGold text-sm font-semibold uppercase tracking-wide" id="advent-card-week">Christmas Season 2025</p>
                   </div>
                 </div>
                 
                 <!-- Description -->
-                <p class="text-flcNavy/90 text-lg leading-relaxed mb-6 font-light drop-shadow-sm">
+                <p class="text-flcNavy/90 text-lg leading-relaxed mb-6 font-light drop-shadow-sm" id="advent-card-description">
                   A thoughtfully crafted 4-week journey through daily meditations for Advent. Experience spiritual growth in <span class="font-semibold text-flcNavy">hope, love, peace, and joy</span> as you prepare your heart for Christmas.
                 </p>
                 
                 <!-- Features Grid -->
                 <div class="grid grid-cols-3 gap-3 mb-6">
-                  <div class="text-center p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-white/60 shadow-lg">
+                  <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
                     <div class="text-2xl font-bold text-flcGold mb-1">4</div>
                     <div class="text-xs text-flcNavy/70 font-medium">Weeks</div>
                   </div>
-                  <div class="text-center p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-white/60 shadow-lg">
+                  <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
                     <div class="text-2xl font-bold text-flcGold mb-1">28</div>
                     <div class="text-xs text-flcNavy/70 font-medium">Days</div>
                   </div>
-                  <div class="text-center p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-white/60 shadow-lg">
-                    <div class="text-2xl font-bold text-flcGold mb-1">🎄</div>
-                    <div class="text-xs text-flcNavy/70 font-medium">New!</div>
+                  <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                    <div class="text-2xl font-bold text-flcGold mb-1" id="advent-card-emoji">🎄</div>
+                    <div class="text-xs text-flcNavy/70 font-medium">Theme</div>
                   </div>
                 </div>
                 
                 <!-- CTA Button -->
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-flcGold to-flcGold/90 text-white text-base font-bold shadow-xl group-hover:shadow-2xl group-hover:from-flcNavy group-hover:to-flcNavy/90 transition-all duration-300 transform group-hover:scale-105">
-                    Begin Your Journey
-                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-flcGold via-flcGold to-flcGoldLight text-white text-base font-bold shadow-2xl group-hover:shadow-[0_20px_60px_-15px_rgba(154,123,79,0.5)] group-hover:from-flcNavy group-hover:via-flcNavy group-hover:to-flcNavyLight transition-all duration-500 transform group-hover:scale-110 relative overflow-hidden" id="advent-card-cta">
+                    <span class="relative z-10" id="advent-card-cta-text">Begin Your Journey</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
+                    <!-- Button shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 group-hover:translate-x-full transition-transform duration-1000"></div>
                   </span>
                 </div>
               </div>
               
-              <!-- Decorative glass elements -->
-              <div class="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-flcGold/30 to-transparent rounded-full blur-3xl"></div>
-              <div class="absolute -bottom-8 -left-8 w-28 h-28 bg-gradient-to-tr from-flcNavy/20 to-transparent rounded-full blur-3xl"></div>
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+              <!-- Enhanced decorative glass elements -->
+              <div class="absolute -top-12 -right-12 w-40 h-40 bg-gradient-to-br from-flcGold/40 to-transparent rounded-full blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
+              <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-gradient-to-tr from-flcNavy/30 to-transparent rounded-full blur-3xl animate-pulse" style="animation-duration: 5s; animation-delay: 1s;"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white/15 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+              
+              <!-- Floating particles effect -->
+              <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-flcGold/30 rounded-full animate-float"></div>
+              <div class="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-flcGold/20 rounded-full animate-float" style="animation-delay: 2s; animation-duration: 6s;"></div>
+              <div class="absolute top-2/3 right-1/3 w-1 h-1 bg-white/40 rounded-full animate-float" style="animation-delay: 4s; animation-duration: 5s;"></div>
             </a>
             <!-- Downloadable Resources Card (overlapping, staggered) -->
             <a href="pages/resources.html" class="block bg-flcOffWhite rounded-2xl shadow-2xl p-7 hover:shadow-3xl transition group border border-flcGold/20 relative lg:translate-x-8 lg:rotate-[2deg] z-10 hover:rotate-1 hover:-translate-y-2 mt-[-2rem]">
@@ -2108,5 +2130,106 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 // --- End Site-wide Search ---
+
+// --- Dynamic Advent Card ---
+document.addEventListener('DOMContentLoaded', function() {
+  const adventWeeks = [
+    {
+      week: 1,
+      theme: 'Hope',
+      title: 'Week 1: The Light of Hope',
+      dates: 'November 30 - December 6',
+      startDate: new Date(2025, 10, 30), // Month is 0-indexed
+      endDate: new Date(2025, 11, 6),
+      url: 'devotionals-pages/devotional-week1-hope.html',
+      description: 'Begin your Advent journey with <span class="font-semibold text-flcNavy">hope</span>. Discover how God\'s promises illuminate even our darkest moments and anchor our souls in His faithfulness.',
+      emoji: '✨'
+    },
+    {
+      week: 2,
+      theme: 'Love',
+      title: 'Week 2: The Light of Love',
+      dates: 'December 7-13',
+      startDate: new Date(2025, 11, 7),
+      endDate: new Date(2025, 11, 13),
+      url: 'devotionals-pages/devotional-week2-love.html',
+      description: 'Experience God\'s transformative <span class="font-semibold text-flcNavy">love</span> this week. Explore how divine love changes hearts, heals wounds, and calls us to love others as Christ loved us.',
+      emoji: '❤️'
+    },
+    {
+      week: 3,
+      theme: 'Peace',
+      title: 'Week 3: The Light of Peace',
+      dates: 'December 14-20',
+      startDate: new Date(2025, 11, 14),
+      endDate: new Date(2025, 11, 20),
+      url: 'devotionals-pages/devotional-week3-peace.html',
+      description: 'Find divine <span class="font-semibold text-flcNavy">peace</span> in the midst of chaos. Learn how the Prince of Peace offers rest for weary souls and calm for troubled hearts.',
+      emoji: '🕊️'
+    },
+    {
+      week: 4,
+      theme: 'Joy',
+      title: 'Week 4: The Light of Joy',
+      dates: 'December 21-25',
+      startDate: new Date(2025, 11, 21),
+      endDate: new Date(2025, 11, 25),
+      url: 'devotionals-pages/devotional-week4-joy.html',
+      description: 'Celebrate with profound <span class="font-semibold text-flcNavy">joy</span> as Christmas approaches. Discover the deep, lasting joy that comes from knowing Jesus—the reason for the season.',
+      emoji: '🎄'
+    }
+  ];
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time for accurate date comparison
+  
+  // Find current week or default to Week 1 if before Advent starts
+  let currentWeek = adventWeeks[0]; // Default to Week 1
+  
+  for (const week of adventWeeks) {
+    if (today >= week.startDate && today <= week.endDate) {
+      currentWeek = week;
+      break;
+    }
+  }
+  
+  // If after Christmas, show Week 4
+  if (today > adventWeeks[3].endDate) {
+    currentWeek = adventWeeks[3];
+  }
+  
+  // Update card content
+  document.getElementById('advent-card-title').innerHTML = currentWeek.title;
+  document.getElementById('advent-card-week').innerHTML = `Week ${currentWeek.week} • ${currentWeek.dates}`;
+  document.getElementById('advent-card-description').innerHTML = currentWeek.description;
+  document.getElementById('advent-card-link').href = currentWeek.url;
+  
+  // Update the emoji in the features grid
+  const emojiElement = document.querySelector('#advent-card-emoji');
+  if (emojiElement) {
+    emojiElement.textContent = currentWeek.emoji;
+  }
+  
+  // Update CTA button text
+  const ctaText = document.getElementById('advent-card-cta-text');
+  if (ctaText) {
+    ctaText.textContent = `Read Week ${currentWeek.week}`;
+  }
+  
+  // Make CTA button click go to specific week (prevent default link behavior)
+  const ctaButton = document.getElementById('advent-card-cta');
+  const cardLink = document.getElementById('advent-card-link');
+  if (ctaButton && cardLink) {
+    ctaButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = currentWeek.url;
+    });
+    
+    // Update the main card link to also go to current week
+    cardLink.href = currentWeek.url;
+  }
+});
+// --- End Dynamic Advent Card ---
 </script>
 </html>
