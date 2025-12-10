@@ -1471,12 +1471,12 @@
                 <!-- Features Grid -->
                 <div class="grid grid-cols-3 gap-3 mb-6">
                   <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="text-2xl font-bold text-flcGold mb-1">4</div>
-                    <div class="text-xs text-flcNavy/70 font-medium">Weeks</div>
+                    <div class="text-2xl font-bold text-flcGold mb-1" id="advent-day-number">1</div>
+                    <div class="text-xs text-flcNavy/70 font-medium">Day of Advent</div>
                   </div>
                   <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
-                    <div class="text-2xl font-bold text-flcGold mb-1">28</div>
-                    <div class="text-xs text-flcNavy/70 font-medium">Days</div>
+                    <div class="text-2xl font-bold text-flcGold mb-1" id="advent-week-number">1</div>
+                    <div class="text-xs text-flcNavy/70 font-medium">Week</div>
                   </div>
                   <div class="text-center p-3 bg-white/70 backdrop-blur-md rounded-xl border border-white/80 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
                     <div class="text-2xl font-bold text-flcGold mb-1" id="advent-card-emoji">🎄</div>
@@ -2133,6 +2133,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // --- Dynamic Advent Card ---
 document.addEventListener('DOMContentLoaded', function() {
+  const adventStartDate = new Date(2025, 10, 30); // November 30, 2025
+  
   const adventWeeks = [
     {
       week: 1,
@@ -2198,11 +2200,24 @@ document.addEventListener('DOMContentLoaded', function() {
     currentWeek = adventWeeks[3];
   }
   
+  // Calculate day of Advent (1-28)
+  let dayOfAdvent = 1;
+  if (today >= adventStartDate) {
+    const timeDiff = today - adventStartDate;
+    dayOfAdvent = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+    // Cap at 28 days
+    if (dayOfAdvent > 28) dayOfAdvent = 28;
+  }
+  
   // Update card content
   document.getElementById('advent-card-title').innerHTML = currentWeek.title;
   document.getElementById('advent-card-week').innerHTML = `Week ${currentWeek.week} • ${currentWeek.dates}`;
   document.getElementById('advent-card-description').innerHTML = currentWeek.description;
   document.getElementById('advent-card-link').href = currentWeek.url;
+  
+  // Update day and week numbers
+  document.getElementById('advent-day-number').textContent = dayOfAdvent;
+  document.getElementById('advent-week-number').textContent = currentWeek.week;
   
   // Update the emoji in the features grid
   const emojiElement = document.querySelector('#advent-card-emoji');
