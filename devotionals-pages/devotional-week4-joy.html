@@ -94,28 +94,69 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Audio Player Styles */
-    .audio-player {
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
-      border-radius: 12px;
-      padding: 16px;
-      color: white;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
-    }
-
-    .audio-progress {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
+    /* Enhanced Devotional Image Styles */
+    .devotional-image-container {
+      position: relative;
       overflow: hidden;
-      cursor: pointer;
     }
 
-    .audio-progress-bar {
-      height: 100%;
-      background: white;
-      width: 0%;
-      transition: width 0.1s;
+    .devotional-image-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(184, 149, 106, 0.15) 0%, transparent 70%);
+      animation: pulseGlow 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .devotional-image {
+      position: relative;
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 20px 40px rgba(154, 123, 79, 0.3)) brightness(1.05) contrast(1.05);
+    }
+
+    .devotional-image:hover {
+      transform: scale(1.05) translateY(-5px);
+      filter: drop-shadow(0 30px 60px rgba(154, 123, 79, 0.4)) brightness(1.1) contrast(1.08);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Shimmer Effect */
+    .devotional-image-container::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 3s infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 200%;
+      }
     }
 
     /* Section Icons */
@@ -220,8 +261,8 @@
       <div class="rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
         <div class="flex flex-col md:flex-row items-stretch">
           <!-- Image -->
-          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
-            <img src="../assets/images/Light of Joy.webp" alt="Joy to the World" class="w-full h-auto object-contain max-w-md rounded-xl">
+          <div class="devotional-image-container w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
+            <img src="../assets/images/Light of Joy.webp" alt="The Light of Joy" class="devotional-image w-full h-auto object-contain max-w-md rounded-xl">
           </div>
           
           <!-- Content -->
@@ -232,14 +273,14 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
               </svg>
-              <span class="hidden sm:inline">WEEK 4 • DECEMBER 21-25 • FINAL WEEK</span>
-              <span class="sm:hidden">WEEK 4 • FINAL</span>
+              <span class="hidden sm:inline">WEEK 4 • DECEMBER 21-25</span>
+              <span class="sm:hidden">WEEK 4</span>
             </div>
             <div class="inline-flex items-center gap-2 text-white/70 text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span>12 min</span>
+              <span>15 min</span>
             </div>
           </div>
           
@@ -247,7 +288,7 @@
           <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold mb-4 lg:mb-6 leading-tight">The Light<br class="sm:hidden" /> of Joy</h1>
           
           <!-- Description -->
-          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">The good news proclaimed to the shepherds brings deep, enduring gladness rooted in God's faithfulness and redemption</p>
+          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">Celebrating the joy of Christ's arrival and the lasting gladness that comes from knowing and trusting Him.</p>
           
           <!-- Author -->
           <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
@@ -259,9 +300,9 @@
           
           <!-- Scripture Box -->
           <div class="bg-white/10 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-4 sm:p-5">
-            <p class="text-flcGold font-bold text-sm mb-3">Luke 2:8-11</p>
+            <p class="text-flcGold font-bold text-sm mb-3">Luke 2:8–11</p>
             <p class="text-white/90 italic text-sm leading-relaxed">
-              In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. But the angel said to them, "Don't be afraid, for look, I proclaim to you good news of great joy that will be for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord."
+              "In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. But the angel said to them, 'Don't be afraid, for look, I proclaim to you good news of great joy that will be for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord.'"
             </p>
           </div>
           </div>
@@ -305,33 +346,32 @@
           </div>
           <div class="flex-1">
             <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900 mb-1">Scripture</h2>
-            <p class="text-xs sm:text-sm text-flcGold font-medium">Luke 2:8-11</p>
+            <p class="text-xs sm:text-sm text-flcGold font-medium">Luke 2:8–11</p>
           </div>
           <svg class="w-5 h-5 text-flcGold transition-all duration-300 sm:hidden" id="scripture-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
           </svg>
         </button>
         <div id="scripture-content" class="hidden sm:block">
-          <div class="flex flex-wrap gap-2 no-print mb-6">
-            <span class="text-xs text-gray-500 font-medium mr-2 flex items-center">Highlight:</span>
-            <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium" title="Yellow Highlight">
-              <span class="w-3 h-3 rounded bg-yellow-400"></span>
-              Yellow
-            </button>
-            <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 hover:bg-green-200 rounded-lg border border-green-400 shadow-sm text-xs font-medium" title="Green Highlight">
-              <span class="w-3 h-3 rounded bg-green-400"></span>
-              Green
-            </button>
-            <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-100 hover:bg-pink-200 rounded-lg border border-pink-400 shadow-sm text-xs font-medium" title="Pink Highlight">
-              <span class="w-3 h-3 rounded bg-pink-400"></span>
-              Pink
-            </button>
-          </div>
+        <div class="flex flex-wrap gap-2 no-print mb-6">
+          <span class="text-xs text-gray-500 font-medium mr-2 hidden sm:flex items-center">Highlight:</span>
+          <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-yellow-100 hover:bg-yellow-200 active:bg-yellow-300 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Yellow Highlight">
+            <span class="w-3 h-3 rounded bg-yellow-400"></span>
+            <span class="hidden sm:inline">Yellow</span>
+          </button>
+          <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-green-100 hover:bg-green-200 active:bg-green-300 rounded-lg border border-green-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Green Highlight">
+            <span class="w-3 h-3 rounded bg-green-400"></span>
+            <span class="hidden sm:inline">Green</span>
+          </button>
+          <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-pink-100 hover:bg-pink-200 active:bg-pink-300 rounded-lg border border-pink-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Pink Highlight">
+            <span class="w-3 h-3 rounded bg-pink-400"></span>
+            <span class="hidden sm:inline">Pink</span>
+          </button>
         </div>
 
-        <div class="prose prose-lg max-w-none mt-6">
+        <div class="prose prose-lg max-w-none">
           <div class="quote-decoration text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="scripture-text">
-            <p>In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. Then an angel of the Lord stood before them, and the glory of the Lord shone around them, and they were terrified. But the angel said to them, "Don't be afraid, for look, I proclaim to you good news of great joy that will be for all the people: Today in the city of David a Savior was born for you, who is the Messiah, the Lord."</p>
+            <p>"8 In the same region, shepherds were staying out in the fields and keeping watch at night over their flock. 9 Then an angel of the Lord stood before them,  and the glory of the Lord   one around them, and they were terrified. 10 But the angel said to them, "Don't be afraid,  for look, I proclaim to you good news of great joy that will be for all the people: 11 Today in the city of David a Savior  was born for you, who is the Messiah,  the Lord." <strong>Luke 2:8–11</strong></p>
           </div>
         </div>
         </div>
@@ -341,7 +381,9 @@
       <section class="reflection-section">
         <button onclick="toggleSection('reflection')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
-            <span class="text-xl sm:text-2xl">💭</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
           </div>
           <div class="flex-1">
             <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Reflection</h2>
@@ -351,7 +393,6 @@
           </svg>
         </button>
         <div id="reflection-content" class="hidden sm:block">
-
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
           <p>On a quiet night, as shepherds kept watch over their flocks, news of extraordinary significance broke into the stillness: the long-awaited promise of God had arrived in a newborn child. For generations, God's people had waited with longing, hope, and expectation. Now that waiting finds its fulfillment in a Savior who brings joy not as fleeting cheerfulness, but as a deep, enduring gladness rooted in God's faithfulness and His work of redemption. Advent reminds us that joy is not merely a feeling; it is the recognition that God is present, active, and working to restore what has been broken in our world and in our hearts.</p>
           
@@ -361,29 +402,21 @@
           
           <p>As we prepare to celebrate Christmas, may our hearts dwell in the joy of God's arrival. May it guide our words, inform our actions, and shape our outlook, so that every encounter becomes an opportunity to reflect the delight and hope that Christ brings to a world longing for light.</p>
         </div>
-        </div>
       </section>
 
       <!-- Prayer Section -->
       <section class="prayer-section">
-        <button onclick="toggleSection('prayer')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
-          <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-            </svg>
+        <div class="flex items-start gap-4 mb-6">
+          <div class="section-icon bg-blue-100">
+            <span>🙏</span>
           </div>
-          <div class="flex-1">
-            <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Prayer</h2>
+          <div>
+            <h2 class="text-2xl font-heading font-bold text-gray-900">Prayer</h2>
           </div>
-          <svg class="w-5 h-5 text-flcNavy transition-all duration-300 sm:hidden" id="prayer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
-          </svg>
-        </button>
-        <div id="prayer-content" class="hidden sm:block">
+        </div>
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
-          <p>Father of Lights, fill me with the joy that flows from Your presence. Let this joy sustain me in uncertainty, lift me in discouragement, and shape the words I speak to others. May my life radiate the gladness of Christ’s coming and reflect the hope of His kingdom. Keep sorrow from consuming me, and anchor my heart in Your unshakable promises. In Jesus’ name, amen.</p>
-        </div>
+          <p>Father of Lights, fill me with the joy that flows from Your presence. Let this joy sustain me in uncertainty, lift me in discouragement, and shape the words I speak to others. May my life radiate the gladness of Christ's coming and reflect the hope of His kingdom. Keep sorrow from consuming me, and anchor my heart in Your unshakable promises. In Jesus' name, amen.</p>
         </div>
       </section>
 
@@ -393,7 +426,7 @@
           <i class="fas fa-sticky-note text-flcGold text-2xl"></i>
           <h2 class="text-2xl font-heading font-bold text-gray-900">Personal Notes</h2>
         </div>
-        <p class="text-sm text-gray-600 mb-4"><strong>Note:</strong> Your notes, highlights, and reflections are saved locally on this device only. They are not synced or stored on any server.</p>
+        <p class="text-sm text-gray-600 mb-4">Write your thoughts, prayers, or personal reflections here. Your notes are saved automatically in your browser.</p>
         <textarea 
           id="personal-notes"
           class="note-area w-full p-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-flcGold focus:border-transparent transition-all"
@@ -408,99 +441,43 @@
 
       <!-- Action Steps Section -->
       <section class="bg-gradient-to-br from-flcGold/10 to-flcGoldLight/10 rounded-2xl p-6 sm:p-8 border-l-4 border-flcGold shadow-lg">
-        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">This Week's Focus</h2>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">1</span>
-            <span class="text-gray-800">Like the shepherds, share good news with someone weary or anxious</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">2</span>
-            <span class="text-gray-800">Write a message or offer a conversation that brings encouragement</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">3</span>
-            <span class="text-gray-800">Remind them that God has not forgotten them and joy has come</span>
-          </li>
-        </ul>
+        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">Action Point</h2>
+        <div class="text-gray-800 leading-relaxed">
+          <p>Like the shepherds, share good news with someone weary or anxious. Write a message or offer a conversation that brings encouragement—reminding them that God has not forgotten them and that joy has come into the world.</p>
+        </div>
       </section>
 
       <!-- Christmas Blessing -->
-      <section class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 text-white rounded-2xl p-10 sm:p-16 shadow-2xl text-center relative overflow-hidden border-2 border-amber-400/20">
-        <!-- Decorative elements -->
-        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-          <div class="absolute top-8 left-8 text-6xl">✨</div>
-          <div class="absolute top-12 right-12 text-6xl">⭐</div>
-          <div class="absolute bottom-12 left-16 text-6xl">❄️</div>
-          <div class="absolute bottom-8 right-20 text-6xl">✨</div>
-          <div class="absolute top-1/2 left-1/4 text-5xl">🎄</div>
-          <div class="absolute top-1/3 right-1/4 text-5xl">🌟</div>
+      <section class="bg-gradient-to-br from-blue-900 via-purple-900 to-blue-900 text-white rounded-2xl p-8 sm:p-12 shadow-2xl text-center">
+        <div class="mb-6">
+          <span class="text-6xl">🎄</span>
         </div>
-        
-        <!-- Subtle shine overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent pointer-events-none"></div>
-        
-        <div class="relative z-10">
-          <div class="mb-8 inline-block">
-            <svg class="w-24 h-24 sm:w-28 sm:h-28 mx-auto drop-shadow-2xl" viewBox="0 0 100 120" fill="none">
-              <!-- Tree foliage layers -->
-              <path d="M50 10 L30 35 L35 35 L20 55 L28 55 L15 75 L85 75 L72 55 L80 55 L65 35 L70 35 Z" fill="#10B981" stroke="#047857" stroke-width="1.5"/>
-              <!-- Star on top -->
-              <path d="M50 2 L52 8 L58 8 L53 12 L55 18 L50 14 L45 18 L47 12 L42 8 L48 8 Z" fill="#FCD34D" stroke="#F59E0B" stroke-width="0.8"/>
-              <!-- Tree trunk -->
-              <rect x="45" y="75" width="10" height="15" fill="#92400E" stroke="#78350F" stroke-width="1"/>
-              <!-- Ornaments -->
-              <circle cx="50" cy="50" r="3" fill="#EF4444"/>
-              <circle cx="40" cy="60" r="3" fill="#3B82F6"/>
-              <circle cx="60" cy="58" r="3" fill="#FCD34D"/>
-              <circle cx="35" cy="68" r="2.5" fill="#A855F7"/>
-              <circle cx="65" cy="65" r="2.5" fill="#F472B6"/>
-            </svg>
-          </div>
-          
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-10 text-amber-100 tracking-wide" style="text-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3); letter-spacing: 0.02em;">
-            Christmas Blessing
-          </h2>
-          
-          <div class="max-w-3xl mx-auto space-y-6 text-xl sm:text-2xl leading-relaxed antialiased" style="font-variant-ligatures: common-ligatures;">
-            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-              May the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Hope</strong> that was prophesied,
-            </p>
-            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-              the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Love</strong> that was given,
-            </p>
-            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-              the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Peace</strong> that was promised,
-            </p>
-            <p class="italic text-slate-100 font-light" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-              and the <strong class="text-amber-300 font-semibold not-italic tracking-wide">Joy</strong> that was proclaimed
-            </p>
-            <p class="text-2xl sm:text-3xl font-semibold mt-10 text-amber-50 leading-snug tracking-tight" style="text-shadow: 0 3px 10px rgba(0,0,0,0.4); font-weight: 600;">
-              fill your heart this Christmas season<br class="hidden sm:block"><span class="sm:inline"> </span>and throughout the coming year.
-            </p>
-          </div>
-          
-          <div class="mt-12 pt-10 border-t-2 border-amber-400/30">
-            <p class="text-xl sm:text-2xl font-medium text-amber-100 tracking-wide" style="text-shadow: 0 2px 6px rgba(0,0,0,0.3);">
-              🎁 Merry Christmas from FLC Publishing House! 🎁
-            </p>
-          </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-6">Christmas Blessing</h2>
+        <div class="max-w-2xl mx-auto space-y-4 text-lg leading-relaxed">
+          <p class="italic">May the <strong class="text-yellow-300">Hope</strong> that was prophesied,</p>
+          <p class="italic">the <strong class="text-pink-300">Peace</strong> that was promised,</p>
+          <p class="italic">the <strong class="text-purple-300">Joy</strong> that was proclaimed,</p>
+          <p class="italic">and the <strong class="text-red-300">Love</strong> that was given</p>
+          <p class="text-xl font-semibold mt-6">fill your heart this Christmas season<br>and throughout the coming year.</p>
+        </div>
+        <div class="mt-8 pt-8 border-t border-white/20">
+          <p class="text-lg font-medium">Merry Christmas from FLC Publishing House! 🎅</p>
         </div>
       </section>
 
     </article>
 
     <!-- Navigation -->
-    <nav class="mt-8 sm:mt-12 mb-12 no-print">
-      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-200">
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <a href="devotional-week3-peace.html" class="flex-1 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
+    <nav class="mt-12 mb-12 no-print">
+      <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="devotional-week3-peace.html" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl font-semibold transition text-center">
             <i class="fas fa-arrow-left mr-2"></i>Previous Week
           </a>
-          <button onclick="markComplete('week4')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition touch-manipulation">
+          <button onclick="markComplete('week4')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition">
             <i class="fas fa-check-circle mr-2"></i>Mark Complete
           </button>
-          <a href="../pages/devotionals.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight active:bg-flcGoldLight/90 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
+          <a href="../pages/devotionals.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight text-white px-6 py-3 rounded-xl font-semibold transition text-center">
             All Weeks<i class="fas fa-th ml-2"></i>
           </a>
         </div>
@@ -515,24 +492,6 @@
 
   <!-- Scripts -->
   <script>
-    // Toggle section functionality for mobile
-    function toggleSection(section) {
-      if (window.innerWidth >= 640) return;
-      
-      const content = document.getElementById(`${section}-content`);
-      const icon = document.getElementById(`${section}-icon`);
-      
-      if (content.classList.contains('hidden')) {
-        content.classList.remove('hidden');
-        icon.querySelector('path').setAttribute('d', 'M5 12h14');
-        icon.style.transform = 'rotate(0deg)';
-      } else {
-        content.classList.add('hidden');
-        icon.querySelector('path').setAttribute('d', 'M12 4v16m8-8H4');
-        icon.style.transform = 'rotate(0deg)';
-      }
-    }
-
     // Highlighting functionality
     function highlightSelection(color) {
       const selection = window.getSelection();
@@ -606,70 +565,6 @@
       }
     }
 
-    // Audio player controls
-    function toggleAudio(audioId) {
-      const audio = document.getElementById(audioId);
-      const btnId = audioId === 'scripture-audio' ? 'play-btn' : 'play-btn-reflection';
-      const btn = document.getElementById(btnId);
-      const icon = btn.querySelector('i');
-      
-      if (audio.paused) {
-        audio.play();
-        icon.classList.remove('fa-play');
-        icon.classList.add('fa-pause');
-      } else {
-        audio.pause();
-        icon.classList.remove('fa-pause');
-        icon.classList.add('fa-play');
-      }
-    }
-
-    function updateProgress() {
-      const audio = document.getElementById('scripture-audio');
-      const progress = (audio.currentTime / audio.duration) * 100;
-      document.getElementById('progress-bar').style.width = progress + '%';
-      
-      const minutes = Math.floor(audio.currentTime / 60);
-      const seconds = Math.floor(audio.currentTime % 60);
-      document.getElementById('audio-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function updateProgressReflection() {
-      const audio = document.getElementById('reflection-audio');
-      const progress = (audio.currentTime / audio.duration) * 100;
-      document.getElementById('progress-bar-reflection').style.width = progress + '%';
-      
-      const minutes = Math.floor(audio.currentTime / 60);
-      const seconds = Math.floor(audio.currentTime % 60);
-      document.getElementById('audio-time-reflection').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function audioEnded() {
-      const btn = document.getElementById('play-btn');
-      const icon = btn.querySelector('i');
-      icon.classList.remove('fa-pause');
-      icon.classList.add('fa-play');
-      document.getElementById('progress-bar').style.width = '0%';
-    }
-
-    function audioEndedReflection() {
-      const btn = document.getElementById('play-btn-reflection');
-      const icon = btn.querySelector('i');
-      icon.classList.remove('fa-pause');
-      icon.classList.add('fa-play');
-      document.getElementById('progress-bar-reflection').style.width = '0%';
-    }
-
-    function seekAudio(event, audioId) {
-      const audio = document.getElementById(audioId);
-      const progressBar = event.currentTarget;
-      const clickX = event.offsetX;
-      const width = progressBar.offsetWidth;
-      const duration = audio.duration;
-      
-      audio.currentTime = (clickX / width) * duration;
-    }
-
     // Mark as complete
     function markComplete(weekId) {
       const progress = JSON.parse(localStorage.getItem('devotionalProgress') || '{"completed":[],"lastRead":0}');
@@ -730,3 +625,5 @@
 
 </body>
 </html>
+
+

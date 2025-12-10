@@ -94,28 +94,69 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Audio Player Styles */
-    .audio-player {
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
-      border-radius: 12px;
-      padding: 16px;
-      color: white;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
-    }
-
-    .audio-progress {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
+    /* Enhanced Devotional Image Styles */
+    .devotional-image-container {
+      position: relative;
       overflow: hidden;
-      cursor: pointer;
     }
 
-    .audio-progress-bar {
-      height: 100%;
-      background: white;
-      width: 0%;
-      transition: width 0.1s;
+    .devotional-image-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(184, 149, 106, 0.15) 0%, transparent 70%);
+      animation: pulseGlow 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .devotional-image {
+      position: relative;
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 20px 40px rgba(154, 123, 79, 0.3)) brightness(1.05) contrast(1.05);
+    }
+
+    .devotional-image:hover {
+      transform: scale(1.05) translateY(-5px);
+      filter: drop-shadow(0 30px 60px rgba(154, 123, 79, 0.4)) brightness(1.1) contrast(1.08);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Shimmer Effect */
+    .devotional-image-container::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 3s infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 200%;
+      }
     }
 
     /* Section Icons */
@@ -220,8 +261,8 @@
       <div class="rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
         <div class="flex flex-col md:flex-row items-stretch">
           <!-- Image -->
-          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
-            <img src="../assets/images/Light of Peace.webp" alt="Peace Through Christ" class="w-full h-auto object-contain max-w-md rounded-xl">
+          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12 devotional-image-container">
+            <img src="../assets/images/Light of Peace.webp" alt="The Light of Peace" class="w-full h-auto object-contain max-w-md rounded-xl devotional-image">
           </div>
           
           <!-- Content -->
@@ -239,7 +280,7 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span>14 min</span>
+              <span>15 min</span>
             </div>
           </div>
           
@@ -247,7 +288,7 @@
           <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold mb-4 lg:mb-6 leading-tight">The Light<br class="sm:hidden" /> of Peace</h1>
           
           <!-- Description -->
-          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">Christ came as the Prince of Peace to restore what was broken by sin and reconcile us to God</p>
+          <p class="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">Exploring the peace that Christ brings—peace with God, peace within ourselves, and peace in our relationships.</p>
           
           <!-- Author -->
           <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
@@ -261,7 +302,7 @@
           <div class="bg-white/10 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-4 sm:p-5">
             <p class="text-flcGold font-bold text-sm mb-3">Isaiah 9:6</p>
             <p class="text-white/90 italic text-sm leading-relaxed">
-              For a child will be born for us, a son will be given to us, and the government will be on his shoulders. He will be named Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace.
+              "For a child will be born for us, a son will be given to us, and the government will be on his shoulders. He will be named Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace."
             </p>
           </div>
           </div>
@@ -312,26 +353,25 @@
           </svg>
         </button>
         <div id="scripture-content" class="hidden sm:block">
-          <div class="flex flex-wrap gap-2 no-print mb-6">
-            <span class="text-xs text-gray-500 font-medium mr-2 flex items-center">Highlight:</span>
-            <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium" title="Yellow Highlight">
-              <span class="w-3 h-3 rounded bg-yellow-400"></span>
-              Yellow
-            </button>
-            <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 hover:bg-green-200 rounded-lg border border-green-400 shadow-sm text-xs font-medium" title="Green Highlight">
-              <span class="w-3 h-3 rounded bg-green-400"></span>
-              Green
-            </button>
-            <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-100 hover:bg-pink-200 rounded-lg border border-pink-400 shadow-sm text-xs font-medium" title="Pink Highlight">
-              <span class="w-3 h-3 rounded bg-pink-400"></span>
-              Pink
-            </button>
-          </div>
+        <div class="flex flex-wrap gap-2 no-print mb-6">
+          <span class="text-xs text-gray-500 font-medium mr-2 hidden sm:flex items-center">Highlight:</span>
+          <button onclick="highlightSelection('yellow')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-yellow-100 hover:bg-yellow-200 active:bg-yellow-300 rounded-lg border border-yellow-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Yellow Highlight">
+            <span class="w-3 h-3 rounded bg-yellow-400"></span>
+            <span class="hidden sm:inline">Yellow</span>
+          </button>
+          <button onclick="highlightSelection('green')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-green-100 hover:bg-green-200 active:bg-green-300 rounded-lg border border-green-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Green Highlight">
+            <span class="w-3 h-3 rounded bg-green-400"></span>
+            <span class="hidden sm:inline">Green</span>
+          </button>
+          <button onclick="highlightSelection('pink')" class="highlight-btn inline-flex items-center gap-1.5 px-3 py-2 sm:px-3 sm:py-1.5 bg-pink-100 hover:bg-pink-200 active:bg-pink-300 rounded-lg border border-pink-400 shadow-sm text-xs font-medium min-h-[44px] sm:min-h-0" title="Pink Highlight">
+            <span class="w-3 h-3 rounded bg-pink-400"></span>
+            <span class="hidden sm:inline">Pink</span>
+          </button>
         </div>
 
-        <div class="prose prose-lg max-w-none mt-6">
+        <div class="prose prose-lg max-w-none">
           <div class="quote-decoration text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="scripture-text">
-            <p>For a child will be born for us, a son will be given to us, and the government will be on his shoulders. He will be named Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace.</p>
+            <p>"6 For a child will be born for us, a son will be given to us, and the government will be on his shoulders. He will be named Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace." <strong>Isaiah 9:6</strong></p>
           </div>
         </div>
         </div>
@@ -341,7 +381,9 @@
       <section class="reflection-section">
         <button onclick="toggleSection('reflection')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
           <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
-            <span class="text-xl sm:text-2xl">💭</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
           </div>
           <div class="flex-1">
             <h2 class="text-xl sm:text-2xl font-heading font-bold text-gray-900">Reflection</h2>
@@ -351,15 +393,14 @@
           </svg>
         </button>
         <div id="reflection-content" class="hidden sm:block">
-
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
-          <p>One of the quiet struggles of the spiritual life is our resistance to humility. We often prefer to stay in control, to manage our own outcomes, or to rely on our own strength to navigate what lies ahead. Love can feel risky because it asks us to trust, to open our hands, and to soften our hearts. Yet God invites us into a posture that welcomes His presence — not just outward obedience, but inward surrender. Humility becomes the soil where love grows, because humility makes room for God to work where our strength cannot.</p>
+          <p>Isaiah paints a vivid picture of the human condition: a people walking in profound darkness, blinded by sin, burdened by fear, and estranged from God's ways. Our hearts often long for light, yet we stumble in confusion and despair. Into this darkness, God sends a great illumination: a child is born, yet a Son—eternal and uncreated—is given. The Messiah is both divine and incarnate, entering the world not with worldly power but with a mission to restore, reconcile, and redeem a creation marred by violence, oppression, and the failures of human governance.</p>
           
-          <p>God's love does not remain distant or abstract — it reaches toward us and then flows outward into the world. Creation itself quietly bears witness to this love. The rising sun, the turning seasons, the breath in our lungs — each is a reminder that God sustains life with tenderness and intention. Even the way our bodies are knit together displays His care: every heartbeat, every moment of being formed and known, reveals a God who delights in His creation.</p>
+          <p>The government resting on His shoulders stirs a deep longing within us all. We yearn for leadership rooted in integrity, justice, and care. Christ's reign embodies these virtues: He is Wonderful, dispensing wisdom beyond human measure; Mighty, with authority that protects and empowers; Everlasting, offering care and guidance to the vulnerable; and the Prince of Peace, establishing harmony where there was conflict. His kingdom is not imposed by fear or coercion but flourishes in righteousness, mercy, and restorative love.</p>
           
-          <p>But Advent reminds us that God's love is not only woven into the world He made — it is embodied in Christ. God draws near not in power or spectacle, but in the fragility of a child. In Jesus, love takes on flesh and walks among us. Love listens, heals, welcomes, and restores. The incarnation shows us that God does not love from afar; He steps into our stories, our limitations, and our longings so that we might know Him as Emmanuel — God with us.</p>
+          <p>The peace of Advent is also profoundly personal. It reaches into the very hearts of those who feel estranged from God. Christ dismantles the walls of hostility and mistrust that separate us from the Divine, reshaping our desires and renewing our spirits. Where once we carried fear, resentment, or pride, we now find room for hope, reconciliation, and trust. Through Him, the chaos of our hearts is transformed into a quiet confidence in God's faithfulness.</p>
           
-          <p>Advent invites us to notice this love again, to receive it with humility, and to allow it to shape how we live. As we wait for Christ, we are called to reflect the love we have been shown — a love that is patient, courageous, and grounded in the nearness of God.</p>
+          <p>This Advent season, we are invited to wait expectantly, not only for the celebration of Christ's birth but for the ongoing work of His peace in our lives. We are called to reflect His peace outward—through forgiveness, reconciliation, and acts of love—so that His kingdom may touch our homes, our communities, and the world around us.</p>
         </div>
         </div>
       </section>
@@ -367,9 +408,9 @@
       <!-- Prayer Section -->
       <section class="prayer-section">
         <button onclick="toggleSection('prayer')" class="flex items-start gap-3 sm:gap-4 mb-6 w-full text-left sm:pointer-events-none">
-          <div class="section-icon bg-flcNavyLight/10 border border-flcNavyLight/20">
+          <div class="section-icon bg-flcNavy/10 border border-flcNavy/20">
             <svg class="w-5 h-5 sm:w-6 sm:h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
             </svg>
           </div>
           <div class="flex-1">
@@ -380,9 +421,8 @@
           </svg>
         </button>
         <div id="prayer-content" class="hidden sm:block">
-
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
-          <p>Father, thank You for clothing Yourself in flesh and stepping into our story. Your love is both incomprehensible and deeply personal. Teach me to reflect this self-giving love in the way I live. Free me from selfish ambition and shape my desires around Your heart. May my life become a witness to Your love made manifest in Christ. In Jesus’ name, amen.</p>
+          <p>Father, thank You for breaking down the walls of hostility that once kept me far from You. Through Christ, You have made peace where there was only rebellion. Let the reign of the Prince of Peace take root in my heart and flow outward into my relationships. Empower me to be an agent of reconciliation in a divided world. In Jesus' name, amen.</p>
         </div>
         </div>
       </section>
@@ -393,7 +433,7 @@
           <i class="fas fa-sticky-note text-flcGold text-2xl"></i>
           <h2 class="text-2xl font-heading font-bold text-gray-900">Personal Notes</h2>
         </div>
-        <p class="text-sm text-gray-600 mb-4"><strong>Note:</strong> Your notes, highlights, and reflections are saved locally on this device only. They are not synced or stored on any server.</p>
+        <p class="text-sm text-gray-600 mb-4">Write your thoughts, prayers, or personal reflections here. Your notes are saved automatically in your browser.</p>
         <textarea 
           id="personal-notes"
           class="note-area w-full p-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-flcGold focus:border-transparent transition-all"
@@ -408,36 +448,25 @@
 
       <!-- Action Steps Section -->
       <section class="bg-gradient-to-br from-flcGold/10 to-flcGoldLight/10 rounded-2xl p-6 sm:p-8 border-l-4 border-flcGold shadow-lg">
-        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">This Week's Focus</h2>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">1</span>
-            <span class="text-gray-800">Choose one intentional act of sacrificial love this week</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">2</span>
-            <span class="text-gray-800">Offer something that costs you time, comfort, or convenience</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">3</span>
-            <span class="text-gray-800">Give it joyfully in Christ's name as a witness to His love</span>
-          </li>
-        </ul>
+        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">Action Point</h2>
+        <div class="text-gray-800 leading-relaxed">
+          <p>Consider someone you have kept at a distance—perhaps through hurt, misunderstanding, or pride. Prayerfully take the first step toward reconciliation: a call, a message, or a listening ear. Let Christ's peace move through you.</p>
+        </div>
       </section>
 
     </article>
 
     <!-- Navigation -->
-    <nav class="mt-8 sm:mt-12 mb-12 no-print">
-      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-200">
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-          <a href="devotional-week2-love.html" class="flex-1 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
+    <nav class="mt-12 mb-12 no-print">
+      <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="devotional-week2-love.html" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-xl font-semibold transition text-center">
             <i class="fas fa-arrow-left mr-2"></i>Previous Week
           </a>
-          <button onclick="markComplete('week3')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition touch-manipulation">
+          <button onclick="markComplete('week3')" id="complete-btn" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition">
             <i class="fas fa-check-circle mr-2"></i>Mark Complete
           </button>
-          <a href="devotional-week4-joy.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight active:bg-flcGoldLight/90 text-white px-4 sm:px-6 py-4 sm:py-3 rounded-xl font-semibold transition text-center touch-manipulation">
+          <a href="devotional-week4-joy.html" class="flex-1 bg-flcGold hover:bg-flcGoldLight text-white px-6 py-3 rounded-xl font-semibold transition text-center">
             Next Week<i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
@@ -452,24 +481,6 @@
 
   <!-- Scripts -->
   <script>
-    // Toggle section functionality for mobile
-    function toggleSection(section) {
-      if (window.innerWidth >= 640) return;
-      
-      const content = document.getElementById(`${section}-content`);
-      const icon = document.getElementById(`${section}-icon`);
-      
-      if (content.classList.contains('hidden')) {
-        content.classList.remove('hidden');
-        icon.querySelector('path').setAttribute('d', 'M5 12h14');
-        icon.style.transform = 'rotate(0deg)';
-      } else {
-        content.classList.add('hidden');
-        icon.querySelector('path').setAttribute('d', 'M12 4v16m8-8H4');
-        icon.style.transform = 'rotate(0deg)';
-      }
-    }
-
     // Highlighting functionality
     function highlightSelection(color) {
       const selection = window.getSelection();
@@ -543,70 +554,6 @@
       }
     }
 
-    // Audio player controls
-    function toggleAudio(audioId) {
-      const audio = document.getElementById(audioId);
-      const btnId = audioId === 'scripture-audio' ? 'play-btn' : 'play-btn-reflection';
-      const btn = document.getElementById(btnId);
-      const icon = btn.querySelector('i');
-      
-      if (audio.paused) {
-        audio.play();
-        icon.classList.remove('fa-play');
-        icon.classList.add('fa-pause');
-      } else {
-        audio.pause();
-        icon.classList.remove('fa-pause');
-        icon.classList.add('fa-play');
-      }
-    }
-
-    function updateProgress() {
-      const audio = document.getElementById('scripture-audio');
-      const progress = (audio.currentTime / audio.duration) * 100;
-      document.getElementById('progress-bar').style.width = progress + '%';
-      
-      const minutes = Math.floor(audio.currentTime / 60);
-      const seconds = Math.floor(audio.currentTime % 60);
-      document.getElementById('audio-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function updateProgressReflection() {
-      const audio = document.getElementById('reflection-audio');
-      const progress = (audio.currentTime / audio.duration) * 100;
-      document.getElementById('progress-bar-reflection').style.width = progress + '%';
-      
-      const minutes = Math.floor(audio.currentTime / 60);
-      const seconds = Math.floor(audio.currentTime % 60);
-      document.getElementById('audio-time-reflection').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function audioEnded() {
-      const btn = document.getElementById('play-btn');
-      const icon = btn.querySelector('i');
-      icon.classList.remove('fa-pause');
-      icon.classList.add('fa-play');
-      document.getElementById('progress-bar').style.width = '0%';
-    }
-
-    function audioEndedReflection() {
-      const btn = document.getElementById('play-btn-reflection');
-      const icon = btn.querySelector('i');
-      icon.classList.remove('fa-pause');
-      icon.classList.add('fa-play');
-      document.getElementById('progress-bar-reflection').style.width = '0%';
-    }
-
-    function seekAudio(event, audioId) {
-      const audio = document.getElementById(audioId);
-      const progressBar = event.currentTarget;
-      const clickX = event.offsetX;
-      const width = progressBar.offsetWidth;
-      const duration = audio.duration;
-      
-      audio.currentTime = (clickX / width) * duration;
-    }
-
     // Mark as complete
     function markComplete(weekId) {
       const progress = JSON.parse(localStorage.getItem('devotionalProgress') || '{"completed":[],"lastRead":0}');
@@ -667,3 +614,5 @@
 
 </body>
 </html>
+
+

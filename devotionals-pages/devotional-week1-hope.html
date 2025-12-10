@@ -94,60 +94,69 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Text-to-Speech Button */
-    .audio-player-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .audio-player-btn:hover {
-      background: linear-gradient(135deg, #2A4A62 0%, #1A3A52 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
-    }
-
-    .audio-player-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .audio-player-btn svg {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    /* Audio Player Styles */
-    .audio-player {
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
-      border-radius: 12px;
-      padding: 16px;
-      color: white;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
-    }
-
-    .audio-progress {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
+    /* Enhanced Devotional Image Styles */
+    .devotional-image-container {
+      position: relative;
       overflow: hidden;
-      cursor: pointer;
     }
 
-    .audio-progress-bar {
-      height: 100%;
-      background: white;
-      width: 0%;
-      transition: width 0.1s;
+    .devotional-image-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(184, 149, 106, 0.15) 0%, transparent 70%);
+      animation: pulseGlow 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .devotional-image {
+      position: relative;
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 20px 40px rgba(154, 123, 79, 0.3)) brightness(1.05) contrast(1.05);
+    }
+
+    .devotional-image:hover {
+      transform: scale(1.05) translateY(-5px);
+      filter: drop-shadow(0 30px 60px rgba(154, 123, 79, 0.4)) brightness(1.1) contrast(1.08);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Shimmer Effect */
+    .devotional-image-container::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 3s infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 200%;
+      }
     }
 
     /* Section Icons */
@@ -252,8 +261,8 @@
       <div class="rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);">
         <div class="flex flex-col md:flex-row items-stretch">
           <!-- Image -->
-          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12">
-            <img src="../assets/images/Light of Hope.webp" alt="The Light of Hope" class="w-full h-auto object-contain max-w-md rounded-xl">
+          <div class="w-full md:w-2/5 lg:w-1/2 flex-shrink-0 bg-gradient-to-br from-flcNavy/50 to-transparent flex items-center justify-center p-6 md:p-8 lg:p-12 devotional-image-container">
+            <img src="../assets/images/Light of Hope.webp" alt="The Light of Hope" class="w-full h-auto object-contain max-w-md rounded-xl devotional-image">
           </div>
           
           <!-- Content -->
@@ -293,7 +302,7 @@
           <div class="bg-white/10 backdrop-blur-sm border-l-4 border-flcGold rounded-lg p-4 sm:p-5">
             <p class="text-flcGold font-bold text-sm mb-3">Titus 1:1–3</p>
             <p class="text-white/90 italic text-sm leading-relaxed">
-              "Paul, a servant of God and an apostle of Jesus Christ, for the faith of God's elect and their knowledge of the truth that leads to godliness, in the hope of eternal life that God, who cannot lie, promised before time began. In his own time he has revealed his word in the preaching with which I was entrusted by the command of God our Savior."
+              "1 Paul,  a servant of God and an apostle of Jesus Christ, for the faith of God's elect and their knowledge of the truth that leads to godliness, 2 in the hope of eternal life that God, who cannot lie,  promised before time began. 3 In his own time he has revealed  his word  in the preaching with which I was entrusted  by the command  of God our Savior."
             </p>
           </div>
           </div>
@@ -386,13 +395,13 @@
         <div id="reflection-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed space-y-4 text-base sm:text-lg" id="reflection-text">
-          <p>In a world often shrouded in darkness—whether through personal struggles, societal challenges, or spiritual doubts—the promise of hope shines brightly. Isaiah prophesied about a light that would break through the deepest darkness, a child who would bring salvation and peace.</p>
+          <p>Fear has a way of exposing the truth about us. It shows us our limits, our vulnerability, and how deeply we long for something greater than ourselves. When the angel says, "Do not be afraid," it is not a dismissal of human emotion. It is God entering the very places where fear lives — our uncertainties about the future, our sense of inadequacy, our quiet worry about whether things will ever change. Advent reminds us that God does not shame us for carrying fear. He meets us in it, speaks into it, and gently leads us toward courage rooted in His presence.</p>
           
-          <p>This hope is not wishful thinking but a confident expectation rooted in God's faithfulness. The names given to this child—Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace—reveal the fullness of who Jesus is and what He came to accomplish.</p>
+          <p>Across Scripture, sin is not a monster lurking outside human history; it is the condition of every human heart. From Genesis onward, we see sin unraveling God's good design—violence, idolatry, oppression, tribalism, exploitation, and spiritual confusion. We see people who have forgotten who they are and whose image they bear. Yet hope never disappears. Prophets, poets, and shepherds longed for the coming Messiah—One who would restore justice, heal creation, protect the vulnerable, forgive sins, and reconcile humanity to God.</p>
           
-          <p>As we begin this Advent journey, we're reminded that hope is not passive waiting but active trust in God's promises. Just as the Israelites anticipated the Messiah's coming, we too live in anticipation—not just of Christmas, but of Christ's ultimate return and the complete restoration of all things.</p>
+          <p>Paul's letter to Titus lifts our eyes even higher: hope was God's plan before time began. Before Adam and Eve fell, before humanity wandered, God had already prepared the way back. Hope is not an afterthought or divine improvisation—it is eternal.</p>
           
-          <p>The light has come. The light is here. The light will return. This is our hope.</p>
+          <p>And at the appointed time, Hope took on flesh. The Son emptied Himself, entering our world as Immanuel—God with us—to restore the closeness humanity lost. Christ is hope embodied, the bridge over the chasm we could never cross. In Jesus, the promise of proximity, reconciliation, and eternal life is fulfilled.</p>
         </div>
         </div>
       </section>
@@ -415,7 +424,7 @@
         <div id="prayer-content" class="hidden sm:block">
 
         <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed italic text-base sm:text-lg">
-          <p>Heavenly Father, thank You for being the source of true hope. In seasons of darkness, help me to remember that Your light has already broken through. Jesus, You are my Wonderful Counselor, Mighty God, Everlasting Father, and Prince of Peace. I place my trust in You today. May Your hope sustain me, encourage me, and overflow from my life to touch others. In Your precious name, Amen.</p>
+          <p>Father, I approach Your throne grateful that the coming of Your Son was a promise made before time itself. Thank You for refusing to abandon me to my sin or leave me to the consequences of my rebellion. In Christ, You built a bridge I could never build and invited me to cross freely into life. May hope in Jesus steady my heart in every season. In His name, amen.</p>
         </div>
         </div>
       </section>
@@ -441,21 +450,10 @@
 
       <!-- Action Steps Section -->
       <section class="bg-gradient-to-br from-flcGold/10 to-flcGoldLight/10 rounded-2xl p-6 sm:p-8 border-l-4 border-flcGold shadow-lg">
-        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">This Week's Focus</h2>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">1</span>
-            <span class="text-gray-800">Meditate on Titus 1:1-3 daily this week</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">2</span>
-            <span class="text-gray-800">Share one way Christ has brought hope into your life with someone this week</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 bg-flcGold text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">3</span>
-            <span class="text-gray-800">Pray for someone you know who needs the light of hope</span>
-          </li>
-        </ul>
+        <h2 class="text-2xl font-heading font-bold text-gray-900 mb-4">Action Point</h2>
+        <div class="text-gray-800 leading-relaxed">
+          <p>Hope becomes real when it becomes active. This week, identify one act of justice, compassion, or service you can offer in Christ's name. Let the hope you hold become hope someone else can see.</p>
+        </div>
       </section>
 
     </article>
@@ -767,3 +765,5 @@
 
 </body>
 </html>
+
+
