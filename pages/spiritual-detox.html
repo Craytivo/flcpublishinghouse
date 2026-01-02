@@ -31,7 +31,35 @@
             flcCream: '#F5F1E8',
             flcOffWhite: '#FAFAF8',
             flcBorder: '#E5E0D8'
-          }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'shimmer': 'shimmer 3s infinite',
+            'float': 'float 4s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            shimmer: {
+              '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+              '100%': { transform: 'translateX(200%) skewX(-12deg)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+          },
+          boxShadow: {
+            'premium': '0 10px 40px rgba(26, 58, 82, 0.1), 0 4px 12px rgba(26, 58, 82, 0.05)',
+            'inner-glow': 'inset 0 0 0 1px rgba(154, 123, 79, 0.1)',
+          },
         }
       }
     }
@@ -40,95 +68,135 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .hero-bg { background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #F0EBE0 100%); }
+
+    /* Premium Mobile Optimizations */
+    @media (max-width: 640px) {
+      .premium-section {
+        background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(250,250,248,0.98) 100%);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(229, 224, 216, 0.3);
+        box-shadow: 0 20px 60px rgba(26, 58, 82, 0.15), 0 8px 24px rgba(26, 58, 82, 0.1);
+      }
+
+      .premium-icon {
+        background: linear-gradient(135deg, rgba(154, 123, 79, 0.15) 0%, rgba(184, 149, 106, 0.1) 100%);
+        border: 1px solid rgba(154, 123, 79, 0.2);
+        box-shadow: 0 8px 24px rgba(154, 123, 79, 0.15);
+      }
+
+      .premium-card {
+        background: linear-gradient(135deg, rgba(250, 250, 248, 0.8) 0%, rgba(245, 241, 232, 0.9) 100%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(229, 224, 216, 0.4);
+        box-shadow: 0 4px 16px rgba(26, 58, 82, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .premium-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(26, 58, 82, 0.12);
+      }
+
+      .premium-button-primary {
+        background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
+        box-shadow: 0 4px 16px rgba(154, 123, 79, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .premium-button-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(154, 123, 79, 0.4);
+      }
+
+      .premium-button-secondary {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,250,248,0.95) 100%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(229, 224, 216, 0.5);
+        box-shadow: 0 2px 8px rgba(26, 58, 82, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .premium-button-secondary:hover {
+        background: linear-gradient(135deg, rgba(26, 58, 82, 0.05) 0%, rgba(26, 58, 82, 0.1) 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(26, 58, 82, 0.15);
+      }
+    }
+
+    /* Fade in animation */
+    .fade-in-section {
+      animation: fadeIn 0.8s ease-out;
+    }
   </style>
 </head>
 <body class="hero-bg text-flcCharcoal">
-  <!-- Site header -->
-  <header class="bg-transparent py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img src="../assets/images/Logo.png" alt="FLC" class="w-12 h-12 object-contain">
-        <div>
-          <div class="text-lg font-heading text-flcNavy">FLC Publishing House</div>
-          <div class="text-xs text-flcCharcoal/60">Freedom Life Church</div>
-        </div>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="/" class="text-flcNavy hover:text-flcGold">Home</a>
-        <a href="/sermons" class="text-flcNavy hover:text-flcGold">Sermons</a>
-        <a href="/pages/devotionals.html" class="text-flcNavy hover:text-flcGold">Devotionals</a>
-        <a href="/pages/resources.html" class="text-flcNavy hover:text-flcGold">Resources</a>
-        <a href="/pages/library.html" class="text-flcNavy hover:text-flcGold">Library</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Header Container -->
+  <div id="headerContainer" data-config='{"currentPage": "resources", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "logoHeight": "105px"}'></div>
+
+  <!-- Load Header Component -->
+  <script src="../assets/js/header-component.js"></script>
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <section class="bg-white rounded-2xl p-8 shadow-lg border border-flcBorder">
-      <div class="flex items-start gap-6">
-        <div class="flex-shrink-0 p-4 rounded-lg bg-flcGold/10 border border-flcGold/20">
-          <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V9H3v10a2 2 0 002 2z"/></svg>
+    <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-flcBorder premium-section fade-in-section">
+      <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+        <div class="flex-shrink-0 p-3 sm:p-4 rounded-lg bg-flcGold/10 border border-flcGold/20 premium-icon mx-auto sm:mx-0">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V9H3v10a2 2 0 002 2z"/></svg>
         </div>
 
-        <div class="flex-1">
-          <h1 class="text-3xl font-heading font-extrabold text-flcNavy">Spiritual Detox</h1>
-          <p class="mt-2 text-sm text-flcCharcoal/70">January 12–31 — Theme: <strong>The Kingdom Blueprint</strong></p>
+        <div class="flex-1 text-center sm:text-left">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-flcNavy leading-tight">Spiritual Detox</h1>
+          <p class="mt-2 text-sm sm:text-base text-flcCharcoal/70">January 12–31 — Theme: <strong class="text-flcGold">The Kingdom Blueprint</strong></p>
 
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
-              <div class="text-sm text-flcGold font-semibold">Bible Studies</div>
-              <div class="text-xs text-flcCharcoal/70 mt-1">Jan 15, Jan 22, Jan 29</div>
+          <div class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div class="p-3 sm:p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center premium-card">
+              <div class="text-sm sm:text-base text-flcGold font-semibold">Bible Studies</div>
+              <div class="text-xs sm:text-sm text-flcCharcoal/70 mt-1">Jan 15, Jan 22, Jan 29</div>
             </div>
-            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
-              <div class="text-sm text-flcGold font-semibold">Time</div>
-              <div class="text-xs text-flcCharcoal/70 mt-1">6:30 PM — 7:30 PM</div>
+            <div class="p-3 sm:p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center premium-card">
+              <div class="text-sm sm:text-base text-flcGold font-semibold">Time</div>
+              <div class="text-xs sm:text-sm text-flcCharcoal/70 mt-1">6:30 PM — 7:30 PM</div>
             </div>
-            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
-              <div class="text-sm text-flcGold font-semibold">Format</div>
-              <div class="text-xs text-flcCharcoal/70 mt-1">In-person • No small groups</div>
+            <div class="p-3 sm:p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center premium-card">
+              <div class="text-sm sm:text-base text-flcGold font-semibold">Format</div>
+              <div class="text-xs sm:text-sm text-flcCharcoal/70 mt-1">In-person • No small groups</div>
             </div>
           </div>
 
-          <div class="prose prose-lg mt-6 text-flcCharcoal">
-            <p>This season is about intentionally clearing space—spiritually, emotionally, and communally—so we can hear God clearly and align our lives with His Kingdom purposes as we prepare for the vision ahead.</p>
-            <h2 class="mt-4">What to Expect</h2>
-            <ul>
+          <div class="prose prose-sm sm:prose-base lg:prose-lg mt-6 sm:mt-8 text-flcCharcoal max-w-none">
+            <p class="text-sm sm:text-base leading-relaxed">This season is about intentionally clearing space—spiritually, emotionally, and communally—so we can hear God clearly and align our lives with His Kingdom purposes as we prepare for the vision ahead.</p>
+            <h2 class="mt-4 sm:mt-6 text-lg sm:text-xl lg:text-2xl font-heading text-flcNavy">What to Expect</h2>
+            <ul class="text-sm sm:text-base space-y-1">
               <li>Spiritual Detox Dates: January 12–31</li>
               <li>Theme: The Kingdom Blueprint</li>
               <li>Bible Studies: January 15, January 22, January 29 (6:30 PM — 7:30 PM)</li>
               <li>No small groups during this period — the whole church moves together.</li>
             </ul>
-            <h3 class="mt-4">Weekly Reflections</h3>
-            <p>Weekly reflections will be distributed to help guide your prayer, Scripture reading, and personal spiritual formation throughout the detox period.</p>
+            <h3 class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl font-heading text-flcNavy">Weekly Reflections</h3>
+            <p class="text-sm sm:text-base leading-relaxed">Weekly reflections will be distributed to help guide your prayer, Scripture reading, and personal spiritual formation throughout the detox period.</p>
           </div>
 
-          <div class="mt-6 flex gap-3">
-            <a href="../pages/library.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-flcGold text-white font-semibold hover:shadow-lg">View Resources</a>
-            <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-flcBorder text-flcNavy hover:bg-flcNavy/5">Back to Home</a>
+          <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center sm:justify-start">
+            <a href="../pages/library.html" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-flcGold text-white font-semibold hover:shadow-lg premium-button-primary text-sm sm:text-base">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              View Resources
+            </a>
+            <a href="/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-flcBorder text-flcNavy hover:bg-flcNavy/5 premium-button-secondary text-sm sm:text-base">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+              Back to Home
+            </a>
           </div>
 
-          <p class="mt-6 text-sm text-flcCharcoal/60">With faith and expectation,<br>Pastor Ro</p>
+          <p class="mt-6 sm:mt-8 text-sm sm:text-base text-flcCharcoal/60 text-center sm:text-left">With faith and expectation,<br class="hidden sm:block">Pastor Ro</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Site footer -->
-  <footer class="bg-flcNavy text-flcOffWhite mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="../assets/images/Dark_Logo-removebg-preview.png" alt="logo" class="w-10 h-10 object-contain">
-        <div>
-          <div class="font-heading text-lg">FLC Publishing House</div>
-          <div class="text-xs text-flcOffWhite/80">Freedom Life Church</div>
-        </div>
-      </div>
+  <!-- Footer Container -->
+  <div id="footerContainer" data-config='{"logoPath": "../assets/images/White Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "../sermons/sermon-im-under-pressure.html"}'></div>
 
-      <div class="mt-4 md:mt-0 text-sm text-flcOffWhite/90">
-        © 2026 Freedom Life Church. All rights reserved.
-      </div>
-    </div>
-  </footer>
-  
+  <!-- Load Footer Component -->
+  <script src="../assets/js/footer-component.js"></script>
+
 </body>
 </html>
