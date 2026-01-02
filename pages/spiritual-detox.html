@@ -3,43 +3,132 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Spiritual Detox — The Kingdom Blueprint</title>
+  <title>Spiritual Detox — The Kingdom Blueprint | FLC Publishing House</title>
+  <meta name="description" content="Spiritual Detox: January 12–31. Theme: The Kingdom Blueprint. Weekly Bible studies Jan 15, 22, 29 at 6:30 PM.">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png">
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ["'Playfair Display'", 'Georgia', 'serif'],
+            body: ['Inter', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            flcNavy: '#1A3A52',
+            flcGold: '#9A7B4F',
+            flcGoldLight: '#B8956A',
+            flcCharcoal: '#2C2C2C',
+            flcCream: '#F5F1E8',
+            flcOffWhite: '#FAFAF8',
+            flcBorder: '#E5E0D8'
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    body { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    body { font-family: 'Inter', sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #F0EBE0 100%); }
   </style>
 </head>
-<body class="bg-flcOffWhite text-flcCharcoal">
-  <main class="max-w-4xl mx-auto p-6 sm:p-12">
-    <header class="mb-6">
-      <h1 class="text-4xl font-heading font-bold text-flcNavy mb-2">Spiritual Detox</h1>
-      <p class="text-sm text-flcCharcoal/70">January 12–31 — Theme: <strong>The Kingdom Blueprint</strong></p>
-    </header>
+<body class="hero-bg text-flcCharcoal">
+  <!-- Site header -->
+  <header class="bg-transparent py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="../assets/images/Logo.png" alt="FLC" class="w-12 h-12 object-contain">
+        <div>
+          <div class="text-lg font-heading text-flcNavy">FLC Publishing House</div>
+          <div class="text-xs text-flcCharcoal/60">Freedom Life Church</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="/" class="text-flcNavy hover:text-flcGold">Home</a>
+        <a href="/sermons" class="text-flcNavy hover:text-flcGold">Sermons</a>
+        <a href="/pages/devotionals.html" class="text-flcNavy hover:text-flcGold">Devotionals</a>
+        <a href="/pages/resources.html" class="text-flcNavy hover:text-flcGold">Resources</a>
+        <a href="/pages/library.html" class="text-flcNavy hover:text-flcGold">Library</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="bg-white rounded-2xl p-6 shadow-md border border-flcBorder/50">
-      <p class="mb-4">As we step into a new year, we invite the entire church into a sacred season of consecration, alignment, and spiritual renewal. From <strong>January 12th to January 31st</strong>, we will journey together through <em>The Kingdom Blueprint</em>.</p>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section class="bg-white rounded-2xl p-8 shadow-lg border border-flcBorder">
+      <div class="flex items-start gap-6">
+        <div class="flex-shrink-0 p-4 rounded-lg bg-flcGold/10 border border-flcGold/20">
+          <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V9H3v10a2 2 0 002 2z"/></svg>
+        </div>
 
-      <h2 class="text-xl font-semibold mt-4">What to Expect</h2>
-      <ul class="list-disc pl-5 mt-2 space-y-2 text-sm text-flcCharcoal/75">
-        <li><strong>Spiritual Detox Dates:</strong> January 12–31</li>
-        <li><strong>Theme:</strong> The Kingdom Blueprint</li>
-        <li><strong>Bible Studies:</strong> January 15, January 22, January 29 — 6:30 PM to 7:30 PM (in-person)</li>
-        <li><strong>No Small Groups:</strong> During this period, there will be no small groups — the whole church moves together.</li>
-        <li><strong>Weekly Reflections:</strong> Distributed to guide prayer, Scripture reading, and personal formation.</li>
-      </ul>
+        <div class="flex-1">
+          <h1 class="text-3xl font-heading font-extrabold text-flcNavy">Spiritual Detox</h1>
+          <p class="mt-2 text-sm text-flcCharcoal/70">January 12–31 — Theme: <strong>The Kingdom Blueprint</strong></p>
 
-      <h3 class="text-lg font-semibold mt-4">Weekly Reflection Schedule</h3>
-      <ol class="list-decimal pl-5 mt-2 text-sm text-flcCharcoal/75 space-y-2">
-        <li>Week 1 (Jan 12–18): Clearing — preparing the heart to hear God</li>
-        <li>Week 2 (Jan 19–25): Aligning — practical formation toward Kingdom rhythms</li>
-        <li>Week 3 (Jan 26–31): Commissioned — stepping into the vision ahead</li>
-      </ol>
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
+              <div class="text-sm text-flcGold font-semibold">Bible Studies</div>
+              <div class="text-xs text-flcCharcoal/70 mt-1">Jan 15, Jan 22, Jan 29</div>
+            </div>
+            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
+              <div class="text-sm text-flcGold font-semibold">Time</div>
+              <div class="text-xs text-flcCharcoal/70 mt-1">6:30 PM — 7:30 PM</div>
+            </div>
+            <div class="p-4 bg-flcOffWhite rounded-lg border border-flcBorder text-center">
+              <div class="text-sm text-flcGold font-semibold">Format</div>
+              <div class="text-xs text-flcCharcoal/70 mt-1">In-person • No small groups</div>
+            </div>
+          </div>
 
-      <p class="mt-4 text-sm">More details and reflection PDFs will be posted here as they become available. If you have questions, contact the church office.</p>
+          <div class="prose prose-lg mt-6 text-flcCharcoal">
+            <p>This season is about intentionally clearing space—spiritually, emotionally, and communally—so we can hear God clearly and align our lives with His Kingdom purposes as we prepare for the vision ahead.</p>
+            <h2 class="mt-4">What to Expect</h2>
+            <ul>
+              <li>Spiritual Detox Dates: January 12–31</li>
+              <li>Theme: The Kingdom Blueprint</li>
+              <li>Bible Studies: January 15, January 22, January 29 (6:30 PM — 7:30 PM)</li>
+              <li>No small groups during this period — the whole church moves together.</li>
+            </ul>
+            <h3 class="mt-4">Weekly Reflections</h3>
+            <p>Weekly reflections will be distributed to help guide your prayer, Scripture reading, and personal spiritual formation throughout the detox period.</p>
+          </div>
 
-      <footer class="mt-6 text-sm text-flcCharcoal/60">With faith and expectation, <br> Pastor Ro</footer>
+          <div class="mt-6 flex gap-3">
+            <a href="../pages/library.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-flcGold text-white font-semibold hover:shadow-lg">View Resources</a>
+            <a href="/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-flcBorder text-flcNavy hover:bg-flcNavy/5">Back to Home</a>
+          </div>
+
+          <p class="mt-6 text-sm text-flcCharcoal/60">With faith and expectation,<br>Pastor Ro</p>
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- Site footer -->
+  <footer class="bg-flcNavy text-flcOffWhite mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="../assets/images/Dark_Logo-removebg-preview.png" alt="logo" class="w-10 h-10 object-contain">
+        <div>
+          <div class="font-heading text-lg">FLC Publishing House</div>
+          <div class="text-xs text-flcOffWhite/80">Freedom Life Church</div>
+        </div>
+      </div>
+
+      <div class="mt-4 md:mt-0 text-sm text-flcOffWhite/90">
+        © 2026 Freedom Life Church. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
 </body>
 </html>
