@@ -67,81 +67,42 @@
 
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .hero-bg { background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #F0EBE0 100%); }
-
-    /* Premium Mobile Optimizations */
-    @media (max-width: 640px) {
-      .premium-section {
-        background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(250,250,248,0.98) 100%);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(229, 224, 216, 0.3);
-        box-shadow: 0 20px 60px rgba(26, 58, 82, 0.15), 0 8px 24px rgba(26, 58, 82, 0.1);
-      }
-
-      .premium-icon {
-        background: linear-gradient(135deg, rgba(154, 123, 79, 0.15) 0%, rgba(184, 149, 106, 0.1) 100%);
-        border: 1px solid rgba(154, 123, 79, 0.2);
-        box-shadow: 0 8px 24px rgba(154, 123, 79, 0.15);
-      }
-
-      .premium-card {
-        background: linear-gradient(135deg, rgba(250, 250, 248, 0.8) 0%, rgba(245, 241, 232, 0.9) 100%);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(229, 224, 216, 0.4);
-        box-shadow: 0 4px 16px rgba(26, 58, 82, 0.08);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .premium-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 32px rgba(26, 58, 82, 0.12);
-      }
-
-      .premium-button-primary {
-        background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
-        box-shadow: 0 4px 16px rgba(154, 123, 79, 0.3);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .premium-button-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(154, 123, 79, 0.4);
-      }
-
-      .premium-button-secondary {
-        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,250,248,0.95) 100%);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(229, 224, 216, 0.5);
-        box-shadow: 0 2px 8px rgba(26, 58, 82, 0.1);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .premium-button-secondary:hover {
-        background: linear-gradient(135deg, rgba(26, 58, 82, 0.05) 0%, rgba(26, 58, 82, 0.1) 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 16px rgba(26, 58, 82, 0.15);
-      }
-    }
+    .hero-bg { background: linear-gradient(180deg, #FFFFFF 0%, #FBF9F6 40%, #F5F1E8 100%); }
 
     /* Fade in animation */
-    .fade-in-section {
-      animation: fadeIn 0.8s ease-out;
+    .fade-in-section { animation: fadeIn 0.8s ease-out; }
+
+    /* Premium container */
+    .premium-section { border-radius: 1rem; box-shadow: 0 14px 50px rgba(26,58,82,0.06); border: 1px solid rgba(229,224,216,0.6); background: linear-gradient(180deg, #ffffff, #fbfaf7); padding: 2rem; }
+
+    /* Hero tweaks */
+    .hero-top { padding: 3rem 1rem; }
+    .hero-title { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.02em; }
+    .hero-sub { color: rgba(44,44,44,0.7); margin-top: 0.6rem; }
+
+    /* CTA styles */
+    .cta-primary { background: linear-gradient(90deg,#9A7B4F 0%, #B8956A 100%); color: white; padding: 0.85rem 1.25rem; border-radius: 9999px; font-weight: 600; box-shadow: 0 10px 28px rgba(154,123,79,0.12); transition: transform .18s ease, box-shadow .18s ease; }
+    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(154,123,79,0.16); }
+    .cta-ghost { background: white; border: 1px solid rgba(229,224,216,0.7); padding: 0.75rem 1.15rem; border-radius: 9999px; }
+
+    /* Card styles */
+    .card-premium { background: linear-gradient(180deg,#fff 0%, #fbfaf7 100%); border-radius: 0.9rem; border: 1px solid rgba(229,224,216,0.6); padding: 1rem; box-shadow: 0 8px 26px rgba(26,58,82,0.06); transition: transform .18s ease, box-shadow .18s ease; }
+    .card-premium:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,58,82,0.08); }
+    .card-badge { width: 56px; height: 56px; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-weight:700; color: white; box-shadow: 0 6px 18px rgba(154,123,79,0.12); }
+
+    /* Prose/readability */
+    .content-prose { max-width: 72ch; margin: 1.25rem auto 0; line-height: 1.8; color: #2b2b2b; }
+    .content-prose h2 { font-family: 'Playfair Display', Georgia, serif; color: #153246; margin-top: 0.6rem; margin-bottom: 0.6rem; }
+    .content-prose ul { padding-left: 1.15rem; margin-top: 0.5rem; }
+
+    /* Blockquote */
+    .content-prose blockquote { border-left: 3px solid rgba(154,123,79,0.12); background: rgba(154,123,79,0.03); padding: 1rem 1rem; margin: 1rem 0; }
+
+    /* Responsive small tweaks */
+    @media (max-width: 640px) {
+      .hero-top { padding: 2rem 0.75rem; }
+      .card-badge { width: 44px; height: 44px; border-radius: 10px; }
     }
-    /* Premium subtle upgrades */
-    .premium-section {
-      border-radius: 1rem;
-      box-shadow: 0 18px 50px rgba(26,58,82,0.06);
-      border: 1px solid rgba(229,224,216,0.55);
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,248,244,0.98));
-    }
-
-    .premium-section .font-heading { letter-spacing: -0.01em; }
-
-    .week-card { transition: transform .18s ease, box-shadow .18s ease; }
-    .week-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(26,58,82,0.08); }
-
-    .hero .cta { box-shadow: 0 10px 28px rgba(154,123,79,0.10); }
-    .hero .cta:hover { transform: translateY(-3px); }
   </style>
 </head>
 <body class="hero-bg text-flcCharcoal text-base lg:text-lg">
@@ -153,15 +114,15 @@
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <section class="bg-white rounded-2xl p-6 sm:p-10 shadow-lg border border-flcBorder premium-section fade-in-section">
-      <div class="text-center">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-flcNavy">Spiritual Detox</h1>
-        <p class="mt-3 text-base sm:text-base text-flcCharcoal/70">January 12–31 — <span class="text-flcGold font-semibold">The Kingdom Blueprint</span></p>
+      <div class="text-center hero-top">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-flcNavy hero-title">Spiritual Detox</h1>
+        <p class="mt-3 text-base sm:text-base hero-sub">January 12–31 — <span class="text-flcGold font-semibold">The Kingdom Blueprint</span></p>
 
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="spiritual-detox-week1.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-flcGold text-white font-semibold hover:shadow-lg text-base sm:text-base">
+          <a href="spiritual-detox-week1.html" class="cta-primary inline-flex items-center gap-2">
             Week 1: Newsletter
           </a>
-          <a href="#weeks" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-flcBorder text-flcNavy hover:bg-flcNavy/5 text-base sm:text-base">
+          <a href="#weeks" class="cta-ghost inline-flex items-center gap-2">
             See All Weeks
           </a>
         </div>
@@ -170,9 +131,9 @@
       </div>
 
       <div id="weeks" class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <a href="spiritual-detox-week1.html" class="block bg-flcOffWhite rounded-xl p-4 border border-flcBorder hover:shadow-lg transition-all">
-          <div class="flex items-start gap-3">
-            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-flcGold to-flcGoldLight flex items-center justify-center text-white font-semibold">1</div>
+        <a href="spiritual-detox-week1.html" class="block card-premium">
+          <div class="flex items-start gap-4">
+            <div class="card-badge bg-gradient-to-br from-flcGold to-flcGoldLight">1</div>
             <div>
               <h3 class="font-heading text-lg text-flcNavy">Week 1 — Newsletter</h3>
               <p class="text-base text-flcCharcoal/70 mt-1">This Week @ FLC — Spiritual Detox newsletter and guide.</p>
@@ -180,9 +141,9 @@
           </div>
         </a>
 
-        <div class="block bg-flcOffWhite rounded-xl p-4 border border-flcBorder opacity-80">
-          <div class="flex items-start gap-3">
-            <div class="w-12 h-12 rounded-lg bg-flcNavy/10 flex items-center justify-center text-flcNavy font-semibold">2</div>
+        <div class="card-premium opacity-85">
+          <div class="flex items-start gap-4">
+            <div class="card-badge bg-flcNavy/10 text-flcNavy">2</div>
             <div>
               <h3 class="font-heading text-lg text-flcNavy">Week 2 — Coming Soon</h3>
               <p class="text-base text-flcCharcoal/70 mt-1">Weekly materials will be posted here as they become available.</p>
@@ -190,9 +151,9 @@
           </div>
         </div>
 
-        <div class="block bg-flcOffWhite rounded-xl p-4 border border-flcBorder opacity-80">
-          <div class="flex items-start gap-3">
-            <div class="w-12 h-12 rounded-lg bg-flcNavy/10 flex items-center justify-center text-flcNavy font-semibold">3</div>
+        <div class="card-premium opacity-85">
+          <div class="flex items-start gap-4">
+            <div class="card-badge bg-flcNavy/10 text-flcNavy">3</div>
             <div>
               <h3 class="font-heading text-lg text-flcNavy">Week 3 — Coming Soon</h3>
               <p class="text-base text-flcCharcoal/70 mt-1">Resources and reflections will appear here.</p>
@@ -201,9 +162,9 @@
         </div>
       </div>
 
-      <div class="mt-10 prose max-w-none text-flcCharcoal">
+      <div class="mt-10 content-prose">
         <h2 class="font-heading text-2xl text-flcNavy">What to Expect</h2>
-        <ul class="list-inside list-disc text-base sm:text-base">
+        <ul class="list-inside list-disc">
           <li>Dates: January 12–31 — The Kingdom Blueprint</li>
           <li>Bible Studies: Jan 15, Jan 22, Jan 29 (6:30 PM)</li>
           <li>Weekly newsletters with reflection prompts and Scripture readings</li>
