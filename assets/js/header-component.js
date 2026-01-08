@@ -27,7 +27,7 @@ function createHeader(config = {}) {
         
         <!-- Center: Navigation Links (Large Desktop) -->
         <div class="nav-links hidden lg:flex items-center gap-1">
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
             <span class="inline-flex items-center gap-1.5">
               Church
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,9 +35,15 @@ function createHeader(config = {}) {
               </svg>
             </span>
           </a>
-          <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'library' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Library</a>
-          <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'devotionals' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Devotionals</a>
-          <a href="${resourcesPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'resources' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Resources</a>
+          <div class="relative group">
+            <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'library' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Library</a>
+            <div class="absolute left-0 mt-2 w-56 bg-white border border-flcGold/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150">
+              <a href="${libraryPath}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">All Library</a>
+              <a href="http://127.0.0.1:5500/pages/spiritual-detox.html" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
+            </div>
+          </div>
+          <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'devotionals' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Devotionals</a>
+          <a href="${resourcesPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'resources' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Resources</a>
         </div>
         
         <!-- Right: Actions (Tablet & Desktop) -->
@@ -56,7 +62,7 @@ function createHeader(config = {}) {
           </div>
           
           <!-- Subscribe Button (Tablet & Desktop) -->
-          <a href="#" class="subscribe-btn hidden md:inline-flex items-center gap-1.5 lg:gap-2 px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white font-semibold text-xs lg:text-sm rounded-full hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
+          <a href="#" class="subscribe-btn hidden md:inline-flex items-center gap-1.5 lg:gap-2 px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white font-semibold text-sm lg:text-base rounded-full hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
             <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
@@ -132,7 +138,7 @@ function createDevotionalHeader(config = {}) {
         
         <!-- Desktop Navigation Links -->
         <div class="nav-links hidden md:flex items-center gap-1">
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">
             <span class="inline-flex items-center gap-1.5">
               Church
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,8 +146,14 @@ function createDevotionalHeader(config = {}) {
               </svg>
             </span>
           </a>
-          <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-[15px] tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">Library</a>
-          <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcGold bg-flcGold/5 font-semibold text-[15px] tracking-wide transition-all duration-200 rounded-lg">Devotionals</a>
+          <div class="relative group">
+            <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">Library</a>
+            <div class="absolute left-0 mt-2 w-44 bg-white border border-flcGold/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150">
+              <a href="${libraryPath}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">All Library</a>
+              <a href="http://127.0.0.1:5500/pages/spiritual-detox.html" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
+            </div>
+          </div>
+          <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcGold bg-flcGold/5 font-semibold text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg">Devotionals</a>
         </div>
         
         <!-- Mobile Menu Button -->
