@@ -14,6 +14,9 @@ function createHeader(config = {}) {
     logoHeight = '105px'
   } = config;
 
+  // Point Spiritual Detox to the published Netlify site
+  const detoxPath = 'https://flcpublishinghouse.netlify.app/pages/spiritual-detox.html';
+
   return `
   <!-- Navigation -->
   <nav id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcGold/10 shadow-sm">
@@ -39,7 +42,7 @@ function createHeader(config = {}) {
             <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'library' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Library</a>
             <div class="absolute left-0 mt-2 w-56 bg-white border border-flcGold/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150">
               <a href="${libraryPath}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">All Library</a>
-              <a href="http://127.0.0.1:5500/pages/spiritual-detox.html" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
+              <a href="${detoxPath}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
             </div>
           </div>
           <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${currentPage === 'devotionals' ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}">Devotionals</a>
@@ -126,6 +129,9 @@ function createDevotionalHeader(config = {}) {
     logoHeight = '85px'
   } = config;
 
+  // Point Spiritual Detox to the published Netlify site (devotional header)
+  const detoxPathDev = 'https://flcpublishinghouse.netlify.app/pages/spiritual-detox.html';
+
   return `
   <!-- Navigation -->
   <nav id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcGold/10 shadow-sm">
@@ -150,7 +156,7 @@ function createDevotionalHeader(config = {}) {
             <a href="${libraryPath}" class="nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5">Library</a>
             <div class="absolute left-0 mt-2 w-44 bg-white border border-flcGold/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150">
               <a href="${libraryPath}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">All Library</a>
-              <a href="http://127.0.0.1:5500/pages/spiritual-detox.html" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
+              <a href="${detoxPathDev}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">Spiritual Detox</a>
             </div>
           </div>
           <a href="${devotionalsPath}" class="nav-link px-5 py-2 text-flcGold bg-flcGold/5 font-semibold text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg">Devotionals</a>
