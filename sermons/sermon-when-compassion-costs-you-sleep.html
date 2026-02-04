@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -906,6 +906,28 @@
     .content-section ul > li:hover {
       background: rgba(154, 123, 79, 0.03);
     }
+  
+    /* Mobile-first refinements */
+    @media (max-width: 768px){
+      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
+      .hero-background{ min-height: auto; }
+      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (max-width: 640px){
+      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
+      .hero-header{ padding: 1.75rem 1.25rem; }
+      .hero-title{ text-wrap: balance; }
+      .hero-cta-group{ align-items: stretch; }
+      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
+      .resource-card{ border-radius: 1.25rem; }
+      .stats-card{ padding: 1.25rem; }
+      .search-bar{ padding: 0.75rem 1rem; }
+      .pill{ white-space: normal; }
+      .toc-wrap{ position: static !important; }
+      .essay{ font-size: 1rem; line-height: 1.8; }
+      .week-card, .searchable-card{ padding: 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -921,7 +943,7 @@
   
   <!-- Header Container -->
   <div id="headerContainer" 
-       data-config='{"currentPage": "", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "logoHeight": "105px"}'></div>
+       data-config='{"currentPage":"sermons","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
   
   <!-- Load Header Component -->
   <script src="../assets/js/header-component.js"></script>
@@ -1171,7 +1193,7 @@
     <div class="content-section" style="background: linear-gradient(135deg, rgba(154, 123, 79, 0.05), rgba(184, 149, 106, 0.08));">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0">More Sermons</h2>
-        <a href="../pages/library.html" class="text-flcGold hover:text-flcGoldDark font-semibold text-sm flex items-center gap-2 transition-colors">
+        <a href="../pages/resources.html" class="text-flcGold hover:text-flcGoldDark font-semibold text-sm flex items-center gap-2 transition-colors">
           View All
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1441,7 +1463,7 @@
 
   <!-- Footer Container -->
   <div id="footerContainer"
-       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "sermon-im-under-pressure.html"}'></div>
+       data-config='{"currentPage":"sermons","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
   
   <!-- Load Footer Component -->
   <script src="../assets/js/footer-component.js"></script>

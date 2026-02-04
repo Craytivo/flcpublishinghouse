@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -133,6 +133,28 @@
         transparent 100%
       );
     }
+  
+    /* Mobile-first refinements */
+    @media (max-width: 768px){
+      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
+      .hero-background{ min-height: auto; }
+      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (max-width: 640px){
+      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
+      .hero-header{ padding: 1.75rem 1.25rem; }
+      .hero-title{ text-wrap: balance; }
+      .hero-cta-group{ align-items: stretch; }
+      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
+      .resource-card{ border-radius: 1.25rem; }
+      .stats-card{ padding: 1.25rem; }
+      .search-bar{ padding: 0.75rem 1rem; }
+      .pill{ white-space: normal; }
+      .toc-wrap{ position: static !important; }
+      .essay{ font-size: 1rem; line-height: 1.8; }
+      .week-card, .searchable-card{ padding: 1rem; }
+    }
   </style>
 </head>
 
@@ -141,7 +163,7 @@
   <!-- Header Container (DO NOT CHANGE) -->
   <div
     id="headerContainer"
-    data-config='{"currentPage":"resources","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/library.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
+    data-config='{"currentPage":"detox","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
   ></div>
   <script src="../assets/js/header-component.js"></script>
 
@@ -252,7 +274,7 @@
   <!-- Footer Container (DO NOT CHANGE) -->
   <div
     id="footerContainer"
-    data-config='{"logoPath":"../assets/images/White Logo.png","homePath":"../index.html","libraryPath":"../pages/library.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","latestSermonPath":"../sermons/sermon-im-under-pressure.html"}'
+    data-config='{"currentPage":"detox","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
   ></div>
   <script src="../assets/js/footer-component.js"></script>
 

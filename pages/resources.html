@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -439,6 +439,65 @@
         font-size: 1rem;
       }
     }
+  
+    /* Mobile-first refinements */
+    @media (max-width: 768px){
+      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
+      .hero-background{ min-height: auto; }
+      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (max-width: 640px){
+      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
+      .hero-header{ padding: 1.75rem 1.25rem; }
+      .hero-title{ text-wrap: balance; }
+      .hero-cta-group{ align-items: stretch; }
+      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
+      .resource-card{ border-radius: 1.25rem; }
+      .stats-card{ padding: 1.25rem; }
+      .search-bar{ padding: 0.75rem 1rem; }
+      .pill{ white-space: normal; }
+      .toc-wrap{ position: static !important; }
+      .essay{ font-size: 1rem; line-height: 1.8; }
+      .week-card, .searchable-card{ padding: 1rem; }
+    }
+  
+    .book-panel{
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(229,224,216,0.8);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(26,58,82,0.06);
+    }
+    .book-row{
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .book-link{
+      color: #1A3A52;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(154,123,79,0.35);
+      padding-bottom: 1px;
+      transition: color .18s ease, border-color .18s ease;
+    }
+    .book-link:hover{
+      color: #9A7B4F;
+      border-color: #9A7B4F;
+    }
+    .book-source{
+      color: rgba(44,44,44,0.7);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(44,44,44,0.25);
+      padding-bottom: 1px;
+    }
+    .book-source:hover{ color: #1A3A52; border-color: rgba(26,58,82,0.4); }
+
+    @media (min-width: 640px){
+      .book-row{ flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -449,445 +508,278 @@
   
   <!-- Header Container -->
   <div id="headerContainer" 
-       data-config='{"currentPage": "resources", "logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "library.html", "devotionalsPath": "devotionals.html", "resourcesPath": "resources.html", "logoHeight": "85px"}'></div>
+       data-config='{"currentPage":"resources","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
   
   <!-- Load Header Component -->
   <script src="../assets/js/header-component.js"></script>
   
   <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-      });
-    }
-    
-    // Calculate total reading time
-    function updateTotalMinutes() {
-      const resourceCards = document.querySelectorAll('.resource-card[data-reading-time]');
-      let totalMinutes = 0;
-      
-      resourceCards.forEach(card => {
-        const readingTime = parseInt(card.getAttribute('data-reading-time')) || 0;
-        totalMinutes += readingTime;
-      });
-      
-      // Update mobile counter
-      const totalMinutesElement = document.getElementById('totalMinutes');
-      if (totalMinutesElement) {
-        let currentValue = 0;
-        const increment = totalMinutes / 30;
-        const timer = setInterval(() => {
-          currentValue += increment;
-          if (currentValue >= totalMinutes) {
-            currentValue = totalMinutes;
-            clearInterval(timer);
-          }
-          totalMinutesElement.textContent = Math.round(currentValue);
-        }, 20);
-      }
-      
-      // Update desktop counter
-      const totalMinutesDesktop = document.getElementById('totalMinutesDesktop');
-      if (totalMinutesDesktop) {
-        let currentValue = 0;
-        const increment = totalMinutes / 30;
-        const timer = setInterval(() => {
-          currentValue += increment;
-          if (currentValue >= totalMinutes) {
-            currentValue = totalMinutes;
-            clearInterval(timer);
-          }
-          totalMinutesDesktop.textContent = Math.round(currentValue);
-        }, 20);
-      }
-    }
-    
-    // Run on page load
-    document.addEventListener('DOMContentLoaded', updateTotalMinutes);
-  </script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+  }
+
+  function updateTotalMinutes() {
+    const resourceCards = document.querySelectorAll('.resource-card[data-reading-time]');
+    let totalMinutes = 0;
+
+    resourceCards.forEach(card => {
+      const readingTime = parseInt(card.getAttribute('data-reading-time')) || 0;
+      totalMinutes += readingTime;
+    });
+
+    const totalMinutesElement = document.getElementById('totalMinutes');
+    if (totalMinutesElement) totalMinutesElement.textContent = totalMinutes;
+
+    const totalMinutesDesktop = document.getElementById('totalMinutesDesktop');
+    if (totalMinutesDesktop) totalMinutesDesktop.textContent = totalMinutes;
+  });
+      return set;
+    };
+
+    const sermonLinks = uniqueLinks('a[href*="sermons/"]', collectionsSection);
+    const devotionalLinks = uniqueLinks('a[href*="devotionals-pages/"]', collectionsSection);
+    const detoxLinks = uniqueLinks('a[href*="spiritual-detox-week"]', collectionsSection);
+    const studyLinks = uniqueLinks('a[href*="bible-studies/"]', collectionsSection);
+
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
+
+    setText('countCollections', collectionCards.length);
+    setText('countBooks', bookRows.length);
+    setText('countSermons', sermonLinks.size);
+    setText('countDevotionals', devotionalLinks.size);
+    setText('countDetox', detoxLinks.size);
+    setText('countStudies', studyLinks.size);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    updateTotalMinutes();
+
+  });
+</script>
   <main class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
     <!-- Hero Section - Immersive Visual Design -->
-    <header class="hero-header relative overflow-hidden min-h-[320px] lg:min-h-[400px] mt-6 sm:mt-8 lg:mt-10">
-      <!-- Dynamic Background with Depth -->
+            <header class="hero-header relative overflow-hidden mt-6 sm:mt-8 lg:mt-10">
       <div class="absolute inset-0">
-        <!-- Base Gradient -->
         <div class="absolute inset-0 bg-gradient-to-br from-[#0d2338] via-[#1A3A52] to-[#0a1921]"></div>
-        
-        <!-- Animated Glow Orbs -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-flcGold/20 rounded-full blur-[120px] animate-pulse" style="animation-duration: 4s;"></div>
-        <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-orange-400/15 rounded-full blur-[100px] animate-pulse" style="animation-duration: 5s; animation-delay: 1s;"></div>
-        
-        <!-- Layered Texture -->
-        <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239A7B4F\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <div class="absolute inset-0 opacity-40" style="background-image: radial-gradient(circle at 20% 30%, rgba(154, 123, 79, 0.15) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);"></div>
       </div>
-      
-      <!-- Content Wrapper -->
-      <div class="relative z-10 h-full">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
-          
-          <!-- Mobile/Tablet Centered Layout -->
-          <div class="lg:hidden text-center space-y-4">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/20 backdrop-blur-xl rounded-full border border-flcGold/40 shadow-2xl">
-              <svg class="w-4 h-4 text-flcGold animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
-              </svg>
-              <span class="text-flcGold text-xs font-bold uppercase tracking-widest">Digital Library</span>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
+        <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/15 backdrop-blur-xl rounded-full border border-flcGold/30">
+              <span class="h-2 w-2 rounded-full bg-flcGold"></span>
+              <span class="text-flcGold text-xs font-bold uppercase tracking-[0.25em]">Resources Hub</span>
             </div>
-            
-            <h1 class="text-3xl sm:text-4xl font-heading font-bold text-white leading-tight">
-              Downloadable<br/><span class="text-flcGold">Resources</span>
+            <h1 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white leading-tight">
+              Everything You Need to Read, Watch, and Download
             </h1>
-            
-            <p class="text-white/80 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-              Access sermon notes, audio teachings, and study materials from Freedom Life Church
+            <p class="mt-4 text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl">
+              This page gathers every published resource from FLC Publishing House—sermon notes, devotionals, Spiritual Detox weeks, Bible studies, and recommended books—so you can quickly find what you need in one place.
             </p>
-            
-            <!-- Stats Counter -->
-            <div class="inline-flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-xl">
-              <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span class="text-2xl font-bold text-white" id="totalMinutes">45</span>
-              <span class="text-sm font-medium text-white/70">mins teaching</span>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="#collections" class="download-btn">Browse Collections</a>
+              <a href="#books" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">View Books</a>
             </div>
           </div>
-          
-          <!-- Desktop Split Layout with Visual Impact -->
-          <div class="hidden lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
-            
-            <!-- Left Column: Content (7 cols) -->
-            <div class="lg:col-span-7 space-y-5">
-              <!-- Badge -->
-              <div class="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-flcGold/25 to-flcGold/15 backdrop-blur-xl rounded-full border border-flcGold/50 shadow-2xl hover:shadow-flcGold/20 hover:border-flcGold/70 transition-all duration-300 group">
-                <svg class="w-5 h-5 text-flcGold group-hover:scale-110 group-hover:rotate-12 transition-all" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
-                </svg>
-                <span class="text-flcGold text-[13px] font-extrabold uppercase tracking-[0.25em] group-hover:tracking-[0.3em] transition-all">Digital Library</span>
-              </div>
-              
-              <!-- Title -->
-              <div class="space-y-3">
-                <h1 class="text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem] font-heading font-bold text-white leading-[1.1] tracking-tight">
-                  Downloadable<br/>
-                  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a870] via-flcGold to-[#7d6038] inline-block mt-1">Resources</span>
-                </h1>
-                <div class="flex items-center gap-3">
-                  <div class="w-16 h-1 bg-gradient-to-r from-flcGold via-flcGoldLight to-transparent rounded-full"></div>
-                  <div class="w-2 h-2 bg-flcGold rounded-full animate-pulse"></div>
+
+          <div class="bg-white/5 border border-white/15 rounded-2xl p-6 sm:p-8 backdrop-blur-xl">
+            <div class="grid gap-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-flcGold/20 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <div>
+                  <p class="text-white font-semibold">Collections</p>
+                  <p class="text-white/70 text-sm">Sermons, devotionals, studies, and Spiritual Detox.</p>
                 </div>
               </div>
-              
-              <!-- Description -->
-              <p class="text-white/75 text-base xl:text-lg leading-relaxed font-light max-w-xl">
-                Access sermon notes, audio teachings, and study materials from Freedom Life Church
-              </p>
-              
-              <!-- CTA Buttons -->
-              <div class="flex flex-wrap items-center gap-3">
-                <a href="#available-resources" class="group inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-flcGold to-flcGoldLight rounded-xl font-semibold text-white shadow-lg hover:shadow-flcGold/40 transition-all duration-300 hover:scale-105">
-                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path>
-                  </svg>
-                  <span>Browse Resources</span>
-                </a>
-                <a href="../sermons/sermon-im-under-pressure.html" class="group inline-flex items-center gap-2.5 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-xl font-semibold text-white border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
-                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                  <span>Latest Sermon</span>
-                </a>
-              </div>
-              
-              <!-- Stats Cards -->
-              <div class="flex items-center gap-5 xl:gap-6">
-                <div class="flex items-center gap-3 group cursor-pointer">
-                  <div class="w-12 h-12 bg-gradient-to-br from-flcGold/25 to-flcGold/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-flcGold/40 group-hover:border-flcGold/60 transition-all shadow-lg group-hover:shadow-flcGold/20">
-                    <svg class="w-6 h-6 text-flcGold group-hover:scale-110 group-hover:-rotate-6 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Resources</p>
-                    <p class="text-flcGold font-bold text-[15px] tracking-wide">2 Sermons</p>
-                  </div>
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                
-                <div class="h-12 w-px bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
-                
-                <div class="flex items-center gap-3 group cursor-pointer">
-                  <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:border-white/40 transition-all shadow-lg">
-                    <svg class="w-6 h-6 text-white/90 group-hover:scale-110 group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Total Time</p>
-                    <p class="text-white font-bold text-sm"><span id="totalMinutesDesktop">45</span> Minutes</p>
-                  </div>
+                <div>
+                  <p class="text-white font-semibold">Stay Current</p>
+                  <p class="text-white/70 text-sm">Updated with each new series release.</p>
                 </div>
               </div>
-            </div>
-            
-            <!-- Right Column: Visual Feature (5 cols) -->
-            <div class="lg:col-span-5 relative">
-              <!-- Hero Visual Card -->
-              <div class="relative group">
-                <!-- Main Card -->
-                <div class="relative bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-3xl rounded-[24px] border-2 border-white/20 p-6 shadow-2xl overflow-hidden hover:scale-[1.02] hover:border-white/30 transition-all duration-500">
-                  <!-- Glow Effect -->
-                  <div class="absolute inset-0 bg-gradient-to-br from-flcGold/20 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <!-- Content -->
-                  <div class="relative z-10 space-y-5">
-                    <!-- Icon with Badge -->
-                    <div class="relative inline-block">
-                      <div class="w-16 h-16 bg-gradient-to-br from-flcGold/40 to-flcGold/10 rounded-2xl flex items-center justify-center border-2 border-flcGold/50 shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                        <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                        </svg>
-                      </div>
-                      <div class="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center border-2 border-white/20 animate-pulse">
-                        <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    <!-- Quick Info -->
-                    <div class="space-y-3">
-                      <div class="flex items-center justify-between">
-                        <span class="text-white/70 text-[15px] font-semibold tracking-wide">Quick Access</span>
-                        <span class="text-white/50 text-xs font-medium px-2 py-1 bg-white/5 rounded-md">4 formats</span>
-                      </div>
-                    </div>
-                    
-                    <!-- Divider -->
-                    <div class="relative h-px">
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-flcGold/20 to-transparent blur-sm"></div>
-                    </div>
-                    
-                    <!-- Format Grid -->
-                    <div class="grid grid-cols-2 gap-3 text-center">
-                      <div class="group/item space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-flcGold/30 transition-all cursor-pointer hover:scale-105">
-                        <div class="relative inline-block">
-                          <svg class="w-6 h-6 text-flcGold mx-auto group-hover/item:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                          </svg>
-                          <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full"></div>
-                        </div>
-                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">PDF Notes</p>
-                      </div>
-                      <div class="group/item space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-flcGold/30 transition-all cursor-pointer hover:scale-105">
-                        <div class="relative inline-block">
-                          <svg class="w-6 h-6 text-flcGold mx-auto group-hover/item:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
-                          </svg>
-                          <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full"></div>
-                        </div>
-                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Audio</p>
-                      </div>
-                      <div class="group/item space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-flcGold/30 transition-all cursor-pointer hover:scale-105">
-                        <div class="relative inline-block">
-                          <svg class="w-6 h-6 text-flcGold mx-auto group-hover/item:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                          </svg>
-                          <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full"></div>
-                        </div>
-                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Video</p>
-                      </div>
-                      <div class="group/item space-y-1.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-flcGold/30 transition-all cursor-pointer hover:scale-105">
-                        <div class="relative inline-block">
-                          <svg class="w-6 h-6 text-flcGold mx-auto group-hover/item:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                          </svg>
-                          <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full"></div>
-                        </div>
-                        <p class="text-white/60 text-[10px] uppercase tracking-wider font-semibold">Online</p>
-                      </div>
-                    </div>
-                    
-                    <!-- CTA Button -->
-                    <a href="#available-resources" class="block mt-4 w-full text-center py-2.5 px-4 bg-gradient-to-r from-flcGold to-flcGoldLight rounded-lg text-white font-semibold text-sm hover:shadow-lg hover:shadow-flcGold/30 transition-all duration-300 hover:scale-105">
-                      Start Exploring
-                    </a>
-                  </div>
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-flcGold/15 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
-                
-                <!-- Floating Accent Elements -->
-                <div class="absolute -top-6 -right-6 w-32 h-32 bg-flcGold/25 rounded-full blur-3xl animate-pulse" style="animation-duration: 3s;"></div>
-                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-orange-400/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s; animation-delay: 0.5s;"></div>
+                <div>
+                  <p class="text-white font-semibold">Downloadable</p>
+                  <p class="text-white/70 text-sm">Handouts and PDFs available where provided.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </header>
-    
-    <!-- Resources Grid -->
-    <div id="available-resources" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
+    </header>    <!-- Collections -->
+    <div id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
       <div class="mb-8">
-        <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Available Resources</h2>
-        <p class="text-flcCharcoal/60">Browse our collection of teachings and materials</p>
+        <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Collections</h2>
+        <p class="text-flcCharcoal/60">Jump into sermons, devotionals, Spiritual Detox, and Bible studies.</p>
       </div>
-      
-      <div class="grid gap-6 md:gap-8">
-      
-      <!-- Resource Card: Vision 2026 (Official) -->
-      <div class="resource-card group" data-reading-time="10">
+
+      <div class="grid gap-6 md:grid-cols-2">
+      <div class="resource-card group">
         <div class="p-6 md:p-8">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
-                  Announcement
-                </span>
-                <span class="text-sm text-flcCharcoal/50">January 2026</span>
-                <span class="text-sm text-flcCharcoal/50">• Official Vision Statement</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">Vision 2026 — Building Campaign & Leadership Focus</h2>
-              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Dear Ministerial Council and Leadership Team — Grace and peace. For 2026 our primary focus is a building campaign to establish Kingdom infrastructure that equips disciples and strengthens community. We will also introduce leadership terms to promote healthy rhythms, clear stewardship, and long-term sustainability. Download the full Vision 2026 PDF for complete details.</p>
-            </div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Announcement</span>
+            <span class="text-sm text-flcCharcoal/50">Vision 2026</span>
           </div>
-          
-          <div class="border-t border-flcBorder pt-6">
-            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
-            <div class="flex flex-wrap gap-3 mb-6">
-              <a href="../assets/pdfs/Vision%202026%20%282%29.pdf" class="download-btn" download="Vision-2026.pdf">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                Download PDF
-              </a>
-            </div>
+          <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Building Campaign & Leadership Focus</h3>
+          <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Download the official Vision 2026 statement outlining the building campaign and leadership initiatives.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="../assets/pdfs/Vision%202026%20%282%29.pdf" class="download-btn" download="Vision-2026.pdf">Download PDF</a>
           </div>
         </div>
       </div>
-      <!-- Resource Card: I'm Under Pressure -->
-      <div class="resource-card group" data-reading-time="35">
-        <div class="p-6 md:p-8">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
-                  Sermon
-                </span>
-                <span class="text-sm text-flcCharcoal/50">November 23, 2024</span>
-                <span class="text-sm text-flcCharcoal/50">• 35 min read</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">I'm Under Pressure</h2>
-              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">A powerful message about handling life's pressures with faith and perseverance. Learn from Noah's example of building under pressure that nobody sees.</p>
+
+        <div class="resource-card group">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Sermons</span>
+              <span class="text-sm text-flcCharcoal/50">3 messages</span>
             </div>
-          </div>
-          
-          <div class="border-t border-flcBorder pt-6">
-            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
+            <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Sermon Notes & Media</h3>
+            <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Browse all published sermon notes and media resources.</p>
             <div class="flex flex-wrap gap-3">
-              <a href="../assets/pdfs/Sermon Handout - I'm Under Pressure.pdf" class="download-btn" download="Sermon-Im-Under-Pressure.pdf">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                PDF Handout
-              </a>
-              <a href="https://www.youtube.com/watch?v=kBFOH2pxS4A" target="_blank" rel="noopener noreferrer" class="download-btn">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
-                Watch Video
-              </a>
-              <a href="../sermons/sermon-im-under-pressure.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                View Notes
-              </a>
+              <a href="../sermons/sermon-im-under-pressure.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">I'm Under Pressure</a>
+              <a href="../sermons/sermon-purpose-protected-me.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">Purpose Protected Me</a>
+              <a href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">When Compassion Costs You Sleep</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-card group">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Devotionals</span>
+              <span class="text-sm text-flcCharcoal/50">4 weeks</span>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Advent Devotional Series</h3>
+            <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Weekly devotionals for Hope, Love, Peace, and Joy.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 · Hope</a>
+              <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 · Love</a>
+              <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 · Peace</a>
+              <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn">Week 4 · Joy</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-card group">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Spiritual Detox</span>
+              <span class="text-sm text-flcCharcoal/50">3 weeks</span>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">The Kingdom Blueprint</h3>
+            <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Newsletter + week-by-week reading plans and resources.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="../pages/spiritual-detox.html" class="download-btn">Series Overview</a>
+              <a href="../pages/spiritual-detox-week1.html" class="download-btn">Week 1</a>
+              <a href="../pages/spiritual-detox-week2.html" class="download-btn">Week 2</a>
+              <a href="../pages/spiritual-detox-week3.html" class="download-btn">Week 3</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-card group">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Bible Study</span>
+              <span class="text-sm text-flcCharcoal/50">Advent</span>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Advent Hope Study</h3>
+            <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Bible study notes and downloadable handout.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="../bible-studies/bible-study-advent-hope.html" class="download-btn">View Study</a>
+              <a href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="download-btn" download>Download Handout</a>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- Resource Card: When Compassion Costs You Sleep -->
-      <div class="resource-card group" data-reading-time="10">
-        <div class="p-6 md:p-8">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
-                  Sermon
-                </span>
-                <span class="text-sm text-flcCharcoal/50">November 2, 2024</span>
-                <span class="text-sm text-flcCharcoal/50">• 10 min read</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">When Compassion Costs You Sleep</h2>
-              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Explore the depth of compassion and the cost of truly caring for others. A message about sacrificial love and servant leadership.</p>
-            </div>
+    </div>    <!-- Books -->
+    <div id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <div class="mb-6">
+        <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Books</h2>
+        <p class="text-flcCharcoal/60">Recommended titles and where they appeared.</p>
+      </div>
+
+      <div class="book-panel divide-y divide-flcBorder/60">
+        <div class="book-row">
+          <div>
+            <h3 class="text-base font-semibold text-flcNavy">Sermon on the Mount</h3>
+            <p class="text-sm text-flcCharcoal/60">Amy-Jill Levine • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
           </div>
-          
-          <div class="border-t border-flcBorder pt-6">
-            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
-            <div class="flex flex-wrap gap-3 mb-6">
-              <a href="../assets/pdfs/when-compassion-costs-you-sleep.pdf" class="download-btn" download="Sermon-When-Compassion-Costs-You-Sleep.pdf">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                PDF Handout
-              </a>
-              <a href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                View Notes
-              </a>
-            </div>
-            
-            <div class="audio-player">
-              <svg class="w-6 h-6 text-flcGold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
-              <audio controls preload="none">
-                <source src="../assets/audio/when-compassion-costs-you-sleep.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://amzn.to/3XuCJJi" target="_blank" rel="noopener" class="book-link">Amazon</a>
+            <a href="https://www.overdrive.com/media/5368935/sermon-on-the-mount" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+          </div>
+        </div>
+
+        <div class="book-row">
+          <div>
+            <h3 class="text-base font-semibold text-flcNavy">Hope in Times of Fear: The Resurrection and the Meaning of Easter</h3>
+            <p class="text-sm text-flcCharcoal/60">Timothy Keller • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://www.amazon.com/gp/product/0525560793" target="_blank" rel="noopener" class="book-link">Amazon</a>
+            <a href="https://www.overdrive.com/media/5665340/hope-in-times-of-fear" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+          </div>
+        </div>
+
+        <div class="book-row">
+          <div>
+            <h3 class="text-base font-semibold text-flcNavy">Deeper: Real Change for Real Sinners</h3>
+            <p class="text-sm text-flcCharcoal/60">Dane C. Ortlund • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://www.amazon.com/s?k=9781433573996" target="_blank" rel="noopener" class="book-link">Amazon</a>
+            <a href="https://www.overdrive.com/media/6037544/deeper-real-change-for-real-sinners" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+          </div>
+        </div>
+
+        <div class="book-row">
+          <div>
+            <h3 class="text-base font-semibold text-flcNavy">Misreading Scripture with Western Eyes: Removing Cultural Blinders to Better Understand the Bible</h3>
+            <p class="text-sm text-flcCharcoal/60">E. Randolph Richards &amp; Brandon J. O'Brien • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://www.amazon.com/dp/0830837825/ref=nosim?tag=ivp02-20" target="_blank" rel="noopener" class="book-link">Amazon</a>
+            <a href="https://www.overdrive.com/media/2543267/misreading-scripture-with-western-eyes" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+          </div>
+        </div>
+
+        <div class="book-row">
+          <div>
+            <h3 class="text-base font-semibold text-flcNavy">Revelation for the Rest of Us: A Prophetic Call to Follow Jesus as a Dissident Disciple</h3>
+            <p class="text-sm text-flcCharcoal/60">Author not listed • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://www.amazon.com/s?k=9780310135784" target="_blank" rel="noopener" class="book-link">Amazon</a>
+            <a href="https://www.overdrive.com/media/9093323/revelation-for-the-rest-of-us" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
           </div>
         </div>
       </div>
-      
-      <!-- Add more resource cards here as needed -->
-      <!-- Resource Card: Spiritual Detox Newsletter -->
-      <div class="resource-card group" data-reading-time="8">
-        <div class="p-6 md:p-8">
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">
-                  Newsletter
-                </span>
-                <span class="text-sm text-flcCharcoal/50">January 2026</span>
-                <span class="text-sm text-flcCharcoal/50">• Spiritual Detox</span>
-              </div>
-              <h2 class="text-2xl md:text-3xl font-heading font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors">Spiritual Detox — This Week @ FLC (Newsletter & Resources)</h2>
-              <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Weekly newsletter and study guide for our "Spiritual Detox" series. Includes reflection prompts, book suggestions, and week-by-week resources.</p>
-            </div>
-          </div>
-          
-          <div class="border-t border-flcBorder pt-6">
-            <p class="text-xs font-semibold uppercase tracking-wide text-flcCharcoal/50 mb-3">Available Formats</p>
-            <div class="flex flex-wrap gap-3 mb-6">
-              <a href="../pages/spiritual-detox.html" class="download-btn" title="Spiritual Detox landing page">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12l9-5-9-5-9 5 9 5z"></path></svg>
-                View Landing Page
-              </a>
-              <a href="../pages/spiritual-detox-week1.html" class="download-btn">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h8a2 2 0 012 2v7a2 2 0 01-2 2H6l-4 4V5z"></path></svg>
-                View Week 1 (HTML)
-              </a>
-              <a href="../assets/pdfs/This%20Week%20@%20FLC%20Newsletter_%20Spiritual%20Detox.pdf" class="download-btn" download="Spiritual-Detox-Newsletter.pdf">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                Download PDF
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </main>
+    </div>  </main>
 
   <!-- Footer Container -->
   <div id="footerContainer"
-       data-config='{"logoPath": "../assets/images/Logo.png", "homePath": "../index.html", "libraryPath": "library.html", "devotionalsPath": "devotionals.html", "resourcesPath": "resources.html", "latestSermonPath": "../sermons/sermon-im-under-pressure.html"}'></div>
+       data-config='{"currentPage":"resources","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
   
   <!-- Load Footer Component -->
   <script src="../assets/js/footer-component.js"></script>

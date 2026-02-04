@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -234,13 +234,35 @@
     .highlight-btn:active {
       transform: scale(0.95);
     }
+  
+    /* Mobile-first refinements */
+    @media (max-width: 768px){
+      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
+      .hero-background{ min-height: auto; }
+      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
+    @media (max-width: 640px){
+      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
+      .hero-header{ padding: 1.75rem 1.25rem; }
+      .hero-title{ text-wrap: balance; }
+      .hero-cta-group{ align-items: stretch; }
+      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
+      .resource-card{ border-radius: 1.25rem; }
+      .stats-card{ padding: 1.25rem; }
+      .search-bar{ padding: 0.75rem 1rem; }
+      .pill{ white-space: normal; }
+      .toc-wrap{ position: static !important; }
+      .essay{ font-size: 1rem; line-height: 1.8; }
+      .week-card, .searchable-card{ padding: 1rem; }
+    }
   </style>
 </head>
 <body class="bg-gray-50">
   
   <!-- Header Container -->
   <div id="headerContainer" 
-       data-config='{"logoPath": "../assets/images/Dark_Logo-removebg-preview.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html"}'></div>
+       data-config='{"currentPage":"devotionals","basePath":"..","logoPath":"../assets/images/Dark_Logo-removebg-preview.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html"}'></div>
   <script src="../assets/js/header-component.js"></script>
 
   <!-- Main Content -->
@@ -476,7 +498,7 @@
   </main>
 
   <!-- Footer -->
-  <div id="footerContainer" data-config='{"logoPath": "../assets/images/White Logo.png", "homePath": "../index.html", "libraryPath": "../pages/library.html", "devotionalsPath": "../pages/devotionals.html", "resourcesPath": "../pages/resources.html", "latestSermonPath": "../sermons/sermon-im-under-pressure.html"}'></div>
+  <div id="footerContainer" data-config='{"currentPage":"devotionals","basePath":"..","logoPath":"../assets/images/Dark_Logo-removebg-preview.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html"}'></div>
   <script src="../assets/js/footer-component.js"></script>
 
   <!-- Scripts -->

@@ -8,10 +8,14 @@ function createFooter() {
   const config = JSON.parse(footerContainer.getAttribute('data-config') || '{}');
   const logoPath = config.logoPath || '../assets/images/Logo.png';
   const homePath = config.homePath || '../index.html';
-  const libraryPath = config.libraryPath || 'library.html';
   const devotionalsPath = config.devotionalsPath || 'devotionals.html';
   const resourcesPath = config.resourcesPath || 'resources.html';
   const latestSermonPath = config.latestSermonPath || '../sermons/sermon-im-under-pressure.html';
+
+  const sermonsPath = config.sermonsPath || resourcesPath;
+  const detoxPath = config.detoxPath || '../pages/spiritual-detox.html';
+  const bibleStudiesPath = config.bibleStudiesPath || resourcesPath;
+  const booksPath = resourcesPath;
 
   const footerHTML = `
   <!-- Premium Footer -->
@@ -37,21 +41,33 @@ function createFooter() {
         <div class="text-center sm:text-left">
           <h4 class="text-base sm:text-lg font-heading font-bold mb-3 sm:mb-4 text-white">Explore</h4>
           <ul class="space-y-2 sm:space-y-2.5 flex flex-col items-center sm:items-start">
-            <li><a href="${libraryPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+            <li><a href="${homePath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
               <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              Library
-            </a></li>
-            <li><a href="${devotionalsPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              Devotionals
+              Home
             </a></li>
             <li><a href="${resourcesPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
               <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               Resources
             </a></li>
-            <li><a href="${latestSermonPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+            <li><a href="${sermonsPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
               <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              Latest Sermon
+              Sermons
+            </a></li>
+            <li><a href="${resourcesPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              Devotionals
+            </a></li>
+            <li><a href="${detoxPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              Spiritual Detox
+            </a></li>
+            <li><a href="${bibleStudiesPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              Bible Studies
+            </a></li>
+            <li><a href="${booksPath}" class="text-white/70 hover:text-flcGold transition-colors text-sm flex items-center gap-2 group">
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              Books
             </a></li>
           </ul>
         </div>
