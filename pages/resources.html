@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -498,6 +498,51 @@
     @media (min-width: 640px){
       .book-row{ flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem; }
     }
+  
+    /* Site Polish */
+    body {
+      line-height: 1.7;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    .content-section {
+      border-color: rgba(154, 123, 79, 0.12);
+    }
+
+    .content-section h2,
+    .content-section h3 {
+      margin-top: 0.2rem;
+    }
+
+    .download-btn,
+    .btn-primary,
+    .btn-premium,
+    .btn-ghost {
+      border-radius: 0.875rem;
+    }
+
+    .resource-card,
+    .week-card,
+    .searchable-card,
+    .book-panel,
+    .content-section {
+      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
+    }
+
+    #footerContainer {
+      margin-top: 3rem;
+    }
+
+    #footerContainer::before {
+      content: '';
+      display: block;
+      height: 1px;
+      margin: 0 0 2rem 0;
+      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+    }
   </style>
 </head>
 <body>
@@ -584,7 +629,7 @@
               Everything You Need to Read, Watch, and Download
             </h1>
             <p class="mt-4 text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl">
-              This page gathers every published resource from FLC Publishing Houseâ€”sermon notes, devotionals, Spiritual Detox weeks, Bible studies, and recommended booksâ€”so you can quickly find what you need in one place.
+              This page gathers every published resource from FLC Publishing House—sermon notes, devotionals, Spiritual Detox weeks, Bible studies, and recommended books—so you can quickly find what you need in one place.
             </p>
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
               <a href="#collections" class="download-btn">Browse Collections</a>
@@ -651,11 +696,12 @@
           <div class="p-6 md:p-8">
             <div class="flex items-center gap-3 mb-3">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Sermons</span>
-              <span class="text-sm text-flcCharcoal/50">3 messages</span>
+              <span class="text-sm text-flcCharcoal/50">4 messages</span>
             </div>
             <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Sermon Notes & Media</h3>
             <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Browse all published sermon notes and media resources.</p>
             <div class="flex flex-wrap gap-3">
+              <a href="../sermons/sermon-its-time-to-crossover.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">It's Time to Cross Over</a>
               <a href="../sermons/sermon-im-under-pressure.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">I'm Under Pressure</a>
               <a href="../sermons/sermon-purpose-protected-me.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">Purpose Protected Me</a>
               <a href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">When Compassion Costs You Sleep</a>
@@ -672,10 +718,10 @@
             <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Advent Devotional Series</h3>
             <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Weekly devotionals for Hope, Love, Peace, and Joy.</p>
             <div class="flex flex-wrap gap-3">
-              <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 Â· Hope</a>
-              <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 Â· Love</a>
-              <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 Â· Peace</a>
-              <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn">Week 4 Â· Joy</a>
+              <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 · Hope</a>
+              <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 · Love</a>
+              <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 · Peace</a>
+              <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn">Week 4 · Joy</a>
             </div>
           </div>
         </div>
@@ -723,7 +769,7 @@
         <div class="book-row">
           <div>
             <h3 class="text-base font-semibold text-flcNavy">Sermon on the Mount</h3>
-            <p class="text-sm text-flcCharcoal/60">Amy-Jill Levine â€¢ From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            <p class="text-sm text-flcCharcoal/60">Amy-Jill Levine • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="https://amzn.to/3XuCJJi" target="_blank" rel="noopener" class="book-link">Amazon</a>
@@ -734,7 +780,7 @@
         <div class="book-row">
           <div>
             <h3 class="text-base font-semibold text-flcNavy">Hope in Times of Fear: The Resurrection and the Meaning of Easter</h3>
-            <p class="text-sm text-flcCharcoal/60">Timothy Keller â€¢ From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            <p class="text-sm text-flcCharcoal/60">Timothy Keller • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="https://www.amazon.com/gp/product/0525560793" target="_blank" rel="noopener" class="book-link">Amazon</a>
@@ -745,7 +791,7 @@
         <div class="book-row">
           <div>
             <h3 class="text-base font-semibold text-flcNavy">Deeper: Real Change for Real Sinners</h3>
-            <p class="text-sm text-flcCharcoal/60">Dane C. Ortlund â€¢ From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            <p class="text-sm text-flcCharcoal/60">Dane C. Ortlund • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="https://www.amazon.com/s?k=9781433573996" target="_blank" rel="noopener" class="book-link">Amazon</a>
@@ -756,7 +802,7 @@
         <div class="book-row">
           <div>
             <h3 class="text-base font-semibold text-flcNavy">Misreading Scripture with Western Eyes: Removing Cultural Blinders to Better Understand the Bible</h3>
-            <p class="text-sm text-flcCharcoal/60">E. Randolph Richards &amp; Brandon J. O'Brien â€¢ From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+            <p class="text-sm text-flcCharcoal/60">E. Randolph Richards &amp; Brandon J. O'Brien • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="https://www.amazon.com/dp/0830837825/ref=nosim?tag=ivp02-20" target="_blank" rel="noopener" class="book-link">Amazon</a>
@@ -767,7 +813,7 @@
         <div class="book-row">
           <div>
             <h3 class="text-base font-semibold text-flcNavy">Revelation for the Rest of Us: A Prophetic Call to Follow Jesus as a Dissident Disciple</h3>
-            <p class="text-sm text-flcCharcoal/60">Author not listed â€¢ From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+            <p class="text-sm text-flcCharcoal/60">Author not listed • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
           </div>
           <div class="flex flex-wrap gap-4">
             <a href="https://www.amazon.com/s?k=9780310135784" target="_blank" rel="noopener" class="book-link">Amazon</a>
@@ -893,3 +939,6 @@
 <!-- Page Transitions & Performance Enhancements -->
 <script src="../assets/js/page-transitions.js"></script>
 </html>
+
+
+

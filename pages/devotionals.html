@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -547,6 +547,51 @@
       .essay{ font-size: 1rem; line-height: 1.8; }
       .week-card, .searchable-card{ padding: 1rem; }
     }
+  
+    /* Site Polish */
+    body {
+      line-height: 1.7;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    .content-section {
+      border-color: rgba(154, 123, 79, 0.12);
+    }
+
+    .content-section h2,
+    .content-section h3 {
+      margin-top: 0.2rem;
+    }
+
+    .download-btn,
+    .btn-primary,
+    .btn-premium,
+    .btn-ghost {
+      border-radius: 0.875rem;
+    }
+
+    .resource-card,
+    .week-card,
+    .searchable-card,
+    .book-panel,
+    .content-section {
+      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
+    }
+
+    #footerContainer {
+      margin-top: 3rem;
+    }
+
+    #footerContainer::before {
+      content: '';
+      display: block;
+      height: 1px;
+      margin: 0 0 2rem 0;
+      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+    }
   </style>
 </head>
 <body>
@@ -610,10 +655,10 @@
             
             <!-- Mobile Theme Tags -->
             <div class="flex flex-wrap justify-center gap-2 pt-4">
-              <span class="px-3 py-1.5 bg-blue-500/20 border border-blue-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">✨ Hope</span>
-              <span class="px-3 py-1.5 bg-pink-500/20 border border-pink-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">💝 Love</span>
-              <span class="px-3 py-1.5 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">🕊️ Peace</span>
-              <span class="px-3 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">🎉 Joy</span>
+              <span class="px-3 py-1.5 bg-blue-500/20 border border-blue-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">? Hope</span>
+              <span class="px-3 py-1.5 bg-pink-500/20 border border-pink-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">?? Love</span>
+              <span class="px-3 py-1.5 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">??? Peace</span>
+              <span class="px-3 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">?? Joy</span>
             </div>
           </div>
           
@@ -680,28 +725,28 @@
               <div class="flex items-center gap-2.5">
                 <div class="group relative px-3.5 py-1.5 bg-gradient-to-br from-blue-500/30 to-blue-600/20 backdrop-blur-xl rounded-full border border-blue-400/50 hover:border-blue-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-blue-500/20">
                   <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">✨</span>
+                    <span class="text-sm group-hover:scale-110 transition-transform">?</span>
                     <span class="text-white font-semibold text-xs tracking-wide">Hope</span>
                   </div>
                   <div class="absolute inset-0 bg-blue-400/0 group-hover:bg-blue-400/10 rounded-full transition-colors"></div>
                 </div>
                 <div class="group relative px-4 py-2 bg-gradient-to-br from-pink-500/30 to-red-500/20 backdrop-blur-xl rounded-full border border-pink-400/50 hover:border-pink-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-pink-500/20">
                   <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">💝</span>
+                    <span class="text-sm group-hover:scale-110 transition-transform">??</span>
                     <span class="text-white font-semibold text-xs tracking-wide">Love</span>
                   </div>
                   <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/10 rounded-full transition-colors"></div>
                 </div>
                 <div class="group relative px-4 py-2 bg-gradient-to-br from-cyan-500/30 to-teal-500/20 backdrop-blur-xl rounded-full border border-cyan-400/50 hover:border-cyan-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-cyan-500/20">
                   <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">🕊️</span>
+                    <span class="text-sm group-hover:scale-110 transition-transform">???</span>
                     <span class="text-white font-semibold text-xs tracking-wide">Peace</span>
                   </div>
                   <div class="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 rounded-full transition-colors"></div>
                 </div>
                 <div class="group relative px-4 py-2 bg-gradient-to-br from-amber-500/30 to-yellow-500/20 backdrop-blur-xl rounded-full border border-amber-400/50 hover:border-amber-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-amber-500/20">
                   <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">🎉</span>
+                    <span class="text-sm group-hover:scale-110 transition-transform">??</span>
                     <span class="text-white font-semibold text-xs tracking-wide">Joy</span>
                   </div>
                   <div class="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 rounded-full transition-colors"></div>
@@ -913,12 +958,12 @@
           </div>
           <div class="flex items-center gap-3 mb-3">
             <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 1 — Hope</h2>
+              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 1 � Hope</h2>
               <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Nov 30-Dec 6</p>
             </div>
           </div>
           <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Titus 1:1–3</p>
+            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Titus 1:1�3</p>
           </div>
           <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">God's plan for hope began before time itself. In Christ, hope is embodied and the promise of eternal life is fulfilled. This week explores how hope meets us in our fears and leads us to courage.</p>
         </div>
@@ -945,7 +990,7 @@
           </div>
           <div class="flex items-center gap-3 mb-3">
             <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 2 — Love</h2>
+              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 2 � Love</h2>
               <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 7-Dec 13</p>
             </div>
           </div>
@@ -977,7 +1022,7 @@
           </div>
           <div class="flex items-center gap-3 mb-3">
             <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 3 — Peace</h2>
+              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 3 � Peace</h2>
               <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 14-Dec 20</p>
             </div>
           </div>
@@ -1009,12 +1054,12 @@
           </div>
           <div class="flex items-center gap-3 mb-3">
             <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 4 — Joy</h2>
+              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 4 � Joy</h2>
               <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 21-Dec 28</p>
             </div>
           </div>
           <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Luke 2:8–11</p>
+            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Luke 2:8�11</p>
           </div>
           <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">The good news of Christ's birth brings deep, enduring gladness rooted in God's faithfulness. This week explores how joy is a lived experience, shaping our words, actions, and outlook.</p>
         </div>
@@ -1062,7 +1107,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-flcNavy mb-2 text-base">Set Aside Time Daily</h3>
-              <p class="text-sm text-flcCharcoal/70 leading-relaxed">Choose a consistent time each day for your devotional reading—morning, lunch, or evening.</p>
+              <p class="text-sm text-flcCharcoal/70 leading-relaxed">Choose a consistent time each day for your devotional reading�morning, lunch, or evening.</p>
             </div>
           </div>
           <div class="flex gap-4 p-4 rounded-xl bg-flcCream/30 border border-flcGold/10 hover:border-flcGold/30 transition-all">
@@ -1457,3 +1502,4 @@
   </script>
 </body>
 </html>
+

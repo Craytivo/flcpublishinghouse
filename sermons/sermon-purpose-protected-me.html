@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="FLC Publishing House â€“ curated sermon notes and resources from Freedom Life Church."
+    content="FLC Publishing House – curated sermon notes and resources from Freedom Life Church."
   />
   
   <!-- Favicon -->
@@ -805,6 +805,51 @@
       .essay{ font-size: 1rem; line-height: 1.8; }
       .week-card, .searchable-card{ padding: 1rem; }
     }
+  
+    /* Site Polish */
+    body {
+      line-height: 1.7;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    .content-section {
+      border-color: rgba(154, 123, 79, 0.12);
+    }
+
+    .content-section h2,
+    .content-section h3 {
+      margin-top: 0.2rem;
+    }
+
+    .download-btn,
+    .btn-primary,
+    .btn-premium,
+    .btn-ghost {
+      border-radius: 0.875rem;
+    }
+
+    .resource-card,
+    .week-card,
+    .searchable-card,
+    .book-panel,
+    .content-section {
+      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
+    }
+
+    #footerContainer {
+      margin-top: 3rem;
+    }
+
+    #footerContainer::before {
+      content: '';
+      display: block;
+      height: 1px;
+      margin: 0 0 2rem 0;
+      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+    }
   </style>
 </head>
 <body>
@@ -838,84 +883,22 @@
       </ul>
     </div>
     
-    <!-- Sermon Header -->
-    <header class="sermon-header">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <!-- Featured Image Column -->
-        <div class="md:w-72 flex-shrink-0">
-          <div class="relative group">
-            <div class="absolute -inset-1 bg-gradient-to-br from-flcGold/30 via-flcGoldLight/20 to-transparent rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
-            <img src="../assets/images/purpose protected .webp" alt="Purpose Protected Me" class="relative w-full h-auto rounded-xl shadow-2xl border border-white/10" style="max-height: 320px; object-fit: cover;">
-          </div>
-        </div>
-        
-        <!-- Content Column -->
-        <div class="flex-1 flex flex-col justify-center">
-          <div class="inline-flex items-center gap-2 mb-4">
-            <div class="h-px w-8 bg-gradient-to-r from-flcGold to-transparent"></div>
-            <p class="text-flcGold text-xs font-bold uppercase tracking-[0.2em] opacity-90">Sermon Notes</p>
-          </div>
-          
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-[1.15] tracking-[-0.02em] text-white">
-            Purpose Protected Me
-          </h1>
-          
-          <div class="flex items-center gap-3 mb-5">
-            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-flcGold/20 to-flcGoldDark/10 flex items-center justify-center border border-white/10">
-              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <p class="text-white text-lg font-semibold leading-tight tracking-[-0.01em]">Pastor Rohan Samuels</p>
-              <p class="text-white/70 text-sm leading-relaxed">Freedom Life Church</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-4 mb-6 text-sm text-white/80">
-            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 backdrop-blur-sm font-medium">
-              <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              December 7, 2025
-            </span>
-            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 backdrop-blur-sm font-medium">
-              <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span id="readingTime">10 min read</span>
-            </span>
-          </div>
-          
-          <div class="flex flex-wrap gap-2.5 mb-6">
-            <span class="px-4 py-2 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm rounded-full text-sm font-medium tracking-wide border border-white/10 hover:border-flcGold/30 transition-all duration-300">Purpose</span>
-            <span class="px-4 py-2 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm rounded-full text-sm font-medium tracking-wide border border-white/10 hover:border-flcGold/30 transition-all duration-300">Protection</span>
-            <span class="px-4 py-2 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-sm rounded-full text-sm font-medium tracking-wide border border-white/10 hover:border-flcGold/30 transition-all duration-300">Divine Providence</span>
-          </div>
-          
-          <!-- Action Buttons -->
-          <div class="flex flex-wrap gap-3">
-            <a href="https://www.youtube.com/watch?v=_rxFVAqUc5Q" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              Watch Sermon
-            </a>
-            <a href="../assets/pdfs/Purpose Protected Me - Handout.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 text-white rounded-lg font-semibold text-sm border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Download PDF
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
+    
 
     <!-- Watch Full Sermon -->
     <div class="content-section">
       <h3 class="text-2xl font-heading font-bold text-flcNavy mb-4 text-center">Watch the Full Sermon</h3>
       <p class="text-flcCharcoal/70 mb-6 text-center max-w-2xl mx-auto">Experience the complete message as Pastor Rohan Samuels explores how God's purpose provides divine protection in our lives.</p>
+      <div class="flex justify-center mt-5">
+        <a href="../assets/pdfs/Purpose Protected Me - Handout.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white rounded-lg font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+      
+      
       <div class="relative w-full" style="padding-bottom: 56.25%;">
         <iframe 
           class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
@@ -933,7 +916,7 @@
       <h2 class="text-2xl font-heading font-bold text-flcNavy">Main Idea</h2>
       <p class="text-flcCharcoal/85 leading-relaxed text-lg" style="line-height: 1.8;">
         When we walk in God's purpose, we are under His divine protection. Purpose becomes our shield against the attacks of the enemy, 
-        and God's plans for our lives cannot be thwarted by opposition. Understanding and embracing your purpose is not just about fulfillmentâ€”it's about positioning yourself under the covering of God's providential care.
+        and God's plans for our lives cannot be thwarted by opposition. Understanding and embracing your purpose is not just about fulfillment—it's about positioning yourself under the covering of God's providential care.
       </p>
     </div>
 
@@ -955,7 +938,7 @@
       <div class="scripture-callout">
         <p class="font-semibold text-flcGold mb-3 text-base tracking-wide">Psalm 138:8</p>
         <p class="text-flcCharcoal/90 italic text-[17px]" style="line-height: 1.8;">
-          "The LORD will vindicate me; your love, LORD, endures foreverâ€”do not abandon the works of your hands."
+          "The LORD will vindicate me; your love, LORD, endures forever—do not abandon the works of your hands."
         </p>
       </div>
     </div>
@@ -1187,3 +1170,10 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
