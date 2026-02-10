@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -205,6 +205,132 @@
       border: 1px solid rgba(255,255,255,0.1);
       position: relative;
       overflow: hidden;
+    }
+
+    .download-btn {
+      min-height: 44px;
+    }
+
+    .quick-jump {
+      position: sticky;
+      top: 72px;
+      z-index: 60;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 0;
+      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
+      border-bottom: 1px solid rgba(154, 123, 79, 0.15);
+      backdrop-filter: blur(14px);
+    }
+
+    .quick-jump a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      color: #1A3A52;
+      background: rgba(154, 123, 79, 0.08);
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      text-decoration: none;
+    }
+
+    .quick-jump a:hover {
+      background: rgba(154, 123, 79, 0.15);
+    }
+
+    .section-divider {
+      height: 1px;
+      margin: 2.5rem 0 2rem;
+      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.3), transparent);
+    }
+
+    .most-recent {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      background: rgba(154, 123, 79, 0.15);
+      color: #9A7B4F;
+      border: 1px solid rgba(154, 123, 79, 0.25);
+    }
+
+    .card-click {
+      position: relative;
+    }
+
+    .book-accordion {
+      border-bottom: 1px solid rgba(229, 224, 216, 0.6);
+    }
+
+    .book-accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-weight: 600;
+      color: #1A3A52;
+    }
+
+    .book-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .book-accordion summary span {
+      color: rgba(44, 44, 44, 0.7);
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    .book-accordion .book-row {
+      padding: 0 1.25rem 1rem 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .book-accordion {
+        border-bottom: none;
+      }
+
+      .book-accordion summary {
+        display: none;
+      }
+
+      .book-accordion[open] .book-row {
+        padding: 1rem 1.25rem;
+      }
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #9A7B4F, #B8956A);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(154, 123, 79, 0.3);
+      text-decoration: none;
+      z-index: 80;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
     }
     
     .download-btn::before {
@@ -460,6 +586,9 @@
       .toc-wrap{ position: static !important; }
       .essay{ font-size: 1rem; line-height: 1.8; }
       .week-card, .searchable-card{ padding: 1rem; }
+      .quick-jump {
+        top: 60px;
+      }
     }
   
     .book-panel{
@@ -608,9 +737,21 @@
   document.addEventListener('DOMContentLoaded', function() {
     updateTotalMinutes();
 
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      document.querySelectorAll('.card-click').forEach(card => {
+        const target = card.getAttribute('data-link');
+        if (!target) return;
+        card.addEventListener('click', (event) => {
+          if (event.target.closest('a, button')) return;
+          window.location.href = target;
+        });
+      });
+    }
+
   });
 </script>
   <main class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
+    <div id="top"></div>
     <!-- Hero Section - Immersive Visual Design -->
             <header class="hero-header relative overflow-hidden mt-6 sm:mt-8 lg:mt-10">
       <div class="absolute inset-0">
@@ -629,7 +770,7 @@
               Everything You Need to Read, Watch, and Download
             </h1>
             <p class="mt-4 text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl">
-              This page gathers every published resource from FLC Publishing House—sermon notes, devotionals, Spiritual Detox weeks, Bible studies, and recommended books—so you can quickly find what you need in one place.
+              This page gathers every published resource from FLC Publishing House - sermon notes, devotionals, Spiritual Detox weeks, Bible studies, and recommended books - so you can quickly find what you need in one place.
             </p>
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
               <a href="#collections" class="download-btn">Browse Collections</a>
@@ -670,7 +811,18 @@
           </div>
         </div>
       </div>
-    </header>    <!-- Collections -->
+    </header>
+
+    <!-- Quick Jump (Mobile-first) -->
+    <div class="quick-jump">
+      <a href="#sermons">Sermons</a>
+      <a href="#devotionals">Devotionals</a>
+      <a href="#detox">Detox</a>
+      <a href="#studies">Studies</a>
+      <a href="#books">Books</a>
+    </div>
+
+    <!-- Collections -->
     <div id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
       <div class="mb-8">
         <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Collections</h2>
@@ -678,25 +830,12 @@
       </div>
 
       <div class="grid gap-6 md:grid-cols-2">
-      <div class="resource-card group">
-        <div class="p-6 md:p-8">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Announcement</span>
-            <span class="text-sm text-flcCharcoal/50">Vision 2026</span>
-          </div>
-          <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Building Campaign & Leadership Focus</h3>
-          <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Download the official Vision 2026 statement outlining the building campaign and leadership initiatives.</p>
-          <div class="flex flex-wrap gap-3">
-            <a href="../assets/pdfs/Vision%202026%20%282%29.pdf" class="download-btn" download="Vision-2026.pdf">Download PDF</a>
-          </div>
-        </div>
-      </div>
-
-        <div class="resource-card group">
+        <div class="resource-card group card-click" id="sermons" data-link="../sermons/sermon-its-time-to-crossover.html">
           <div class="p-6 md:p-8">
             <div class="flex items-center gap-3 mb-3">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Sermons</span>
               <span class="text-sm text-flcCharcoal/50">4 messages</span>
+              <span class="most-recent">Most Recent</span>
             </div>
             <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Sermon Notes & Media</h3>
             <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Browse all published sermon notes and media resources.</p>
@@ -709,24 +848,25 @@
           </div>
         </div>
 
-        <div class="resource-card group">
+        <div class="resource-card group card-click" id="devotionals" data-link="../devotionals-pages/devotional-week4-joy.html">
           <div class="p-6 md:p-8">
             <div class="flex items-center gap-3 mb-3">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Devotionals</span>
               <span class="text-sm text-flcCharcoal/50">4 weeks</span>
+              <span class="most-recent">Most Recent</span>
             </div>
             <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Advent Devotional Series</h3>
             <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Weekly devotionals for Hope, Love, Peace, and Joy.</p>
             <div class="flex flex-wrap gap-3">
-              <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 · Hope</a>
-              <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 · Love</a>
-              <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 · Peace</a>
-              <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn">Week 4 · Joy</a>
+              <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 Â· Hope</a>
+              <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 Â· Love</a>
+              <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 Â· Peace</a>
+              <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn">Week 4 Â· Joy</a>
             </div>
           </div>
         </div>
 
-        <div class="resource-card group">
+        <div class="resource-card group card-click" id="detox" data-link="../pages/spiritual-detox.html">
           <div class="p-6 md:p-8">
             <div class="flex items-center gap-3 mb-3">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Spiritual Detox</span>
@@ -743,7 +883,7 @@
           </div>
         </div>
 
-        <div class="resource-card group">
+        <div class="resource-card group card-click" id="studies" data-link="../bible-studies/bible-study-advent-hope.html">
           <div class="p-6 md:p-8">
             <div class="flex items-center gap-3 mb-3">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Bible Study</span>
@@ -757,71 +897,107 @@
             </div>
           </div>
         </div>
+
+        <div class="resource-card group card-click" data-link="../assets/pdfs/Vision%202026%20%282%29.pdf">
+          <div class="p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Announcement</span>
+              <span class="text-sm text-flcCharcoal/50">Vision 2026</span>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Building Campaign & Leadership Focus</h3>
+            <p class="text-flcCharcoal/70 mb-6 leading-relaxed">Download the official Vision 2026 statement outlining the building campaign and leadership initiatives.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="../assets/pdfs/Vision%202026%20%282%29.pdf" class="download-btn" download="Vision-2026.pdf">Download PDF</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>    <!-- Books -->
-    <div id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+    <div class="section-divider"></div>
+    <div id="books" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
       <div class="mb-6">
         <h2 class="text-3xl font-heading font-bold text-flcNavy mb-2">Books</h2>
         <p class="text-flcCharcoal/60">Recommended titles and where they appeared.</p>
       </div>
 
       <div class="book-panel divide-y divide-flcBorder/60">
-        <div class="book-row">
-          <div>
-            <h3 class="text-base font-semibold text-flcNavy">Sermon on the Mount</h3>
-            <p class="text-sm text-flcCharcoal/60">Amy-Jill Levine • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+        <details class="book-accordion" open>
+          <summary>Sermon on the Mount <span>Amy-Jill Levine Â· Spiritual Detox Week 2</span></summary>
+          <div class="book-row">
+            <div>
+              <h3 class="text-base font-semibold text-flcNavy">Sermon on the Mount</h3>
+              <p class="text-sm text-flcCharcoal/60">Amy-Jill Levine Â· From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://amzn.to/3XuCJJi" target="_blank" rel="noopener" class="book-link">Amazon</a>
+              <a href="https://www.overdrive.com/media/5368935/sermon-on-the-mount" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="https://amzn.to/3XuCJJi" target="_blank" rel="noopener" class="book-link">Amazon</a>
-            <a href="https://www.overdrive.com/media/5368935/sermon-on-the-mount" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
-          </div>
-        </div>
+        </details>
 
-        <div class="book-row">
-          <div>
-            <h3 class="text-base font-semibold text-flcNavy">Hope in Times of Fear: The Resurrection and the Meaning of Easter</h3>
-            <p class="text-sm text-flcCharcoal/60">Timothy Keller • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+        <details class="book-accordion" open>
+          <summary>Hope in Times of Fear <span>Timothy Keller Â· Spiritual Detox Week 2</span></summary>
+          <div class="book-row">
+            <div>
+              <h3 class="text-base font-semibold text-flcNavy">Hope in Times of Fear: The Resurrection and the Meaning of Easter</h3>
+              <p class="text-sm text-flcCharcoal/60">Timothy Keller Â· From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://www.amazon.com/gp/product/0525560793" target="_blank" rel="noopener" class="book-link">Amazon</a>
+              <a href="https://www.overdrive.com/media/5665340/hope-in-times-of-fear" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="https://www.amazon.com/gp/product/0525560793" target="_blank" rel="noopener" class="book-link">Amazon</a>
-            <a href="https://www.overdrive.com/media/5665340/hope-in-times-of-fear" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
-          </div>
-        </div>
+        </details>
 
-        <div class="book-row">
-          <div>
-            <h3 class="text-base font-semibold text-flcNavy">Deeper: Real Change for Real Sinners</h3>
-            <p class="text-sm text-flcCharcoal/60">Dane C. Ortlund • From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+        <details class="book-accordion" open>
+          <summary>Deeper <span>Dane C. Ortlund Â· Spiritual Detox Week 2</span></summary>
+          <div class="book-row">
+            <div>
+              <h3 class="text-base font-semibold text-flcNavy">Deeper: Real Change for Real Sinners</h3>
+              <p class="text-sm text-flcCharcoal/60">Dane C. Ortlund Â· From <a href="../pages/spiritual-detox-week2.html" class="book-source">Spiritual Detox Week 2</a></p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://www.amazon.com/s?k=9781433573996" target="_blank" rel="noopener" class="book-link">Amazon</a>
+              <a href="https://www.overdrive.com/media/6037544/deeper-real-change-for-real-sinners" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="https://www.amazon.com/s?k=9781433573996" target="_blank" rel="noopener" class="book-link">Amazon</a>
-            <a href="https://www.overdrive.com/media/6037544/deeper-real-change-for-real-sinners" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
-          </div>
-        </div>
+        </details>
 
-        <div class="book-row">
-          <div>
-            <h3 class="text-base font-semibold text-flcNavy">Misreading Scripture with Western Eyes: Removing Cultural Blinders to Better Understand the Bible</h3>
-            <p class="text-sm text-flcCharcoal/60">E. Randolph Richards &amp; Brandon J. O'Brien • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+        <details class="book-accordion" open>
+          <summary>Misreading Scripture with Western Eyes <span>E. Randolph Richards Â· Spiritual Detox Week 3</span></summary>
+          <div class="book-row">
+            <div>
+              <h3 class="text-base font-semibold text-flcNavy">Misreading Scripture with Western Eyes: Removing Cultural Blinders to Better Understand the Bible</h3>
+              <p class="text-sm text-flcCharcoal/60">E. Randolph Richards &amp; Brandon J. O'Brien Â· From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://www.amazon.com/dp/0830837825/ref=nosim?tag=ivp02-20" target="_blank" rel="noopener" class="book-link">Amazon</a>
+              <a href="https://www.overdrive.com/media/2543267/misreading-scripture-with-western-eyes" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="https://www.amazon.com/dp/0830837825/ref=nosim?tag=ivp02-20" target="_blank" rel="noopener" class="book-link">Amazon</a>
-            <a href="https://www.overdrive.com/media/2543267/misreading-scripture-with-western-eyes" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
-          </div>
-        </div>
+        </details>
 
-        <div class="book-row">
-          <div>
-            <h3 class="text-base font-semibold text-flcNavy">Revelation for the Rest of Us: A Prophetic Call to Follow Jesus as a Dissident Disciple</h3>
-            <p class="text-sm text-flcCharcoal/60">Author not listed • From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+        <details class="book-accordion" open>
+          <summary>Revelation for the Rest of Us <span>Spiritual Detox Week 3</span></summary>
+          <div class="book-row">
+            <div>
+              <h3 class="text-base font-semibold text-flcNavy">Revelation for the Rest of Us: A Prophetic Call to Follow Jesus as a Dissident Disciple</h3>
+              <p class="text-sm text-flcCharcoal/60">Author not listed Â· From <a href="../pages/spiritual-detox-week3.html" class="book-source">Spiritual Detox Week 3</a></p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="https://www.amazon.com/s?k=9780310135784" target="_blank" rel="noopener" class="book-link">Amazon</a>
+              <a href="https://www.overdrive.com/media/9093323/revelation-for-the-rest-of-us" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-4">
-            <a href="https://www.amazon.com/s?k=9780310135784" target="_blank" rel="noopener" class="book-link">Amazon</a>
-            <a href="https://www.overdrive.com/media/9093323/revelation-for-the-rest-of-us" target="_blank" rel="noopener" class="book-link">Borrow Free</a>
-          </div>
-        </div>
+        </details>
       </div>
     </div>  </main>
+
+  <a href="#top" class="back-to-top" aria-label="Back to top">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </a>
 
   <!-- Footer Container -->
   <div id="footerContainer"
@@ -939,6 +1115,11 @@
 <!-- Page Transitions & Performance Enhancements -->
 <script src="../assets/js/page-transitions.js"></script>
 </html>
+
+
+
+
+
 
 
 
