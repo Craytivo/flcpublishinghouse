@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -302,8 +302,10 @@
       background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
     }
   </style>
+<link rel="stylesheet" href="../assets/css/site-theme.css" />
 </head>
 <body class="bg-gray-50">
+  <a href="#main-content" class="skip-link">Skip to content</a>
   
   <!-- Header Container -->
   <div id="headerContainer" 
@@ -311,7 +313,7 @@
   <script src="../assets/js/header-component.js"></script>
 
   <!-- Main Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
     
     <!-- Back Button -->
     <div class="mb-6 no-print">
@@ -694,11 +696,13 @@
       localStorage.setItem('devotionalProgress', JSON.stringify(progress));
     });
   </script>
-
-  <script src="../assets/js/page-transitions.js"></script>
-
+<script src="../assets/js/site-theme.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 

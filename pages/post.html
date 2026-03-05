@@ -1,0 +1,1798 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post - FLC Publishing House</title>
+  <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ["Cormorant Garamond", "serif"],
+            sans: ["Manrope", "sans-serif"]
+          },
+          colors: {
+            flcNavy: "#1A3A52",
+            flcGold: "#9A7B4F",
+            flcCharcoal: "#2C2C2C",
+            flcCream: "#F5F1E8",
+            flcOffWhite: "#FAFAF8",
+            flcBorder: "#E5E0D8"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 40px;
+      --space-5: 64px;
+      --type-body: clamp(1.02rem, 0.96rem + 0.26vw, 1.12rem);
+      --type-small: clamp(0.92rem, 0.88rem + 0.16vw, 0.98rem);
+      --type-lead: clamp(1.1rem, 1.02rem + 0.3vw, 1.24rem);
+      --leading-body: 1.85;
+      --leading-heading: 1.14;
+      --measure: 68ch;
+      --measure-media: 76ch;
+      --measure-meta: 44ch;
+      --radius-1: 12px;
+      --radius-2: 16px;
+      --radius-3: 24px;
+    }
+    .post-shell {
+      background:
+        radial-gradient(1000px 420px at 8% -4%, rgba(154, 123, 79, 0.12), transparent 70%),
+        radial-gradient(900px 420px at 92% -10%, rgba(26, 58, 82, 0.14), transparent 72%),
+        linear-gradient(165deg, #FAFAF8 0%, #F5F1E8 45%, #EFE8DA 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      position: relative;
+      isolation: isolate;
+    }
+    .post-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 22%);
+    }
+    .post-shell::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.05;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(26, 58, 82, 0.65) 0.7px, transparent 0.8px);
+      background-size: 3px 3px;
+    }
+    .post-frame {
+      background: linear-gradient(160deg, rgba(255,255,255,0.97), rgba(252,250,246,0.94));
+      border: 1px solid rgba(154, 123, 79, 0.24);
+      box-shadow: 0 26px 56px rgba(15, 40, 56, 0.14), 0 10px 24px rgba(15, 40, 56, 0.09);
+      border-radius: var(--radius-3);
+    }
+    .post-kicker {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #9A7B4F;
+      text-align: center;
+    }
+    .detox-overview-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0 auto var(--space-2);
+      color: rgba(26, 58, 82, 0.8);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(154, 123, 79, 0.35);
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .detox-overview-link:hover {
+      color: #1A3A52;
+      border-color: rgba(154, 123, 79, 0.72);
+    }
+    .post-title {
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+      max-width: 22ch;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .post-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.35rem;
+      justify-content: center;
+      max-width: var(--measure-meta);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .post-body {
+      max-width: var(--measure);
+      font-size: var(--type-body);
+      font-kerning: normal;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .post-inline-heading {
+      color: #1A3A52;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-2);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: var(--leading-heading);
+      font-size: clamp(1.5rem, 1.92vw, 1.9rem);
+      text-wrap: balance;
+      max-width: 24ch;
+      position: relative;
+    }
+    .post-inline-heading::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 2px;
+      border-radius: 999px;
+      margin-top: var(--space-1);
+      background: linear-gradient(90deg, #9A7B4F 0%, rgba(154, 123, 79, 0.25) 100%);
+    }
+    .post-inline-subheading {
+      color: #1A3A52;
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-2);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      font-size: clamp(1.24rem, 1.45vw, 1.46rem);
+      text-wrap: balance;
+      max-width: 30ch;
+    }
+    .post-body p {
+      margin-bottom: var(--space-3);
+      line-height: var(--leading-body);
+      color: rgba(44, 44, 44, 0.86);
+      font-size: var(--type-body);
+      font-weight: 400;
+      text-wrap: pretty;
+      hanging-punctuation: first last;
+    }
+    .post-body h2, .post-body h3 {
+      color: #1A3A52;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-2);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: var(--leading-heading);
+      text-wrap: balance;
+      max-width: 24ch;
+      position: relative;
+    }
+    .post-body h2 {
+      font-size: clamp(1.52rem, 2vw, 1.96rem);
+    }
+    .post-body h3 {
+      font-size: clamp(1.28rem, 1.62vw, 1.58rem);
+    }
+    .post-body h2::after,
+    .post-body h3::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 2px;
+      border-radius: 999px;
+      margin-top: var(--space-1);
+      background: linear-gradient(90deg, #9A7B4F 0%, rgba(154, 123, 79, 0.25) 100%);
+    }
+    .post-body blockquote {
+      margin: var(--space-3) 0;
+      padding: var(--space-2) var(--space-3) var(--space-2) var(--space-3);
+      border-left: 3px solid rgba(154, 123, 79, 0.7);
+      background: rgba(154, 123, 79, 0.08);
+      color: rgba(26, 58, 82, 0.95);
+      font-style: italic;
+      border-radius: var(--radius-1);
+    }
+    .post-lead-quote {
+      margin-top: 0;
+      margin-bottom: var(--space-4);
+      border-left-width: 4px;
+      background: rgba(154, 123, 79, 0.1);
+      color: rgba(26, 58, 82, 0.98);
+      font-size: clamp(1.08rem, 1.02rem + 0.25vw, 1.2rem);
+      line-height: 1.72;
+    }
+    .post-body a {
+      color: #1A3A52;
+      text-decoration: underline;
+      text-decoration-color: rgba(154, 123, 79, 0.6);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.12em;
+      transition: color 0.2s ease, text-underline-offset 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .post-body a:hover {
+      color: #0f2e43;
+      text-decoration-color: rgba(154, 123, 79, 0.95);
+      text-underline-offset: 0.18em;
+    }
+    .post-body strong {
+      color: #1A3A52;
+      font-weight: 700;
+    }
+    .post-body em {
+      color: rgba(26, 58, 82, 0.92);
+      font-style: italic;
+    }
+    .post-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.94em;
+      background: rgba(26, 58, 82, 0.08);
+      border-radius: 0.28rem;
+      padding: 0.06rem 0.35rem;
+    }
+    .post-body > p:first-child {
+      font-size: var(--type-lead);
+      line-height: 1.7;
+      color: rgba(26, 58, 82, 0.9);
+      margin-bottom: var(--space-3);
+    }
+    .post-meta-row + .post-body > p:first-child::first-letter {
+      float: left;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 3.1em;
+      line-height: 0.8;
+      padding-right: 0.09em;
+      color: #1A3A52;
+      font-weight: 700;
+    }
+    .post-body ul, .post-body ol {
+      margin: 0 0 var(--space-3) 1.3rem;
+      color: rgba(44, 44, 44, 0.88);
+      padding: 0;
+      max-width: calc(var(--measure) - 2ch);
+    }
+    .post-body li {
+      margin-bottom: var(--space-1);
+      line-height: 1.75;
+    }
+    .post-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.92rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(154, 123, 79, 0.14), rgba(184, 149, 106, 0.1));
+      border: 1px solid rgba(154, 123, 79, 0.25);
+      color: #1A3A52;
+      font-size: 0.77rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .post-meta svg {
+      width: 0.95rem;
+      height: 0.95rem;
+      color: #9A7B4F;
+      flex-shrink: 0;
+      stroke-width: 1.9;
+    }
+    .related-card {
+      border: 1px solid rgba(229, 224, 216, 0.95);
+      border-radius: var(--radius-2);
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(15, 40, 56, 0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      display: flex;
+      min-height: 100%;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .related-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 36px rgba(15, 40, 56, 0.15);
+      border-color: rgba(154, 123, 79, 0.56);
+    }
+    .related-card.is-visible {
+      animation: cardIn 320ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    .related-card .card-inner {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .related-card .card-title {
+      font-size: 1.05rem;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .related-card .card-meta {
+      color: rgba(44, 44, 44, 0.6);
+    }
+    .recommended-shell {
+      background: linear-gradient(160deg, rgba(255,255,255,0.96), rgba(249,246,240,0.94));
+      border: 1px solid rgba(154, 123, 79, 0.22);
+      border-radius: var(--radius-3);
+      padding: var(--space-3);
+      box-shadow: 0 14px 30px rgba(15, 40, 56, 0.1);
+    }
+    .recommended-kicker {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #9A7B4F;
+    }
+    .guide-shell {
+      margin-top: var(--space-4);
+      padding: var(--space-3);
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      border-radius: var(--radius-2);
+      background: linear-gradient(160deg, rgba(248, 244, 236, 0.68), rgba(255, 255, 255, 0.86));
+      max-width: var(--measure);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .guide-title {
+      font-family: "Cormorant Garamond", serif;
+      color: #1A3A52;
+      font-size: 1.75rem;
+      line-height: 1.1;
+      margin: 0 0 0.25rem;
+    }
+    .guide-subtitle {
+      margin: 0 0 0.9rem;
+      color: rgba(44, 44, 44, 0.72);
+      font-size: var(--type-small);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+    .guide-grid[data-count="1"] {
+      grid-template-columns: 1fr;
+    }
+    .guide-block {
+      border: 1px solid rgba(154, 123, 79, 0.18);
+      border-radius: var(--radius-1);
+      background: rgba(255, 255, 255, 0.88);
+      padding: var(--space-2);
+    }
+    .guide-block h3 {
+      margin: 0 0 0.42rem;
+      font-size: 1.1rem;
+      color: #1A3A52;
+      font-weight: 700;
+      font-family: "Cormorant Garamond", serif;
+    }
+    .guide-block p {
+      margin: 0.4rem 0 0;
+      line-height: 1.72;
+      color: rgba(44, 44, 44, 0.9);
+    }
+    .guide-block ul {
+      margin: 0.3rem 0 0 1.05rem;
+      line-height: 1.68;
+      color: rgba(44, 44, 44, 0.93);
+    }
+    .guide-scripture {
+      font-style: italic;
+      color: rgba(26, 58, 82, 0.95);
+    }
+    .guide-question {
+      font-style: italic;
+      color: rgba(26, 58, 82, 0.94);
+    }
+    .guide-prayer strong {
+      color: #1A3A52;
+    }
+    .books-shell {
+      max-width: var(--measure);
+      margin: var(--space-4) auto 0;
+      border: 1px solid rgba(154, 123, 79, 0.14);
+      border-radius: var(--radius-2);
+      background: linear-gradient(160deg, rgba(255,255,255,0.88), rgba(249, 246, 241, 0.78));
+      padding: var(--space-3);
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    .book-card {
+      border: 1px solid rgba(229, 224, 216, 0.72);
+      border-radius: var(--radius-1);
+      background: rgba(255, 255, 255, 0.82);
+      padding: var(--space-2);
+    }
+    .book-title {
+      margin: 0;
+      color: rgba(26, 58, 82, 0.92);
+      font-weight: 700;
+      line-height: 1.3;
+      font-size: clamp(0.95rem, 0.92rem + 0.18vw, 1.05rem);
+      letter-spacing: -0.01em;
+    }
+    .book-title-link {
+      color: #1A3A52;
+      text-decoration: none;
+      border-bottom: none;
+      transition: color 0.18s ease;
+    }
+    .book-title-link:hover {
+      color: #9A7B4F;
+    }
+    .book-author {
+      margin: 0.45rem 0 0;
+      color: rgba(44, 44, 44, 0.64);
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .book-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.85rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(26, 58, 82, 0.86);
+      border: 1px solid rgba(154, 123, 79, 0.22);
+      background: rgba(154, 123, 79, 0.08);
+      transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+    }
+    .book-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(154, 123, 79, 0.34);
+      background: rgba(154, 123, 79, 0.12);
+    }
+    .week-nav {
+      max-width: var(--measure);
+      margin: var(--space-4) auto 0;
+      border: 1px solid rgba(154, 123, 79, 0.2);
+      border-radius: var(--radius-2);
+      background: linear-gradient(160deg, rgba(255,255,255,0.95), rgba(248, 244, 236, 0.88));
+      padding: var(--space-2);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    .week-nav-link {
+      display: block;
+      border: 1px solid rgba(229, 224, 216, 0.95);
+      border-radius: var(--radius-1);
+      background: #fff;
+      padding: 0.85rem 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .week-nav-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(15, 40, 56, 0.1);
+      border-color: rgba(154, 123, 79, 0.45);
+    }
+    .week-nav-kicker {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9A7B4F;
+      font-weight: 700;
+    }
+    .week-nav-title {
+      display: block;
+      color: #1A3A52;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    @media (min-width: 768px) {
+      .week-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .pastor-message {
+      max-width: var(--measure);
+      margin: 0 auto var(--space-4);
+      border: 1px solid rgba(154, 123, 79, 0.22);
+      border-radius: var(--radius-2);
+      background: linear-gradient(160deg, rgba(255,255,255,0.94), rgba(248, 244, 236, 0.9));
+      padding: var(--space-3);
+    }
+    .pastor-message .label {
+      margin: 0 0 var(--space-1);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #9A7B4F;
+    }
+    .pastor-message blockquote {
+      margin: 0;
+      border-left: 3px solid rgba(154, 123, 79, 0.6);
+      padding-left: var(--space-2);
+      color: rgba(26, 58, 82, 0.95);
+      font-style: italic;
+      line-height: 1.75;
+    }
+    .pastor-message blockquote p {
+      margin: 0;
+    }
+    .pastor-message blockquote p + p {
+      margin-top: var(--space-2);
+    }
+    .post-hero-media {
+      position: relative;
+      max-width: var(--measure-media);
+      margin: 0 auto;
+      border-radius: var(--radius-2);
+      overflow: hidden;
+    }
+    .post-hero-media::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 34%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(252, 250, 246, 0.88) 100%);
+      pointer-events: none;
+    }
+    .post-video-wrap {
+      max-width: var(--measure-media);
+      margin: var(--space-4) auto;
+    }
+    .post-intro {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeSlideIn 320ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (min-width: 900px) {
+      .guide-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .guide-grid[data-count="1"] {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .guide-grid[data-count="3"] .guide-block:first-child {
+        grid-column: 1 / -1;
+      }
+      .books-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      .post-frame {
+        border-radius: var(--radius-2);
+        box-shadow: 0 14px 28px rgba(15, 40, 56, 0.12), 0 6px 16px rgba(15, 40, 56, 0.08);
+      }
+      .post-hero-media {
+        border-radius: var(--radius-1);
+      }
+      #postImage {
+        height: min(52vw, 270px) !important;
+      }
+      .post-kicker {
+        margin-bottom: var(--space-2) !important;
+      }
+      .post-title {
+        font-size: clamp(1.85rem, 7.4vw, 2.2rem);
+        max-width: 18ch;
+        margin-bottom: var(--space-3) !important;
+      }
+      .post-meta-row {
+        gap: var(--space-1);
+        margin-bottom: var(--space-2);
+      }
+      .post-meta {
+        padding: 0.42rem 0.78rem;
+        font-size: 0.7rem;
+      }
+      .post-meta svg {
+        width: 0.84rem;
+        height: 0.84rem;
+      }
+      .post-body,
+      .guide-shell,
+      .recommended-shell {
+        max-width: 100%;
+      }
+      .post-inline-heading,
+      .post-body h2,
+      .post-body h3 {
+        max-width: 100%;
+      }
+      .post-body p {
+        margin-bottom: var(--space-2);
+      }
+      .post-body ul, .post-body ol {
+        margin-left: 1.05rem;
+        max-width: 100%;
+      }
+      .post-video-wrap {
+        margin: var(--space-3) auto;
+      }
+      .recommended-shell {
+        padding: var(--space-2);
+      }
+      .guide-shell {
+        padding: var(--space-2);
+      }
+    }
+    @media (max-width: 640px) {
+      .post-body p {
+        font-size: 1rem;
+        line-height: 1.82;
+      }
+      .post-title {
+        font-size: 2rem;
+      }
+      .post-video-wrap {
+        margin: var(--space-3) auto;
+      }
+      .post-meta-row + .post-body > p:first-child::first-letter {
+        font-size: 2.5em;
+      }
+    }
+    @media (max-width: 480px) {
+      .post-shell::after {
+        display: none;
+      }
+      .post-shell::before {
+        opacity: 0.55;
+      }
+      .post-title {
+        font-size: clamp(1.7rem, 8.5vw, 2rem);
+        max-width: 16ch;
+      }
+      .post-meta-row {
+        max-width: 100%;
+      }
+      .post-meta {
+        letter-spacing: 0.08em;
+      }
+      .post-body > p:first-child::first-letter {
+        float: none;
+        font-size: inherit;
+        line-height: inherit;
+        padding-right: 0;
+      }
+      .post-body > p:first-child {
+        font-size: clamp(1.04rem, 3.9vw, 1.14rem);
+      }
+      .related-card {
+        min-height: 0;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .post-intro,
+      .related-card,
+      .related-card.is-visible {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/site-theme.css" />
+</head>
+<body class="post-shell text-flcCharcoal font-sans">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <div
+    id="headerContainer"
+    data-config='{"currentPage":"resources","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
+  ></div>
+  <script src="../assets/js/header-component.js"></script>
+
+  <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <a href="../pages/resources.html" class="inline-flex items-center text-sm font-semibold text-flcNavy hover:text-flcGold mb-8">
+      &larr; Back to Resources
+    </a>
+
+    <article class="post-frame post-intro overflow-hidden">
+      <div id="postImageWrap" class="post-hero-media hidden">
+        <img id="postImage" src="" alt="" class="w-full h-72 sm:h-[26rem] object-cover" />
+      </div>
+      <div class="p-6 sm:p-9 lg:p-11">
+        <p class="post-kicker mb-3">FLC Publishing House</p>
+        <div id="detoxOverviewLinkWrap" class="hidden text-center">
+          <a id="detoxOverviewLink" class="detox-overview-link" href="../pages/spiritual-detox.html">
+            The Kingdom Blueprint
+          </a>
+        </div>
+        <h1 id="postTitle" class="post-title font-heading text-flcNavy mb-6">Loading post...</h1>
+        <div class="post-meta-row">
+          <div id="postDateWrap" class="hidden">
+            <div class="post-meta">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span id="postDateText"></span>
+            </div>
+          </div>
+          <div id="postPastorWrap" class="hidden">
+            <div class="post-meta">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1118.88 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span id="postPastorText"></span>
+            </div>
+          </div>
+        </div>
+        <div id="postVideoWrap" class="post-video-wrap hidden">
+          <div class="relative w-full overflow-hidden rounded-xl bg-black" style="padding-bottom: 56.25%;">
+            <iframe
+              id="postVideo"
+              class="absolute inset-0 w-full h-full"
+              src=""
+              title="Post video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="mt-2 text-xs text-flcCharcoal/70">
+            Video not playing?
+            <a id="postVideoFallbackLink" href="#" target="_blank" rel="noopener" class="text-flcNavy underline">Watch on YouTube</a>
+          </p>
+        </div>
+        <section id="pastorMessageSection" class="pastor-message hidden">
+          <p class="label">Message from Pastor Rohan</p>
+          <blockquote id="pastorMessageText"></blockquote>
+        </section>
+        <div id="postBody" class="post-body text-base"></div>
+        <div id="postGuide" class="hidden"></div>
+        <section id="booksSection" class="books-shell hidden">
+          <p class="recommended-kicker mb-2">Further Reading</p>
+          <h2 class="guide-title mb-4">Books for This Week</h2>
+          <div id="booksGrid" class="books-grid"></div>
+        </section>
+        <section id="detoxWeekNav" class="week-nav hidden">
+          <a id="prevWeekLink" class="week-nav-link hidden" href="#">
+            <span class="week-nav-kicker">Previous Week</span>
+            <span id="prevWeekTitle" class="week-nav-title"></span>
+          </a>
+          <a id="nextWeekLink" class="week-nav-link hidden" href="#">
+            <span class="week-nav-kicker">Next Week</span>
+            <span id="nextWeekTitle" class="week-nav-title"></span>
+          </a>
+        </section>
+      </div>
+    </article>
+
+    <section id="relatedPostsSection" class="hidden mt-16">
+      <div class="recommended-shell">
+        <p class="recommended-kicker mb-2">Keep Reading</p>
+        <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy mb-6">Recommended Posts</h2>
+        <div id="relatedPostsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
+      </div>
+    </section>
+  </main>
+
+  <div
+    id="footerContainer"
+    data-config='{"currentPage":"resources","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
+  ></div>
+  <script src="../assets/js/footer-component.js"></script>
+
+  <script>
+    window.FLC_CONTENTFUL = window.FLC_CONTENTFUL || {
+      spaceId: 'i8pstcwrkztq',
+      environment: 'master',
+      accessToken: 'pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw',
+      postPagePath: '../pages/post.html'
+    };
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderTextNode(node) {
+      const value = escapeHtml(node.value || '');
+      const marks = Array.isArray(node.marks) ? node.marks : [];
+      return marks.reduce((acc, mark) => {
+        if (mark.type === 'bold') return `<strong>${acc}</strong>`;
+        if (mark.type === 'italic') return `<em>${acc}</em>`;
+        if (mark.type === 'underline') return `<u>${acc}</u>`;
+        if (mark.type === 'code') return `<code>${acc}</code>`;
+        return acc;
+      }, value);
+    }
+
+    function renderRichNode(node) {
+      if (!node || !node.nodeType) return '';
+      const children = Array.isArray(node.content) ? node.content.map(renderRichNode).join('') : '';
+
+      if (node.nodeType === 'text') return renderTextNode(node);
+      if (node.nodeType === 'paragraph') {
+        const namedSubheading = getNamedSubheading(node);
+        if (namedSubheading) {
+          return `<h3 class="post-inline-subheading">${namedSubheading}</h3>`;
+        }
+        if (isBoldHeadingParagraph(node)) {
+          const headingText = escapeHtml(
+            (node.content || [])
+              .map((item) => (item && item.nodeType === 'text' ? item.value || '' : ''))
+              .join(' ')
+              .replace(/\s+/g, ' ')
+              .trim()
+          );
+          return `<h2 class="post-inline-heading">${headingText}</h2>`;
+        }
+        return `<p>${children}</p>`;
+      }
+      if (node.nodeType === 'heading-2') return `<h2>${children}</h2>`;
+      if (node.nodeType === 'heading-3') return `<h3>${children}</h3>`;
+      if (node.nodeType === 'unordered-list') return `<ul>${children}</ul>`;
+      if (node.nodeType === 'ordered-list') return `<ol>${children}</ol>`;
+      if (node.nodeType === 'list-item') return `<li>${children}</li>`;
+      if (node.nodeType === 'blockquote') return `<blockquote>${children}</blockquote>`;
+      if (node.nodeType === 'hyperlink') {
+        const href = node.data && node.data.uri ? escapeHtml(node.data.uri) : '#';
+        return `<a href="${href}" target="_blank" rel="noopener" class="text-flcNavy underline">${children}</a>`;
+      }
+      if (node.nodeType === 'document') return children;
+      return children;
+    }
+
+    function plainParagraphText(node) {
+      if (!node || node.nodeType !== 'paragraph' || !Array.isArray(node.content)) return '';
+      return node.content
+        .map((item) => (item && item.nodeType === 'text' ? item.value || '' : ''))
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function getNamedSubheading(node) {
+      const text = plainParagraphText(node);
+      if (!text) return '';
+      const normalized = text.toLowerCase().replace(/\s+/g, ' ').trim();
+      if (/^uncommon provision[.!?]?$/.test(normalized)) return 'Uncommon Provision';
+      if (/^detox call to action[.!?]?$/.test(normalized)) return 'Detox Call To Action';
+      return '';
+    }
+
+    function isBoldHeadingParagraph(node) {
+      if (!node || node.nodeType !== 'paragraph' || !Array.isArray(node.content) || !node.content.length) {
+        return false;
+      }
+      const textNodes = node.content.filter((item) => item && item.nodeType === 'text');
+      if (textNodes.length !== node.content.length) return false;
+
+      const combined = textNodes.map((item) => item.value || '').join('').replace(/\s+/g, ' ').trim();
+      if (!combined || combined.length > 95) return false;
+
+      return textNodes.every((item) => {
+        const value = String(item.value || '').trim();
+        if (!value) return true;
+        const marks = Array.isArray(item.marks) ? item.marks : [];
+        return marks.some((mark) => mark && mark.type === 'bold');
+      });
+    }
+
+    function extractYouTubeId(value) {
+      if (!value || typeof value !== 'string') return '';
+      let input = value.trim();
+      if (!input) return '';
+
+      if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+
+      // Accept protocol-less YouTube URLs stored in CMS, e.g. "youtube.com/watch?v=..."
+      if (!/^https?:\/\//i.test(input) && /(youtube\.com|youtu\.be)/i.test(input)) {
+        input = `https://${input.replace(/^\/+/, '')}`;
+      }
+
+      try {
+        const url = new URL(input);
+        if (url.hostname.includes('youtu.be')) {
+          const id = url.pathname.replace(/\//g, '');
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : '';
+        }
+        if (url.hostname.includes('youtube.com')) {
+          const v = url.searchParams.get('v');
+          if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+          const pathParts = url.pathname.split('/').filter(Boolean);
+          const embedIndex = pathParts.findIndex((part) => part === 'embed' || part === 'shorts');
+          if (embedIndex !== -1 && pathParts[embedIndex + 1]) {
+            const id = pathParts[embedIndex + 1];
+            return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : '';
+          }
+        }
+      } catch (error) {
+        return '';
+      }
+
+      return '';
+    }
+
+    function extractYouTubeIdFromRichNode(node) {
+      if (!node || typeof node !== 'object') return '';
+      if (node.nodeType === 'hyperlink' && node.data && typeof node.data.uri === 'string') {
+        return extractYouTubeId(node.data.uri);
+      }
+      if (!Array.isArray(node.content)) return '';
+      for (const child of node.content) {
+        const found = extractYouTubeIdFromRichNode(child);
+        if (found) return found;
+      }
+      return '';
+    }
+
+    function resolveYouTubeId(fields, body) {
+      if (!fields) return '';
+
+      const candidates = [
+        fields.youTubeVideo,
+        fields.youtubeVideo,
+        fields.youtubeURL,
+        fields.youtubeUrl,
+        fields.youTubeUrl,
+        fields.youtubeVideoUrl,
+        fields.youtubeLink,
+        fields.youtube,
+        fields.videoUrl,
+        fields.videoURL,
+        fields.videoLink,
+        fields.video,
+        fields.sermonVideo,
+        fields.messageVideo,
+        fields.mediaUrl,
+        fields.mediaURL,
+        fields.url,
+        fields.youtubeId
+      ];
+
+      for (const candidate of candidates) {
+        const id = extractYouTubeId(String(candidate || ''));
+        if (id) return id;
+      }
+
+      // Fallback: scan rich text fields for pasted YouTube hyperlinks.
+      const richSources = [fields.body, fields.summary, body];
+      for (const source of richSources) {
+        const id = extractYouTubeIdFromRichNode(source);
+        if (id) return id;
+      }
+
+      return '';
+    }
+
+    function formatPostDate(value) {
+      if (!value || typeof value !== 'string') return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(date);
+    }
+
+    function formatPastorName(value) {
+      if (!value || typeof value !== 'string') return '';
+      return value.replace(/\s+/g, ' ').trim();
+    }
+
+    function formatCompactDate(value) {
+      if (!value || typeof value !== 'string') return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(date);
+    }
+
+    function normalizeAssetUrl(url) {
+      if (!url) return '';
+      return url.startsWith('//') ? `https:${url}` : url;
+    }
+
+    function resolveImageUrl(entryPayload) {
+      const imageLink = entryPayload && entryPayload.fields
+        ? (entryPayload.fields.image || entryPayload.fields.heroimage || null)
+        : null;
+      if (!imageLink || !imageLink.sys || !imageLink.sys.id) return '';
+      const targetId = imageLink.sys.id;
+      const includes = entryPayload.includes && Array.isArray(entryPayload.includes.Asset)
+        ? entryPayload.includes.Asset
+        : [];
+      const asset = includes.find((item) => item && item.sys && item.sys.id === targetId);
+      const fileUrl = asset && asset.fields && asset.fields.file && asset.fields.file.url ? asset.fields.file.url : '';
+      return normalizeAssetUrl(fileUrl);
+    }
+
+    function cleanText(value) {
+      return String(value || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function listFromField(value) {
+      if (Array.isArray(value)) return value.map(cleanText).filter(Boolean);
+      if (typeof value === 'string') {
+        return value
+          .split(/\r?\n|;/)
+          .map(cleanText)
+          .filter(Boolean);
+      }
+      return [];
+    }
+
+    function renderLongTextParagraphs(value) {
+      if (!value || typeof value !== 'string') return '';
+      return value
+        .split(/\r?\n\r?\n/)
+        .map((p) => cleanText(p))
+        .filter(Boolean)
+        .map((p) => `<p>${escapeHtml(p)}</p>`)
+        .join('');
+    }
+
+    function renderSmartList(items, type) {
+      if (!Array.isArray(items) || !items.length) return '';
+      const lines = items.map((item) => {
+        const raw = cleanText(item);
+        if (!raw) return '';
+        const safe = escapeHtml(raw);
+
+        if (type === 'scripture') {
+          return `<li class="guide-scripture">${safe}</li>`;
+        }
+
+        if (type === 'question') {
+          const withQ = /[?]$/.test(raw) ? raw : `${raw}?`;
+          return `<li class="guide-question">${escapeHtml(withQ)}</li>`;
+        }
+
+        if (type === 'prayer') {
+          const parts = raw.split(':');
+          if (parts.length > 1) {
+            const lead = escapeHtml(parts.shift().trim());
+            const rest = escapeHtml(parts.join(':').trim());
+            return `<li class="guide-prayer"><strong>${lead}:</strong> ${rest}</li>`;
+          }
+          return `<li class="guide-prayer">${safe}</li>`;
+        }
+
+        return `<li>${safe}</li>`;
+      }).filter(Boolean);
+
+      if (!lines.length) return '';
+      return `<ul>${lines.join('')}</ul>`;
+    }
+
+    function renderStudyGuide(fields) {
+      const guideEl = document.getElementById('postGuide');
+      if (!guideEl || !fields) return;
+
+      const summary = typeof fields.summary === 'string' ? fields.summary.trim() : '';
+      const keyScriptures = listFromField(fields.keyScriptures);
+      const reflectionQuestions = listFromField(fields.reflectionQuestions);
+      const prayerPoints = listFromField(fields.prayerPoints);
+
+      const blocks = [];
+      if (summary) {
+        blocks.push(`
+          <section class="guide-block">
+            <h3>Summary</h3>
+            ${renderLongTextParagraphs(summary)}
+          </section>
+        `);
+      }
+      if (keyScriptures.length) {
+        blocks.push(`
+          <section class="guide-block">
+            <h3>Key Scriptures</h3>
+            ${renderSmartList(keyScriptures, 'scripture')}
+          </section>
+        `);
+      }
+      if (reflectionQuestions.length) {
+        blocks.push(`
+          <section class="guide-block">
+            <h3>Reflection Questions</h3>
+            ${renderSmartList(reflectionQuestions, 'question')}
+          </section>
+        `);
+      }
+      if (prayerPoints.length) {
+        blocks.push(`
+          <section class="guide-block">
+            <h3>Prayer Points</h3>
+            ${renderSmartList(prayerPoints, 'prayer')}
+          </section>
+        `);
+      }
+
+      if (!blocks.length) return;
+
+      guideEl.innerHTML = `
+        <section class="guide-shell">
+          <h2 class="guide-title">Study Guide</h2>
+          <p class="guide-subtitle">Meditate, Reflect, Pray</p>
+          <div class="guide-grid" data-count="${blocks.length}">
+            ${blocks.join('')}
+          </div>
+        </section>
+      `;
+      guideEl.classList.remove('hidden');
+    }
+
+    function extractFirstBodyParagraphText(body) {
+      if (!body || !Array.isArray(body.content)) return '';
+      for (const node of body.content) {
+        if (!node || node.nodeType !== 'paragraph' || !Array.isArray(node.content)) continue;
+        const text = node.content
+          .map((item) => (item && item.nodeType === 'text' ? item.value || '' : ''))
+          .join(' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (text) return text;
+      }
+      return '';
+    }
+
+    function extractTextFromRichNode(node) {
+      if (!node || typeof node !== 'object') return '';
+      if (node.nodeType === 'text') return String(node.value || '');
+      if (!Array.isArray(node.content)) return '';
+      return node.content.map(extractTextFromRichNode).join('');
+    }
+
+    function extractTextFromRichDocument(doc) {
+      if (!doc || doc.nodeType !== 'document' || !Array.isArray(doc.content)) return '';
+      return doc.content
+        .map((block) => extractTextFromRichNode(block).replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .join('\n\n')
+        .trim();
+    }
+
+    function resolveMessageFieldValue(value) {
+      if (typeof value === 'string') return value.trim();
+      if (Array.isArray(value)) {
+        return value
+          .map((item) => (typeof item === 'string' ? item.trim() : ''))
+          .filter(Boolean)
+          .join('\n\n')
+          .trim();
+      }
+      if (value && typeof value === 'object' && value.nodeType === 'document') {
+        return extractTextFromRichDocument(value);
+      }
+      return '';
+    }
+
+    function resolveEntryQuote(fields) {
+      if (!fields || typeof fields !== 'object') return '';
+      const raw =
+        fields.quote ||
+        fields.leadQuote ||
+        fields.openingQuote ||
+        '';
+      return resolveMessageFieldValue(raw);
+    }
+
+    function splitParagraphs(text) {
+      return String(text || '')
+        .split(/\r?\n\s*\r?\n|[\r\n]+/)
+        .map((p) => p.replace(/\s+/g, ' ').trim())
+        .filter(Boolean);
+    }
+
+    function extractBodyParagraphs(body, limit) {
+      if (!body || !Array.isArray(body.content)) return [];
+      const out = [];
+      for (const node of body.content) {
+        if (!node || node.nodeType !== 'paragraph') continue;
+        const txt = plainParagraphText(node);
+        if (!txt) continue;
+        out.push(txt);
+        if (out.length >= (limit || 2)) break;
+      }
+      return out;
+    }
+
+    function uniqueParagraphs(paragraphs) {
+      const seen = new Set();
+      const out = [];
+      for (const raw of paragraphs) {
+        const text = String(raw || '').replace(/\s+/g, ' ').trim();
+        if (!text) continue;
+        const key = text.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(text);
+      }
+      return out;
+    }
+
+    function renderPastorMessageHtml(paragraphs) {
+      const safe = uniqueParagraphs(paragraphs).slice(0, 4);
+      if (!safe.length) return '';
+      return safe.map((p) => `<p>${escapeHtml(p)}</p>`).join('');
+    }
+
+    function resolvePastorMessage(fields) {
+      const fromField = fields && (
+        fields.messageFromPastorRohan ||
+        fields.messageFromPastor ||
+        fields.pastorMessage ||
+        fields.pastoralMessage ||
+        fields.rohanMessage ||
+        fields.messageFromRohan ||
+        ''
+      );
+      const fieldOnly = splitParagraphs(resolveMessageFieldValue(fromField));
+      if (fieldOnly.length) return uniqueParagraphs(fieldOnly);
+
+      // Final key-scan fallback for Contentful model variations.
+      const dynamicField = fields && typeof fields === 'object'
+        ? Object.keys(fields).find((key) => {
+            const k = String(key || '').toLowerCase();
+            return k.includes('message') && k.includes('pastor') && k.includes('rohan');
+          })
+        : '';
+      if (dynamicField) {
+        const dynamicOnly = splitParagraphs(resolveMessageFieldValue(fields[dynamicField]));
+        if (dynamicOnly.length) return uniqueParagraphs(dynamicOnly);
+      }
+      return [];
+    }
+
+    async function fetchAssetUrlById(assetId, cfg) {
+      if (!assetId || !cfg || !cfg.spaceId || !cfg.accessToken) return '';
+      const env = cfg.environment || 'master';
+      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/assets/${encodeURIComponent(assetId)}?access_token=${encodeURIComponent(cfg.accessToken)}`;
+      try {
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+        if (!response.ok) return '';
+        const asset = await response.json();
+        const fileUrl = asset && asset.fields && asset.fields.file && asset.fields.file.url ? asset.fields.file.url : '';
+        return normalizeAssetUrl(fileUrl);
+      } catch (error) {
+        return '';
+      }
+    }
+
+    async function fetchEntriesByIds(entryIds, cfg) {
+      if (!Array.isArray(entryIds) || !entryIds.length || !cfg || !cfg.spaceId || !cfg.accessToken) return [];
+      const env = cfg.environment || 'master';
+      const requests = entryIds.map((id) => {
+        const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries/${encodeURIComponent(id)}?access_token=${encodeURIComponent(cfg.accessToken)}&include=1`;
+        return fetch(endpoint, { headers: { Accept: 'application/json' } })
+          .then((response) => (response.ok ? response.json() : null))
+          .catch(() => null);
+      });
+      const results = await Promise.all(requests);
+      return results.filter(Boolean);
+    }
+
+    function normalizeText(value) {
+      return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function parseWeekNumber(fields) {
+      if (!fields || typeof fields !== 'object') return NaN;
+      const raw = fields.weekNumber ?? fields.week_number ?? fields.week ?? '';
+      const value = Number(raw);
+      return Number.isFinite(value) ? value : NaN;
+    }
+
+    function getSeriesTitle(fields) {
+      if (!fields || typeof fields !== 'object') return '';
+      return String(fields.seriesTitle || fields.series_title || '').trim();
+    }
+
+    function normalizeUrl(url) {
+      const raw = String(url || '').trim();
+      if (!raw) return '';
+      if (/^https?:\/\//i.test(raw)) return raw;
+      return `https://${raw}`;
+    }
+
+    function isLikelyAmazonUrl(url) {
+      const text = String(url || '').toLowerCase();
+      return text.includes('amazon.');
+    }
+
+    function buildAmazonSearchUrl(title, author) {
+      const query = [String(title || '').trim(), String(author || '').trim(), 'book']
+        .filter(Boolean)
+        .join(' ');
+      if (!query) return '';
+      return `https://www.amazon.com/s?k=${encodeURIComponent(query)}`;
+    }
+
+    function resolveKnownBookAmazonUrl(title, author) {
+      const t = String(title || '').toLowerCase();
+      const a = String(author || '').toLowerCase();
+      if (t.includes('sermon on the mount') && a.includes('amy-jill')) {
+        return 'https://www.amazon.com/s?k=Sermon+on+the+Mount+Amy-Jill+Levine';
+      }
+      if (t.includes('hope in times of fear') && a.includes('timothy keller')) {
+        return 'https://www.amazon.com/s?k=Hope+in+Times+of+Fear+Timothy+Keller';
+      }
+      if (t.includes('deeper') && t.includes('real change for real sinners') && a.includes('dane')) {
+        return 'https://www.amazon.com/s?k=Deeper+Real+Change+for+Real+Sinners+Dane+C.+Ortlund';
+      }
+      return '';
+    }
+
+    function parseBookListString(value) {
+      const text = String(value || '').trim();
+      if (!text) return null;
+      const parts = text.split('|').map((p) => p.trim()).filter(Boolean);
+      if (!parts.length) return null;
+      return {
+        title: parts[0] || '',
+        author: parts[1] || '',
+        amazonUrl: normalizeUrl(parts[2] || '')
+      };
+    }
+
+    function collectBooksFromFields(fields) {
+      if (!fields || typeof fields !== 'object') return [];
+      const out = [];
+
+      const pushBook = (book) => {
+        if (!book || !book.title) return;
+        out.push({
+          title: String(book.title).trim(),
+          author: String(book.author || '').trim(),
+          amazonUrl: normalizeUrl(book.amazonUrl || '')
+        });
+      };
+
+      pushBook({
+        title: fields.bookTitle || fields.book || fields.featuredBookTitle || '',
+        author: fields.bookAuthor || fields.author || fields.featuredBookAuthor || '',
+        amazonUrl: fields.amazonLink || fields.amazonUrl || fields.bookAmazonLink || fields.bookLink || ''
+      });
+
+      const booksList = fields.books || fields.recommendedBooks || fields.bookList || [];
+      if (Array.isArray(booksList)) {
+        booksList.forEach((item) => {
+          if (typeof item === 'string') {
+            const parsed = parseBookListString(item);
+            if (parsed) pushBook(parsed);
+          } else if (item && typeof item === 'object') {
+            pushBook({
+              title: item.title || item.bookTitle || '',
+              author: item.author || item.bookAuthor || '',
+              amazonUrl: item.amazonLink || item.amazonUrl || item.link || ''
+            });
+          }
+        });
+      }
+
+      const altTitles = Array.isArray(fields.bookTitles) ? fields.bookTitles : [];
+      const altAuthors = Array.isArray(fields.bookAuthors) ? fields.bookAuthors : [];
+      const altLinks = Array.isArray(fields.amazonLinks) ? fields.amazonLinks : [];
+      if (altTitles.length) {
+        altTitles.forEach((title, idx) => {
+          pushBook({
+            title: title,
+            author: altAuthors[idx] || '',
+            amazonUrl: altLinks[idx] || ''
+          });
+        });
+      }
+
+      const cleaned = out
+        .map((b) => ({
+          title: String(b.title || '').trim(),
+          author: String(b.author || '').trim(),
+          amazonUrl: normalizeUrl(b.amazonUrl || '')
+        }))
+        .filter((b) => b.title);
+
+      const unique = [];
+      const seen = new Set();
+      cleaned.forEach((b) => {
+        const key = `${b.title.toLowerCase()}|${b.author.toLowerCase()}`;
+        if (seen.has(key)) return;
+        seen.add(key);
+        unique.push(b);
+      });
+      return unique;
+    }
+
+    function renderBooksSection(entryPayload) {
+      const section = document.getElementById('booksSection');
+      const grid = document.getElementById('booksGrid');
+      if (!section || !grid) return;
+
+      const contentType = entryPayload?.sys?.contentType?.sys?.id || '';
+      if (contentType !== 'detoxPost') return;
+
+      const fields = entryPayload?.fields || {};
+      const books = collectBooksFromFields(fields);
+      if (!books.length) return;
+
+      grid.innerHTML = books.map((book) => {
+        const title = escapeHtml(book.title);
+        const author = escapeHtml(book.author);
+        const directAmazonUrl = isLikelyAmazonUrl(book.amazonUrl) ? book.amazonUrl : '';
+        const knownAmazonUrl = resolveKnownBookAmazonUrl(book.title, book.author);
+        const fallbackAmazonUrl = buildAmazonSearchUrl(book.title, book.author);
+        const amazonUrl = directAmazonUrl || knownAmazonUrl || fallbackAmazonUrl;
+        const titleHtml = amazonUrl
+          ? `<a class="book-title-link" href="${escapeHtml(amazonUrl)}" target="_blank" rel="noopener">${title}</a>`
+          : title;
+        const linkHtml = amazonUrl
+          ? `<a class="book-link" href="${escapeHtml(amazonUrl)}" target="_blank" rel="noopener">${directAmazonUrl ? 'View on Amazon' : 'Find on Amazon'}</a>`
+          : '';
+        return `
+          <article class="book-card">
+            <h3 class="book-title">${titleHtml}</h3>
+            ${author ? `<p class="book-author">by ${author}</p>` : ''}
+            ${linkHtml}
+          </article>
+        `;
+      }).join('');
+
+      section.classList.remove('hidden');
+    }
+
+    async function renderDetoxWeekNavigation(entryPayload, cfg) {
+      const nav = document.getElementById('detoxWeekNav');
+      const prevLink = document.getElementById('prevWeekLink');
+      const nextLink = document.getElementById('nextWeekLink');
+      const prevTitle = document.getElementById('prevWeekTitle');
+      const nextTitle = document.getElementById('nextWeekTitle');
+      if (!nav || !prevLink || !nextLink || !prevTitle || !nextTitle) return;
+
+      const currentType = entryPayload?.sys?.contentType?.sys?.id || '';
+      if (currentType !== 'detoxPost') return;
+
+      const currentFields = entryPayload?.fields || {};
+      const currentWeek = parseWeekNumber(currentFields);
+      if (!Number.isFinite(currentWeek)) return;
+
+      const env = (cfg && cfg.environment) || 'master';
+      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?access_token=${encodeURIComponent(cfg.accessToken)}&content_type=detoxPost&limit=200`;
+      let items = [];
+      try {
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+        if (!response.ok) return;
+        const payload = await response.json();
+        items = Array.isArray(payload.items) ? payload.items : [];
+      } catch (error) {
+        return;
+      }
+
+      const currentSeries = normalizeText(getSeriesTitle(currentFields));
+      let weeks = items
+        .filter((item) => item && item.sys && item.fields)
+        .map((item) => ({
+          id: item.sys.id,
+          title: String(item.fields.title || 'Untitled').trim(),
+          week: parseWeekNumber(item.fields),
+          series: normalizeText(getSeriesTitle(item.fields))
+        }))
+        .filter((item) => Number.isFinite(item.week));
+
+      if (currentSeries) {
+        const inSeries = weeks.filter((item) => item.series === currentSeries);
+        if (inSeries.length >= 2) weeks = inSeries;
+      }
+
+      weeks.sort((a, b) => a.week - b.week);
+      const index = weeks.findIndex((item) => item.id === entryPayload.sys.id);
+      if (index === -1) return;
+
+      const postPagePath =
+        (cfg && typeof cfg.postPagePath === 'string' && cfg.postPagePath.trim()) ||
+        '../pages/post.html';
+
+      const prev = weeks[index - 1] || null;
+      const next = weeks[index + 1] || null;
+
+      if (prev) {
+        prevLink.href = `${postPagePath}?entry=${encodeURIComponent(prev.id)}`;
+        prevTitle.textContent = `Week ${prev.week}: ${prev.title}`;
+        prevLink.classList.remove('hidden');
+      }
+      if (next) {
+        nextLink.href = `${postPagePath}?entry=${encodeURIComponent(next.id)}`;
+        nextTitle.textContent = `Week ${next.week}: ${next.title}`;
+        nextLink.classList.remove('hidden');
+      }
+      if (prev || next) {
+        nav.classList.remove('hidden');
+      }
+    }
+
+    async function renderRecommendedPosts(entryPayload, cfg) {
+      const section = document.getElementById('relatedPostsSection');
+      const grid = document.getElementById('relatedPostsGrid');
+      if (!section || !grid) return;
+
+      const links = entryPayload && entryPayload.fields && Array.isArray(entryPayload.fields.recommendedPosts)
+        ? entryPayload.fields.recommendedPosts
+        : [];
+      const includedEntries = entryPayload && entryPayload.includes && Array.isArray(entryPayload.includes.Entry)
+        ? entryPayload.includes.Entry
+        : [];
+      const includedAssets = entryPayload && entryPayload.includes && Array.isArray(entryPayload.includes.Asset)
+        ? entryPayload.includes.Asset
+        : [];
+
+      if (!links.length) return;
+
+      const entriesById = new Map(
+        includedEntries
+          .filter((item) => item && item.sys && item.sys.id)
+          .map((item) => [item.sys.id, item])
+      );
+      const assetsById = new Map(
+        includedAssets
+          .filter((item) => item && item.sys && item.sys.id)
+          .map((item) => [item.sys.id, item])
+      );
+
+      const postPagePath =
+        (cfg && typeof cfg.postPagePath === 'string' && cfg.postPagePath.trim()) ||
+        '../pages/post.html';
+
+      let cards = links
+        .map((link) => {
+          const recommendedId = link && link.sys ? link.sys.id : '';
+          if (!recommendedId) return null;
+          const recommendedEntry = entriesById.get(recommendedId);
+          if (!recommendedEntry || !recommendedEntry.fields) return null;
+
+          const recommendedTitle = recommendedEntry.fields.title;
+          if (typeof recommendedTitle !== 'string' || !recommendedTitle.trim()) return null;
+
+          const imageLink = recommendedEntry.fields.image;
+          const imageId = imageLink && imageLink.sys ? imageLink.sys.id : '';
+          const imageAsset = imageId ? assetsById.get(imageId) : null;
+          const imageUrl = normalizeAssetUrl(
+            imageAsset && imageAsset.fields && imageAsset.fields.file ? imageAsset.fields.file.url : ''
+          );
+
+          return {
+            id: recommendedId,
+            title: recommendedTitle.trim(),
+            imageUrl,
+            date: formatCompactDate(recommendedEntry.fields.date),
+            pastor: formatPastorName(
+              recommendedEntry.fields.pastor ||
+              recommendedEntry.fields.speaker ||
+              recommendedEntry.fields.pastorName ||
+              recommendedEntry.fields.preacher ||
+              ''
+            )
+          };
+        })
+        .filter(Boolean);
+
+      if (!cards.length) {
+        const missingIds = links
+          .map((link) => (link && link.sys ? link.sys.id : ''))
+          .filter(Boolean);
+        const fetched = await fetchEntriesByIds(missingIds, cfg);
+        const fetchedMap = new Map(
+          fetched
+            .filter((item) => item && item.sys && item.sys.id && item.fields)
+            .map((item) => [item.sys.id, item])
+        );
+
+        cards = missingIds
+          .map((id) => {
+            const item = fetchedMap.get(id);
+            if (!item || !item.fields || !item.fields.title) return null;
+            return {
+              id,
+              title: String(item.fields.title).trim(),
+              imageUrl: '',
+              date: formatCompactDate(item.fields.date),
+              pastor: formatPastorName(item.fields.pastor || item.fields.speaker || item.fields.pastorName || item.fields.preacher || '')
+            };
+          })
+          .filter(Boolean);
+      }
+
+      if (!cards.length) return;
+
+      grid.innerHTML = cards
+        .map((card, index) => {
+          const safeTitle = escapeHtml(card.title);
+          const href = `${postPagePath}?entry=${encodeURIComponent(card.id)}`;
+          const metaBits = [card.date, card.pastor].filter(Boolean).map(escapeHtml).join(' · ');
+          return `
+            <a href="${href}" class="related-card" style="animation-delay:${Math.min(index * 70, 280)}ms">
+              <div class="card-inner p-4 sm:p-5">
+                <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Recommended</p>
+                <h3 class="card-title font-semibold text-flcNavy leading-snug">${safeTitle}</h3>
+                ${metaBits ? `<p class="card-meta mt-2 text-xs">${metaBits}</p>` : ''}
+                <p class="mt-auto pt-4 text-sm font-semibold text-flcNavy">Read Post</p>
+              </div>
+            </a>
+          `;
+        })
+        .join('');
+
+      section.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        grid.querySelectorAll('.related-card').forEach((card) => card.classList.add('is-visible'));
+      });
+    }
+
+    async function loadPost() {
+      const entryId = getQueryParam('entry');
+      const titleEl = document.getElementById('postTitle');
+      const bodyEl = document.getElementById('postBody');
+      const imageWrap = document.getElementById('postImageWrap');
+      const imageEl = document.getElementById('postImage');
+      const videoWrap = document.getElementById('postVideoWrap');
+      const videoEl = document.getElementById('postVideo');
+      const videoFallbackLink = document.getElementById('postVideoFallbackLink');
+      const dateWrap = document.getElementById('postDateWrap');
+      const dateText = document.getElementById('postDateText');
+      const pastorWrap = document.getElementById('postPastorWrap');
+      const pastorText = document.getElementById('postPastorText');
+      const detoxOverviewLinkWrap = document.getElementById('detoxOverviewLinkWrap');
+      const detoxOverviewLink = document.getElementById('detoxOverviewLink');
+      const pastorMessageSection = document.getElementById('pastorMessageSection');
+      const pastorMessageText = document.getElementById('pastorMessageText');
+      const guideEl = document.getElementById('postGuide');
+
+      if (!entryId) {
+        titleEl.textContent = 'Post not found';
+        bodyEl.innerHTML = '<p>Missing entry ID in URL.</p>';
+        return;
+      }
+
+      const cfg = window.FLC_CONTENTFUL || {};
+      if (!cfg.spaceId || !cfg.accessToken) {
+        titleEl.textContent = 'Post unavailable';
+        bodyEl.innerHTML = '<p>Contentful is not configured.</p>';
+        return;
+      }
+
+      const env = cfg.environment || 'master';
+      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries/${encodeURIComponent(entryId)}?access_token=${encodeURIComponent(cfg.accessToken)}&include=2`;
+
+      try {
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+        const entry = await response.json();
+
+        const title = entry && entry.fields && entry.fields.title ? entry.fields.title : 'Untitled post';
+        const body = entry && entry.fields ? entry.fields.body : null;
+        const contentTypeId = entry?.sys?.contentType?.sys?.id || '';
+        const leadQuote = resolveEntryQuote(entry && entry.fields ? entry.fields : {});
+        const pastorMessageParagraphs = resolvePastorMessage(entry && entry.fields ? entry.fields : {});
+        const youtubeId = resolveYouTubeId(entry ? entry.fields : null, body);
+        const formattedDate = formatPostDate(entry && entry.fields ? entry.fields.date : '');
+        const formattedPastor = formatPastorName(
+          entry && entry.fields
+            ? (entry.fields.pastor || entry.fields.speaker || entry.fields.pastorName || entry.fields.preacher || '')
+            : ''
+        );
+        let imageUrl = resolveImageUrl(entry);
+        if (!imageUrl) {
+          const linkedImageId =
+            entry && entry.fields
+              ? (
+                (entry.fields.image && entry.fields.image.sys ? entry.fields.image.sys.id : '') ||
+                (entry.fields.heroimage && entry.fields.heroimage.sys ? entry.fields.heroimage.sys.id : '')
+              )
+              : '';
+          imageUrl = await fetchAssetUrlById(linkedImageId, cfg);
+        }
+
+        titleEl.textContent = title;
+        document.title = `${title} - FLC Publishing House`;
+        const renderedBody = body ? renderRichNode(body) : '<p>No content available.</p>';
+        const quoteHtml = leadQuote ? `<blockquote class="post-lead-quote">${escapeHtml(leadQuote)}</blockquote>` : '';
+        bodyEl.innerHTML = `${quoteHtml}${renderedBody}`;
+
+        if (pastorMessageSection && pastorMessageText && Array.isArray(pastorMessageParagraphs) && pastorMessageParagraphs.length) {
+          pastorMessageText.innerHTML = renderPastorMessageHtml(pastorMessageParagraphs);
+          pastorMessageSection.classList.remove('hidden');
+        }
+
+        if (imageUrl) {
+          imageEl.src = imageUrl;
+          imageEl.alt = title;
+          imageWrap.classList.remove('hidden');
+        }
+
+        if (youtubeId) {
+          videoEl.src = `https://www.youtube.com/embed/${youtubeId}`;
+          if (videoFallbackLink) {
+            videoFallbackLink.href = `https://www.youtube.com/watch?v=${youtubeId}`;
+          }
+          videoWrap.classList.remove('hidden');
+        }
+
+        if (formattedDate) {
+          dateText.textContent = formattedDate;
+          dateWrap.classList.remove('hidden');
+        }
+
+        if (formattedPastor) {
+          pastorText.textContent = formattedPastor;
+          pastorWrap.classList.remove('hidden');
+        }
+
+        if (contentTypeId === 'detoxPost' && detoxOverviewLinkWrap && detoxOverviewLink) {
+          detoxOverviewLink.href = '../pages/spiritual-detox.html';
+          detoxOverviewLinkWrap.classList.remove('hidden');
+        }
+
+        if (guideEl) {
+          renderStudyGuide(entry.fields || {});
+        }
+
+        renderBooksSection(entry);
+        await renderDetoxWeekNavigation(entry, cfg);
+        await renderRecommendedPosts(entry, cfg);
+      } catch (error) {
+        titleEl.textContent = 'Unable to load post';
+        bodyEl.innerHTML = '<p>Please try again later.</p>';
+        console.error('Failed to load post from Contentful:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPost);
+  </script>
+  <script src="../assets/js/site-theme.js"></script>
+</body>
+</html>
+

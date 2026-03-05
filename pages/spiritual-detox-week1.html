@@ -1,334 +1,120 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Kingdom Blueprint - Essay | FLC Publishing House</title>
-  <meta name="description" content="The Kingdom Blueprint: Seek First His Kingdom - full essay." />
-
+  <title>Seek First His Kingdom - Spiritual Detox Week 1</title>
+  <meta name="description" content="Redirecting to Contentful-powered Detox Week 1 post." />
   <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png" />
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Playfair Display'", "Georgia", "serif"],
-            body: ["Inter", "system-ui", "sans-serif"]
-          },
-          colors: {
-            flcNavy: "#1A3A52",
-            flcGold: "#9A7B4F",
-            flcCharcoal: "#2C2C2C",
-            flcCream: "#F5F1E8",
-            flcOffWhite: "#FAFAF8",
-            flcBorder: "#E5E0D8"
-          }
-        }
-      }
-    };
-  </script>
-
   <style>
-    :root {
-      --flcNavy: #1A3A52;
-      --flcGold: #9A7B4F;
-      --flcCharcoal: #2C2C2C;
-      --flcCream: #F5F1E8;
-      --flcOffWhite: #FAFAF8;
-      --flcBorder: #E5E0D8;
-    }
-
     body {
-      font-family: Inter, system-ui, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(160deg, #0f2838 0%, #1a3a52 55%, #173548 100%);
+      color: #fff;
+      text-align: center;
+      padding: 1.25rem;
     }
-
-    .page-bg {
-      background: linear-gradient(180deg, #FFFFFF 0%, #FBF9F6 40%, #F5F1E8 100%);
+    .card {
+      max-width: 40rem;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      padding: 1.4rem 1.25rem;
     }
-
-    .shell {
-      background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
-      border: 1px solid rgba(229,224,216,0.75);
-      border-radius: 1.25rem;
-      box-shadow: 0 14px 50px rgba(26,58,82,0.06);
-      overflow: hidden;
+    .title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 0 0 0.65rem;
     }
-
-    .shell-head {
-      background:
-        radial-gradient(900px 320px at 50% -15%, rgba(154,123,79,0.12), transparent 60%),
-        linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
-      border-bottom: 1px solid rgba(229,224,216,0.75);
+    .text {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
     }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: rgba(44,44,44,0.65);
-      padding: 0.35rem 0.7rem;
-      border: 1px solid rgba(229,224,216,0.85);
-      border-radius: 9999px;
-      background: #fff;
-      white-space: nowrap;
+    .link {
+      color: #d5bc96;
+      font-weight: 600;
+      text-decoration: none;
     }
-
-    /* Essay typography */
-    .essay {
-      max-width: 78ch;
-      margin: 0 auto;
-      color: rgba(44,44,44,0.88);
-      line-height: 1.9;
-      font-size: 1.05rem;
-    }
-
-    .essay h2 {
-      font-family: "Playfair Display", Georgia, serif;
-      color: var(--flcNavy);
-      letter-spacing: -0.02em;
-      margin-top: 2.25rem;
-      margin-bottom: 0.75rem;
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .essay p {
-      margin: 1rem 0;
-    }
-
-    .essay blockquote {
-      border-left: 3px solid rgba(154,123,79,0.22);
-      background: rgba(154,123,79,0.06);
-      padding: 1rem 1.15rem;
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      font-style: italic;
-      color: rgba(44,44,44,0.9);
-    }
-
-    .essay strong {
-      color: rgba(26,58,82,0.95);
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(229,224,216,0.9) 15%,
-        rgba(229,224,216,0.9) 85%,
-        transparent 100%
-      );
-    }
-  
-    /* Mobile-first refinements */
-    @media (max-width: 768px){
-      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
-      .hero-background{ min-height: auto; }
-      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
-    }
-
-    @media (max-width: 640px){
-      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
-      .hero-header{ padding: 1.75rem 1.25rem; }
-      .hero-title{ text-wrap: balance; }
-      .hero-cta-group{ align-items: stretch; }
-      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
-      .resource-card{ border-radius: 1.25rem; }
-      .stats-card{ padding: 1.25rem; }
-      .search-bar{ padding: 0.75rem 1rem; }
-      .pill{ white-space: normal; }
-      .toc-wrap{ position: static !important; }
-      .essay{ font-size: 1rem; line-height: 1.8; }
-      .week-card, .searchable-card{ padding: 1rem; }
-    }
-  
-    /* Site Polish */
-    body {
-      line-height: 1.7;
-    }
-
-    p {
-      line-height: 1.7;
-    }
-
-    .content-section {
-      border-color: rgba(154, 123, 79, 0.12);
-    }
-
-    .content-section h2,
-    .content-section h3 {
-      margin-top: 0.2rem;
-    }
-
-    .download-btn,
-    .btn-primary,
-    .btn-premium,
-    .btn-ghost {
-      border-radius: 0.875rem;
-    }
-
-    .resource-card,
-    .week-card,
-    .searchable-card,
-    .book-panel,
-    .content-section {
-      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
-    }
-
-    #footerContainer {
-      margin-top: 3rem;
-    }
-
-    #footerContainer::before {
-      content: '';
-      display: block;
-      height: 1px;
-      margin: 0 0 2rem 0;
-      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+    .link:hover {
+      color: #fff;
+      text-decoration: underline;
     }
   </style>
 </head>
-
-<body class="page-bg text-flcCharcoal text-base lg:text-lg">
-
-  <!-- Header Container (DO NOT CHANGE) -->
-  <div
-    id="headerContainer"
-    data-config='{"currentPage":"detox","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
-  ></div>
-  <script src="../assets/js/header-component.js"></script>
-
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <section class="shell">
-
-      <!-- Essay Header -->
-      <div class="shell-head px-6 sm:px-10 py-10">
-        <div class="max-w-3xl mx-auto text-center">
-          <p class="inline-flex items-center justify-center gap-2 text-sm font-semibold text-flcGold">
-            <span class="h-2 w-2 rounded-full bg-flcGold"></span>
-            The Kingdom Blueprint
-          </p>
-
-          <h1 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-flcNavy" style="letter-spacing:-0.02em;">
-            Seek First His Kingdom
-          </h1>
-
-          <p class="mt-3 text-base sm:text-lg text-flcCharcoal/70">
-            Full Essay " Clean Reading View
-          </p>
-
-          <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
-            <span class="pill">Matthew 6:25"34</span>
-            <span class="pill">Series: The Kingdom Blueprint</span>
-            <span class="pill">Reading time: ~10"12 min</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Essay Body -->
-      <div class="px-6 sm:px-10 py-10">
-        <article class="essay">
-
-          <!-- ESSAY CONTENT START -->
-          <blockquote>
-            "Therefore I tell you, do not be anxious about your life, what you will eat or what you will drink, nor about your body, what you will put on. Is not life more than food, and the body more than clothing? Look at the birds of the air: they neither sow nor reap nor gather into barns, and yet your heavenly Father feeds them. Are you not of more value than they? " Matthew 6:25"26
-          </blockquote>
-
-          <p>
-            Anxiety is one of the defining emotional currents of our time. We live in a culture that rewards hustle, praises control, and quietly teaches us that our worth is tied to our productivity and provision. Against this backdrop, Jesus words in Matthew 6 land with quiet but radical authority: do not be anxious about your life.
-          </p>
-
-          <p>
-            This command is not naïve. Jesus does not dismiss the real pressures of rent, food, health, or the future. Instead, He reframes them. He lifts our eyes from our scarcity narratives to Gods abundant character.
-          </p>
-
-          <h2>The Illusion of Control</h2>
-
-          <p>
-            We often assume that if we can just manage enough variables, then peace will follow. We create budgets, calendars, productivity systems, five-year plans. None of these are evil. But when they become our ultimate security, they quietly replace trust with tension.
-          </p>
-
-          <p>
-            Jesus exposes this illusion when He asks, "Which of you by being anxious can add a single hour to his span of life? Worry masquerades as responsibility, but it produces nothing except emotional debt.
-          </p>
-
-          <h2>Seeking First the Kingdom</h2>
-
-          <p>
-            The antidote to anxiety is not passivity. It is priority. Jesus does not say, "Ignore your needs. He says, "Seek first the kingdom of God and His righteousness, and all these things will be added to you.
-          </p>
-
-          <p>
-            To seek first the kingdom is to reorder your loves. It is to let Gods purposes define your schedule, your ambitions, and your identity. When the kingdom becomes central, provision becomes contextual " it is added, not chased.
-          </p>
-
-          <h2>The Fathers Care</h2>
-
-          <p>
-            Jesus anchors His argument in the tenderness of God. Birds are fed. Lilies are clothed. And you are worth more than both. This is not poetic filler. It is theological grounding.
-          </p>
-
-          <p>
-            Anxiety shrinks God and enlarges circumstances. Faith does the opposite. When we remember who God is, our problems return to their proper scale.
-          </p>
-
-          <h2>A Kingdom Practice</h2>
-
-          <p>
-            Spiritual detox begins with honest inventory. Where has worry replaced worship? Where has striving replaced surrender? These are not questions of condemnation. They are invitations to recalibration.
-          </p>
-
-          <p>
-            When you choose to seek first the kingdom, you are not choosing irresponsibility. You are choosing alignment. You are choosing to build your life around what cannot be shaken.
-          </p>
-
-          <blockquote>
-            "But seek first the kingdom of God and His righteousness, and all these things will be added to you. " Matthew 6:33
-          </blockquote>
-
-          <p>
-            This is not a slogan. It is a blueprint. A way of living that trades anxiety for assurance and control for communion.
-          </p>
-          <!-- ESSAY CONTENT END -->
-
-        </article>
-
-        <div class="mt-10 divider"></div>
-
-        <p class="mt-6 text-center text-sm text-flcCharcoal/60">
-          Series: <strong>The Kingdom Blueprint</strong>  FLC Publishing House
-        </p>
-      </div>
-    </section>
+<body>
+  <main class="card">
+    <h1 class="title">Opening Detox Week 1...</h1>
+    <p id="statusText" class="text">Looking up the Contentful post by slug.</p>
+    <p class="text" style="margin-top:0.8rem;">
+      If you are not redirected, open
+      <a class="link" href="../pages/resources.html">Resources</a>.
+    </p>
   </main>
 
-  <!-- Footer Container (DO NOT CHANGE) -->
-  <div
-    id="footerContainer"
-    data-config='{"currentPage":"detox","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'
-  ></div>
-  <script src="../assets/js/footer-component.js"></script>
+  <script>
+    const TARGET_SLUG = "seek-first-his-kingdom";
+    const cfg = {
+      spaceId: "i8pstcwrkztq",
+      environment: "master",
+      accessToken: "pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw",
+      contentTypes: ["detoxPost", "blogPage"],
+      postPagePath: "../pages/post.html"
+    };
 
+    async function fetchByType(contentType) {
+      const params = new URLSearchParams({
+        access_token: cfg.accessToken,
+        content_type: contentType,
+        "fields.slug[match]": TARGET_SLUG,
+        limit: "10"
+      });
+      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${cfg.environment}/entries?${params.toString()}`;
+      try {
+        const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+        // Some content types (e.g. blogPage) may not have slug and can return 422.
+        // Treat as no match so we can continue to the next content type.
+        if (!response.ok) return null;
+        const payload = await response.json();
+        const items = Array.isArray(payload.items) ? payload.items : [];
+        const exact = items.find((item) => String(item?.fields?.slug || "").trim().toLowerCase() === TARGET_SLUG);
+        return exact || items[0] || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    async function goToDetoxPost() {
+      const statusText = document.getElementById("statusText");
+
+      try {
+        const types = Array.isArray(cfg.contentTypes) ? cfg.contentTypes : [];
+        let matched = null;
+        for (const type of types) {
+          matched = await fetchByType(type);
+          if (matched && matched.sys && matched.sys.id) break;
+        }
+
+        if (matched && matched.sys && matched.sys.id) {
+          const href = `${cfg.postPagePath}?entry=${encodeURIComponent(matched.sys.id)}`;
+          window.location.replace(href);
+          return;
+        }
+
+        statusText.textContent = "No matching detox post found. Confirm slug and publish status in Contentful.";
+      } catch (error) {
+        statusText.textContent = "Could not reach Contentful right now. Please open Resources and try again.";
+      }
+    }
+
+    goToDetoxPost();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-

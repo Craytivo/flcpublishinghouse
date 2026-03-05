@@ -169,6 +169,7 @@ function createHeader(config = {}) {
 
   const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
   const computedResourcesBooksPath = `${computedResourcesPath}#books`;
+  const computedPostPagePath = withBase('pages/post.html');
 
   const menu = [
     { label: 'Home', href: computedHomePath, key: 'home' },
@@ -200,11 +201,11 @@ function createHeader(config = {}) {
   `;
 
   function navLinkClass(active) {
-    return `nav-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${active ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}`;
+    return `flc-header-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${active ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}`;
   }
 
   function navLinkExternalClass() {
-    return 'nav-link px-5 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg border border-flcGold/20 hover:bg-flcGold/5';
+    return 'flc-header-link px-5 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg border border-flcGold/20 hover:bg-flcGold/5';
   }
 
   function renderDesktopLink(item) {
@@ -220,6 +221,16 @@ function createHeader(config = {}) {
     const children = item.children
       .map((child) => `<a href="${child.href}" class="block px-4 py-2 text-sm text-flcCharcoal hover:bg-flcGold/5">${child.label}</a>`)
       .join('');
+    const suggestedDesktop = item.key === 'resources'
+      ? `
+        <div class="border-t border-flcGold/10 px-4 py-3">
+          <p class="text-[0.68rem] uppercase tracking-[0.2em] text-flcCharcoal/50 mb-2">Suggested Posts</p>
+          <div id="headerSuggestedPostsDesktop" class="space-y-1.5">
+            <p class="text-xs text-flcCharcoal/55">Loading latest posts...</p>
+          </div>
+        </div>
+      `
+      : '';
     return `
       <div class="relative group">
         <a href="${item.href}" class="${navLinkClass(isActive)}">
@@ -227,6 +238,7 @@ function createHeader(config = {}) {
         </a>
         <div class="absolute left-0 mt-2 w-72 bg-white border border-flcGold/10 rounded-lg shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-150">
           ${children}
+          ${suggestedDesktop}
         </div>
       </div>
     `;
@@ -246,17 +258,28 @@ function createHeader(config = {}) {
     const children = item.children
       .map((child) => `<a href="${child.href}" class="${mobileLinkClass(false, true)}">${child.label}</a>`)
       .join('');
+    const suggestedMobile = item.key === 'resources'
+      ? `
+        <div class="px-8 pb-2 pt-1">
+          <p class="text-[0.62rem] uppercase tracking-[0.2em] text-flcCharcoal/45 mb-1.5">Suggested Posts</p>
+          <div id="headerSuggestedPostsMobile" class="space-y-1.5">
+            <p class="text-xs text-flcCharcoal/55">Loading latest posts...</p>
+          </div>
+        </div>
+      `
+      : '';
     return `
       <div class="pt-2">
         <div class="px-4 text-[0.7rem] uppercase tracking-[0.2em] text-flcCharcoal/50">${item.label}</div>
         ${children}
+        ${suggestedMobile}
       </div>
     `;
   }
 
   return `
   <!-- Navigation -->
-  <nav id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcGold/10 shadow-sm">
+  <header id="mainNav" role="navigation" aria-label="Primary" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcGold/10 shadow-sm">
     <!-- Premium Header Layout -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
@@ -287,10 +310,7 @@ function createHeader(config = {}) {
           </div>
           
           <!-- Subscribe Button (Tablet & Desktop) -->
-          <a href="#" class="subscribe-btn hidden md:inline-flex items-center gap-1.5 lg:gap-2 px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white font-semibold text-sm lg:text-base rounded-full hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
-            <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-            </svg>
+          <a href="#" class="subscribe-btn hidden md:inline-flex items-center px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white font-semibold text-sm lg:text-base rounded-full hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
             <span class="hidden lg:inline">Subscribe</span>
           </a>
           
@@ -323,16 +343,13 @@ function createHeader(config = {}) {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <a href="#" class="flex items-center justify-center gap-2 mx-4 py-3 bg-gradient-to-r from-flcGold to-flcGoldLight text-white rounded-lg font-semibold hover:shadow-md active:scale-95 transition-all duration-200">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-            </svg>
+          <a href="#" class="flex items-center justify-center mx-4 py-3 bg-gradient-to-r from-flcGold to-flcGoldLight text-white rounded-lg font-semibold hover:shadow-md active:scale-95 transition-all duration-200">
             Subscribe
           </a>
         </div>
       </div>
     </div>
-  </nav>
+  </header>
   `;
 }
 
@@ -363,6 +380,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', function() {
         mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+        });
       });
     }
     
@@ -419,6 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const computedSermon3Path = withBase('sermons/sermon-when-compassion-costs-you-sleep.html');
     const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
     const computedResourcesBooksPath = `${computedResourcesPath}#books`;
+    const computedPostPagePath = withBase('pages/post.html');
 
     const searchIndex = [
       { title: 'Resources Hub', type: 'Resources', href: computedResourcesPath, tags: ['resources', 'download', 'hub'] },
@@ -502,5 +525,87 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initSearch(document.getElementById('resourceSearch'), document.getElementById('resourceSearchResults'));
     initSearch(document.getElementById('resourceSearchMobile'), document.getElementById('resourceSearchResultsMobile'));
+
+    function formatDateLabel(value) {
+      if (!value || typeof value !== 'string') return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
+    }
+
+    function getSortTime(entry) {
+      const sermonDate = entry && entry.fields ? entry.fields.date : '';
+      const sermonMs = sermonDate ? Date.parse(sermonDate) : NaN;
+      if (!Number.isNaN(sermonMs)) return sermonMs;
+      const updatedAt = entry && entry.sys ? entry.sys.updatedAt : '';
+      const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
+      return Number.isNaN(updatedMs) ? 0 : updatedMs;
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    async function loadHeaderSuggestedPosts() {
+      const desktopTarget = document.getElementById('headerSuggestedPostsDesktop');
+      const mobileTarget = document.getElementById('headerSuggestedPostsMobile');
+      if (!desktopTarget && !mobileTarget) return;
+
+      const contentfulCfg = window.FLC_CONTENTFUL || {
+        enabled: true,
+        spaceId: 'i8pstcwrkztq',
+        environment: 'master',
+        accessToken: 'pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw',
+        contentType: 'blogPage'
+      };
+
+      if (!contentfulCfg.enabled || !contentfulCfg.spaceId || !contentfulCfg.accessToken) return;
+
+      const env = contentfulCfg.environment || 'master';
+      const params = new URLSearchParams({
+        access_token: contentfulCfg.accessToken,
+        content_type: contentfulCfg.contentType || 'blogPage',
+        order: '-fields.date',
+        limit: '6'
+      });
+      const endpoint = `https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+
+      try {
+        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+        if (!response.ok) return;
+        const payload = await response.json();
+        const items = Array.isArray(payload.items) ? payload.items : [];
+        const top = items
+          .filter((item) => item && item.fields && item.sys && item.sys.id && item.fields.title)
+          .sort((a, b) => getSortTime(b) - getSortTime(a))
+          .slice(0, 3);
+
+        if (!top.length) return;
+
+        const renderHtml = top.map((item) => {
+          const title = escapeHtml(String(item.fields.title).trim());
+          const dateLabel = formatDateLabel(item.fields.date);
+          const href = `${computedPostPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+          return `
+            <a href="${href}" class="block rounded-md px-2 py-1.5 hover:bg-flcGold/5 transition-colors">
+              <span class="block text-xs font-medium text-flcNavy leading-snug">${title}</span>
+              ${dateLabel ? `<span class="block text-[0.68rem] text-flcCharcoal/55 mt-0.5">${escapeHtml(dateLabel)}</span>` : ''}
+            </a>
+          `;
+        }).join('');
+
+        if (desktopTarget) desktopTarget.innerHTML = renderHtml;
+        if (mobileTarget) mobileTarget.innerHTML = renderHtml;
+      } catch (error) {
+        // Keep static fallback text in place on failure.
+      }
+    }
+
+    loadHeaderSuggestedPosts();
   }
 });

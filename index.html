@@ -1,18 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>FLC Publishing House | Freedom Life Church</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="FLC Publishing House " curated sermon notes and resources from Freedom Life Church."
-  />
+  <meta name="description" content="Curated sermon notes, devotionals, and ministry resources from FLC Publishing House at Freedom Life Church." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/Dark_Logo-removebg-preview.png">
+  <link rel="icon" type="image/png" href="assets/images/Dark_Logo-removebg-preview.png" />
 
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -20,1054 +15,523 @@
         extend: {
           colors: {
             flcNavy: "#1A3A52",
+            flcNavyDark: "#0F2838",
+            flcNavyLight: "#2A4A62",
             flcGold: "#9A7B4F",
+            flcGoldLight: "#B8956A",
             flcCharcoal: "#2C2C2C",
             flcCream: "#F5F1E8",
             flcOffWhite: "#FAFAF8",
-            flcBorder: "#E8E6E1",
-            flcNavyLight: "#2A4A62",
-            flcNavyDark: "#0F2838",
-            flcGoldLight: "#B8956A",
-            flcGoldDark: "#7A6240",
-            flcAccent: "#8B7965",
+            flcBorder: "#E8E6E1"
           },
           fontFamily: {
             heading: ["'Playfair Display'", "Georgia", "serif"],
-            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-          },
-          letterSpacing: {
-            widePlus: "0.18em",
-            tighter: "-0.02em",
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.6s ease-out',
-            'slide-up': 'slideUp 0.5s ease-out',
-            'scale-in': 'scaleIn 0.4s ease-out',
-            'shimmer': 'shimmer 3s infinite',
-            'float': 'float 4s ease-in-out infinite',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(20px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-            scaleIn: {
-              '0%': { transform: 'scale(0.95)', opacity: '0' },
-              '100%': { transform: 'scale(1)', opacity: '1' },
-            },
-            shimmer: {
-              '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
-              '100%': { transform: 'translateX(200%) skewX(-12deg)' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0px) translateX(0px)', opacity: '0.3' },
-              '50%': { transform: 'translateY(-20px) translateX(10px)', opacity: '0.6' },
-            },
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"]
           },
           boxShadow: {
-            'soft': '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)',
-            'medium': '0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04)',
-            'hard': '0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06)',
-            'lift': '0 12px 32px rgba(0, 42, 92, 0.15), 0 6px 12px rgba(0, 42, 92, 0.08)',
-            'inner-glow': 'inset 0 0 0 1px rgba(198, 146, 20, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)',
-          },
-        },
-      },
+            soft: "0 4px 14px rgba(15, 40, 56, 0.08)",
+            medium: "0 10px 28px rgba(15, 40, 56, 0.14)"
+          }
+        }
+      }
     };
   </script>
 
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* =========================================================
-       PREMIUM MOBILE PASS (iPhone-first) - keeps header/footer
-       ========================================================= */
-    :root{
-      --safe-b: env(safe-area-inset-bottom, 0px);
-      --safe-t: env(safe-area-inset-top, 0px);
-      --safe-l: env(safe-area-inset-left, 0px);
-      --safe-r: env(safe-area-inset-right, 0px);
+    html { scroll-behavior: smooth; }
+
+    .hero-surface {
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(184, 149, 106, 0.24), transparent 65%),
+        radial-gradient(900px 450px at 10% 0%, rgba(42, 74, 98, 0.30), transparent 70%),
+        linear-gradient(145deg, #0F2838 0%, #1A3A52 55%, #163247 100%);
     }
 
-    html{
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      max-width: 100vw;
-    }
-    body{
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-      max-width: 100vw;
-      padding-left: var(--safe-l);
-      padding-right: var(--safe-r);
-      background-attachment: fixed;
-    }
-
-    /* Prevent accidental horizontal scroll from transforms */
-    * { max-width: 100%; }
-    section, article, div { max-width: 100%; }
-
-    /* Make fixed UI respect iPhone home indicator */
-    .quick-jump-fab{ bottom: calc(5rem + var(--safe-b)) !important; }
-    .scroll-top-btn{ bottom: calc(2rem + var(--safe-b)) !important; }
-    .toast{
-      bottom: calc(2rem + var(--safe-b)) !important;
-    }
-
-    /* Touch devices: kill "hover growth that feels jumpy */
-    @media (hover: none) and (pointer: coarse){
-      .card-hover:hover,
-      .scale-hover:hover,
-      .glow-on-hover:hover{
-        transform: none !important;
-        box-shadow: inherit !important;
-      }
-      .btn-premium:hover{
-        transform: none !important;
-      }
-    }
-
-    /* Hero: use modern viewport units so iPhone Safari doesnt crop */
-    .hero-background{
-      min-height: 100svh;
-      padding-top: calc(1.25rem + var(--safe-t));
-      padding-bottom: calc(2.25rem + var(--safe-b));
-      overflow: hidden;
-    }
-
-    /* Make hero typography consistent + premium on small screens */
-    .hero-title{
-      text-wrap: balance;
-    }
-
-    /* Reduce motion for accessibility + iOS comfort */
-    @media (prefers-reduced-motion: reduce){
-      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-    }
-
-    /* =========================
-       Your existing CSS (kept)
-       ========================= */
-
-    /* Page Transition Overlay */
-    .page-transition-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1A3A52 0%, #0F2838 100%);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .page-transition-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .page-transition-spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(154, 123, 79, 0.2);
-      border-top-color: #9A7B4F;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Lazy Loading Images */
-    img[data-src] { opacity: 0; transition: opacity 0.6s ease-in-out; }
-    img.lazy-loaded { opacity: 1; }
-
-    /* Skeleton Loaders */
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 0.5rem;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    .skeleton-text { height: 1rem; margin-bottom: 0.5rem; border-radius: 0.25rem; }
-    .skeleton-title { height: 2rem; width: 60%; margin-bottom: 1rem; border-radius: 0.5rem; }
-    .skeleton-card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-    .skeleton-image { width: 100%; height: 200px; border-radius: 0.75rem; margin-bottom: 1rem; }
-
-    /* Subtle Fade-in on Load */
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
-
-    /* Card Hover Effects */
-    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .card-hover:hover {
-      transform: scale(1.02);
-      box-shadow: 0 12px 32px rgba(26, 58, 82, 0.15), 0 6px 12px rgba(26, 58, 82, 0.08);
-    }
-
-    /* Layered Elevation System */
-    .elevation-1 { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04); }
-    .elevation-2 { box-shadow: 0 4px 12px rgba(0, 42, 92, 0.08), 0 2px 4px rgba(0, 42, 92, 0.04); }
-    .elevation-3 { box-shadow: 0 8px 24px rgba(0, 42, 92, 0.12), 0 4px 8px rgba(0, 42, 92, 0.06); }
-
-    /* Sophisticated Color Treatments */
-    .gradient-text {
-      background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 50%, #9A7B4F 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-background {
-      background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-background::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(154, 123, 79, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(154, 123, 79, 0.05) 0%, transparent 50%);
-      opacity: 0.6;
-    }
-    .hero-particles { position: absolute; inset: 0; overflow: hidden; opacity: 0.08; }
-    .particle {
-      position: absolute;
-      background: radial-gradient(circle, rgba(154, 123, 79, 0.6), transparent 60%);
-      border-radius: 50%;
-      animation: float 30s infinite ease-in-out;
-      filter: blur(2px);
-    }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-      50% { transform: translate(20px, -30px) scale(1.1); opacity: 0.7; }
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(154, 123, 79, 0.08), transparent 70%);
-      filter: blur(80px);
-      animation: pulse-hero 10s infinite ease-in-out;
-    }
-    @keyframes pulse-hero {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
-    .hero-title {
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-      animation: titleReveal 1s ease-out;
-    }
-    @keyframes titleReveal {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1.25rem;
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.15), rgba(154, 123, 79, 0.08));
-      backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(154, 123, 79, 0.3);
-      border-radius: 24px;
-      font-size: 12px;
-      font-weight: 600;
+    .section-kicker {
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      position: relative;
-      overflow: hidden;
-      animation: badge-float 3s ease-in-out infinite;
-    }
-    .hero-badge::before {
-      content: '';
-      position: absolute;
-      inset: -100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      animation: badge-shimmer 3s infinite;
-    }
-    @keyframes badge-shimmer {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      100% { transform: translateX(200%) rotate(45deg); }
-    }
-    @keyframes badge-float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
+      font-size: 0.72rem;
+      font-weight: 700;
     }
 
-    .btn-premium {
-      transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-      position: relative;
-      will-change: transform;
+    .card-link {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
-    .btn-premium:active { transform: scale(0.98); }
 
-    /* Toast Notifications */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: white;
-      border-left: 4px solid #9A7B4F;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      transform: translateX(400px);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      z-index: 1000;
-      max-width: 350px;
+    .card-link:hover,
+    .card-link:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(154, 123, 79, 0.55);
+      box-shadow: 0 10px 28px rgba(15, 40, 56, 0.14);
     }
-    .toast.show { transform: translateX(0); opacity: 1; }
-    .toast.success { border-left-color: #22c55e; }
-    .toast.error { border-left-color: #ef4444; }
-    .toast.info { border-left-color: #1A3A52; }
 
-    /* Scroll to Top Button */
     .scroll-top-btn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 48px;
-      height: 48px;
+      right: 1rem;
+      bottom: 1rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: linear-gradient(135deg, #1A3A52, #2A4A62);
       color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
       opacity: 0;
-      visibility: hidden;
-      transform: scale(0.8);
-      transition: all 0.3s ease;
-      z-index: 999;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.3);
-    }
-    .scroll-top-btn.visible { opacity: 1; visibility: visible; transform: scale(1); }
-    .scroll-top-btn:hover {
-      background: linear-gradient(135deg, #2A4A62, #1A3A52);
-      box-shadow: 0 6px 20px rgba(26, 58, 82, 0.4);
-      transform: scale(1.1);
-    }
-
-    /* Quick Jump FAB */
-    .quick-jump-fab {
-      position: fixed;
-      bottom: 5rem;
-      right: 2rem;
-      background: linear-gradient(135deg, #9A7B4F, #B8956A);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(154, 123, 79, 0.4);
-      transition: all 0.3s ease;
-      z-index: 998;
-      font-size: 14px;
-      font-weight: 600;
-      opacity: 0;
-      visibility: hidden;
       transform: scale(0.9);
-      white-space: nowrap;
-    }
-    .quick-jump-fab.visible { opacity: 1; visibility: visible; transform: scale(1); }
-    .quick-jump-fab:hover {
-      background: linear-gradient(135deg, #B8956A, #9A7B4F);
-      box-shadow: 0 6px 20px rgba(154, 123, 79, 0.5);
-      transform: translateY(-2px) scale(1.05);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 6px 18px rgba(15, 40, 56, 0.25);
+      z-index: 50;
     }
 
-    /* Subscription Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      padding: 1rem;
-    }
-    .modal-overlay.show { opacity: 1; visibility: visible; }
-    .modal-content {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 500px;
-      width: 100%;
-      max-height: calc(90svh - var(--safe-b));
-      overflow-y: auto;
-      position: relative;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-      -webkit-overflow-scrolling: touch;
-    }
-    .modal-overlay.show .modal-content { transform: scale(1); }
-
-    /* Mobile Responsive Enhancements (improved) */
-    @media (max-width: 1023px) {
-      .hero-background { min-height: auto; padding-top: 2.5rem; padding-bottom: 2.5rem; }
-      .hero-title { font-size: 2.5rem; line-height: 1.1; }
-      .hero-badge { font-size: 10px; padding: 0.4rem 0.8rem; }
-      .hero-cta-group a, .hero-cta-group button {
-        width: 100%;
-        justify-content: center;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-      }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
 
     @media (max-width: 640px) {
-      .hero-background { padding-top: calc(1.25rem + var(--safe-t)); padding-bottom: calc(1.75rem + var(--safe-b)); }
-      .hero-particles { display: none; }
-      .hero-title { font-size: 1.9rem; line-height: 1.15; margin-bottom: 0.35rem; }
-      .hero-badge { max-width: 92vw; font-size: 9px; padding: 0.375rem 0.75rem; }
-      .hero-cta-group { width: 100%; gap: 0.75rem; }
-      .quick-jump-fab {
-        width: 48px;
-        height: 48px;
-        padding: 0;
-        justify-content: center;
-        border-radius: 50%;
-        gap: 0;
-        bottom: calc(1.5rem + var(--safe-b)) !important;
-        left: 0.75rem;
-        right: auto;
+      .hero-v2-title {
+        font-size: 2.1rem;
+        line-height: 1.1;
       }
-      .quick-jump-fab span { display: none; }
-      .scroll-top-btn {
-        bottom: calc(1.5rem + var(--safe-b)) !important;
-        right: 0.75rem;
-        width: 48px;
-        height: 48px;
+
+      .hero-v2-lede {
+        font-size: 1rem;
+        line-height: 1.55;
       }
-      .toast { bottom: calc(1rem + var(--safe-b)) !important; right: 1rem; left: 1rem; max-width: none; }
-      .modal-content { padding: 1.5rem; border-radius: 14px; }
-    }
-  
-    /* Site Polish */
-    body {
-      line-height: 1.7;
-    }
 
-    p {
-      line-height: 1.7;
-    }
-
-    .content-section {
-      border-color: rgba(154, 123, 79, 0.12);
-    }
-
-    .content-section h2,
-    .content-section h3 {
-      margin-top: 0.2rem;
-    }
-
-    .download-btn,
-    .btn-primary,
-    .btn-premium,
-    .btn-ghost {
-      border-radius: 0.875rem;
-    }
-
-    .resource-card,
-    .week-card,
-    .searchable-card,
-    .book-panel,
-    .content-section {
-      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
-    }
-
-    #footerContainer {
-      margin-top: 3rem;
-    }
-
-    #footerContainer::before {
-      content: '';
-      display: block;
-      height: 1px;
-      margin: 0 0 2rem 0;
-      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+      .mobile-tight-section {
+        padding-top: 2.75rem;
+        padding-bottom: 2.75rem;
+      }
     }
   </style>
+<link rel="stylesheet" href="assets/css/site-theme.css" />
 </head>
 
-<body class="bg-gradient-to-br from-flcOffWhite via-flcOffWhite to-flcCream/30 text-flcCharcoal font-body antialiased">
-  <!-- Page Transition Overlay -->
-  <div class="page-transition-overlay" id="pageTransition">
-    <div class="page-transition-spinner"></div>
-  </div>
-
-  <!-- Header Container (UNCHANGED) -->
-  <div id="headerContainer"
-       data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'></div>
-
-  <!-- Load Header Component (UNCHANGED) -->
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+<div
+    id="headerContainer"
+    data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'
+  ></div>
   <script src="assets/js/header-component.js"></script>
 
-  <!-- Search Results Dropdown -->
-  <div id="searchResultsDropdown" class="hidden absolute z-50 left-1/2 transform -translate-x-1/2 mt-2 w-full max-w-xs bg-white border border-flcGold/30 rounded-xl shadow-lg overflow-hidden"></div>  <!-- Scroll to Top Button -->
-  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-    </svg>
-  </button>
-
-  <!-- Toast Container -->
-  <div id="toastContainer"></div>
-
-  <!-- Subscription Modal -->
-  <div class="modal-overlay" id="subscriptionModal">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" aria-label="Close modal">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <div class="text-center mb-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-flcNavy/10 to-flcGold/10 rounded-full mb-4">
-          <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-          </svg>
-        </div>
-        <h3 class="text-2xl font-heading font-bold text-flcNavy mb-2">Never Miss a Sermon</h3>
-        <p class="text-flcCharcoal/70">Get notified when new sermon notes and Bible studies are published</p>
-      </div>
-
-      <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-4">
-        <div>
-          <label for="subName" class="block text-sm font-medium text-flcCharcoal mb-2">Full Name</label>
-          <input type="text" id="subName" name="name" required class="w-full px-4 py-3 border-2 border-flcBorder rounded-lg text-sm focus:outline-none focus:border-flcNavy focus:ring-4 focus:ring-flcNavy/10" placeholder="John Doe">
-        </div>
-
-        <div>
-          <label for="subEmail" class="block text-sm font-medium text-flcCharcoal mb-2">Email Address</label>
-          <input type="email" id="subEmail" name="email" required class="w-full px-4 py-3 border-2 border-flcBorder rounded-lg text-sm focus:outline-none focus:border-flcNavy focus:ring-4 focus:ring-flcNavy/10" placeholder="john@example.com">
-        </div>
-
-        <div class="space-y-2">
-          <p class="text-sm font-medium text-flcCharcoal mb-2">Notification Preferences</p>
-          <label class="flex items-start gap-2 cursor-pointer text-[13px] text-flcCharcoal/70">
-            <input type="checkbox" name="newSermon" checked class="mt-[3px]">
-            <span>New sermon notes published</span>
-          </label>
-          <label class="flex items-start gap-2 cursor-pointer text-[13px] text-flcCharcoal/70">
-            <input type="checkbox" name="weeklyDigest" checked class="mt-[3px]">
-            <span>Weekly digest of resources</span>
-          </label>
-        </div>
-
-        <button type="submit" class="w-full btn-premium px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-semibold tracking-widePlus uppercase text-sm hover:from-flcNavyLight hover:to-flcNavy shadow-md hover:shadow-lg">
-          Subscribe Now
-        </button>
-
-        <p class="text-xs text-center text-flcCharcoal/50 mt-4">
-          We respect your privacy. Unsubscribe anytime.
-        </p>
-      </form>
-    </div>
-  </div>
-
-  <main class="min-h-screen">
-    <!-- Hero Header -->
-    <section class="hero-background relative text-white flex items-center">
-      <!-- Animated Background Elements -->
-      <div class="hero-particles">
-        <div class="particle" style="top: 10%; left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
-        <div class="particle" style="top: 20%; left: 80%; width: 3px; height: 3px; animation-delay: 2s;"></div>
-        <div class="particle" style="top: 70%; left: 20%; width: 5px; height: 5px; animation-delay: 4s;"></div>
-        <div class="particle" style="top: 40%; left: 90%; width: 4px; height: 4px; animation-delay: 6s;"></div>
-        <div class="particle" style="top: 80%; left: 70%; width: 3px; height: 3px; animation-delay: 8s;"></div>
-        <div class="particle" style="top: 30%; left: 50%; width: 6px; height: 6px; animation-delay: 10s;"></div>
-      </div>
-
-      <!-- Hero Glow Effects -->
-      <div class="hero-glow hidden sm:block" style="top: -200px; right: -100px;"></div>
-      <div class="hero-glow hidden sm:block" style="bottom: -300px; left: -150px; animation-delay: 4s;"></div>
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 relative z-10 w-full">
-        <div class="relative grid lg:grid-cols-[1.1fr_0.9fr] gap-8 sm:gap-12 lg:gap-20 items-center">
-          <!-- Decorative background shapes -->
-          <div class="absolute -top-16 -left-16 w-72 h-72 bg-flcGold/10 rounded-full blur-3xl z-0"></div>
-          <div class="absolute -bottom-24 right-0 w-96 h-96 bg-flcNavy/10 rounded-full blur-3xl z-0"></div>
-
-          <div class="fade-in-section is-visible space-y-6 sm:space-y-8 relative z-10 text-center lg:text-left">
-            <div class="hero-badge inline-block">
-              <span class="text-flcGold/90">FLC Publishing House</span>
-            </div>
-
-            <h1 class="hero-title font-heading font-bold leading-tight tracking-tight max-w-full overflow-hidden">
-              <span class="block text-white mb-1 text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">Resources for</span>
-              <span class="block text-flcGoldLight mb-1 text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl">Learning and Leading</span>
-              <span class="block text-white text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl">in the Word</span>
+  <main id="main-content" class="min-h-screen">
+    <section class="hero-surface text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-16 items-center">
+          <div>
+            <p class="section-kicker text-flcGoldLight mb-4">FLC Publishing House</p>
+            <h1 class="hero-v2-title font-heading text-4xl sm:text-5xl lg:text-6xl leading-tight mb-5">
+              Teach clearly on Sunday. Grow deeply all week.
             </h1>
-
-            <p class="text-base sm:text-lg lg:text-xl text-white leading-relaxed font-light max-w-2xl mx-auto lg:mx-0">
-              Sermon notes, devotionals, Spiritual Detox weeks, and Bible studies"all organized in one place so you can read, share, and grow with clarity.
+            <p class="hero-v2-lede text-white/85 text-base sm:text-lg max-w-2xl">
+              FLC Publishing House gives pastors, ministry leaders, and everyday believers a clean library of sermon notes, devotionals, and practical study tools.
             </p>
-
-            <div class="hero-cta-group flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
-              <a href="pages/resources.html" class="btn-premium inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-gradient-to-r from-flcGold to-flcGoldLight text-flcNavyDark font-bold tracking-wide sm:tracking-widePlus uppercase text-sm hover:from-flcGoldLight hover:to-flcGold shadow-2xl hover:shadow-flcGold/50 transition-all">
-                Explore Resources
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+              <a href="pages/resources.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 bg-flcGold text-white font-semibold hover:bg-flcGoldLight transition-colors">
+                Explore the Library
               </a>
-              <button id="heroSubscribeBtn" class="btn-premium inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 rounded-full border-2 border-white/30 bg-white/5 text-white font-semibold text-sm tracking-wide uppercase hover:bg-white/15 hover:border-white/50 backdrop-blur-md shadow-lg hover:shadow-xl transition-all">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                </svg>
-                Get Notifications
-              </button>
-              <a href="https://freedomlifechurch.ca/" class="btn-premium inline-flex items-center justify-center px-6 py-3 sm:py-3.5 rounded-full border border-white/20 text-white/80 font-medium text-sm hover:text-white hover:bg-white/5 hover:border-white/30 backdrop-blur-sm transition-all">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Back to Church
+              <a href="#start-here" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-white/35 text-white font-semibold hover:bg-white/10 transition-colors">
+                Find Your Path
               </a>
             </div>
           </div>
 
-          <!-- Right hero column: MOBILE-OPTIMIZED stack (no sideways overflow) -->
-          <div class="flex flex-col gap-4 sm:gap-6 fade-in-section is-visible lg:mt-0 mt-8 sm:mt-12 relative" style="animation-delay: 0.2s;">
-            <div class="absolute -top-3 right-0 lg:right-8 bg-gradient-to-r from-flcGold to-flcGold/90 text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl backdrop-blur-md z-40 animate-pulse" style="animation-duration: 3s;">
-              ? Seasonal Feature
-            </div>
-
-            <!-- Spiritual Detox Announcement -->
-            <a href="pages/spiritual-detox.html"
-               class="block bg-white/95 backdrop-blur-sm rounded-3xl p-5 sm:p-8 shadow-xl border border-flcBorder/60 hover:shadow-2xl transition-all duration-400">
-              <div class="flex flex-col sm:flex-row sm:items-start gap-4">
-                <div class="p-3 bg-flcGold/10 rounded-xl border border-flcGold/20 shrink-0 w-fit">
-                  <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V9H3v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-
-                <div class="flex-1">
-                  <h4 class="text-lg sm:text-xl font-heading font-bold text-flcNavy">Spiritual Detox - The Kingdom Blueprint</h4>
-                  <p class="text-sm text-flcCharcoal/70 mt-1">January 12-31  A season of consecration, alignment, and spiritual renewal</p>
-
-                  <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="p-3 bg-white/70 rounded-lg text-center border border-flcBorder/60">
-                      <div class="text-sm text-flcGold font-bold">Bible Studies</div>
-                      <div class="text-xs text-flcCharcoal/70">Jan 15, Jan 22, Jan 29</div>
-                    </div>
-                    <div class="p-3 bg-white/70 rounded-lg text-center border border-flcBorder/60">
-                      <div class="text-sm text-flcGold font-bold">Time</div>
-                      <div class="text-xs text-flcCharcoal/70">6:30 PM - 7:30 PM</div>
-                    </div>
-                    <div class="p-3 bg-white/70 rounded-lg text-center border border-flcBorder/60">
-                      <div class="text-sm text-flcGold font-bold">Format</div>
-                      <div class="text-xs text-flcCharcoal/70">In-person  No small groups</div>
-                    </div>
-                  </div>
-
-                  <p class="text-sm text-flcCharcoal/70 mt-4">
-                    Weekly reflections will be distributed to guide prayer, Scripture reading, and personal formation. Click for full details and resources.
-                  </p>
-
-                  <!-- Mobile-first CTA -->
-                  <div class="mt-4">
-                    <span class="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 rounded-full bg-flcGold text-white font-semibold">
-                      Learn More
-                    </span>
-                  </div>
-                </div>
+          <aside class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-7">
+            <p class="section-kicker text-flcGoldLight mb-3">This Week</p>
+            <h2 id="heroWeekTitle" class="font-heading text-2xl sm:text-3xl mb-3">Latest Sermon</h2>
+            <p id="heroWeekSummary" class="text-white/85 mb-5">Freshly published teaching notes and resources from Freedom Life Church.</p>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between gap-4 border-b border-white/15 pb-2">
+                <dt class="text-white/75">Date</dt>
+                <dd id="heroWeekDate" class="font-medium">Most recent</dd>
               </div>
-            </a>
-
-            <!-- Downloadable Resources Card (only rotate/offset on lg to avoid mobile overflow) -->
-            <a href="pages/resources.html"
-               class="block bg-flcOffWhite rounded-2xl shadow-2xl p-6 sm:p-7 transition group border border-flcGold/20 relative z-10 lg:translate-x-8 lg:rotate-[2deg] lg:hover:rotate-1 lg:hover:-translate-y-2">
-              <div class="flex items-center gap-3 mb-2">
-                <svg class="w-7 h-7 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                <span class="text-lg font-heading font-bold text-flcNavy group-hover:text-flcGold transition">Downloadable Resources</span>
+              <div class="flex justify-between gap-4 border-b border-white/15 pb-2">
+                <dt class="text-white/75">Pastor</dt>
+                <dd id="heroWeekPastor" class="font-medium">FLC Team</dd>
               </div>
-              <p class="text-flcCharcoal/80 text-sm mb-2">
-                Download sermon notes, study guides, and printable resources for your ministry or personal growth.
-              </p>
-              <span class="inline-block mt-1 px-4 py-1 rounded-full bg-flcGold/10 text-flcGold text-xs font-semibold">See Downloads</span>
-              <div class="absolute -bottom-6 -left-6 w-16 h-16 bg-flcNavy/20 rounded-full blur-2xl z-0"></div>
-            </a>
-          </div>
+              <div class="flex justify-between gap-4">
+                <dt class="text-white/75">Type</dt>
+                <dd class="font-medium">Sermon</dd>
+              </div>
+            </dl>
+            <a id="heroWeekLink" href="pages/resources.html" class="mt-6 inline-flex items-center text-flcGoldLight font-semibold hover:text-white transition-colors">Open Sermon</a>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section class="relative py-14 sm:py-16 bg-flcOffWhite overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-32 bg-flcGold/10 rounded-b-full blur-2xl"></div>
-        <div class="absolute bottom-0 right-0 w-1/3 h-24 bg-flcGold/10 rounded-tl-3xl blur-2xl"></div>
+    <section class="mobile-tight-section py-10 sm:py-12 border-b border-flcBorder/70 bg-white/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-4 md:grid-cols-[1.1fr_1fr_1fr_1fr]">
+          <div class="rounded-2xl border border-flcBorder bg-white p-4 sm:p-5">
+            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Freshness</p>
+            <p class="text-sm sm:text-base text-flcNavy font-semibold">Last updated: February 2026</p>
+            <p class="text-xs text-flcCharcoal/70 mt-1">New notes and devotionals added regularly.</p>
+          </div>
+          <a href="sermons/sermon-when-compassion-costs-you-sleep.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
+            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Sermon</p>
+            <p class="text-sm sm:text-base text-flcNavy font-semibold">When Compassion Costs You Sleep</p>
+            <p class="text-xs text-flcCharcoal/70 mt-1">Latest teaching note</p>
+          </a>
+          <a href="pages/devotionals.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
+            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Devotional</p>
+            <p class="text-sm sm:text-base text-flcNavy font-semibold">Advent Collection</p>
+            <p class="text-xs text-flcCharcoal/70 mt-1">4-week guided journey</p>
+          </a>
+          <a href="pages/resources.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
+            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Download</p>
+            <p class="text-sm sm:text-base text-flcNavy font-semibold">Printable Handouts</p>
+            <p class="text-xs text-flcCharcoal/70 mt-1">Ministry-ready PDFs</p>
+          </a>
+        </div>
       </div>
-      <div class="max-w-6xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-        <div class="grid md:grid-cols-2 gap-10 sm:gap-12 items-start">
+    </section>
+
+    <section id="start-here" class="mobile-tight-section py-14 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between gap-6 mb-8">
           <div>
-            <h2 class="text-3xl sm:text-4xl font-heading font-bold text-flcNavy mb-4 tracking-tight">About FLC Publishing House</h2>
-            <div class="h-1 w-16 bg-flcGold rounded mb-6"></div>
-            <p class="text-base sm:text-lg text-flcCharcoal/90 leading-relaxed mb-6">
-              FLC Publishing House is a ministry of Freedom Life Church, dedicated to equipping believers and leaders with premium sermon notes, Bible studies, and devotionals. Our resources are crafted to help you engage deeply with Scripture, grow in faith, and lead others with confidence.
-            </p>
-            <blockquote class="border-l-4 border-flcGold pl-5 italic text-flcCharcoal/80 mb-6">
-              "Our mission is to make the Word of God accessible, practical, and transformative for every believer.
-            </blockquote>
-            <p class="text-sm sm:text-base text-flcCharcoal/80 mb-4">
-              Whether youre a pastor, small group leader, or a passionate learner, youll find tools here to enrich your spiritual journey and teaching ministry.
-            </p>
-            <div class="bg-flcGold/10 rounded-xl px-6 py-4 text-flcNavy font-medium shadow-inner mb-2">
-              Explore our resources for sermon notes, devotionals, and downloadable resources"each designed to help you grow and lead with confidence.
+            <p class="section-kicker text-flcGold">Start Here</p>
+            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Choose your next step</h2>
+          </div>
+          <a href="pages/resources.html" class="hidden sm:inline text-flcNavy font-medium hover:text-flcGold">View full library</a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-heading text-xl text-flcNavy">Sermon Notes</h3>
+              <span class="text-[11px] px-2 py-1 rounded-full bg-flcGold/12 text-flcGold font-semibold">Most Used</span>
             </div>
+            <p class="text-sm text-flcCharcoal/75">Structured notes for teaching, reflection, and group discussion.</p>
+            <p class="text-xs text-flcCharcoal/60 mt-3">Best for pastors and small-group leaders.</p>
+          </a>
+          <a href="pages/devotionals.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-heading text-xl text-flcNavy">Devotionals</h3>
+              <span class="text-[11px] px-2 py-1 rounded-full bg-flcNavy/10 text-flcNavy font-semibold">Weekly Rhythm</span>
+            </div>
+            <p class="text-sm text-flcCharcoal/75">Week-by-week devotional tracks for personal and team growth.</p>
+            <p class="text-xs text-flcCharcoal/60 mt-3">Best for daily discipleship and family devotion.</p>
+          </a>
+          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-heading text-xl text-flcNavy">Downloads</h3>
+              <span class="text-[11px] px-2 py-1 rounded-full bg-flcGold/12 text-flcGold font-semibold">Printable</span>
+            </div>
+            <p class="text-sm text-flcCharcoal/75">Printable guides, handouts, and ministry-ready resource packs.</p>
+            <p class="text-xs text-flcCharcoal/60 mt-3">Best for Sunday prep and classroom handouts.</p>
+          </a>
+          <a href="pages/spiritual-detox.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-heading text-xl text-flcNavy">Seasonal Series</h3>
+              <span class="text-[11px] px-2 py-1 rounded-full bg-flcNavy/10 text-flcNavy font-semibold">Current</span>
+            </div>
+            <p class="text-sm text-flcCharcoal/75">Current church-wide study journeys and special formation tracks.</p>
+            <p class="text-xs text-flcCharcoal/60 mt-3">Best for church-wide campaigns and focused seasons.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mobile-tight-section py-14 sm:py-16 bg-flcCream/45 border-y border-flcBorder">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <p class="section-kicker text-flcGold">Latest</p>
+          <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">New and featured this month</h2>
+        </div>
+
+        <div id="featuredPostsGrid" class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
+            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
+            <h3 class="font-heading text-2xl text-flcNavy mt-2">Loading latest post...</h3>
+            <p class="mt-3 text-flcCharcoal/80">Fetching recently dated sermon posts from Contentful.</p>
+            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
+          </article>
+          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
+            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
+            <h3 class="font-heading text-2xl text-flcNavy mt-2">Loading latest post...</h3>
+            <p class="mt-3 text-flcCharcoal/80">Fetching recently dated sermon posts from Contentful.</p>
+            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
+          </article>
+          <article class="bg-flcNavy text-white rounded-2xl border border-flcNavy p-6 shadow-medium">
+            <p class="text-xs font-semibold tracking-wide text-flcGoldLight uppercase">Sermon</p>
+            <h3 class="font-heading text-2xl mt-2">Loading latest post...</h3>
+            <p class="mt-3 text-white/82">Fetching recently dated sermon posts from Contentful.</p>
+            <a href="pages/resources.html" class="inline-flex mt-5 text-flcGoldLight font-semibold hover:text-white">Read now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-start">
+          <div>
+            <p class="section-kicker text-flcGold mb-3">About</p>
+            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy mb-4">A ministry for Scripture-centered formation</h2>
+            <p class="text-flcCharcoal/85 mb-4">
+              FLC Publishing House equips believers and leaders with clear, practical resources rooted in the Word of God.
+              Every release is designed to help churches teach faithfully and help individuals grow steadily.
+            </p>
+            <p class="text-flcCharcoal/85">
+              Whether you are serving a congregation, leading a small group, or building a personal rhythm of study,
+              this library is built to support your next faithful step.
+            </p>
           </div>
 
-          <div class="space-y-6">
-            <div class="bg-white/90 rounded-2xl shadow-lg p-6 mb-2 border border-flcBorder/60">
-              <h3 class="text-xl font-heading font-semibold text-flcGold mb-2">What Makes Us Unique?</h3>
-              <ul class="list-disc pl-5 text-flcCharcoal/90 text-base space-y-1">
-                <li>Original, in-depth sermon notes and studies</li>
-                <li>Devotionals for every season and age group</li>
-                <li>Practical resources for leaders and families</li>
-                <li>Rooted in Scripture, relevant for today</li>
-              </ul>
-            </div>
-            <div class="bg-flcNavy/5 rounded-2xl shadow p-6 border border-flcBorder/60">
-              <h4 class="text-lg font-heading font-semibold text-flcNavy mb-1">Get Involved</h4>
-              <p class="text-flcCharcoal/80 text-base">
-                Want to contribute, request a resource, or share your story?
-                <a href="#subscribe" class="text-flcGold underline hover:text-flcNavy">Contact us or subscribe</a>
-                for updates and opportunities to connect.
-              </p>
-            </div>
+          <div class="bg-white rounded-2xl border border-flcBorder p-6 sm:p-7 shadow-soft" id="subscribe">
+            <h3 class="font-heading text-2xl text-flcNavy mb-2">Stay updated</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-5">Get notified when new sermon notes, devotionals, and ministry tools are published.</p>
+
+            <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-3">
+              <label class="block">
+                <span class="text-sm font-medium text-flcNavy">Name</span>
+                <input name="name" type="text" required class="mt-1 w-full rounded-xl border border-flcBorder px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-flcGold/35" />
+              </label>
+
+              <label class="block">
+                <span class="text-sm font-medium text-flcNavy">Email</span>
+                <input name="email" type="email" required class="mt-1 w-full rounded-xl border border-flcBorder px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-flcGold/35" />
+              </label>
+
+              <button type="submit" class="w-full rounded-xl bg-flcNavy text-white font-semibold py-3 hover:bg-flcNavyLight transition-colors">
+                Subscribe
+              </button>
+              <p id="subscriptionStatus" class="text-sm text-flcCharcoal/70" aria-live="polite"></p>
+            </form>
           </div>
         </div>
       </div>
-    </section>    <!-- Give fixed buttons some breathing room on iPhone -->
-    <div class="h-20 sm:h-24"></div>
+    </section>
   </main>
 
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+  <div
+    id="footerContainer"
+    data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'
+  ></div>
+  <script src="assets/js/footer-component.js"></script>
+
   <script>
-    // Fade-in animation on scroll
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('is-visible');
-      });
-    }, observerOptions);
+    window.FLC_CONTENTFUL = window.FLC_CONTENTFUL || {
+      enabled: true,
+      spaceId: "i8pstcwrkztq",
+      environment: "master",
+      accessToken: "pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw",
+      contentType: "blogPage",
+      postPagePath: "pages/post.html"
+    };
 
-    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-
-    // Toast Notification System
-    function showToast(message, type = 'info', duration = 3000) {
-      const container = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.innerHTML = `
-        <div class="flex items-center gap-3">
-          <div class="flex-shrink-0">
-            ${type === 'success' ? '?' : type === 'error' ? '?' : '?'}
-          </div>
-          <div class="flex-1 text-sm font-medium text-flcCharcoal">${message}</div>
-        </div>
-      `;
-      container.appendChild(toast);
-      setTimeout(() => toast.classList.add('show'), 10);
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-      }, duration);
-    }
-
-    // Scroll to Top Button
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    function toggleScrollTopButton() {
-      if (window.pageYOffset > 500) scrollTopBtn.classList.add('visible');
-      else scrollTopBtn.classList.remove('visible');
-    }
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      showToast('Scrolled to top', 'success', 1500);
-    });
-    window.addEventListener('scroll', toggleScrollTopButton, { passive: true });
-
-    // Subscription Modal
-    const subscriptionModal = document.getElementById('subscriptionModal');
-    const modalClose = document.getElementById('modalClose');
-    const subscriptionForm = document.getElementById('subscriptionForm');
-    const heroSubscribeBtn = document.getElementById('heroSubscribeBtn');
-
-    function openSubscriptionModal() {
-      subscriptionModal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeSubscriptionModal() {
-      subscriptionModal.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    if (heroSubscribeBtn) heroSubscribeBtn.addEventListener('click', openSubscriptionModal);
-
-    const navSubscribeBtn = document.getElementById('navSubscribe');
-    if (navSubscribeBtn) {
-      navSubscribeBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openSubscriptionModal();
-      });
-    }
-
-    modalClose.addEventListener('click', closeSubscriptionModal);
-    subscriptionModal.addEventListener('click', (e) => {
-      if (e.target === subscriptionModal) closeSubscriptionModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && subscriptionModal.classList.contains('show')) closeSubscriptionModal();
-    });
-
-    subscriptionForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(subscriptionForm);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        preferences: {
-          newSermon: formData.get('newSermon') === 'on',
-          weeklyDigest: formData.get('weeklyDigest') === 'on',
-        },
-        subscribedAt: new Date().toISOString()
+    function stripRichTextToPlain(rich) {
+      if (!rich || !Array.isArray(rich.content)) return "";
+      const parts = [];
+      const walk = (node) => {
+        if (!node) return;
+        if (node.nodeType === "text" && typeof node.value === "string") {
+          parts.push(node.value);
+        }
+        if (Array.isArray(node.content)) node.content.forEach(walk);
       };
+      rich.content.forEach(walk);
+      return parts.join(" ").replace(/\s+/g, " ").trim();
+    }
+
+    function formatDateSafe(value) {
+      if (!value || typeof value !== "string") return "Most recent";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Most recent";
+      return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(date);
+    }
+
+    function normalizePastor(value) {
+      if (!value || typeof value !== "string") return "FLC Team";
+      const clean = value.replace(/\s+/g, " ").trim();
+      return clean || "FLC Team";
+    }
+
+    function getSermonSortTime(entry) {
+      const sermonDate = entry && entry.fields ? entry.fields.date : "";
+      const dateMs = sermonDate ? Date.parse(sermonDate) : NaN;
+      if (!Number.isNaN(dateMs)) return dateMs;
+      const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
+      const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
+      return Number.isNaN(updatedMs) ? 0 : updatedMs;
+    }
+
+    let latestEntriesPromise = null;
+
+    function getLatestSermonEntries() {
+      if (latestEntriesPromise) return latestEntriesPromise;
+
+      const cfg = window.FLC_CONTENTFUL || {};
+      if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.contentType) {
+        latestEntriesPromise = Promise.resolve([]);
+        return latestEntriesPromise;
+      }
+
+      const env = cfg.environment || "master";
+      const params = new URLSearchParams({
+        access_token: cfg.accessToken,
+        content_type: cfg.contentType,
+        order: "-fields.date",
+        limit: "20"
+      });
+      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+
+      latestEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
+        .then((response) => (response.ok ? response.json() : { items: [] }))
+        .then((payload) => {
+          const items = Array.isArray(payload.items) ? payload.items : [];
+          return items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a));
+        })
+        .catch(() => []);
+
+      return latestEntriesPromise;
+    }
+
+    async function loadHeroMostRecentSermon() {
+      try {
+        const cfg = window.FLC_CONTENTFUL || {};
+        const items = await getLatestSermonEntries();
+        const item = items.length ? items[0] : null;
+        if (!item || !item.fields || !item.sys || !item.sys.id) return;
+
+        const title = (item.fields.title || "").trim();
+        const summaryRaw = stripRichTextToPlain(item.fields.body);
+        const summary = summaryRaw ? `${summaryRaw.slice(0, 150)}${summaryRaw.length > 150 ? "..." : ""}` : "Freshly published teaching notes and resources from Freedom Life Church.";
+        const dateText = formatDateSafe(item.fields.date);
+        const pastor = normalizePastor(item.fields.pastor || item.fields.pastorName || item.fields.preacher);
+        const postPagePath = cfg.postPagePath || "pages/post.html";
+        const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+
+        const titleEl = document.getElementById("heroWeekTitle");
+        const summaryEl = document.getElementById("heroWeekSummary");
+        const dateEl = document.getElementById("heroWeekDate");
+        const pastorEl = document.getElementById("heroWeekPastor");
+        const linkEl = document.getElementById("heroWeekLink");
+
+        if (titleEl && title) titleEl.textContent = title;
+        if (summaryEl) summaryEl.textContent = summary;
+        if (dateEl) dateEl.textContent = dateText;
+        if (pastorEl) pastorEl.textContent = pastor;
+        if (linkEl) linkEl.href = href;
+      } catch (error) {
+        console.error("Failed to load latest sermon for hero:", error);
+      }
+    }
+
+    async function loadFeaturedPostsSection() {
+      const grid = document.getElementById("featuredPostsGrid");
+      if (!grid) return;
 
       try {
+        const cfg = window.FLC_CONTENTFUL || {};
+        const items = await getLatestSermonEntries();
+        const topThree = items.filter((item) => item && item.fields && item.sys && item.sys.id).slice(0, 3);
+        if (!topThree.length) return;
+
+        const postPagePath = cfg.postPagePath || "pages/post.html";
+
+        grid.innerHTML = topThree.map((item, index) => {
+          const title = (item.fields.title || "Untitled Sermon").trim();
+          const summaryRaw = stripRichTextToPlain(item.fields.body);
+          const summary = summaryRaw
+            ? `${summaryRaw.slice(0, 120)}${summaryRaw.length > 120 ? "..." : ""}`
+            : "Freshly published teaching notes and resources from Freedom Life Church.";
+          const dateText = formatDateSafe(item.fields.date);
+          const pastor = normalizePastor(item.fields.pastor || item.fields.pastorName || item.fields.preacher);
+          const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+
+          const isAccent = index === 2;
+          const cardClasses = isAccent
+            ? "bg-flcNavy text-white rounded-2xl border border-flcNavy p-6 shadow-medium"
+            : "bg-white rounded-2xl border border-flcBorder p-6 shadow-soft";
+          const kickerClasses = isAccent
+            ? "text-xs font-semibold tracking-wide text-flcGoldLight uppercase"
+            : "text-xs font-semibold tracking-wide text-flcGold uppercase";
+          const headingClasses = isAccent
+            ? "font-heading text-2xl mt-2"
+            : "font-heading text-2xl text-flcNavy mt-2";
+          const summaryClasses = isAccent
+            ? "mt-3 text-white/82"
+            : "mt-3 text-flcCharcoal/80";
+          const metaClasses = isAccent
+            ? "mt-3 text-xs text-white/70"
+            : "mt-3 text-xs text-flcCharcoal/60";
+          const linkClasses = isAccent
+            ? "inline-flex mt-5 text-flcGoldLight font-semibold hover:text-white"
+            : "inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold";
+
+          return `
+            <article class="${cardClasses}">
+              <p class="${kickerClasses}">Sermon</p>
+              <h3 class="${headingClasses}">${title.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</h3>
+              <p class="${summaryClasses}">${summary.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+              <p class="${metaClasses}">${dateText} · ${pastor.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+              <a href="${href}" class="${linkClasses}">Read now</a>
+            </article>
+          `;
+        }).join("");
+      } catch (error) {
+        console.error("Failed to load featured posts section:", error);
+      }
+    }
+
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) scrollTopBtn.classList.add("visible");
+      else scrollTopBtn.classList.remove("visible");
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const subscriptionForm = document.getElementById("subscriptionForm");
+    const subscriptionStatus = document.getElementById("subscriptionStatus");
+
+    loadHeroMostRecentSermon();
+    loadFeaturedPostsSection();
+
+    subscriptionForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      subscriptionStatus.textContent = "Submitting...";
+
+      try {
+        const formData = new FormData(subscriptionForm);
         const response = await fetch(subscriptionForm.action, {
-          method: 'POST',
+          method: "POST",
           body: formData,
-          headers: { 'Accept': 'application/json' }
+          headers: { Accept: "application/json" }
         });
 
         if (response.ok) {
-          localStorage.setItem('flc_subscription', JSON.stringify(data));
-          showToast(`Welcome ${data.name}! You're now subscribed.`, 'success', 4000);
-          closeSubscriptionModal();
+          subscriptionStatus.textContent = "Thanks, you are subscribed.";
           subscriptionForm.reset();
         } else {
-          showToast('Subscription failed. Please try again.', 'error', 4000);
+          subscriptionStatus.textContent = "Subscription failed. Please try again.";
         }
       } catch (error) {
-        showToast('Network error. Please try again.', 'error', 4000);
-      }
-    });
-
-    // Show subscription prompt after 30s if not subscribed
-    if (!localStorage.getItem('flc_subscription')) {
-      setTimeout(() => {
-        if (!localStorage.getItem('flc_subscription')) openSubscriptionModal();
-      }, 30000);
-    }
-
-    // Navigation (scrolled class) - guard against missing element to avoid console errors
-    const mainNav = document.getElementById('mainNav');
-    if (mainNav) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) mainNav.classList.add('scrolled');
-        else mainNav.classList.remove('scrolled');
-      }, { passive: true });
-    }
-
-    // Page Transition Handler
-    const pageTransition = document.getElementById('pageTransition');
-    const transitionLinks = document.querySelectorAll('a[href]:not([href^="#"]):not([target="_blank"])');
-
-    transitionLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-        if (href.startsWith('javascript:') || href.startsWith('http') || href.includes('://')) return;
-
-        e.preventDefault();
-        pageTransition.classList.add('active');
-
-        setTimeout(() => {
-          window.location.href = href;
-        }, 400);
-      });
-    });
-
-    window.addEventListener('load', () => {
-      setTimeout(() => pageTransition.classList.remove('active'), 200);
-    });
-
-    // Lazy Loading Images
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.add('lazy-loaded');
-          img.removeAttribute('data-src');
-          observer.unobserve(img);
-        }
-      });
-    }, { rootMargin: '50px' });
-
-    lazyImages.forEach(img => imageObserver.observe(img));
-  </script>
-
-  <!-- Page Transitions & Performance Enhancements -->
-  <script src="assets/js/page-transitions.js"></script>
-
-  <!-- Footer Container (UNCHANGED) -->
-  <div id="footerContainer"
-       data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'></div>
-
-  <!-- Load Footer Component (UNCHANGED) -->
-  <script src="assets/js/footer-component.js"></script>
-
-  <!-- Site-wide Search + Dynamic Advent (kept as-is from your file; no changes required here) -->
-  <script>
-    // --- Site-wide Search Functionality ---
-    const searchData = [
-      { title: "It's Time to Cross Over", type: "Sermon", url: "sermons/sermon-its-time-to-crossover.html" },
-      { title: "When Compassion Costs You Sleep", type: "Sermon", url: "sermons/sermon-when-compassion-costs-you-sleep.html" },
-      { title: "Week 1: The Light of Hope", type: "Devotional", url: "devotionals-pages/devotional-week1-hope.html" },
-      { title: "Week 2: The Light of Love", type: "Devotional", url: "devotionals-pages/devotional-week2-love.html" },
-      { title: "Week 3: The Light of Peace", type: "Devotional", url: "devotionals-pages/devotional-week3-peace.html" },
-      { title: "Week 4: The Light of Joy", type: "Devotional", url: "devotionals-pages/devotional-week4-joy.html" },
-    ];
-
-    function renderSearchResults(results) {
-      const dropdown = document.getElementById('searchResultsDropdown');
-      if (!results.length) {
-        dropdown.innerHTML = '<div class="px-4 py-3 text-flcCharcoal/60 text-sm">No results found.</div>';
-        dropdown.classList.remove('hidden');
-        return;
-      }
-      dropdown.innerHTML = results.map(item => `
-        <a href="${item.url}" class="block px-4 py-3 hover:bg-flcGold/10 transition-colors">
-          <span class="font-semibold text-flcNavy">${item.title}</span><br>
-          <span class="text-xs text-flcGold font-medium">${item.type}</span>
-        </a>
-      `).join('');
-      dropdown.classList.remove('hidden');
-    }
-
-    function hideSearchResults() {
-      document.getElementById('searchResultsDropdown').classList.add('hidden');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('resourceSearch');
-      const dropdown = document.getElementById('searchResultsDropdown');
-      if (!searchInput) return;
-      searchInput.addEventListener('input', function(e) {
-        const q = e.target.value.trim().toLowerCase();
-        if (!q) { hideSearchResults(); return; }
-        const results = searchData.filter(item => item.title.toLowerCase().includes(q) || item.type.toLowerCase().includes(q));
-        renderSearchResults(results);
-      });
-      searchInput.addEventListener('focus', function(e) {
-        if (e.target.value.trim()) {
-          const q = e.target.value.trim().toLowerCase();
-          const results = searchData.filter(item => item.title.toLowerCase().includes(q) || item.type.toLowerCase().includes(q));
-          renderSearchResults(results);
-        }
-      });
-      document.addEventListener('click', function(e) {
-        if (!dropdown.contains(e.target) && e.target !== searchInput) hideSearchResults();
-      });
-    });
-
-    // --- Dynamic Advent Card ---
-    document.addEventListener('DOMContentLoaded', function() {
-      const adventStartDate = new Date(2025, 10, 30);
-      const adventWeeks = [
-        { week: 1, theme: 'Hope', title: 'Week 1: The Light of Hope', dates: 'November 30 - December 6', startDate: new Date(2025, 10, 30), endDate: new Date(2025, 11, 6), url: 'devotionals-pages/devotional-week1-hope.html', description: 'Begin your Advent journey with <span class="font-semibold text-flcNavy">hope</span>. Discover how God\'s promises illuminate even our darkest moments and anchor our souls in His faithfulness.', emoji: '?' },
-        { week: 2, theme: 'Love', title: 'Week 2: The Light of Love', dates: 'December 7-13', startDate: new Date(2025, 11, 7), endDate: new Date(2025, 11, 13), url: 'devotionals-pages/devotional-week2-love.html', description: 'Experience God\'s transformative <span class="font-semibold text-flcNavy">love</span> this week. Explore how divine love changes hearts, heals wounds, and calls us to love others as Christ loved us.', emoji: '??' },
-        { week: 3, theme: 'Peace', title: 'Week 3: The Light of Peace', dates: 'December 14-20', startDate: new Date(2025, 11, 14), endDate: new Date(2025, 11, 20), url: 'devotionals-pages/devotional-week3-peace.html', description: 'Find divine <span class="font-semibold text-flcNavy">peace</span> in the midst of chaos. Learn how the Prince of Peace offers rest for weary souls and calm for troubled hearts.', emoji: '???' },
-        { week: 4, theme: 'Joy', title: 'Week 4: The Light of Joy', dates: 'December 21-25', startDate: new Date(2025, 11, 21), endDate: new Date(2025, 11, 25), url: 'devotionals-pages/devotional-week4-joy.html', description: 'Celebrate with profound <span class="font-semibold text-flcNavy">joy</span> as Christmas approaches. Discover the deep, lasting joy that comes from knowing Jesus"the reason for the season.', emoji: '??' }
-      ];
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      let currentWeek = adventWeeks[0];
-      for (const week of adventWeeks) {
-        if (today >= week.startDate && today <= week.endDate) { currentWeek = week; break; }
-      }
-      if (today > adventWeeks[3].endDate) currentWeek = adventWeeks[3];
-
-      let dayOfAdvent = 1;
-      if (today >= adventStartDate) {
-        const timeDiff = today - adventStartDate;
-        dayOfAdvent = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
-        if (dayOfAdvent > 28) dayOfAdvent = 28;
-      }
-
-      // (These elements may not exist on this page; safe-guard)
-      const setHTML = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
-      const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      const setHref = (id, val) => { const el = document.getElementById(id); if (el) el.href = val; };
-
-      setHTML('advent-card-title', currentWeek.title);
-      setHTML('advent-card-week', `Week ${currentWeek.week}  ${currentWeek.dates}`);
-      setHTML('advent-card-description', currentWeek.description);
-      setHref('advent-card-link', currentWeek.url);
-      setText('advent-day-number', dayOfAdvent);
-      setText('advent-week-number', currentWeek.week);
-
-      const emojiElement = document.querySelector('#advent-card-emoji');
-      if (emojiElement) emojiElement.textContent = currentWeek.emoji;
-
-      const ctaText = document.getElementById('advent-card-cta-text');
-      if (ctaText) ctaText.textContent = `Read Week ${currentWeek.week}`;
-
-      const ctaButton = document.getElementById('advent-card-cta');
-      const cardLink = document.getElementById('advent-card-link');
-      if (ctaButton && cardLink) {
-        ctaButton.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = currentWeek.url;
-        });
-        cardLink.href = currentWeek.url;
+        subscriptionStatus.textContent = "Network error. Please try again.";
       }
     });
   </script>
+<script src="assets/js/site-theme.js"></script>
 </body>
 </html>
-
-
-
-
 
 
 
