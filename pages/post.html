@@ -713,6 +713,55 @@
         opacity: 1 !important;
       }
     }
+
+    /* New styles for enhanced layout */
+    #readingProgress {
+      background: linear-gradient(90deg, #9A7B4F 0%, #B8946A 100%);
+      transition: width 0.1s ease-out;
+    }
+
+    .post-sidebar {
+      position: sticky;
+      top: 6rem;
+      height: fit-content;
+    }
+
+    /* Font controls styling */
+    #decreaseFontBtn, #increaseFontBtn {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #resetFontBtn {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Reading time styling */
+    #readingTime {
+      font-weight: 600;
+    }
+
+    /* Print styles */
+    @media print {
+      .post-shell::before,
+      .post-shell::after,
+      #readingProgress,
+      aside,
+      .hidden-print {
+        display: none !important;
+      }
+
+      .post-frame {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      body {
+        font-size: 12pt;
+        line-height: 1.4;
+      }
+    }
   </style>
   <link rel="stylesheet" href="../assets/css/site-theme.css" />
 </head>
@@ -724,81 +773,149 @@
   ></div>
   <script src="../assets/js/header-component.js"></script>
 
-  <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-    <a href="../pages/resources.html" class="inline-flex items-center text-sm font-semibold text-flcNavy hover:text-flcGold mb-8">
-      &larr; Back to Resources
-    </a>
+  <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 relative">
+    <!-- Decorative side elements -->
+    <div class="hidden lg:block fixed left-4 top-1/2 transform -translate-y-1/2 z-10 opacity-20">
+      <div class="text-flcGold text-6xl font-heading rotate-90 origin-center">FLC</div>
+    </div>
+    <div class="hidden lg:block fixed right-4 top-1/2 transform -translate-y-1/2 z-10 opacity-20">
+      <div class="text-flcNavy text-6xl font-heading -rotate-90 origin-center">Faith</div>
+    </div>
 
-    <article class="post-frame post-intro overflow-hidden">
-      <div id="postImageWrap" class="post-hero-media hidden">
-        <img id="postImage" src="" alt="" class="w-full h-72 sm:h-[26rem] object-cover" />
+    <!-- Reading progress bar -->
+    <div id="readingProgress" class="fixed top-0 left-0 w-full h-1 bg-flcGold z-50 hidden lg:block"></div>
+
+    <div class="lg:flex lg:gap-8">
+      <!-- Main content -->
+      <div class="lg:flex-1 lg:max-w-4xl">
+        <a href="../pages/resources.html" class="inline-flex items-center text-sm font-semibold text-flcNavy hover:text-flcGold mb-8">
+          &larr; Back to Resources
+        </a>
+
+        <article class="post-frame post-intro overflow-hidden">
+          <!-- Post content remains the same -->
+          <div id="postImageWrap" class="post-hero-media hidden">
+            <img id="postImage" src="" alt="" class="w-full h-72 sm:h-[26rem] object-cover" />
+          </div>
+          <div class="p-6 sm:p-9 lg:p-11">
+            <p class="post-kicker mb-3">FLC Publishing House</p>
+            <div id="detoxOverviewLinkWrap" class="hidden text-center">
+              <a id="detoxOverviewLink" class="detox-overview-link" href="../pages/spiritual-detox.html">
+                The Kingdom Blueprint
+              </a>
+            </div>
+            <h1 id="postTitle" class="post-title font-heading text-flcNavy mb-6">Loading post...</h1>
+            <div class="post-meta-row">
+              <div id="postDateWrap" class="hidden">
+                <div class="post-meta">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <span id="postDateText"></span>
+                </div>
+              </div>
+              <div id="postPastorWrap" class="hidden">
+                <div class="post-meta">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1118.88 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span id="postPastorText"></span>
+                </div>
+              </div>
+              <div id="readingTimeWrap" class="hidden">
+                <div class="post-meta">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span id="readingTime"></span>
+                </div>
+              </div>
+            </div>
+            <div id="postVideoWrap" class="post-video-wrap hidden">
+              <div class="relative w-full overflow-hidden rounded-xl bg-black" style="padding-bottom: 56.25%;">
+                <iframe
+                  id="postVideo"
+                  class="absolute inset-0 w-full h-full"
+                  src=""
+                  title="Post video"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <p class="mt-2 text-xs text-flcCharcoal/70">
+                Video not playing?
+                <a id="postVideoFallbackLink" href="#" target="_blank" rel="noopener" class="text-flcNavy underline">Watch on YouTube</a>
+              </p>
+            </div>
+            <section id="pastorMessageSection" class="pastor-message hidden">
+              <p class="label">Message from Pastor Rohan</p>
+              <blockquote id="pastorMessageText"></blockquote>
+            </section>
+            <div id="postBody" class="post-body text-base"></div>
+            <div id="postGuide" class="hidden"></div>
+            <section id="booksSection" class="books-shell hidden">
+              <p class="recommended-kicker mb-2">Further Reading</p>
+              <h2 class="guide-title mb-4">Books for This Week</h2>
+              <div id="booksGrid" class="books-grid"></div>
+            </section>
+            <section id="detoxWeekNav" class="week-nav hidden">
+              <a id="prevWeekLink" class="week-nav-link hidden" href="#">
+                <span class="week-nav-kicker">Previous Week</span>
+                <span id="prevWeekTitle" class="week-nav-title"></span>
+              </a>
+              <a id="nextWeekLink" class="week-nav-link hidden" href="#">
+                <span class="week-nav-kicker">Next Week</span>
+                <span id="nextWeekTitle" class="week-nav-title"></span>
+              </a>
+            </section>
+          </div>
+        </article>
       </div>
-      <div class="p-6 sm:p-9 lg:p-11">
-        <p class="post-kicker mb-3">FLC Publishing House</p>
-        <div id="detoxOverviewLinkWrap" class="hidden text-center">
-          <a id="detoxOverviewLink" class="detox-overview-link" href="../pages/spiritual-detox.html">
-            The Kingdom Blueprint
-          </a>
-        </div>
-        <h1 id="postTitle" class="post-title font-heading text-flcNavy mb-6">Loading post...</h1>
-        <div class="post-meta-row">
-          <div id="postDateWrap" class="hidden">
-            <div class="post-meta">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              <span id="postDateText"></span>
+
+      <!-- Sidebar -->
+      <aside class="hidden lg:block lg:w-80 lg:sticky lg:top-24 lg:self-start">
+        <div class="space-y-8">
+          <!-- Recommended Posts -->
+          <div id="sidebarRecommendedPosts" class="hidden">
+            <div class="recommended-shell">
+              <p class="recommended-kicker mb-2">Keep Reading</p>
+              <h3 class="font-heading text-lg text-flcNavy mb-4">Recommended Posts</h3>
+              <div id="sidebarRelatedPostsGrid" class="grid grid-cols-1 gap-4"></div>
             </div>
           </div>
-          <div id="postPastorWrap" class="hidden">
-            <div class="post-meta">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1118.88 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <span id="postPastorText"></span>
+
+          <!-- Quick Actions -->
+          <div class="bg-white/80 backdrop-blur-sm border border-flcBorder rounded-2xl p-6 shadow-lg">
+            <h3 class="font-heading text-lg text-flcNavy mb-4">Quick Actions</h3>
+            <div class="space-y-3">
+              <button id="shareButton" class="w-full bg-flcGold text-white px-4 py-2 rounded-lg hover:bg-flcNavy transition-colors">
+                Share This Post
+              </button>
+              <button id="printButton" class="w-full border border-flcNavy text-flcNavy px-4 py-2 rounded-lg hover:bg-flcNavy hover:text-white transition-colors">
+                Print Post
+              </button>
+              
+              <!-- Font Size Controls -->
+              <div class="pt-2 border-t border-flcBorder/50">
+                <p class="text-sm text-flcCharcoal font-medium mb-2">Font Size</p>
+                <div class="flex gap-2">
+                  <button id="decreaseFontBtn" class="flex-1 border border-flcNavy text-flcNavy px-3 py-1 rounded text-sm hover:bg-flcNavy hover:text-white transition-colors" title="Decrease font size">
+                    A-
+                  </button>
+                  <button id="resetFontBtn" class="flex-1 bg-flcGold text-white px-3 py-1 rounded text-sm hover:bg-flcNavy transition-colors" title="Reset font size">
+                    Reset
+                  </button>
+                  <button id="increaseFontBtn" class="flex-1 border border-flcNavy text-flcNavy px-3 py-1 rounded text-sm hover:bg-flcNavy hover:text-white transition-colors" title="Increase font size">
+                    A+
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div id="postVideoWrap" class="post-video-wrap hidden">
-          <div class="relative w-full overflow-hidden rounded-xl bg-black" style="padding-bottom: 56.25%;">
-            <iframe
-              id="postVideo"
-              class="absolute inset-0 w-full h-full"
-              src=""
-              title="Post video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <p class="mt-2 text-xs text-flcCharcoal/70">
-            Video not playing?
-            <a id="postVideoFallbackLink" href="#" target="_blank" rel="noopener" class="text-flcNavy underline">Watch on YouTube</a>
-          </p>
-        </div>
-        <section id="pastorMessageSection" class="pastor-message hidden">
-          <p class="label">Message from Pastor Rohan</p>
-          <blockquote id="pastorMessageText"></blockquote>
-        </section>
-        <div id="postBody" class="post-body text-base"></div>
-        <div id="postGuide" class="hidden"></div>
-        <section id="booksSection" class="books-shell hidden">
-          <p class="recommended-kicker mb-2">Further Reading</p>
-          <h2 class="guide-title mb-4">Books for This Week</h2>
-          <div id="booksGrid" class="books-grid"></div>
-        </section>
-        <section id="detoxWeekNav" class="week-nav hidden">
-          <a id="prevWeekLink" class="week-nav-link hidden" href="#">
-            <span class="week-nav-kicker">Previous Week</span>
-            <span id="prevWeekTitle" class="week-nav-title"></span>
-          </a>
-          <a id="nextWeekLink" class="week-nav-link hidden" href="#">
-            <span class="week-nav-kicker">Next Week</span>
-            <span id="nextWeekTitle" class="week-nav-title"></span>
-          </a>
-        </section>
-      </div>
-    </article>
+      </aside>
+    </div>
 
     <section id="relatedPostsSection" class="hidden mt-16">
       <div class="recommended-shell">
@@ -807,7 +924,6 @@
         <div id="relatedPostsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
       </div>
     </section>
-  </main>
 
   <div
     id="footerContainer"
@@ -1556,9 +1672,12 @@
     }
 
     async function renderRecommendedPosts(entryPayload, cfg) {
-      const section = document.getElementById('relatedPostsSection');
-      const grid = document.getElementById('relatedPostsGrid');
-      if (!section || !grid) return;
+      const sidebarSection = document.getElementById('sidebarRecommendedPosts');
+      const sidebarGrid = document.getElementById('sidebarRelatedPostsGrid');
+      const bottomSection = document.getElementById('relatedPostsSection');
+      const bottomGrid = document.getElementById('relatedPostsGrid');
+      
+      if (!sidebarSection || !sidebarGrid || !bottomSection || !bottomGrid) return;
 
       const links = entryPayload && entryPayload.fields && Array.isArray(entryPayload.fields.recommendedPosts)
         ? entryPayload.fields.recommendedPosts
@@ -1648,8 +1767,27 @@
 
       if (!cards.length) return;
 
-      grid.innerHTML = cards
-        .map((card, index) => {
+      // Render in sidebar (compact version)
+      const sidebarCards = cards.slice(0, 3).map((card, index) => {
+        const safeTitle = escapeHtml(card.title);
+        const href = `${postPagePath}?entry=${encodeURIComponent(card.id)}`;
+        const metaBits = [card.date, card.pastor].filter(Boolean).map(escapeHtml).join(' · ');
+        return `
+          <a href="${href}" class="block p-4 bg-white/80 backdrop-blur-sm border border-flcBorder rounded-xl hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Recommended</p>
+            <h4 class="font-semibold text-flcNavy leading-snug text-sm mb-2 line-clamp-2">${safeTitle}</h4>
+            ${metaBits ? `<p class="text-xs text-flcCharcoal/70 mb-2">${metaBits}</p>` : ''}
+            <p class="text-xs font-semibold text-flcNavy">Read Post →</p>
+          </a>
+        `;
+      }).join('');
+
+      sidebarGrid.innerHTML = sidebarCards;
+      sidebarSection.classList.remove('hidden');
+
+      // Render in bottom section (full version) if there are more than 3 posts
+      if (cards.length > 3) {
+        const bottomCards = cards.map((card, index) => {
           const safeTitle = escapeHtml(card.title);
           const href = `${postPagePath}?entry=${encodeURIComponent(card.id)}`;
           const metaBits = [card.date, card.pastor].filter(Boolean).map(escapeHtml).join(' · ');
@@ -1663,13 +1801,14 @@
               </div>
             </a>
           `;
-        })
-        .join('');
+        }).join('');
 
-      section.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        grid.querySelectorAll('.related-card').forEach((card) => card.classList.add('is-visible'));
-      });
+        bottomGrid.innerHTML = bottomCards;
+        bottomSection.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          bottomGrid.querySelectorAll('.related-card').forEach((card) => card.classList.add('is-visible'));
+        });
+      }
     }
 
     async function loadPost() {
@@ -1783,6 +1922,11 @@
         renderBooksSection(entry);
         await renderDetoxWeekNavigation(entry, cfg);
         await renderRecommendedPosts(entry, cfg);
+        
+        // Generate TOC and update quote after content is loaded
+        setTimeout(() => {
+          calculateReadingTime();
+        }, 100);
       } catch (error) {
         titleEl.textContent = 'Unable to load post';
         bodyEl.innerHTML = '<p>Please try again later.</p>';
@@ -1790,7 +1934,206 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadPost);
+    // Calculate and display reading time
+    function calculateReadingTime() {
+      const postBody = document.getElementById('postBody');
+      const readingTimeElement = document.getElementById('readingTime');
+      
+      if (!postBody || !readingTimeElement) return;
+      
+      // Get text content and count words
+      const text = postBody.textContent || postBody.innerText || '';
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length;
+      
+      // Average reading speed: 200 words per minute
+      const wordsPerMinute = 200;
+      const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+      
+      // Update the display
+      readingTimeElement.textContent = `${readingTimeMinutes} min read`;
+      readingTimeElement.style.display = 'inline-flex';
+    }
+
+    // Font size controls
+    function initializeFontControls() {
+      const increaseBtn = document.getElementById('increaseFontBtn');
+      const decreaseBtn = document.getElementById('decreaseFontBtn');
+      const resetBtn = document.getElementById('resetFontBtn');
+      
+      if (!increaseBtn || !decreaseBtn || !resetBtn) return;
+      
+      // Get stored font size or default to 100%
+      let currentFontSize = parseInt(localStorage.getItem('flcPostFontSize') || '100');
+      
+      // Apply initial font size
+      applyFontSize(currentFontSize);
+      
+      increaseBtn.addEventListener('click', () => {
+        if (currentFontSize < 140) {
+          currentFontSize += 10;
+          applyFontSize(currentFontSize);
+          saveFontSize(currentFontSize);
+        }
+      });
+      
+      decreaseBtn.addEventListener('click', () => {
+        if (currentFontSize > 80) {
+          currentFontSize -= 10;
+          applyFontSize(currentFontSize);
+          saveFontSize(currentFontSize);
+        }
+      });
+      
+      resetBtn.addEventListener('click', () => {
+        currentFontSize = 100;
+        applyFontSize(currentFontSize);
+        saveFontSize(currentFontSize);
+      });
+    }
+
+    function applyFontSize(size) {
+      const postBody = document.getElementById('postBody');
+      if (postBody) {
+        postBody.style.fontSize = size + '%';
+        // Also adjust line height for better readability
+        postBody.style.lineHeight = size > 100 ? '1.8' : size < 100 ? '1.6' : '1.7';
+      }
+    }
+
+    function saveFontSize(size) {
+      localStorage.setItem('flcPostFontSize', size.toString());
+    }
+
+    // Update inspirational quote with dynamic Bible verse
+    function updateInspirationalQuote() {
+      const postBody = document.getElementById('postBody');
+      const quoteElement = document.querySelector('.inspirational-quote');
+      
+      if (!postBody || !quoteElement) return;
+      
+      const bodyText = postBody.textContent || '';
+      const verses = extractBibleVerses(bodyText);
+      
+      if (verses.length > 0) {
+        // Pick a random verse from those found
+        const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+        
+        // Try to find the context around this verse
+        const bodyHTML = postBody.innerHTML;
+        const verseIndex = bodyHTML.toLowerCase().indexOf(randomVerse.toLowerCase());
+        
+        if (verseIndex !== -1) {
+          // Extract some context around the verse (up to 200 chars before and after)
+          const start = Math.max(0, verseIndex - 100);
+          const end = Math.min(bodyHTML.length, verseIndex + randomVerse.length + 100);
+          const context = bodyHTML.substring(start, end);
+          
+          // Clean up HTML tags for display
+          const cleanContext = context.replace(/<[^>]*>/g, '').trim();
+          
+          quoteElement.innerHTML = `
+            <blockquote class="text-flcNavy italic text-center">
+              "${cleanContext}"
+              <cite class="block mt-2 text-sm text-flcGold font-semibold">${randomVerse}</cite>
+            </blockquote>
+          `;
+        } else {
+          // Fallback to just the verse reference
+          quoteElement.innerHTML = `
+            <blockquote class="text-flcNavy italic text-center">
+              "Trust in the Lord with all your heart and lean not on your own understanding."
+              <cite class="block mt-2 text-sm text-flcGold font-semibold">${randomVerse}</cite>
+            </blockquote>
+          `;
+        }
+      } else {
+        // Fallback to default quote if no verses found
+        quoteElement.innerHTML = `
+          <blockquote class="text-flcNavy italic text-center">
+            "Faith is the substance of things hoped for, the evidence of things not seen."
+            <cite class="block mt-2 text-sm text-flcGold font-semibold">Hebrews 11:1</cite>
+          </blockquote>
+        `;
+      }
+    }
+
+    // Reading progress bar
+    function updateReadingProgress() {
+      const progressBar = document.getElementById('readingProgress');
+      if (!progressBar) return;
+
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+    }
+
+    // Share functionality
+    function setupShareButton() {
+      const shareButton = document.getElementById('shareButton');
+      if (!shareButton) return;
+
+      shareButton.addEventListener('click', async () => {
+        const title = document.getElementById('postTitle').textContent;
+        const url = window.location.href;
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: title,
+              url: url
+            });
+          } catch (err) {
+            console.log('Share cancelled');
+          }
+        } else {
+          // Fallback: copy to clipboard
+          navigator.clipboard.writeText(url).then(() => {
+            shareButton.textContent = 'Link Copied!';
+            setTimeout(() => {
+              shareButton.textContent = 'Share This Post';
+            }, 2000);
+          });
+        }
+      });
+    }
+
+    // Print functionality
+    function setupPrintButton() {
+      const printButton = document.getElementById('printButton');
+      if (!printButton) return;
+
+      printButton.addEventListener('click', () => {
+        window.print();
+      });
+    }
+
+    // Smooth scrolling for TOC links
+    function setupSmoothScrolling() {
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('#tableOfContents a')) {
+          e.preventDefault();
+          const targetId = e.target.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPost();
+      setupShareButton();
+      setupPrintButton();
+      setupSmoothScrolling();
+      initializeFontControls();
+      
+      // Reading progress
+      window.addEventListener('scroll', updateReadingProgress);
+      updateReadingProgress(); // Initial call
+    });
   </script>
   <script src="../assets/js/site-theme.js"></script>
 </body>

@@ -208,7 +208,14 @@
     }
 
     .download-btn {
-      min-height: 44px;
+      min-height: 48px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+      color: #fff !important;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 8px rgba(154,123,79,0.22), 0 1px 2px rgba(0,0,0,0.07);
     }
 
     .quick-jump {
@@ -270,7 +277,8 @@
 
     .book-accordion {
       border-bottom: 1px solid rgba(229, 224, 216, 0.6);
-    }\n
+    }
+\n
       .book-accordion .book-row {
         padding: 0 1rem 0.95rem 1rem !important;
         gap: 0.65rem;
@@ -397,53 +405,93 @@
       }
     }
 
-    /* Collections Upgrade */
-    .collections-grid {
-      gap: 1rem;
+    /* Hover Previews */
+    .card-preview {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border: 1px solid rgba(229, 224, 216, 0.9);
+      border-radius: 0.75rem;
+      box-shadow: 0 20px 40px rgba(26, 58, 82, 0.15);
+      padding: 1rem;
+      min-width: 280px;
+      max-width: 320px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      margin-top: 0.5rem;
     }
 
-    .collection-card {
-      border: 1px solid rgba(229, 224, 216, 0.88);
+    .card-preview::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-bottom-color: white;
+    }
+
+    .card-preview::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-bottom-color: rgba(229, 224, 216, 0.9);
+      margin-bottom: 1px;
+    }
+
+    .card-link:hover .card-preview {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Better spacing and grouping */
+    .section-spacer {
+      height: 4rem;
+    }
+
+    .content-group {
+      background: rgba(250, 248, 244, 0.3);
       border-radius: 1rem;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.97), rgba(250, 248, 244, 0.95));
-      box-shadow: 0 10px 24px rgba(26, 58, 82, 0.07);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      padding: 2rem;
+      margin-bottom: 2rem;
     }
 
-    .collection-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(26, 58, 82, 0.1);
-      border-color: rgba(154, 123, 79, 0.32);
+    /* Progressive disclosure */
+    .expandable-content {
+      max-height: 120px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
-    .collection-card .collection-top {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.8rem;
+    .expandable-content.expanded {
+      max-height: none;
     }
 
-    .collection-card .collection-title {
-      font-size: clamp(1.34rem, 1.2rem + 0.55vw, 1.75rem);
-      line-height: 1.2;
-      margin-bottom: 0.55rem;
-      color: #1A3A52;
-      letter-spacing: -0.018em;
+    .expand-btn {
+      background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
     }
 
-    .collection-card .collection-desc {
-      margin-bottom: 0.75rem;
-      color: rgba(44, 44, 44, 0.8);
-      line-height: 1.62;
-      max-width: 62ch;
-    }
-
-    .collection-card .collection-note {
-      margin-bottom: 0.95rem;
-      color: rgba(44, 44, 44, 0.58);
-      font-size: 0.76rem;
-      letter-spacing: 0.01em;
+    .expand-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(154, 123, 79, 0.3);
     }
 
     .collection-actions {
@@ -550,6 +598,61 @@
       #booksPanel .book-row .book-link {
         width: 100%;
       }
+    }
+
+    /* Expandable content styles */
+    .expandable-content {
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    .expandable-content[style*="max-height: 0"] {
+      opacity: 0;
+    }
+
+    .expandable-content[style*="max-height:"] {
+      opacity: 1;
+    }
+
+    .expand-btn {
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      background: linear-gradient(90deg, #B8956A 0%, #9A7B4F 100%);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(154,123,79,0.18);
+      border: none;
+      outline: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .expand-btn:hover, .expand-btn:focus {
+      background: linear-gradient(90deg, #9A7B4F 0%, #B8956A 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(154,123,79,0.22);
+    }
+
+    .expand-btn.expanded .expand-text {
+      color: #fff;
+    }
+
+    .expand-btn svg {
+      transition: transform 0.3s ease;
+      stroke: #fff;
+    }
+
+    .expand-btn.expanded svg {
+      transform: rotate(180deg);
+      stroke: #fff;
+    }
+
+    /* Swipe indicator styles */
+    #swipe-indicator {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
     }
   </style>
 <link rel="stylesheet" href="../assets/css/site-theme.css" />
@@ -1145,26 +1248,59 @@
       </div>
     </header>
     <section class="mobile-tight mt-8 sm:mt-10">
-      <div class="freshness-grid grid gap-4 md:grid-cols-4">
-        <article class="bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Freshness</p>
-          <p id="freshnessText" class="text-sm sm:text-base text-flcNavy font-semibold">Last updated: February 2026</p>
-          <p id="freshnessSubtext" class="text-xs text-flcCharcoal/70 mt-1">Library entries refreshed each release cycle.</p>
+      <div class="freshness-grid grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <article class="bg-white rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft hover:shadow-lg transition-shadow duration-300">
+          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-3">Freshness</p>
+          <p id="freshnessText" class="text-lg sm:text-xl text-flcNavy font-semibold mb-2">Last updated: February 2026</p>
+          <p id="freshnessSubtext" class="text-sm text-flcCharcoal/70">Library entries refreshed each release cycle.</p>
         </article>
-        <a id="featuredSermonCard" href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Sermon</p>
-          <p id="featuredSermonTitle" class="text-sm sm:text-base text-flcNavy font-semibold">When Compassion Costs You Sleep</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Latest sermon resource</p>
+        <a id="featuredSermonCard" href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="card-link bg-white rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft hover:shadow-xl transition-all duration-300 block group relative">
+          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-3">Featured Sermon</p>
+          <p id="featuredSermonTitle" class="text-lg sm:text-xl text-flcNavy font-semibold mb-2 group-hover:text-flcGold transition-colors">When Compassion Costs You Sleep</p>
+          <p class="text-sm text-flcCharcoal/70 mb-4">Latest sermon resource</p>
+          <div class="flex items-center text-sm font-medium text-flcNavy group-hover:text-flcGold transition-colors">
+            Read Now →
+          </div>
+          <div class="card-preview">
+            <h4 class="font-semibold text-flcNavy mb-2">When Compassion Costs You Sleep</h4>
+            <p class="text-sm text-flcCharcoal/80 mb-3">Explore the tension between compassion and personal boundaries in ministry. This sermon examines biblical examples of leaders who faced similar challenges.</p>
+            <div class="flex items-center gap-4 text-xs text-flcCharcoal/60">
+              <span>📖 15 min read</span>
+              <span>🎵 Audio available</span>
+            </div>
+          </div>
         </a>
-        <a href="../pages/devotionals.html" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Devotional</p>
-          <p class="text-sm sm:text-base text-flcNavy font-semibold">Advent 4-Week Journey</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Hope, love, peace, and joy</p>
+        <a href="../pages/devotionals.html" class="card-link bg-white rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft hover:shadow-xl transition-all duration-300 block group relative">
+          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-3">Featured Devotional</p>
+          <p class="text-lg sm:text-xl text-flcNavy font-semibold mb-2 group-hover:text-flcGold transition-colors">Advent 4-Week Journey</p>
+          <p class="text-sm text-flcCharcoal/70 mb-4">Hope, love, peace, and joy</p>
+          <div class="flex items-center text-sm font-medium text-flcNavy group-hover:text-flcGold transition-colors">
+            Start Journey →
+          </div>
+          <div class="card-preview">
+            <h4 class="font-semibold text-flcNavy mb-2">Advent 4-Week Journey</h4>
+            <p class="text-sm text-flcCharcoal/80 mb-3">A transformative 4-week devotional experience exploring the themes of Advent: Hope, Love, Peace, and Joy. Perfect for personal reflection or group study.</p>
+            <div class="flex items-center gap-4 text-xs text-flcCharcoal/60">
+              <span>📅 4 weeks</span>
+              <span>📝 Daily readings</span>
+            </div>
+          </div>
         </a>
-        <a id="featuredDownloadCard" href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Download</p>
-          <p id="featuredDownloadTitle" class="text-sm sm:text-base text-flcNavy font-semibold">Advent Hope Handout</p>
-          <p id="featuredDownloadSubtext" class="text-xs text-flcCharcoal/70 mt-1">Printable PDF handout</p>
+        <a id="featuredDownloadCard" href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="card-link bg-white rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft hover:shadow-xl transition-all duration-300 block group relative">
+          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-3">Featured Download</p>
+          <p id="featuredDownloadTitle" class="text-lg sm:text-xl text-flcNavy font-semibold mb-2 group-hover:text-flcGold transition-colors">Advent Hope Handout</p>
+          <p id="featuredDownloadSubtext" class="text-sm text-flcCharcoal/70 mb-4">Printable PDF handout</p>
+          <div class="flex items-center text-sm font-medium text-flcNavy group-hover:text-flcGold transition-colors">
+            Download PDF →
+          </div>
+          <div class="card-preview">
+            <h4 class="font-semibold text-flcNavy mb-2">Advent Hope Handout</h4>
+            <p class="text-sm text-flcCharcoal/80 mb-3">Beautiful printable handout exploring the theme of hope during Advent. Perfect for personal journaling or group discussions.</p>
+            <div class="flex items-center gap-4 text-xs text-flcCharcoal/60">
+              <span>📄 PDF format</span>
+              <span>🖨️ Print ready</span>
+            </div>
+          </div>
         </a>
       </div>
     </section>
@@ -1184,18 +1320,52 @@
         <p class="text-flcCharcoal/60">Jump into sermons, devotionals, Spiritual Detox, and Bible studies.</p>
       </div>
 
-      <div class="collections-grid grid gap-6 md:grid-cols-2">
+      <div class="collections-grid grid gap-8 lg:grid-cols-2">
         <div class="resource-card collection-card group card-click" id="sermons" data-link="../sermons/sermon-its-time-to-crossover.html">
-          <div class="p-6 md:p-8">
+          <div class="p-8 md:p-10">
             <div class="collection-top">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Sermons</span>
-              <span id="sermonCountLabel" class="text-sm text-flcCharcoal/50">4 messages</span>
+              <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-flcGold/10 text-flcGold border border-flcGold/20">Sermons</span>
+              <span id="sermonCountLabel" class="text-base text-flcCharcoal/60 font-medium">4 messages</span>
               <span class="most-recent">Most Recent</span>
             </div>
-            <h3 class="collection-title text-2xl font-heading font-bold text-flcNavy mb-3">Sermon Notes & Media</h3>
-            <p class="collection-desc text-flcCharcoal/70 mb-6 leading-relaxed">Browse all published sermon notes and media resources.</p>
-            <p class="collection-note text-xs text-flcCharcoal/60 mb-5">Best for sermon preparation, recap, and group teaching.</p>
-            <div id="sermonLinks" class="collection-actions flex flex-wrap gap-3">
+            <h3 class="collection-title text-3xl font-heading font-bold text-flcNavy mb-4">Sermon Notes & Media</h3>
+            <p class="collection-desc text-flcCharcoal/80 mb-6 leading-relaxed text-lg">Browse all published sermon notes and media resources for personal study and group preparation.</p>
+
+            <!-- Expandable content -->
+            <div class="expandable-content overflow-hidden transition-all duration-300" style="max-height: 0;">
+              <div class="pt-4 border-t border-flcBorder/30">
+                <h4 class="text-lg font-semibold text-flcNavy mb-3">Recent Sermons</h4>
+                <div class="space-y-3 mb-6">
+                  <div class="flex items-start gap-3 p-3 bg-flcNavy/5 rounded-lg">
+                    <div class="w-2 h-2 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-sm">When Compassion Costs You Sleep</p>
+                      <p class="text-xs text-flcCharcoal/60">Exploring the cost of genuine compassion in ministry</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3 p-3 bg-flcNavy/5 rounded-lg">
+                    <div class="w-2 h-2 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-sm">Purpose Protected Me</p>
+                      <p class="text-xs text-flcCharcoal/60">Understanding divine protection through purpose</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-sm text-flcCharcoal/70 mb-4">Each sermon includes full notes, discussion questions, and application points for personal and group study.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-6">
+              <p class="collection-note text-sm text-flcCharcoal/60">Best for sermon preparation, recap, and group teaching.</p>
+              <button class="expand-btn text-flcGold hover:text-flcNavy font-medium text-sm transition-colors flex items-center gap-1">
+                <span class="expand-text">Show More</span>
+                <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div id="sermonLinks" class="collection-actions flex flex-wrap gap-4 mt-4">
               <a href="../sermons/sermon-its-time-to-crossover.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">It's Time to Cross Over</a>
               <a href="../sermons/sermon-im-under-pressure.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">I'm Under Pressure</a>
               <a href="../sermons/sermon-purpose-protected-me.html" class="download-btn" style="background: linear-gradient(90deg, #1A3A52 0%, #2C5068 100%);">Purpose Protected Me</a>
@@ -1212,9 +1382,43 @@
               <span class="most-recent">Most Recent</span>
             </div>
             <h3 class="collection-title text-2xl font-heading font-bold text-flcNavy mb-3">Advent Devotional Series</h3>
-            <p class="collection-desc text-flcCharcoal/70 mb-6 leading-relaxed">Weekly devotionals for Hope, Love, Peace, and Joy.</p>
-            <p class="collection-note text-xs text-flcCharcoal/60 mb-5">Best for daily spiritual rhythms at home or in teams.</p>
-            <div class="collection-actions flex flex-wrap gap-3">
+            <p class="collection-desc text-flcCharcoal/70 mb-4 leading-relaxed">Weekly devotionals for Hope, Love, Peace, and Joy.</p>
+
+            <!-- Expandable content -->
+            <div class="expandable-content overflow-hidden transition-all duration-300" style="max-height: 0;">
+              <div class="pt-3 border-t border-flcBorder/30">
+                <h4 class="text-base font-semibold text-flcNavy mb-2">This Season's Focus</h4>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-start gap-2 p-2 bg-flcGold/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Week 4: Joy</p>
+                      <p class="text-xs text-flcCharcoal/60">Finding joy in God's presence</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 p-2 bg-flcGold/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Week 3: Peace</p>
+                      <p class="text-xs text-flcCharcoal/60">Resting in divine peace</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-xs text-flcCharcoal/70 mb-3">Each week includes Scripture reading, reflection questions, and practical applications for daily life.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+              <p class="collection-note text-xs text-flcCharcoal/60">Best for daily spiritual rhythms at home or in teams.</p>
+              <button class="expand-btn text-flcGold hover:text-flcNavy font-medium text-xs transition-colors flex items-center gap-1">
+                <span class="expand-text">Show More</span>
+                <svg class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="collection-actions flex flex-wrap gap-3 mt-3">
               <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn">Week 1 &middot; Hope</a>
               <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn">Week 2 &middot; Love</a>
               <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn">Week 3 &middot; Peace</a>
@@ -1230,9 +1434,50 @@
               <span id="detoxCountLabel" class="text-sm text-flcCharcoal/50">3 weeks</span>
             </div>
             <h3 class="collection-title text-2xl font-heading font-bold text-flcNavy mb-3">The Kingdom Blueprint</h3>
-            <p class="collection-desc text-flcCharcoal/70 mb-6 leading-relaxed">Newsletter + week-by-week reading plans and resources.</p>
-            <p class="collection-note text-xs text-flcCharcoal/60 mb-5">Best for church-wide study seasons and spiritual reset.</p>
-            <div id="detoxLinks" class="collection-actions flex flex-wrap gap-3">
+            <p class="collection-desc text-flcCharcoal/70 mb-4 leading-relaxed">Newsletter + week-by-week reading plans and resources.</p>
+
+            <!-- Expandable content -->
+            <div class="expandable-content overflow-hidden transition-all duration-300" style="max-height: 0;">
+              <div class="pt-3 border-t border-flcBorder/30">
+                <h4 class="text-base font-semibold text-flcNavy mb-2">Weekly Structure</h4>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-start gap-2 p-2 bg-flcNavy/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Week 1: Foundation</p>
+                      <p class="text-xs text-flcCharcoal/60">Building spiritual habits</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 p-2 bg-flcNavy/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Week 2: Renewal</p>
+                      <p class="text-xs text-flcCharcoal/60">Scripture meditation and prayer</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 p-2 bg-flcNavy/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Week 3: Application</p>
+                      <p class="text-xs text-flcCharcoal/60">Living out kingdom principles</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-xs text-flcCharcoal/70 mb-3">Includes weekly newsletters, Scripture readings, reflection questions, and recommended books.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+              <p class="collection-note text-xs text-flcCharcoal/60">Best for church-wide study seasons and spiritual reset.</p>
+              <button class="expand-btn text-flcGold hover:text-flcNavy font-medium text-xs transition-colors flex items-center gap-1">
+                <span class="expand-text">Show More</span>
+                <svg class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div id="detoxLinks" class="collection-actions flex flex-wrap gap-3 mt-3">
               <a href="../pages/spiritual-detox.html" class="download-btn">Series Overview</a>
               <a href="../pages/spiritual-detox-week1.html" class="download-btn">Week 1</a>
               <a href="../pages/spiritual-detox-week2.html" class="download-btn">Week 2</a>
@@ -1248,9 +1493,43 @@
               <span class="text-sm text-flcCharcoal/50">Advent</span>
             </div>
             <h3 class="collection-title text-2xl font-heading font-bold text-flcNavy mb-3">Advent Hope Study</h3>
-            <p class="collection-desc text-flcCharcoal/70 mb-6 leading-relaxed">Bible study notes and downloadable handout.</p>
-            <p class="collection-note text-xs text-flcCharcoal/60 mb-5">Best for discussion groups and teaching teams.</p>
-            <div class="collection-actions flex flex-wrap gap-3">
+            <p class="collection-desc text-flcCharcoal/70 mb-4 leading-relaxed">Bible study notes and downloadable handout.</p>
+
+            <!-- Expandable content -->
+            <div class="expandable-content overflow-hidden transition-all duration-300" style="max-height: 0;">
+              <div class="pt-3 border-t border-flcBorder/30">
+                <h4 class="text-base font-semibold text-flcNavy mb-2">Study Materials</h4>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-start gap-2 p-2 bg-flcGold/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Full Study Guide</p>
+                      <p class="text-xs text-flcCharcoal/60">Complete notes with discussion questions</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 p-2 bg-flcGold/5 rounded">
+                    <div class="w-1.5 h-1.5 bg-flcGold rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p class="font-medium text-flcNavy text-xs">Printable Handout</p>
+                      <p class="text-xs text-flcCharcoal/60">PDF for group distribution</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-xs text-flcCharcoal/70 mb-3">Designed for small groups, Sunday school classes, or personal study with Scripture references and application questions.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+              <p class="collection-note text-xs text-flcCharcoal/60">Best for discussion groups and teaching teams.</p>
+              <button class="expand-btn text-flcGold hover:text-flcNavy font-medium text-xs transition-colors flex items-center gap-1">
+                <span class="expand-text">Show More</span>
+                <svg class="w-3 h-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="collection-actions flex flex-wrap gap-3 mt-3">
               <a href="../bible-studies/bible-study-advent-hope.html" class="download-btn">View Study</a>
               <a href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="download-btn" download>Download Handout</a>
             </div>
