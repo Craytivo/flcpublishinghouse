@@ -25,8 +25,8 @@
             flcBorder: "#E8E6E1"
           },
           fontFamily: {
-            heading: ["'Playfair Display'", "Georgia", "serif"],
-            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"]
+            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
+            body: ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"]
           },
           boxShadow: {
             soft: "0 4px 14px rgba(15, 40, 56, 0.08)",
@@ -37,16 +37,15 @@
     };
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap&family=Source+Sans+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     html { scroll-behavior: smooth; }
 
     .hero-surface {
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(184, 149, 106, 0.24), transparent 65%),
-        radial-gradient(900px 450px at 10% 0%, rgba(42, 74, 98, 0.30), transparent 70%),
-        linear-gradient(145deg, #0F2838 0%, #1A3A52 55%, #163247 100%);
+      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
     }
 
     .section-kicker {
@@ -77,7 +76,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #1A3A52, #2A4A62);
+      background: #1A3A52;
       color: white;
       opacity: 0;
       transform: scale(0.9);
@@ -91,6 +90,61 @@
       opacity: 1;
       transform: scale(1);
       pointer-events: auto;
+    }
+
+    .pattern-dots {
+      background-image: radial-gradient(circle, #E8E6E1 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .pattern-lines {
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(232, 230, 225, 0.3) 10px,
+        rgba(232, 230, 225, 0.3) 11px
+      );
+    }
+
+    /* Animation Classes */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Skeleton Loader */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+    }
+
+    @keyframes skeleton-loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-up {
+        opacity: 1;
+        transform: translateY(0);
+        transition: none;
+      }
+
+      .skeleton {
+        animation: none;
+      }
     }
 
     @media (max-width: 640px) {
@@ -119,190 +173,199 @@
     id="headerContainer"
     data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'
   ></div>
-  <script src="assets/js/header-component.js"></script>
+  <script src="assets/js/components/header-component.js"></script>
 
   <main id="main-content" class="min-h-screen">
-    <section class="hero-surface text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
-        <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-16 items-center">
+    <section class="py-20 sm:py-24 lg:py-32 bg-white pattern-dots fade-in-up">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <p class="section-kicker text-flcGoldLight mb-4">FLC Publishing House</p>
-            <h1 class="hero-v2-title font-heading text-4xl sm:text-5xl lg:text-6xl leading-tight mb-5">
-              Teach clearly on Sunday. Grow deeply all week.
+            <p class="section-kicker text-flcGold mb-4">Welcome to FLC Publishing House</p>
+            <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
+              Grow in faith with resources you can trust
             </h1>
-            <p class="hero-v2-lede text-white/85 text-base sm:text-lg max-w-2xl">
-              FLC Publishing House gives pastors, ministry leaders, and everyday believers a clean library of sermon notes, devotionals, and practical study tools.
+            <p class="text-flcCharcoal/85 text-base sm:text-lg leading-relaxed mb-4">
+              Every sermon note, devotional, and guide is rooted in biblical truth—designed to help you teach, lead, and grow with confidence.
             </p>
-            <div class="mt-8 flex flex-col sm:flex-row gap-3">
-              <a href="pages/resources.html" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 bg-flcGold text-white font-semibold hover:bg-flcGoldLight transition-colors">
-                Explore the Library
+            <p class="text-sm text-flcCharcoal/60 mb-8">
+              New resources published weekly
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="pages/resources.html" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+                Browse Sermons
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </a>
-              <a href="#start-here" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-white/35 text-white font-semibold hover:bg-white/10 transition-colors">
-                Find Your Path
+              <a href="pages/devotionals.html" class="inline-flex items-center justify-center px-6 py-3 bg-white text-flcNavy font-semibold rounded-xl border-2 border-flcNavy hover:border-flcGold hover:text-flcGold transition-all duration-300 transform hover:-translate-y-0.5">
+                Start Devotional
               </a>
             </div>
           </div>
-
-          <aside class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-7">
-            <p class="section-kicker text-flcGoldLight mb-3">This Week</p>
-            <h2 id="heroWeekTitle" class="font-heading text-2xl sm:text-3xl mb-3">Latest Sermon</h2>
-            <p id="heroWeekSummary" class="text-white/85 mb-5">Freshly published teaching notes and resources from Freedom Life Church.</p>
-            <dl class="space-y-3 text-sm">
-              <div class="flex justify-between gap-4 border-b border-white/15 pb-2">
-                <dt class="text-white/75">Date</dt>
-                <dd id="heroWeekDate" class="font-medium">Most recent</dd>
+          <div class="order-first lg:order-last">
+            <div class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
+              <p class="text-xs font-semibold tracking-wide text-flcGold uppercase mb-2">Latest Resource</p>
+              <h3 id="aboutFeaturedTitle" class="font-heading text-xl text-flcNavy mb-2 skeleton h-6 w-3/4 rounded"></h3>
+              <p id="aboutFeaturedSummary" class="text-sm text-flcCharcoal/80 mb-4 line-clamp-3 skeleton h-16 rounded"></p>
+              <div class="flex gap-4 text-xs text-flcCharcoal/70 mb-4">
+                <span id="aboutFeaturedDate" class="skeleton h-4 w-16 rounded"></span> · <span id="aboutFeaturedPastor" class="skeleton h-4 w-20 rounded"></span>
               </div>
-              <div class="flex justify-between gap-4 border-b border-white/15 pb-2">
-                <dt class="text-white/75">Pastor</dt>
-                <dd id="heroWeekPastor" class="font-medium">FLC Team</dd>
-              </div>
-              <div class="flex justify-between gap-4">
-                <dt class="text-white/75">Type</dt>
-                <dd class="font-medium">Sermon</dd>
-              </div>
-            </dl>
-            <a id="heroWeekLink" href="pages/resources.html" class="mt-6 inline-flex items-center text-flcGoldLight font-semibold hover:text-white transition-colors">Open Sermon</a>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="mobile-tight-section py-10 sm:py-12 border-b border-flcBorder/70 bg-white/60">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-4 md:grid-cols-[1.1fr_1fr_1fr_1fr]">
-          <div class="rounded-2xl border border-flcBorder bg-white p-4 sm:p-5">
-            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Freshness</p>
-            <p class="text-sm sm:text-base text-flcNavy font-semibold">Last updated: February 2026</p>
-            <p class="text-xs text-flcCharcoal/70 mt-1">New notes and devotionals added regularly.</p>
+              <a id="aboutFeaturedLink" href="pages/resources.html" class="inline-flex items-center text-flcNavy font-semibold hover:text-flcGold text-sm transition-colors">
+                Read now
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-          <a href="sermons/sermon-when-compassion-costs-you-sleep.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
-            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Sermon</p>
-            <p class="text-sm sm:text-base text-flcNavy font-semibold">When Compassion Costs You Sleep</p>
-            <p class="text-xs text-flcCharcoal/70 mt-1">Latest teaching note</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 sm:py-24 lg:py-32 bg-flcCream/30 fade-in-up">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <p class="section-kicker text-flcGold mb-3">Start Here</p>
+          <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Find your path</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <a href="pages/devotionals.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
+            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl text-flcNavy mb-2">New to Bible Study</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Build a daily habit with guided devotionals designed for personal growth.</p>
+            <p class="text-xs text-flcCharcoal/60 mb-4">Perfect for beginners and families.</p>
+            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
+              Start devotionals
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </span>
           </a>
-          <a href="pages/devotionals.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
-            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Devotional</p>
-            <p class="text-sm sm:text-base text-flcNavy font-semibold">Advent Collection</p>
-            <p class="text-xs text-flcCharcoal/70 mt-1">4-week guided journey</p>
+          <a href="pages/resources.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
+            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl text-flcNavy mb-2">Teaching or Leading</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Sermon notes and teaching guides for pastors and small group leaders.</p>
+            <p class="text-xs text-flcCharcoal/60 mb-4">Designed for ministry preparation.</p>
+            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
+              Browse sermon notes
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </span>
           </a>
-          <a href="pages/resources.html" class="card-link rounded-2xl border border-flcBorder bg-white p-4 sm:p-5 block">
-            <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Download</p>
-            <p class="text-sm sm:text-base text-flcNavy font-semibold">Printable Handouts</p>
-            <p class="text-xs text-flcCharcoal/70 mt-1">Ministry-ready PDFs</p>
+          <a href="pages/resources.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
+            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+            </div>
+            <h3 class="font-heading text-xl text-flcNavy mb-2">Need Materials</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Printable guides, handouts, and ministry-ready resource packs.</p>
+            <p class="text-xs text-flcCharcoal/60 mb-4">Ready for Sunday prep and classroom use.</p>
+            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
+              Get downloads
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </span>
           </a>
         </div>
       </div>
     </section>
 
-    <section id="start-here" class="mobile-tight-section py-14 sm:py-16">
+    <section id="categories" class="py-20 sm:py-24 bg-white fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-6 mb-8">
+        <div class="flex items-end justify-between gap-6 mb-10">
           <div>
-            <p class="section-kicker text-flcGold">Start Here</p>
+            <p class="section-kicker text-flcGold">Browse by Category</p>
             <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Choose your next step</h2>
           </div>
           <a href="pages/resources.html" class="hidden sm:inline text-flcNavy font-medium hover:text-flcGold">View full library</a>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-heading text-xl text-flcNavy">Sermon Notes</h3>
-              <span class="text-[11px] px-2 py-1 rounded-full bg-flcGold/12 text-flcGold font-semibold">Most Used</span>
-            </div>
-            <p class="text-sm text-flcCharcoal/75">Structured notes for teaching, reflection, and group discussion.</p>
-            <p class="text-xs text-flcCharcoal/60 mt-3">Best for pastors and small-group leaders.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
+            <h3 class="font-heading text-xl text-flcNavy mb-2">Sermon Notes</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Structured notes for teaching, reflection, and group discussion.</p>
+            <p class="text-xs text-flcCharcoal/60">Best for pastors and small-group leaders.</p>
           </a>
-          <a href="pages/devotionals.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-heading text-xl text-flcNavy">Devotionals</h3>
-              <span class="text-[11px] px-2 py-1 rounded-full bg-flcNavy/10 text-flcNavy font-semibold">Weekly Rhythm</span>
-            </div>
-            <p class="text-sm text-flcCharcoal/75">Week-by-week devotional tracks for personal and team growth.</p>
-            <p class="text-xs text-flcCharcoal/60 mt-3">Best for daily discipleship and family devotion.</p>
+          <a href="pages/devotionals.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
+            <h3 class="font-heading text-xl text-flcNavy mb-2">Devotionals</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Week-by-week devotional tracks for personal and team growth.</p>
+            <p class="text-xs text-flcCharcoal/60">Best for daily discipleship and family devotion.</p>
           </a>
-          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-heading text-xl text-flcNavy">Downloads</h3>
-              <span class="text-[11px] px-2 py-1 rounded-full bg-flcGold/12 text-flcGold font-semibold">Printable</span>
-            </div>
-            <p class="text-sm text-flcCharcoal/75">Printable guides, handouts, and ministry-ready resource packs.</p>
-            <p class="text-xs text-flcCharcoal/60 mt-3">Best for Sunday prep and classroom handouts.</p>
+          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
+            <h3 class="font-heading text-xl text-flcNavy mb-2">Downloads</h3>
+            <p class="text-sm text-flcCharcoal/75 mb-4">Printable guides, handouts, and ministry-ready resource packs.</p>
+            <p class="text-xs text-flcCharcoal/60">Best for Sunday prep and classroom handouts.</p>
           </a>
-          <a href="pages/spiritual-detox.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-5">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-heading text-xl text-flcNavy">Seasonal Series</h3>
-              <span class="text-[11px] px-2 py-1 rounded-full bg-flcNavy/10 text-flcNavy font-semibold">Current</span>
-            </div>
-            <p class="text-sm text-flcCharcoal/75">Current church-wide study journeys and special formation tracks.</p>
-            <p class="text-xs text-flcCharcoal/60 mt-3">Best for church-wide campaigns and focused seasons.</p>
-          </a>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-flcBorder flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+          <p class="text-sm text-flcCharcoal/70">
+            <span class="font-semibold text-flcNavy">Pastor-developed</span> • Used weekly at Freedom Life Church
+          </p>
+          <div class="flex items-center gap-2 text-xs text-flcCharcoal/60">
+            <svg class="w-4 h-4 text-flcGold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Scripture-grounded teaching
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="mobile-tight-section py-14 sm:py-16 bg-flcCream/45 border-y border-flcBorder">
+    <section class="py-20 sm:py-24 bg-flcCream/30 pattern-lines fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
           <p class="section-kicker text-flcGold">Latest</p>
           <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">New and featured this month</h2>
         </div>
 
-        <div id="featuredPostsGrid" class="grid lg:grid-cols-3 gap-5">
-          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
-            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
-            <h3 class="font-heading text-2xl text-flcNavy mt-2">Loading latest post...</h3>
-            <p class="mt-3 text-flcCharcoal/80">Fetching recently dated sermon posts from Contentful.</p>
+        <div id="featuredPostsGrid" class="grid lg:grid-cols-3 gap-6">
+          <article class="lg:col-span-2 bg-white rounded-2xl border border-flcBorder p-8 shadow-soft">
+            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Featured</p>
+            <h3 class="font-heading text-2xl sm:text-3xl text-flcNavy mt-2 skeleton h-8 w-3/4 rounded"></h3>
+            <p class="mt-3 text-flcCharcoal/80 skeleton h-20 rounded"></p>
+            <p class="mt-3 text-sm text-flcCharcoal/70 skeleton h-5 w-32 rounded"></p>
             <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
           </article>
           <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
             <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
-            <h3 class="font-heading text-2xl text-flcNavy mt-2">Loading latest post...</h3>
-            <p class="mt-3 text-flcCharcoal/80">Fetching recently dated sermon posts from Contentful.</p>
+            <h3 class="font-heading text-xl text-flcNavy mt-2 skeleton h-6 w-3/4 rounded"></h3>
+            <p class="mt-3 text-flcCharcoal/80 skeleton h-16 rounded"></p>
             <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
           </article>
-          <article class="bg-flcNavy text-white rounded-2xl border border-flcNavy p-6 shadow-medium">
-            <p class="text-xs font-semibold tracking-wide text-flcGoldLight uppercase">Sermon</p>
-            <h3 class="font-heading text-2xl mt-2">Loading latest post...</h3>
-            <p class="mt-3 text-white/82">Fetching recently dated sermon posts from Contentful.</p>
-            <a href="pages/resources.html" class="inline-flex mt-5 text-flcGoldLight font-semibold hover:text-white">Read now</a>
+          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
+            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
+            <h3 class="font-heading text-xl text-flcNavy mt-2 skeleton h-6 w-3/4 rounded"></h3>
+            <p class="mt-3 text-flcCharcoal/80 skeleton h-16 rounded"></p>
+            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="py-14 sm:py-16">
+    <section class="py-20 sm:py-24 bg-white fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-start">
           <div>
-            <p class="section-kicker text-flcGold mb-3">About</p>
-            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy mb-4">A ministry for Scripture-centered formation</h2>
+            <p class="section-kicker text-flcGold mb-3">Stay Connected</p>
+            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy mb-4">Subscribe for updates</h2>
             <p class="text-flcCharcoal/85 mb-4">
-              FLC Publishing House equips believers and leaders with clear, practical resources rooted in the Word of God.
-              Every release is designed to help churches teach faithfully and help individuals grow steadily.
-            </p>
-            <p class="text-flcCharcoal/85">
-              Whether you are serving a congregation, leading a small group, or building a personal rhythm of study,
-              this library is built to support your next faithful step.
+              Get notified when new sermon notes, devotionals, and ministry tools are published.
             </p>
           </div>
 
-          <div class="bg-white rounded-2xl border border-flcBorder p-6 sm:p-7 shadow-soft" id="subscribe">
-            <h3 class="font-heading text-2xl text-flcNavy mb-2">Stay updated</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-5">Get notified when new sermon notes, devotionals, and ministry tools are published.</p>
-
-            <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-3">
+          <div class="bg-flcCream/30 rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft" id="subscribe">
+            <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-4">
               <label class="block">
                 <span class="text-sm font-medium text-flcNavy">Name</span>
-                <input name="name" type="text" required class="mt-1 w-full rounded-xl border border-flcBorder px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-flcGold/35" />
+                <input name="name" type="text" required class="mt-1 w-full rounded-xl border border-flcBorder px-4 py-3 focus:outline-none focus:ring-2 focus:ring-flcGold/35 bg-white" />
               </label>
 
               <label class="block">
                 <span class="text-sm font-medium text-flcNavy">Email</span>
-                <input name="email" type="email" required class="mt-1 w-full rounded-xl border border-flcBorder px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-flcGold/35" />
+                <input name="email" type="email" required class="mt-1 w-full rounded-xl border border-flcBorder px-4 py-3 focus:outline-none focus:ring-2 focus:ring-flcGold/35 bg-white" />
               </label>
 
-              <button type="submit" class="w-full rounded-xl bg-flcNavy text-white font-semibold py-3 hover:bg-flcNavyLight transition-colors">
+              <button type="submit" class="w-full rounded-xl bg-flcNavy text-white font-semibold py-3 hover:bg-flcGold transition-colors">
                 Subscribe
               </button>
               <p id="subscriptionStatus" class="text-sm text-flcCharcoal/70" aria-live="polite"></p>
@@ -323,213 +386,11 @@
     id="footerContainer"
     data-config='{"currentPage":"home","basePath":".","logoPath":"assets/images/Logo.png","homePath":"index.html","libraryPath":"pages/resources.html","devotionalsPath":"pages/devotionals.html","resourcesPath":"pages/resources.html","logoHeight":"105px"}'
   ></div>
-  <script src="assets/js/footer-component.js"></script>
+  <script src="assets/js/components/footer-component.js"></script>
 
-  <script>
-    window.FLC_CONTENTFUL = window.FLC_CONTENTFUL || {
-      enabled: true,
-      spaceId: "i8pstcwrkztq",
-      environment: "master",
-      accessToken: "pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw",
-      contentType: "blogPage",
-      postPagePath: "pages/post.html"
-    };
-
-    function stripRichTextToPlain(rich) {
-      if (!rich || !Array.isArray(rich.content)) return "";
-      const parts = [];
-      const walk = (node) => {
-        if (!node) return;
-        if (node.nodeType === "text" && typeof node.value === "string") {
-          parts.push(node.value);
-        }
-        if (Array.isArray(node.content)) node.content.forEach(walk);
-      };
-      rich.content.forEach(walk);
-      return parts.join(" ").replace(/\s+/g, " ").trim();
-    }
-
-    function formatDateSafe(value) {
-      if (!value || typeof value !== "string") return "Most recent";
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "Most recent";
-      return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(date);
-    }
-
-    function normalizePastor(value) {
-      if (!value || typeof value !== "string") return "FLC Team";
-      const clean = value.replace(/\s+/g, " ").trim();
-      return clean || "FLC Team";
-    }
-
-    function getSermonSortTime(entry) {
-      const sermonDate = entry && entry.fields ? entry.fields.date : "";
-      const dateMs = sermonDate ? Date.parse(sermonDate) : NaN;
-      if (!Number.isNaN(dateMs)) return dateMs;
-      const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
-      const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
-      return Number.isNaN(updatedMs) ? 0 : updatedMs;
-    }
-
-    let latestEntriesPromise = null;
-
-    function getLatestSermonEntries() {
-      if (latestEntriesPromise) return latestEntriesPromise;
-
-      const cfg = window.FLC_CONTENTFUL || {};
-      if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.contentType) {
-        latestEntriesPromise = Promise.resolve([]);
-        return latestEntriesPromise;
-      }
-
-      const env = cfg.environment || "master";
-      const params = new URLSearchParams({
-        access_token: cfg.accessToken,
-        content_type: cfg.contentType,
-        order: "-fields.date",
-        limit: "20"
-      });
-      const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
-
-      latestEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
-        .then((response) => (response.ok ? response.json() : { items: [] }))
-        .then((payload) => {
-          const items = Array.isArray(payload.items) ? payload.items : [];
-          return items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a));
-        })
-        .catch(() => []);
-
-      return latestEntriesPromise;
-    }
-
-    async function loadHeroMostRecentSermon() {
-      try {
-        const cfg = window.FLC_CONTENTFUL || {};
-        const items = await getLatestSermonEntries();
-        const item = items.length ? items[0] : null;
-        if (!item || !item.fields || !item.sys || !item.sys.id) return;
-
-        const title = (item.fields.title || "").trim();
-        const summaryRaw = stripRichTextToPlain(item.fields.body);
-        const summary = summaryRaw ? `${summaryRaw.slice(0, 150)}${summaryRaw.length > 150 ? "..." : ""}` : "Freshly published teaching notes and resources from Freedom Life Church.";
-        const dateText = formatDateSafe(item.fields.date);
-        const pastor = normalizePastor(item.fields.pastor || item.fields.pastorName || item.fields.preacher);
-        const postPagePath = cfg.postPagePath || "pages/post.html";
-        const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
-
-        const titleEl = document.getElementById("heroWeekTitle");
-        const summaryEl = document.getElementById("heroWeekSummary");
-        const dateEl = document.getElementById("heroWeekDate");
-        const pastorEl = document.getElementById("heroWeekPastor");
-        const linkEl = document.getElementById("heroWeekLink");
-
-        if (titleEl && title) titleEl.textContent = title;
-        if (summaryEl) summaryEl.textContent = summary;
-        if (dateEl) dateEl.textContent = dateText;
-        if (pastorEl) pastorEl.textContent = pastor;
-        if (linkEl) linkEl.href = href;
-      } catch (error) {
-        console.error("Failed to load latest sermon for hero:", error);
-      }
-    }
-
-    async function loadFeaturedPostsSection() {
-      const grid = document.getElementById("featuredPostsGrid");
-      if (!grid) return;
-
-      try {
-        const cfg = window.FLC_CONTENTFUL || {};
-        const items = await getLatestSermonEntries();
-        const topThree = items.filter((item) => item && item.fields && item.sys && item.sys.id).slice(0, 3);
-        if (!topThree.length) return;
-
-        const postPagePath = cfg.postPagePath || "pages/post.html";
-
-        grid.innerHTML = topThree.map((item, index) => {
-          const title = (item.fields.title || "Untitled Sermon").trim();
-          const summaryRaw = stripRichTextToPlain(item.fields.body);
-          const summary = summaryRaw
-            ? `${summaryRaw.slice(0, 120)}${summaryRaw.length > 120 ? "..." : ""}`
-            : "Freshly published teaching notes and resources from Freedom Life Church.";
-          const dateText = formatDateSafe(item.fields.date);
-          const pastor = normalizePastor(item.fields.pastor || item.fields.pastorName || item.fields.preacher);
-          const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
-
-          const isAccent = index === 2;
-          const cardClasses = isAccent
-            ? "bg-flcNavy text-white rounded-2xl border border-flcNavy p-6 shadow-medium"
-            : "bg-white rounded-2xl border border-flcBorder p-6 shadow-soft";
-          const kickerClasses = isAccent
-            ? "text-xs font-semibold tracking-wide text-flcGoldLight uppercase"
-            : "text-xs font-semibold tracking-wide text-flcGold uppercase";
-          const headingClasses = isAccent
-            ? "font-heading text-2xl mt-2"
-            : "font-heading text-2xl text-flcNavy mt-2";
-          const summaryClasses = isAccent
-            ? "mt-3 text-white/82"
-            : "mt-3 text-flcCharcoal/80";
-          const metaClasses = isAccent
-            ? "mt-3 text-xs text-white/70"
-            : "mt-3 text-xs text-flcCharcoal/60";
-          const linkClasses = isAccent
-            ? "inline-flex mt-5 text-flcGoldLight font-semibold hover:text-white"
-            : "inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold";
-
-          return `
-            <article class="${cardClasses}">
-              <p class="${kickerClasses}">Sermon</p>
-              <h3 class="${headingClasses}">${title.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</h3>
-              <p class="${summaryClasses}">${summary.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-              <p class="${metaClasses}">${dateText} · ${pastor.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-              <a href="${href}" class="${linkClasses}">Read now</a>
-            </article>
-          `;
-        }).join("");
-      } catch (error) {
-        console.error("Failed to load featured posts section:", error);
-      }
-    }
-
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 500) scrollTopBtn.classList.add("visible");
-      else scrollTopBtn.classList.remove("visible");
-    }, { passive: true });
-
-    scrollTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    const subscriptionForm = document.getElementById("subscriptionForm");
-    const subscriptionStatus = document.getElementById("subscriptionStatus");
-
-    loadHeroMostRecentSermon();
-    loadFeaturedPostsSection();
-
-    subscriptionForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      subscriptionStatus.textContent = "Submitting...";
-
-      try {
-        const formData = new FormData(subscriptionForm);
-        const response = await fetch(subscriptionForm.action, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" }
-        });
-
-        if (response.ok) {
-          subscriptionStatus.textContent = "Thanks, you are subscribed.";
-          subscriptionForm.reset();
-        } else {
-          subscriptionStatus.textContent = "Subscription failed. Please try again.";
-        }
-      } catch (error) {
-        subscriptionStatus.textContent = "Network error. Please try again.";
-      }
-    });
-  </script>
-<script src="assets/js/site-theme.js"></script>
+  <script type="module" src="assets/js/config.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script src="assets/js/lib/site-theme.js"></script>
 </body>
 </html>
 

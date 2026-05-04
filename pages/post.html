@@ -259,6 +259,41 @@
       color: rgba(26, 58, 82, 0.9);
       margin-bottom: var(--space-3);
     }
+
+    /* Devotional Guide specific styles */
+    .weekly-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .weekly-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(26, 58, 82, 0.12);
+    }
+
+    @media (max-width: 768px) {
+      .post-subtitle {
+        font-size: 1rem;
+      }
+      .devotional-date-range {
+        display: block;
+        text-align: center;
+      }
+      .post-tags {
+        justify-content: center;
+      }
+      .post-featured-badge {
+        text-align: center;
+      }
+      .post-description {
+        padding: 1rem;
+      }
+      .weekly-card {
+        padding: 1rem;
+      }
+      h2[id^="section-"],
+      h3[id^="week-"] {
+        font-size: 1.25rem;
+      }
+    }
     .post-meta-row + .post-body > p:first-child::first-letter {
       float: left;
       font-family: "Cormorant Garamond", serif;
@@ -804,7 +839,28 @@
                 The Kingdom Blueprint
               </a>
             </div>
-            <h1 id="postTitle" class="post-title font-heading text-flcNavy mb-6">Loading post...</h1>
+            <h1 id="postTitle" class="post-title font-heading text-flcNavy mb-4">Loading post...</h1>
+            <p id="postSubtitle" class="post-subtitle hidden text-lg text-flcCharcoal/80 mb-4 leading-relaxed"></p>
+            <div id="devotionalDateRange" class="devotional-date-range hidden mb-4">
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/10 rounded-full border border-flcGold/20">
+                <svg class="w-4 h-4 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span id="dateRangeText" class="text-sm font-semibold text-flcNavy"></span>
+              </div>
+            </div>
+            <div id="postTags" class="post-tags hidden mb-6 flex flex-wrap gap-2"></div>
+            <div id="postFeaturedBadge" class="post-featured-badge hidden mb-6">
+              <span class="inline-flex items-center gap-2 px-3 py-1 bg-flcGold text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-md">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                Featured
+              </span>
+            </div>
+            <div id="postDescription" class="post-description hidden mb-8 p-6 bg-gradient-to-br from-flcNavy/5 to-flcGold/5 rounded-2xl border border-flcGold/20">
+              <p class="text-base text-flcCharcoal/90 leading-relaxed italic"></p>
+            </div>
             <div class="post-meta-row">
               <div id="postDateWrap" class="hidden">
                 <div class="post-meta">
@@ -876,6 +932,28 @@
       <!-- Sidebar -->
       <aside class="hidden lg:block lg:w-80 lg:sticky lg:top-24 lg:self-start">
         <div class="space-y-8">
+          <!-- Table of Contents -->
+          <div id="sidebarTableOfContents" class="hidden bg-white/80 backdrop-blur-sm border border-flcBorder rounded-2xl p-6 shadow-lg">
+            <h3 class="font-heading text-lg text-flcNavy mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+              </svg>
+              Contents
+            </h3>
+            <nav id="sidebarTocNav" class="space-y-2"></nav>
+          </div>
+
+          <!-- Event Timeline -->
+          <div id="eventTimeline" class="hidden bg-white/80 backdrop-blur-sm border border-flcBorder rounded-2xl p-6 shadow-lg">
+            <h3 class="font-heading text-lg text-flcNavy mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              Event Timeline
+            </h3>
+            <div id="timelineContent" class="space-y-4"></div>
+          </div>
+
           <!-- Recommended Posts -->
           <div id="sidebarRecommendedPosts" class="hidden">
             <div class="recommended-shell">
@@ -887,15 +965,32 @@
 
           <!-- Quick Actions -->
           <div class="bg-white/80 backdrop-blur-sm border border-flcBorder rounded-2xl p-6 shadow-lg">
-            <h3 class="font-heading text-lg text-flcNavy mb-4">Quick Actions</h3>
+            <h3 class="font-heading text-lg text-flcNavy mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              Quick Actions
+            </h3>
             <div class="space-y-3">
-              <button id="shareButton" class="w-full bg-flcGold text-white px-4 py-2 rounded-lg hover:bg-flcNavy transition-colors">
-                Share This Post
+              <button id="shareButton" class="w-full bg-gradient-to-r from-flcGold to-flcGoldLight text-white px-4 py-2.5 rounded-lg hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                </svg>
+                Share This Guide
               </button>
-              <button id="printButton" class="w-full border border-flcNavy text-flcNavy px-4 py-2 rounded-lg hover:bg-flcNavy hover:text-white transition-colors">
-                Print Post
+              <button id="printButton" class="w-full border-2 border-flcNavy text-flcNavy px-4 py-2.5 rounded-lg hover:bg-flcNavy hover:text-white transition-all duration-200 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                Print Guide
               </button>
-              
+              <button id="bookmarkButton" class="w-full bg-flcNavy/5 border border-flcNavy/20 text-flcNavy px-4 py-2.5 rounded-lg hover:bg-flcNavy/10 transition-all duration-200 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                </svg>
+                Bookmark
+              </button>
+
               <!-- Font Size Controls -->
               <div class="pt-2 border-t border-flcBorder/50">
                 <p class="text-sm text-flcCharcoal font-medium mb-2">Font Size</p>
@@ -951,6 +1046,128 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function parseDevotionalGuideBody(body) {
+      if (!body || typeof body !== 'string') return { html: '<p>No content available.</p>', tocItems: [] };
+
+      const lines = body.split('\n').map(line => line.trim()).filter(line => line);
+      let html = '';
+      let inList = false;
+      let inSection = false;
+      let sectionIdCounter = 0;
+      const tocItems = [];
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const nextLine = lines[i + 1] || '';
+
+        // Detect section headers (all caps or with —)
+        if (line === line.toUpperCase() || line.includes('—')) {
+          // Close any open structures
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          if (inSection) {
+            html += '</div>';
+            inSection = false;
+          }
+
+          // Add section heading with ID for TOC
+          const sectionId = `section-${sectionIdCounter++}`;
+          html += `<h2 id="${sectionId}" class="text-2xl font-heading font-bold text-flcNavy mt-6 mb-3">${escapeHtml(line)}</h2>`;
+          tocItems.push({ id: sectionId, title: line });
+          continue;
+        }
+
+        // Detect weekly sections (Week X: ...)
+        if (line.match(/^Week\s+\d+:/i)) {
+          // Close any open structures
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          if (inSection) {
+            html += '</div>';
+            inSection = false;
+          }
+
+          // Start section for weekly content
+          const weekNum = line.match(/Week\s+(\d+)/i)?.[1] || '';
+          const sectionId = `week-${weekNum || sectionIdCounter++}`;
+          html += `<div id="${sectionId}" class="mb-5">
+            <h3 class="text-xl font-heading font-bold text-flcNavy mb-2">${escapeHtml(line)}</h3>`;
+          tocItems.push({ id: sectionId, title: line });
+          inSection = true;
+          continue;
+        }
+
+        // Detect bullet points or numbered items
+        if (line.match(/^[-•]\s/) || line.match(/^\d+\.\s/)) {
+          if (!inList) {
+            html += '<ul class="ml-6 mb-2">';
+            inList = true;
+          }
+          html += `<li class="text-flcCharcoal/90 leading-relaxed mb-1">${escapeHtml(line.replace(/^[-•]\s/, '').replace(/^\d+\.\s/, ''))}</li>`;
+          continue;
+        }
+
+        // Detect sub-items (indented or with specific keywords)
+        if (line.match(/^(Focus|Prayer Emphasis|Fasting Focus):/i)) {
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          html += `<h4 class="text-base font-semibold text-flcNavy mt-3 mb-1">${escapeHtml(line)}</h4>`;
+          continue;
+        }
+
+        // Detect quoted text (in parentheses or with quotes)
+        if (line.startsWith('"') || line.startsWith('(')) {
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          html += `<blockquote class="pl-4 border-l-4 border-flcGold/50 italic text-flcCharcoal/80 my-2">${escapeHtml(line)}</blockquote>`;
+          continue;
+        }
+
+        // Regular paragraph
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+        html += `<p class="text-flcCharcoal/90 leading-relaxed mb-2">${escapeHtml(line)}</p>`;
+      }
+
+      // Close any open structures
+      if (inList) {
+        html += '</ul>';
+      }
+      if (inSection) {
+        html += '</div>';
+      }
+
+      return { html, tocItems };
+    }
+
+    function getSectionIcon(sectionName) {
+      const sectionLower = sectionName.toLowerCase();
+      if (sectionLower.includes('schedule')) return '📅';
+      if (sectionLower.includes('theme')) return '🎯';
+      if (sectionLower.includes('fasting')) return '🙏';
+      if (sectionLower.includes('guideline')) return '📋';
+      if (sectionLower.includes('pastoral')) return '✝️';
+      return '📖';
+    }
+
+    function getSubsectionIcon(subsectionName) {
+      const subLower = subsectionName.toLowerCase();
+      if (subLower.includes('focus')) return '🎯';
+      if (subLower.includes('prayer')) return '🙏';
+      if (subLower.includes('fasting')) return '⏳';
+      return '•';
     }
 
     function renderTextNode(node) {
@@ -1852,17 +2069,25 @@
         const entry = await response.json();
 
         const title = entry && entry.fields && entry.fields.title ? entry.fields.title : 'Untitled post';
+        const subtitle = entry && entry.fields && entry.fields.subtitle ? entry.fields.subtitle : '';
+        const description = entry && entry.fields && entry.fields.descrition ? entry.fields.descrition : '';
+        const tags = entry && entry.fields && Array.isArray(entry.fields.tags) ? entry.fields.tags : [];
+        const featured = entry && entry.fields && entry.fields.featured === true;
+        const eventType = entry && entry.fields && entry.fields.eventType ? entry.fields.eventType : '';
         const body = entry && entry.fields ? entry.fields.body : null;
         const contentTypeId = entry?.sys?.contentType?.sys?.id || '';
         const leadQuote = resolveEntryQuote(entry && entry.fields ? entry.fields : {});
         const pastorMessageParagraphs = resolvePastorMessage(entry && entry.fields ? entry.fields : {});
         const youtubeId = resolveYouTubeId(entry ? entry.fields : null, body);
-        const formattedDate = formatPostDate(entry && entry.fields ? entry.fields.date : '');
+        const dateField = contentTypeId === 'devotionalGuide' ? (entry.fields.startDate || entry.fields.date) : entry.fields.date;
+        const formattedDate = formatPostDate(dateField || '');
         const formattedPastor = formatPastorName(
           entry && entry.fields
             ? (entry.fields.pastor || entry.fields.speaker || entry.fields.pastorName || entry.fields.preacher || '')
             : ''
         );
+        const startDate = entry.fields.startDate ? formatPostDate(entry.fields.startDate) : '';
+        const endDate = entry.fields.endDate ? formatPostDate(entry.fields.endDate) : '';
         let imageUrl = resolveImageUrl(entry);
         if (!imageUrl) {
           const linkedImageId =
@@ -1877,9 +2102,108 @@
 
         titleEl.textContent = title;
         document.title = `${title} - FLC Publishing House`;
-        const renderedBody = body ? renderRichNode(body) : '<p>No content available.</p>';
+
+        // Handle subtitle for devotional guides
+        const subtitleEl = document.getElementById('postSubtitle');
+        if (subtitleEl && subtitle) {
+          subtitleEl.textContent = subtitle;
+          subtitleEl.classList.remove('hidden');
+        }
+
+        // Handle description for devotional guides
+        const descriptionEl = document.getElementById('postDescription');
+        if (descriptionEl && description) {
+          const descriptionTextEl = descriptionEl.querySelector('p');
+          if (descriptionTextEl) {
+            descriptionTextEl.textContent = description;
+          }
+          descriptionEl.classList.remove('hidden');
+        }
+
+        // Handle tags
+        const tagsEl = document.getElementById('postTags');
+        if (tagsEl && tags.length > 0) {
+          tagsEl.innerHTML = tags.map(tag => {
+            const tagClass = tag.toLowerCase().replace(/\s+/g, '-');
+            return `<span class="inline-flex items-center px-3 py-1 bg-flcNavy/5 border border-flcNavy/20 rounded-full text-sm font-medium text-flcNavy/80 hover:bg-flcNavy/10 transition-colors">${escapeHtml(tag)}</span>`;
+          }).join('');
+          tagsEl.classList.remove('hidden');
+        }
+
+        // Handle featured badge
+        const featuredBadgeEl = document.getElementById('postFeaturedBadge');
+        if (featuredBadgeEl && featured) {
+          featuredBadgeEl.classList.remove('hidden');
+        }
+
+        // Handle date range for devotional guides
+        const dateRangeEl = document.getElementById('devotionalDateRange');
+        const dateRangeTextEl = document.getElementById('dateRangeText');
+        if (dateRangeEl && dateRangeTextEl && startDate && endDate && contentTypeId === 'devotionalGuide') {
+          dateRangeTextEl.textContent = `${startDate} — ${endDate}`;
+          dateRangeEl.classList.remove('hidden');
+        }
+
+        let renderedBody;
+        let tocItems = [];
+        if (contentTypeId === 'devotionalGuide') {
+          // devotionalGuide body is plain text, not RichText
+          const parsedBody = parseDevotionalGuideBody(body);
+          renderedBody = parsedBody.html;
+          tocItems = parsedBody.tocItems || [];
+        } else {
+          renderedBody = body ? renderRichNode(body) : '<p>No content available.</p>';
+        }
         const quoteHtml = leadQuote ? `<blockquote class="post-lead-quote">${escapeHtml(leadQuote)}</blockquote>` : '';
         bodyEl.innerHTML = `${quoteHtml}${renderedBody}`;
+
+        // Generate table of contents for devotional guides
+        if (contentTypeId === 'devotionalGuide' && tocItems.length > 0) {
+          const sidebarTocContainer = document.getElementById('sidebarTableOfContents');
+          const sidebarTocNav = document.getElementById('sidebarTocNav');
+          if (sidebarTocContainer && sidebarTocNav) {
+            sidebarTocNav.innerHTML = tocItems.map(item => `
+              <a href="#${item.id}" class="block text-sm text-flcNavy/80 hover:text-flcGold transition-colors py-2 px-3 rounded-lg hover:bg-flcGold/5 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-flcGold/50"></span>
+                ${escapeHtml(item.title)}
+              </a>
+            `).join('');
+            sidebarTocContainer.classList.remove('hidden');
+          }
+
+          // Generate event timeline for devotional guides
+          if (startDate && endDate) {
+            const timelineContainer = document.getElementById('eventTimeline');
+            const timelineContent = document.getElementById('timelineContent');
+            if (timelineContainer && timelineContent) {
+              timelineContent.innerHTML = `
+                <div class="flex items-center gap-3 p-3 bg-flcNavy/5 rounded-lg">
+                  <div class="w-10 h-10 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-flcCharcoal/60 uppercase tracking-wide">Start Date</p>
+                    <p class="text-sm font-semibold text-flcNavy">${startDate}</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-flcGold/5 rounded-lg">
+                  <div class="w-10 h-10 rounded-full bg-flcGold/20 flex items-center justify-center text-flcGold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-flcCharcoal/60 uppercase tracking-wide">End Date</p>
+                    <p class="text-sm font-semibold text-flcNavy">${endDate}</p>
+                  </div>
+                </div>
+              `;
+              timelineContainer.classList.remove('hidden');
+            }
+          }
+        }
 
         if (pastorMessageSection && pastorMessageText && Array.isArray(pastorMessageParagraphs) && pastorMessageParagraphs.length) {
           pastorMessageText.innerHTML = renderPastorMessageHtml(pastorMessageParagraphs);
@@ -1912,6 +2236,12 @@
 
         if (contentTypeId === 'detoxPost' && detoxOverviewLinkWrap && detoxOverviewLink) {
           detoxOverviewLink.href = '../pages/spiritual-detox.html';
+          detoxOverviewLinkWrap.classList.remove('hidden');
+        }
+
+        if (contentTypeId === 'devotionalGuide' && detoxOverviewLinkWrap && detoxOverviewLink) {
+          detoxOverviewLink.href = '../pages/resources.html#devotionalGuides';
+          detoxOverviewLink.textContent = 'View All Devotional Guides';
           detoxOverviewLinkWrap.classList.remove('hidden');
         }
 

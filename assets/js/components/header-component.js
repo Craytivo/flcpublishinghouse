@@ -182,6 +182,7 @@ function createHeader(config = {}) {
         { label: 'Spiritual Detox', href: computedDetoxPath },
         { label: 'Sermons', href: computedResourcesPath },
         { label: 'Devotionals', href: computedResourcesPath },
+        { label: 'Devotional Guides', href: `${computedResourcesPath}#devotionalGuides` },
         { label: 'Bible Studies', href: computedResourcesPath },
         { label: 'Books', href: computedResourcesPath }
       ]
@@ -201,11 +202,11 @@ function createHeader(config = {}) {
   `;
 
   function navLinkClass(active) {
-    return `flc-header-link px-5 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg hover:bg-flcGold/5 ${active ? 'text-flcGold bg-flcGold/5 font-semibold' : ''}`;
+    return `flc-header-link px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200 ${active ? 'text-flcGold font-semibold' : ''}`;
   }
 
   function navLinkExternalClass() {
-    return 'flc-header-link px-5 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base tracking-wide transition-all duration-200 rounded-lg border border-flcGold/20 hover:bg-flcGold/5';
+    return 'flc-header-link px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200';
   }
 
   function renderDesktopLink(item) {
@@ -279,13 +280,13 @@ function createHeader(config = {}) {
 
   return `
   <!-- Navigation -->
-  <header id="mainNav" role="navigation" aria-label="Primary" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcGold/10 shadow-sm">
+  <header id="mainNav" role="navigation" aria-label="Primary" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
     <!-- Premium Header Layout -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
         <!-- Logo -->
         <a href="${computedHomePath}" class="flex items-center group flex-shrink-0 absolute left-1/2 -translate-x-1/2 sm:static sm:translate-x-0">
-          <img src="${computedLogoPath}" alt="FLC Publishing House" class="w-auto group-hover:scale-105 transition-all duration-300 filter group-hover:brightness-110" style="height: ${logoHeight}; object-fit: contain;">
+          <img src="${computedLogoPath}" alt="FLC Publishing House" class="w-auto group-hover:scale-105 transition-all duration-300" style="height: ${logoHeight}; object-fit: contain;">
         </a>
         
         <!-- Center: Navigation Links (Large Desktop) -->
@@ -301,7 +302,7 @@ function createHeader(config = {}) {
               type="text"
               id="resourceSearch"
               placeholder="Search..."
-              class="w-40 lg:w-56 xl:w-64 px-3 py-1.5 lg:px-4 lg:py-2 pl-9 lg:pl-10 rounded-full border border-flcGold/20 bg-flcCream/40 focus:outline-none focus:border-flcGold focus:bg-white text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200 hover:border-flcGold/40"
+              class="w-40 lg:w-56 xl:w-64 px-3 py-1.5 lg:px-4 lg:py-2 pl-9 lg:pl-10 rounded-full border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:bg-white text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
             />
             <div id="resourceSearchResults" class="search-results hidden"></div>
             <svg class="absolute left-3 lg:left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 lg:w-4 lg:h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -310,7 +311,7 @@ function createHeader(config = {}) {
           </div>
           
           <!-- Subscribe Button (Tablet & Desktop) -->
-          <a href="#" class="subscribe-btn hidden md:inline-flex items-center px-4 lg:px-6 py-2 lg:py-2.5 bg-gradient-to-r from-flcGold to-flcGoldLight text-white font-semibold text-sm lg:text-base rounded-full hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200">
+          <a href="#" class="subscribe-btn hidden md:inline-flex items-center px-4 lg:px-6 py-2 lg:py-2.5 bg-flcNavy text-white font-semibold text-sm lg:text-base rounded-full hover:bg-flcGold transition-colors">
             <span class="hidden lg:inline">Subscribe</span>
           </a>
           
@@ -325,7 +326,7 @@ function createHeader(config = {}) {
     </div>
     
     <!-- Mobile/Tablet Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcGold/10 bg-flcCream/50 backdrop-blur-lg max-h-[80vh] overflow-y-auto">
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite backdrop-blur-lg max-h-[80vh] overflow-y-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1">
         ${menu.map(renderMobileSection).join('')}
         
@@ -336,14 +337,14 @@ function createHeader(config = {}) {
               type="text"
               id="resourceSearchMobile"
               placeholder="Search..."
-              class="w-full px-4 py-2.5 pl-10 rounded-lg border border-flcGold/20 bg-white focus:outline-none focus:border-flcGold text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
+              class="w-full px-4 py-2.5 pl-10 rounded-lg border border-flcBorder bg-white focus:outline-none focus:border-flcGold text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
             />
             <div id="resourceSearchResultsMobile" class="search-results hidden"></div>
             <svg class="absolute left-7 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <a href="#" class="flex items-center justify-center mx-4 py-3 bg-gradient-to-r from-flcGold to-flcGoldLight text-white rounded-lg font-semibold hover:shadow-md active:scale-95 transition-all duration-200">
+          <a href="#" class="flex items-center justify-center mx-4 py-3 bg-flcNavy text-white rounded-lg font-semibold hover:bg-flcGold transition-colors">
             Subscribe
           </a>
         </div>
@@ -561,35 +562,52 @@ document.addEventListener('DOMContentLoaded', function() {
         spaceId: 'i8pstcwrkztq',
         environment: 'master',
         accessToken: 'pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw',
-        contentType: 'blogPage'
+        contentType: 'blogPage',
+        devotionalGuideContentType: 'devotionalGuide'
       };
 
       if (!contentfulCfg.enabled || !contentfulCfg.spaceId || !contentfulCfg.accessToken) return;
 
       const env = contentfulCfg.environment || 'master';
-      const params = new URLSearchParams({
-        access_token: contentfulCfg.accessToken,
-        content_type: contentfulCfg.contentType || 'blogPage',
-        order: '-fields.date',
-        limit: '6'
-      });
-      const endpoint = `https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${params.toString()}`;
 
       try {
-        const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
-        if (!response.ok) return;
-        const payload = await response.json();
-        const items = Array.isArray(payload.items) ? payload.items : [];
-        const top = items
+        // Fetch both sermons and devotional guides
+        const [sermonsResponse, devotionalsResponse] = await Promise.all([
+          fetch(`https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
+            access_token: contentfulCfg.accessToken,
+            content_type: contentfulCfg.contentType || 'blogPage',
+            order: '-fields.date',
+            limit: '6'
+          })}`, { headers: { Accept: 'application/json' } }),
+          fetch(`https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
+            access_token: contentfulCfg.accessToken,
+            content_type: contentfulCfg.devotionalGuideContentType || 'devotionalGuide',
+            order: '-fields.startDate',
+            limit: '6'
+          })}`, { headers: { Accept: 'application/json' } })
+        ]);
+
+        const sermonsPayload = sermonsResponse.ok ? await sermonsResponse.json() : { items: [] };
+        const devotionalsPayload = devotionalsResponse.ok ? await devotionalsResponse.json() : { items: [] };
+
+        const sermons = Array.isArray(sermonsPayload.items) ? sermonsPayload.items : [];
+        const devotionals = Array.isArray(devotionalsPayload.items) ? devotionalsPayload.items : [];
+
+        // Combine and sort by date
+        const allItems = [...sermons, ...devotionals].map(item => ({
+          ...item,
+          sortDate: item.fields.date || item.fields.startDate || item.sys.updatedAt
+        })).sort((a, b) => new Date(b.sortDate) - new Date(a.sortDate));
+
+        const top = allItems
           .filter((item) => item && item.fields && item.sys && item.sys.id && item.fields.title)
-          .sort((a, b) => getSortTime(b) - getSortTime(a))
           .slice(0, 3);
 
         if (!top.length) return;
 
         const renderHtml = top.map((item) => {
           const title = escapeHtml(String(item.fields.title).trim());
-          const dateLabel = formatDateLabel(item.fields.date);
+          const dateLabel = formatDateLabel(item.fields.date || item.fields.startDate);
           const href = `${computedPostPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
           return `
             <a href="${href}" class="block rounded-md px-2 py-1.5 hover:bg-flcGold/5 transition-colors">

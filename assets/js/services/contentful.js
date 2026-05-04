@@ -1,0 +1,109 @@
+// services/contentful.js - Contentful API service with caching
+
+let latestEntriesPromise = null;
+let detoxEntriesPromise = null;
+
+function getSermonSortTime(entry) {
+  const sermonDate = entry && entry.fields ? entry.fields.date : "";
+  const dateMs = sermonDate ? Date.parse(sermonDate) : NaN;
+  if (!Number.isNaN(dateMs)) return dateMs;
+  const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
+  const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
+  return Number.isNaN(updatedMs) ? 0 : updatedMs;
+}
+
+function getDetoxSortTime(entry) {
+  const weekNumber = entry && entry.fields ? entry.fields.weekNumber : NaN;
+  if (!Number.isNaN(weekNumber)) return weekNumber;
+  const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
+  const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
+  return Number.isNaN(updatedMs) ? 0 : updatedMs;
+}
+
+export async function getLatestSermonEntries() {
+  if (latestEntriesPromise) return latestEntriesPromise;
+
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.contentType) {
+    latestEntriesPromise = Promise.resolve([]);
+    return latestEntriesPromise;
+  }
+
+  const env = cfg.environment || "master";
+  const params = new URLSearchParams({
+    access_token: cfg.accessToken,
+    content_type: cfg.contentType,
+    order: "-fields.date",
+  });
+  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+
+  latestEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
+    .then((response) => (response.ok ? response.json() : { items: [] }))
+    .then((payload) => {
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      return items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a));
+    })
+    .catch(() => []);
+
+  return latestEntriesPromise;
+}
+
+export async function getDetoxEntries() {
+  if (detoxEntriesPromise) return detoxEntriesPromise;
+
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.detoxContentType) {
+    detoxEntriesPromise = Promise.resolve([]);
+    return detoxEntriesPromise;
+  }
+
+  const env = cfg.environment || "master";
+  const params = new URLSearchParams({
+    access_token: cfg.accessToken,
+    content_type: cfg.detoxContentType,
+    order: "fields.weekNumber",
+    limit: "100",
+    include: "2"
+  });
+  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+
+  detoxEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
+    .then((response) => (response.ok ? response.json() : { items: [], includes: {} }))
+    .then((payload) => {
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      const filtered = items.filter((item) => item && item.fields && item.fields.published !== false);
+      return {
+        items: filtered.sort((a, b) => getDetoxSortTime(a) - getDetoxSortTime(b)),
+        includes: payload.includes || {}
+      };
+    })
+    .catch(() => ({ items: [], includes: {} }));
+
+  return detoxEntriesPromise;
+}
+
+export async function getDevotionalGuideEntries() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.devotionalGuideContentType) {
+    return [];
+  }
+
+  const env = cfg.environment || "master";
+  const params = new URLSearchParams({
+    access_token: cfg.accessToken,
+    content_type: cfg.devotionalGuideContentType,
+    order: "-fields.startDate",
+    limit: "24"
+  });
+  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+
+  try {
+    const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+    if (!response.ok) return [];
+    const payload = await response.json();
+    return Array.isArray(payload.items) ? payload.items : [];
+  } catch (error) {
+    console.error("Failed to load devotional guides:", error);
+    return [];
+  }
+}
