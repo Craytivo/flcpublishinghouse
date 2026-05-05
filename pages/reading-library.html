@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consecration Reading Library — FLC Publishing House</title>
+  <meta name="description" content="A curated reading library for serious spiritual formation—books on holiness, discipleship, and transformation from Freedom Life Church." />
+
+  <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Cormorant Garamond', 'Georgia', 'serif'],
+            body:    ['Source Sans Pro', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            flcNavy:     '#1A3A52',
+            flcNavyDark: '#0F2838',
+            flcNavyLight:'#2A4A62',
+            flcGold:     '#9A7B4F',
+            flcGoldLight:'#B8956A',
+            flcCharcoal: '#2C2C2C',
+            flcCream:    '#F5F1E8',
+            flcOffWhite: '#FAFAF8',
+            flcBorder:   '#E8E6E1',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: #1A3A52; color: white;
+      padding: 8px 16px; z-index: 100;
+      transition: top 0.3s;
+    }
+    .skip-link:focus { top: 0; }
+
+    .pattern-dots {
+      background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-up { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9A7B4F;
+    }
+
+    .book-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .book-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(26,58,82,0.12) !important;
+    }
+
+    /* Hide scrollbar on filter strip */
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+    /* Sticky filter bar */
+    #filterBar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #FAFAF8;
+      border-bottom: 1px solid #E5E0D8;
+    }
+
+    /* Back to top */
+    #backToTop { opacity: 0; pointer-events: none; }
+    #backToTop.visible { opacity: 1; pointer-events: auto; }
+
+    /* Accordion cards */
+    .book-card {
+      border: 1px solid #E8E6E1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .book-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,58,82,0.08);
+    }
+    .book-card.expanded {
+      border-color: #9A7B4F;
+      box-shadow: 0 12px 32px rgba(26,58,82,0.1);
+    }
+    .book-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+      opacity: 0;
+    }
+    .book-details.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+    .expand-icon {
+      transition: transform 0.2s ease;
+    }
+    .expand-icon.rotated {
+      transform: rotate(180deg);
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/site-theme.css" />
+</head>
+
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div id="headerContainer"
+       data-config='{"currentPage":"reading-library","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
+  <script src="../assets/js/components/header-component.js"></script>
+
+  <main id="main-content">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden fade-in-up">
+      <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-flcOffWhite/0 via-flcOffWhite/0 to-flcOffWhite pointer-events-none"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <p class="section-kicker mb-4">Freedom Life Church</p>
+          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-flcNavy leading-[1.06] mb-6">
+            Consecration<br class="hidden sm:block"> Reading Library
+          </h1>
+          <div class="w-12 h-px bg-flcGold mb-6"></div>
+          <p id="libraryIntro" class="text-flcCharcoal/80 text-base sm:text-lg leading-relaxed max-w-2xl"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FILTER BAR ═══ -->
+    <div id="filterBar" class="py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="filterTabs" class="flex gap-2 overflow-x-auto scrollbar-hide pb-0.5"></div>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-3">
+          <div class="relative flex-1 sm:flex-none">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style="color:rgba(44,44,44,0.35);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input id="bookSearch" type="text" placeholder="Search title or author…"
+              class="w-full sm:w-64 pl-10 pr-8 py-2 text-sm border border-flcBorder rounded-full bg-white focus:outline-none focus:border-flcNavy transition-colors"
+              style="color:#2C2C2C;"/>
+            <button id="clearSearch" class="hidden absolute right-3 top-1/2 -translate-y-1/2" style="color:rgba(44,44,44,0.4);" aria-label="Clear search">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <p id="bookCount" class="text-xs font-medium tracking-wide sm:ml-auto whitespace-nowrap" style="color:rgba(44,44,44,0.5);"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LIBRARY GRID ═══ -->
+    <section id="librarySection" class="py-10 sm:py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="libraryLabel" class="flex items-center gap-4 mb-7">
+          <p class="section-kicker" id="libraryLabelText">Library</p>
+          <div class="flex-1 h-px bg-flcBorder"></div>
+        </div>
+        <div id="bookGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
+        <div id="emptyState" class="hidden text-center py-20">
+          <p class="font-heading text-2xl text-flcNavy mb-2">No books found.</p>
+          <p class="text-sm" style="color:rgba(44,44,44,0.6);">Try a different search or category.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ LIBRARY NOTE ═══ -->
+    <section class="py-16 sm:py-20 fade-in-up">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="border-t border-flcBorder pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div class="max-w-xl">
+            <p class="section-kicker mb-2">A Growing Library</p>
+            <p class="text-sm text-flcCharcoal/70 leading-relaxed">
+              This library will expand as new titles are added. Each book is evaluated for theological integrity, pastoral usefulness, and its capacity to form rather than merely inform. Suggestions rooted in those same convictions are welcome.
+            </p>
+          </div>
+          <a href="../index.html#subscribe"
+             class="flex-shrink-0 inline-flex items-center px-5 py-2.5 bg-flcNavy text-white font-semibold text-sm rounded-xl hover:bg-flcGold transition-colors duration-200">
+            Stay updated
+            <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footerContainer"
+       data-config='{"currentPage":"reading-library","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
+  <script src="../assets/js/components/footer-component.js"></script>
+  <!-- Back to top -->
+  <button id="backToTop" class="fixed bottom-6 right-6 z-30 w-10 h-10 flex items-center justify-center rounded-full shadow-lg transition-all duration-300" style="background:#1A3A52;color:white;" aria-label="Back to top">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <script src="../assets/js/lib/site-theme.js"></script>
+  <script src="../assets/js/pages/reading-library.js"></script>
+</body>
+</html>
