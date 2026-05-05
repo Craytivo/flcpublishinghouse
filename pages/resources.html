@@ -13,13 +13,13 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            'heading': ['Playfair Display', 'serif'],
+            'heading': ['Cormorant Garamond', 'Georgia', 'serif'],
             'sans': ['Inter', 'sans-serif']
           },
           colors: {
@@ -60,8 +60,8 @@
     /* Fade In Up Animation */
     .fade-in-up {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
 
     .fade-in-up.visible {
@@ -165,6 +165,24 @@
       border-bottom: 1px solid #E5E0D8;
     }
 
+    @media (max-width: 640px) {
+      .book-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 0.875rem;
+      }
+
+      .book-row h3 {
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+      }
+
+      .book-row p {
+        line-height: 1.5;
+        margin-top: 0.25rem;
+      }
+    }
+
     .book-link {
       display: inline-flex;
       align-items: center;
@@ -249,27 +267,28 @@
   <!-- Load Header Component -->
   <script src="../assets/js/components/header-component.js"></script>
   
-  <script type="module" src="../assets/js/config.js"></script>
   <script type="module" src="../assets/js/pages/resources.js"></script>
   <main id="main-content" class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
     <div id="top"></div>
     <!-- Hero Section -->
-    <section class="py-20 sm:py-24 lg:py-32 bg-white pattern-dots fade-in-up">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="relative pt-40 pb-20 sm:pt-48 sm:pb-24 lg:pt-56 lg:pb-32 overflow-hidden fade-in-up">
+      <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+      <div class="absolute top-24 left-8 w-px h-40 bg-gradient-to-b from-transparent via-flcGold/40 to-transparent hidden lg:block"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="max-w-3xl">
-          <p class="section-kicker text-flcGold mb-4">Resources Hub</p>
-          <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
-            Resource library for sermons, detox, devotionals, and studies
+          <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/80 font-medium mb-6">Resources Hub</p>
+          <h1 class="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] text-flcNavy leading-[1.1] tracking-[-0.035em] mb-6">
+            Resource library for sermons, devotionals, and studies
           </h1>
-          <p class="text-lg text-flcCharcoal/80 mb-8">
+          <p class="text-[1.1rem] text-flcCharcoal/70 leading-[1.8] max-w-[60ch] mb-10">
             Access teaching notes, week-by-week detox resources, and downloadable guides for personal study and group preparation.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="#collections" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+            <a href="#collections" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 shadow-md hover:shadow-lg">
               Browse Collections
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </a>
-            <a href="#books" class="inline-flex items-center justify-center px-6 py-3 bg-white text-flcNavy font-semibold rounded-xl border-2 border-flcNavy hover:border-flcGold hover:text-flcGold transition-all duration-300 transform hover:-translate-y-0.5">
+            <a href="#books" class="inline-flex items-center justify-center px-6 py-3 bg-transparent text-flcNavy font-semibold rounded-xl border border-flcNavy/30 hover:border-flcGold hover:text-flcGold transition-all duration-300">
               Book List
             </a>
           </div>
@@ -284,7 +303,7 @@
           <p id="freshnessText" class="text-lg text-flcNavy font-semibold mb-2">Last updated: February 2026</p>
           <p id="freshnessSubtext" class="text-sm text-flcCharcoal/70">Library entries refreshed each release cycle.</p>
         </article>
-        <a id="featuredSermonCard" href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft hover:shadow-xl transition-all duration-300 block group">
+        <a id="featuredSermonCard" href="sermons.html" class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft hover:shadow-xl transition-all duration-300 block group">
           <p class="text-xs uppercase tracking-widest text-flcGold font-semibold mb-3">Featured Sermon</p>
           <p id="featuredSermonTitle" class="text-lg text-flcNavy font-semibold mb-2 group-hover:text-flcGold transition-colors">When Compassion Costs You Sleep</p>
           <p class="text-sm text-flcCharcoal/70 mb-4">Latest sermon resource</p>
@@ -325,11 +344,8 @@
           </div>
           <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Sermon Notes & Media</h3>
           <p class="text-flcCharcoal/80 mb-6">Browse all published sermon notes and media resources for personal study and group preparation.</p>
-          <div id="sermonLinks" class="flex flex-wrap gap-3">
-            <a href="../sermons/sermon-its-time-to-crossover.html" class="download-btn">It's Time to Cross Over</a>
-            <a href="../sermons/sermon-im-under-pressure.html" class="download-btn">I'm Under Pressure</a>
-            <a href="../sermons/sermon-purpose-protected-me.html" class="download-btn">Purpose Protected Me</a>
-            <a href="../sermons/sermon-when-compassion-costs-you-sleep.html" class="download-btn">When Compassion Costs You Sleep</a>
+          <div class="flex flex-wrap gap-3">
+            <a href="sermons.html" class="btn-primary px-6 py-3 text-sm sm:text-base">Browse All Sermons</a>
           </div>
         </div>
 
@@ -396,7 +412,7 @@
           <h3 class="text-2xl font-heading font-bold text-flcNavy mb-3">Building Campaign & Leadership Focus</h3>
           <p class="text-flcCharcoal/80 mb-6">Download the official Vision 2026 statement outlining the building campaign and leadership initiatives.</p>
           <div class="flex flex-wrap gap-3">
-            <a href="../assets/pdfs/Vision%202026%20%282%29.pdf" class="download-btn" download="Vision-2026.pdf">Download PDF</a>
+            <a href="../assets/pdfs/Vision%202026.pdf" class="download-btn" download="Vision-2026.pdf">Download PDF</a>
           </div>
         </div>
       </div>
