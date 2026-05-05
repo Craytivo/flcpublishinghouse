@@ -337,6 +337,39 @@ async function loadPost() {
     errorState.classList.add('hidden');
     postContent.classList.remove('hidden');
 
+    // Wire up share buttons
+    const shareUrl = window.location.href;
+    const shareTitle = entry.fields.title || document.title;
+
+    const shareNative = document.getElementById('shareNative');
+    if (shareNative) {
+      shareNative.addEventListener('click', async () => {
+        if (navigator.share) {
+          await navigator.share({ title: shareTitle, url: shareUrl });
+        } else {
+          await navigator.clipboard.writeText(shareUrl);
+          shareNative.title = 'Link copied!';
+          setTimeout(() => { shareNative.title = 'Share'; }, 2000);
+        }
+      });
+    }
+
+    const shareTwitter = document.getElementById('shareTwitter');
+    if (shareTwitter) {
+      shareTwitter.addEventListener('click', () => {
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    const shareEmail = document.getElementById('shareEmail');
+    if (shareEmail) {
+      shareEmail.addEventListener('click', () => {
+        const emailUrl = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareUrl)}`;
+        window.location.href = emailUrl;
+      });
+    }
+
     // Load recommended posts
     loadRecommendedPosts(entryId);
 
