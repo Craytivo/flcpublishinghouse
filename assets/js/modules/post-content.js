@@ -89,64 +89,63 @@ async function loadPost() {
       postTitle.textContent = entry.fields.title || 'Untitled Post';
     }
 
-    // Determine content type based on available fields
-    const isDevotionalGuide = entry.fields.startDate || entry.fields.endDate || entry.fields.speaker;
+    // Display speaker if available (for any content type)
+    const postSpeaker = document.getElementById('postSpeaker');
+    if (postSpeaker && entry.fields.speaker) {
+      postSpeaker.textContent = entry.fields.speaker;
+      postSpeaker.classList.remove('hidden');
+    }
+    
+    // Display start/end dates if available (for devotional guides, events, etc.)
+    const postStartDate = document.getElementById('postStartDate');
+    const postEndDate = document.getElementById('postEndDate');
+    
+    let hasDateRange = false;
+    if (postStartDate && entry.fields.startDate) {
+      postStartDate.textContent = 'Start: ' + formatDateSafe(entry.fields.startDate);
+      postStartDate.classList.remove('hidden');
+      hasDateRange = true;
+    }
+    
+    if (postEndDate && entry.fields.endDate) {
+      postEndDate.textContent = 'End: ' + formatDateSafe(entry.fields.endDate);
+      postEndDate.classList.remove('hidden');
+      hasDateRange = true;
+    }
 
+    // Determine content type to set appropriate CTA
+    const isDevotionalGuide = entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide;
+    const isSermon = entry.fields.speaker || entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon;
+
+    // Display pastor/preacher for sermons
+    if (postPastor && isSermon) {
+      const pastor = entry.fields.speaker || entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || '';
+      if (pastor) {
+        postPastor.textContent = pastor;
+      }
+    }
+
+    // Display date if available and not a date-range content
+    if (postDate && entry.fields.date && !hasDateRange) {
+      postDate.textContent = formatDateSafe(entry.fields.date);
+    } else if (postDate && hasDateRange) {
+      postDate.style.display = 'none';
+    }
+    
+    // Update CTA based on content type
+    const ctaTitle = document.getElementById('ctaTitle');
+    const ctaLink = document.getElementById('ctaLink');
+    const ctaText = document.getElementById('ctaText');
+    
     if (isDevotionalGuide) {
-      // Devotional Guide specific rendering
-      if (postPastor) {
-        postPastor.parentElement.style.display = 'none';
-      }
-      
-      // Show speaker if available
-      const postSpeaker = document.getElementById('postSpeaker');
-      if (postSpeaker && entry.fields.speaker) {
-        postSpeaker.textContent = entry.fields.speaker;
-        postSpeaker.classList.remove('hidden');
-      }
-      
-      // Show start date if available
-      const postStartDate = document.getElementById('postStartDate');
-      if (postStartDate && entry.fields.startDate) {
-        postStartDate.textContent = 'Start: ' + formatDateSafe(entry.fields.startDate);
-        postStartDate.classList.remove('hidden');
-      }
-      
-      // Show end date if available
-      const postEndDate = document.getElementById('postEndDate');
-      if (postEndDate && entry.fields.endDate) {
-        postEndDate.textContent = 'End: ' + formatDateSafe(entry.fields.endDate);
-        postEndDate.classList.remove('hidden');
-      }
-      
-      // Hide regular date for devotionals
-      if (postDate) {
-        postDate.parentElement.style.display = 'none';
-      }
-      
-      // Update CTA for devotionals
-      const ctaTitle = document.getElementById('ctaTitle');
-      const ctaLink = document.getElementById('ctaLink');
-      const ctaText = document.getElementById('ctaText');
       if (ctaTitle) ctaTitle.textContent = 'More Devotionals';
       if (ctaLink) ctaLink.href = '../pages/devotionals.html';
       if (ctaText) ctaText.textContent = 'Back to All Devotionals';
     } else {
-      // Sermon specific rendering
-      if (postPastor) {
-        const pastor = entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || '';
-        if (pastor) {
-          postPastor.textContent = pastor;
-        } else {
-          postPastor.parentElement.style.display = 'none';
-        }
-      }
-
-      if (postDate && entry.fields.date) {
-        postDate.textContent = formatDateSafe(entry.fields.date);
-      }
-      
-      // CTA remains as sermons (default)
+      // Default to sermons
+      if (ctaTitle) ctaTitle.textContent = 'More Sermons';
+      if (ctaLink) ctaLink.href = '../pages/sermons.html';
+      if (ctaText) ctaText.textContent = 'Back to All Sermons';
     }
 
     // Optional excerpt - use description field if available, otherwise fall back to summary/body/content
