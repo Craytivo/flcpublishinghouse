@@ -34,16 +34,21 @@ export async function getLatestSermonEntries() {
     access_token: cfg.accessToken,
     content_type: cfg.contentType,
     order: "-fields.date",
+    include: "2"
   });
   const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
 
   latestEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
-    .then((response) => (response.ok ? response.json() : { items: [] }))
+    .then((response) => (response.ok ? response.json() : { items: [], includes: {} }))
     .then((payload) => {
       const items = Array.isArray(payload.items) ? payload.items : [];
-      return items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a));
+      const includes = payload.includes || {};
+      return {
+        items: items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a)),
+        includes: includes
+      };
     })
-    .catch(() => []);
+    .catch(() => ({ items: [], includes: {} }));
 
   return latestEntriesPromise;
 }
@@ -105,5 +110,28 @@ export async function getDevotionalGuideEntries() {
   } catch (error) {
     console.error("Failed to load devotional guides:", error);
     return [];
+  }
+}
+
+export async function getEntryById(entryId) {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) {
+    return null;
+  }
+
+  const env = cfg.environment || "master";
+  const params = new URLSearchParams({
+    access_token: cfg.accessToken
+  });
+  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries/${entryId}?${params.toString()}`;
+
+  try {
+    const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+    if (!response.ok) return null;
+    const payload = await response.json();
+    return payload;
+  } catch (error) {
+    console.error("Failed to load entry by ID:", error);
+    return null;
   }
 }

@@ -1,0 +1,431 @@
+/* Sermon Page Component Styles - Premium Editorial Design */
+
+/* YouTube Video Embed */
+.youtube-video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2.5rem auto;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(26, 58, 82, 0.15);
+  background: #000;
+}
+
+.youtube-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Enhanced Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation for children */
+.fade-in-up.visible > * {
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-up.visible > *:nth-child(1) { animation-delay: 0.1s; }
+.fade-in-up.visible > *:nth-child(2) { animation-delay: 0.2s; }
+.fade-in-up.visible > *:nth-child(3) { animation-delay: 0.3s; }
+.fade-in-up.visible > *:nth-child(4) { animation-delay: 0.4s; }
+.fade-in-up.visible > *:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Post Content Typography - Editorial Reading Experience */
+.post-content {
+  max-width: 110ch;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  color: #2C2C2C;
+}
+
+/* Drop cap for first paragraph */
+.post-content > p:first-child::first-letter {
+  float: left;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  font-weight: 700;
+  color: #1A3A52;
+  padding-right: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: #1A3A52;
+}
+
+.post-content h1 { font-size: 2.25rem; line-height: 1.2; }
+.post-content h2 { font-size: 1.875rem; line-height: 1.25; }
+.post-content h3 { font-size: 1.5rem; line-height: 1.3; }
+.post-content h4 { font-size: 1.25rem; line-height: 1.35; }
+
+.post-content p {
+  margin-bottom: 1.75rem;
+}
+
+.post-content strong {
+  font-weight: 700;
+  color: #1A3A52;
+}
+
+.post-content a {
+  color: #9A7B4F;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(154, 123, 79, 0.3);
+  transition: all 0.2s ease;
+}
+
+.post-content a:hover {
+  color: #1A3A52;
+  text-decoration-color: #1A3A52;
+}
+
+.post-content ul,
+.post-content ol {
+  margin-bottom: 1.75rem;
+  padding-left: 1.5rem;
+}
+
+.post-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.post-content blockquote {
+  border-left: 3px solid #9A7B4F;
+  padding-left: 1.75rem;
+  margin: 2.5rem 0;
+  font-style: italic;
+  color: #2C2C2C;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  opacity: 0.85;
+}
+
+/* Responsive Images */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 12px 48px rgba(26, 58, 82, 0.12);
+}
+
+.responsive-image-container {
+  margin: 2.5rem 0;
+}
+
+/* Reading Progress Bar - Premium */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #9A7B4F, #B8956A);
+  transition: width 0.1s linear;
+  z-index: 9999;
+}
+
+/* Aspect Ratios */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Page Background - Subtle Paper Texture */
+body {
+  background-color: #FAFAF8;
+  background-image: url('data:image/svg+xml,%3Csvg width=%22400%22 height=%22400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22paper-texture%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.04%22 numOctaves=%225%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix type=%22matrix%22 values=%220 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.90 0 0 0 0.02 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23paper-texture)%22/%3E%3C/svg%3E');
+  background-attachment: fixed;
+}
+
+/* Hero Layered Background Effects */
+.hero-layered-bg {
+  position: relative;
+}
+
+/* Parallax Effect for Hero */
+.hero-parallax {
+  will-change: transform;
+}
+
+/* Subtle parallax animation */
+@keyframes parallaxFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-parallax:hover {
+  animation: parallaxFloat 6s ease-in-out infinite;
+}
+
+/* Lazy Loading Images */
+img[loading="lazy"] {
+  background-color: #F5F1E8;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Scripture Callout */
+.scripture-callout {
+  background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
+  border-left: 4px solid #9A7B4F;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  font-style: italic;
+  position: relative;
+}
+
+.scripture-callout::before {
+  content: '"';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.75rem;
+  font-size: 3rem;
+  color: #9A7B4F;
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.scripture-callout p {
+  margin: 0;
+  color: #1A3A52;
+}
+
+.scripture-callout .scripture-ref {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #9A7B4F;
+  font-weight: 600;
+}
+
+/* Section Divider */
+.section-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #E5E0D8 50%, transparent 100%);
+  margin: 3rem 0;
+}
+
+/* Pull Quote */
+.pull-quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #1A3A52;
+  border-left: 3px solid #9A7B4F;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  line-height: 1.6;
+}
+
+.pull-quote::before {
+  content: '"';
+  font-size: 2rem;
+  color: #9A7B4F;
+  margin-right: 0.25rem;
+}
+
+/* Key Point Box */
+.key-point {
+  background: linear-gradient(135deg, #1A3A52 0%, #2A4A62 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(26, 58, 82, 0.15);
+}
+
+.key-point h4 {
+  color: #9A7B4F;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.key-point p {
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Discussion Questions */
+.discussion-questions {
+  background: #FAFAF8;
+  border: 1px solid #E5E0D8;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.discussion-questions h4 {
+  color: #1A3A52;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.discussion-questions ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.discussion-questions li {
+  margin-bottom: 0.75rem;
+  color: #2C2C2C;
+}
+
+/* Related Sermons Section */
+.related-sermons {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #E5E0D8;
+}
+
+.related-sermons h3 {
+  color: #1A3A52;
+  margin-bottom: 1.25rem;
+}
+
+.related-sermons .sermon-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E0D8;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #2C2C2C;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.related-sermons .sermon-link:hover {
+  border-color: #9A7B4F;
+  background: #F5F1E8;
+  color: #1A3A52;
+}
+
+/* Sermon Content Structure */
+.sermon-content {
+  line-height: 1.75;
+  max-width: 100%;
+}
+
+.sermon-content p {
+  margin-bottom: 1.25rem;
+}
+
+.sermon-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1A3A52;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sermon-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1A3A52;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.sermon-content ul,
+.sermon-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.sermon-content li {
+  margin-bottom: 0.5rem;
+}
+
+.sermon-content a {
+  color: #9A7B4F;
+  text-decoration: underline;
+}
+
+.sermon-content a:hover {
+  color: #1A3A52;
+}
+
+.sermon-content strong {
+  color: #1A3A52;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .scripture-callout {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .key-point {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .discussion-questions {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .sermon-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .sermon-content h3 {
+    font-size: 1.25rem;
+  }
+}
