@@ -4,9 +4,14 @@ let lenis;
 let magneticElements = [];
 let scrollProgress = 0;
 
-// Initialize Lenis smooth scroll - lighter configuration
+// Initialize Lenis smooth scroll - optimized for responsiveness
 export function initLenis() {
-  if (typeof Lenis === 'undefined') return;
+  if (typeof Lenis === 'undefined') {
+    console.error('Lenis is not loaded');
+    return;
+  }
+  
+  console.log('Initializing Lenis smooth scroll...');
   
   lenis = new Lenis({
     duration: 0.8,
@@ -19,6 +24,10 @@ export function initLenis() {
     touchMultiplier: 2,
     lerp: 0.1,
   });
+
+  // Expose lenis to window for access from other modules
+  window.lenisScroller = lenis;
+  console.log('Lenis initialized successfully');
 
   function raf(time) {
     lenis.raf(time);
@@ -187,7 +196,10 @@ export function initParticleEffect(container) {
 export function initHeroEnhancements() {
   initLenis();
   
-  const heroSection = document.querySelector('.relative.pt-10');
+  // Try multiple selectors for hero section
+  const heroSection = document.getElementById('heroSection') || 
+                      document.querySelector('.relative.pt-10') ||
+                      document.querySelector('section.relative');
   if (heroSection) {
     initParticleEffect(heroSection);
   }
