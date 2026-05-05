@@ -303,9 +303,9 @@
         </div>
       </div>
 
-      <!-- Sidebar (Fixed position on right, outside content flow) -->
-  <aside class="hidden lg:block fixed right-8 top-24 w-72 z-50">
-    <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px_rgba(26,58,82,0.04)]">
+            <!-- Sidebar (Fixed position on right, outside content flow) -->
+  <aside class="hidden lg:block fixed right-8 top-24 w-80 z-50">
+    <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px rgba(26,58,82,0.04)]">
       <!-- Decorative line -->
       <div class="w-px h-16 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
       
@@ -326,6 +326,14 @@
       <div class="pt-6 border-t border-flcBorder/40 mb-6">
         <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
         <p class="text-2xl font-heading font-bold text-flcNavy" id="wordCount">-- words</p>
+      </div>
+      
+      <!-- Recommended Posts -->
+      <div class="pt-6 border-t border-flcBorder/40 mb-6">
+        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Recommended</p>
+        <div id="sidebarRecommendedPosts" class="space-y-4">
+          <!-- Recommended posts will be loaded here -->
+        </div>
       </div>
       
       <!-- Share -->
@@ -351,17 +359,6 @@
       </div>
     </div>
   </aside>
-
-      <!-- Recommended Posts -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 fade-in-up">
-        <div class="text-center mb-16">
-          <p class="text-xs uppercase tracking-[0.12em] text-flcGold/80 mb-3 font-medium">Continue Reading</p>
-          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-flcNavy mb-4 tracking-tight">Recommended Posts</h2>
-        </div>
-        <div id="recommendedPostsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Recommended posts will be loaded here -->
-        </div>
-      </section>
 
       <!-- Notes Section -->
       <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20 fade-in-up">

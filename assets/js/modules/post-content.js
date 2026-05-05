@@ -238,8 +238,8 @@ function showError() {
 }
 
 async function loadRecommendedPosts(currentEntryId) {
-  const recommendedGrid = document.getElementById('recommendedPostsGrid');
-  if (!recommendedGrid) return;
+  const sidebarRecommended = document.getElementById('sidebarRecommendedPosts');
+  if (!sidebarRecommended) return;
 
   try {
     const contentfulData = await getLatestSermonEntries();
@@ -254,31 +254,29 @@ async function loadRecommendedPosts(currentEntryId) {
       .slice(0, 3);
 
     if (!recommended.length) {
-      recommendedGrid.innerHTML = '<p class="text-flcCharcoal/60 col-span-full text-center">No recommended posts available.</p>';
+      sidebarRecommended.innerHTML = '<p class="text-flcCharcoal/60 text-xs">No recommendations available.</p>';
       return;
     }
 
-    recommendedGrid.innerHTML = recommended.map(item => {
+    sidebarRecommended.innerHTML = recommended.map(item => {
       const title = (item.fields.title || 'Untitled').trim();
       const summaryRaw = item.fields.body || item.fields.content || item.fields.summary || '';
-      const summary = summaryRaw ? stripRichTextToPlain(summaryRaw).slice(0, 120) + '...' : 'No description.';
+      const summary = summaryRaw ? stripRichTextToPlain(summaryRaw).slice(0, 60) + '...' : '';
       const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
       const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
 
       return `
-        <a href="${href}" class="group bg-white/90 backdrop-blur-md rounded-[18px] border border-flcBorder/40 p-6 shadow-[0_8px_32px_rgba(26,58,82,0.08)] hover:shadow-[0_16px_64px_rgba(26,58,82,0.16)] hover:border-flcGold/30 transition-all duration-500 transform hover:-translate-y-2">
-          ${imageUrl ? `
-            <div class="aspect-video mb-5 bg-flcCream/60 rounded-xl overflow-hidden">
-              <img src="${imageUrl}" alt="${title}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" loading="lazy" />
+        <a href="${href}" class="block group">
+          <div class="flex items-start gap-3">
+            ${imageUrl ? `
+              <div class="w-16 h-16 flex-shrink-0 bg-flcCream/60 rounded-lg overflow-hidden">
+                <img src="${imageUrl}" alt="${title}" class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300" loading="lazy" />
+              </div>
+            ` : ''}
+            <div class="flex-1 min-w-0">
+              <h4 class="font-heading text-sm font-bold text-flcNavy mb-1 group-hover:text-flcGold transition-colors duration-300 tracking-tight line-clamp-2">${title}</h4>
+              <p class="text-xs text-flcCharcoal/60 line-clamp-1">${summary}</p>
             </div>
-          ` : ''}
-          <h3 class="font-heading text-lg font-bold text-flcNavy mb-3 group-hover:text-flcGold transition-colors duration-300 tracking-tight">${title}</h3>
-          <p class="text-sm text-flcCharcoal/70 mb-5 line-clamp-2 leading-relaxed">${summary}</p>
-          <div class="flex items-center text-flcGold text-sm font-semibold tracking-wide">
-            Read more
-            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
           </div>
         </a>
       `;
