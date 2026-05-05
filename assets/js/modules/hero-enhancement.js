@@ -4,36 +4,11 @@ let lenis;
 let magneticElements = [];
 let scrollProgress = 0;
 
-// Initialize Lenis smooth scroll - optimized for responsiveness
+// Initialize Lenis smooth scroll - disabled for native scrolling
 export function initLenis() {
-  if (typeof Lenis === 'undefined') {
-    console.error('Lenis is not loaded');
-    return;
-  }
-  
-  console.log('Initializing Lenis smooth scroll...');
-  
-  lenis = new Lenis({
-    duration: 0.8,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 0.8,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    lerp: 0.1,
-  });
-
-  // Expose lenis to window for access from other modules
-  window.lenisScroller = lenis;
-  console.log('Lenis initialized successfully');
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  // Lenis disabled - using native browser scrolling
+  console.log('Lenis disabled - using native scrolling');
+  return;
 }
 
 // Text reveal animation (staggered character reveal) - disabled for now
