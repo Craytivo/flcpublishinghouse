@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post - FLC Publishing House</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -244,41 +245,58 @@
     <!-- Post Content -->
     <article id="postContent" class="hidden">
       <!-- Hero Section -->
-      <section class="relative pt-10 sm:pt-12 pb-6 sm:pb-8 lg:pt-16 lg:pb-10 overflow-hidden fade-in-up">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <!-- Meta line -->
-          <div class="flex items-center justify-center space-x-4 mb-8">
-            <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium" id="postPastor">
-              Loading...
-            </p>
-            <span class="text-flcGold/30">•</span>
-            <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium" id="postDate">
-              Loading...
-            </p>
-          </div>
-          
-          <!-- Title -->
-          <h1 class="font-heading font-bold text-[clamp(2.5rem,5vw,3.5rem)] text-flcNavy leading-[1.12] tracking-[-0.03em] mb-10" id="postTitle">
-            Loading...
-          </h1>
-          
-          <!-- Optional excerpt -->
-          <p class="text-[1.05rem] text-flcCharcoal/70 leading-[1.8] max-w-[90ch] mx-auto mb-12" id="postExcerpt">
-            Loading...
-          </p>
-          
-          <!-- Featured Image -->
-          <div id="postImageContainer" class="max-w-4xl mx-auto mb-12 hidden">
-            <div class="relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)] group">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <img id="heroImage" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]" loading="eager" alt="" />
+      <section class="relative pt-12 sm:pt-16 pb-8 sm:pb-12 lg:pt-24 lg:pb-16 overflow-hidden fade-in-up" id="heroSection">
+        <!-- Decorative line elements -->
+        <div class="absolute top-20 left-8 w-px h-32 bg-gradient-to-b from-transparent via-flcGold/30 to-transparent hidden lg:block"></div>
+        <div class="absolute top-32 right-12 w-24 h-px bg-gradient-to-r from-transparent via-flcGold/20 to-transparent hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Asymmetric Layout -->
+          <div class="flex flex-col lg:flex-row lg:gap-16">
+            <!-- Left Column - Meta Line -->
+            <div class="lg:w-1/4 lg:pt-8">
+              <div class="flex items-center space-x-4 mb-8 lg:flex-col lg:items-start lg:space-x-0 lg:space-y-3">
+                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium" id="postPastor">
+                  Loading...
+                </p>
+                <span class="text-flcGold/30 lg:hidden">•</span>
+                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium" id="postDate">
+                  Loading...
+                </p>
+              </div>
+              
+              <!-- Section number marker -->
+              <div class="hidden lg:block">
+                <span class="text-[6rem] font-heading font-bold text-flcGold/5 leading-none">01</span>
+              </div>
+            </div>
+            
+            <!-- Right Column - Title, Excerpt, Image -->
+            <div class="lg:w-3/4 text-center lg:text-left">
+              <!-- Title -->
+              <h1 class="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] text-flcNavy leading-[1.1] tracking-[-0.035em] mb-8" id="postTitle">
+                Loading...
+              </h1>
+              
+              <!-- Optional excerpt -->
+              <p class="text-[1.05rem] text-flcCharcoal/70 leading-[1.8] max-w-[70ch] mb-12" id="postExcerpt">
+                Loading...
+              </p>
+              
+              <!-- Featured Image -->
+              <div id="postImageContainer" class="max-w-4xl mx-auto lg:mx-0 mb-12 hidden">
+                <div class="relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)] group">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img id="heroImage" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]" loading="eager" alt="" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
         
         <!-- Divider -->
-        <div class="max-w-24 mx-auto mt-20">
-          <div class="h-px bg-gradient-to-r from-transparent via-flcGold/20 to-transparent"></div>
+        <div class="max-w-32 mx-auto lg:mx-0 lg:ml-[25%] mt-16">
+          <div class="h-px bg-gradient-to-r from-transparent via-flcGold/30 to-transparent"></div>
         </div>
       </section>
 

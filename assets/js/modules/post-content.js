@@ -6,10 +6,10 @@ import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText, generateSrcset } from '../utils/images.js';
 import { renderRichText } from '../utils/richTextRenderer.js';
+import { initHeroEnhancements } from './hero-enhancement.js';
 
 export function initPostFeatures() {
   loadPost();
-  initReadingProgress();
   initNotes();
 }
 
@@ -160,6 +160,9 @@ async function loadPost() {
         el.classList.add('visible');
       });
     });
+
+    // Initialize hero enhancements
+    initHeroEnhancements();
 
   } catch (error) {
     console.error('Failed to load post:', error);
