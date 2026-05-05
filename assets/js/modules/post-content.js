@@ -89,6 +89,13 @@ async function loadPost() {
       postTitle.textContent = entry.fields.title || 'Untitled Post';
     }
 
+    // Display subtitle if available
+    const postSubtitle = document.getElementById('postSubtitle');
+    if (postSubtitle && entry.fields.subtitle) {
+      postSubtitle.textContent = entry.fields.subtitle;
+      postSubtitle.classList.remove('hidden');
+    }
+
     // Display speaker if available (for any content type)
     const postSpeaker = document.getElementById('postSpeaker');
     if (postSpeaker && entry.fields.speaker) {
