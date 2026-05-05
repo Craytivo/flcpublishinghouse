@@ -1,19 +1,16 @@
 // modules/resources-sermons.js - Sermon loading logic for resources page
 
 import { getLatestSermonEntries } from '../services/contentful.js';
-import { formatDateSafe, removeSkeleton } from '../utils/format.js';
-import { stripRichTextToPlain } from '../utils/richText.js';
 
 export async function initResourcesSermons() {
-  const sermonLinks = document.getElementById('sermonLinks');
   const sermonCount = document.getElementById('sermonCountLabel');
   const featuredSermonCard = document.getElementById('featuredSermonCard');
   const featuredSermonTitle = document.getElementById('featuredSermonTitle');
 
   try {
     const cfg = window.FLC_CONTENTFUL || {};
-    const items = await getLatestSermonEntries();
-    const sermons = items
+    const { items } = await getLatestSermonEntries();
+    const sermons = (items || [])
       .filter((item) => item && item.fields && item.sys)
       .map((item) => ({
         title: (item.fields.title || 'Untitled Sermon').trim(),
