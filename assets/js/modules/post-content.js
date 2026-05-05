@@ -11,6 +11,31 @@ import { initHeroEnhancements } from './hero-enhancement.js';
 export function initPostFeatures() {
   loadPost();
   initNotes();
+  initMobileSidebar();
+}
+
+// Mobile sidebar toggle functionality
+function initMobileSidebar() {
+  const toggle = document.getElementById('mobileSidebarToggle');
+  const sidebar = document.getElementById('mobileSidebar');
+  const overlay = document.getElementById('mobileSidebarOverlay');
+  const content = document.getElementById('mobileSidebarContent');
+  
+  if (!toggle || !sidebar || !overlay || !content) return;
+  
+  toggle.addEventListener('click', () => {
+    sidebar.classList.remove('hidden');
+    setTimeout(() => {
+      content.classList.remove('translate-y-full');
+    }, 10);
+  });
+  
+  overlay.addEventListener('click', () => {
+    content.classList.add('translate-y-full');
+    setTimeout(() => {
+      sidebar.classList.add('hidden');
+    }, 300);
+  });
 }
 
 // Calculate reading time based on word count
@@ -127,10 +152,11 @@ async function loadPost() {
       
       if (videoId) {
         youtubeContainer.innerHTML = `
-          <div class="youtube-video-container">
+          <div class="youtube-video-container relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)]">
             <iframe 
               src="https://www.youtube.com/embed/${videoId}" 
               title="${entry.fields.title || 'Sermon Video'}"
+              class="w-full aspect-video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
             </iframe>
@@ -164,6 +190,19 @@ async function loadPost() {
           const wordCount = plainText.split(' ').length;
           wordCountElement.textContent = wordCount.toLocaleString() + ' words';
         }
+        
+        // Sync mobile sidebar values
+        const mobileReadingTimeElement = document.getElementById('mobileReadingTime');
+        if (mobileReadingTimeElement) {
+          mobileReadingTimeElement.textContent = calculateReadingTime(bodyHtml);
+        }
+        
+        const mobileWordCountElement = document.getElementById('mobileWordCount');
+        if (mobileWordCountElement) {
+          const plainText = bodyHtml.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+          const wordCount = plainText.split(' ').length;
+          mobileWordCountElement.textContent = wordCount.toLocaleString() + ' words';
+        }
       } else if (typeof bodyField === 'string') {
         // Plain text - preserve line breaks and basic formatting
         postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
@@ -180,6 +219,19 @@ async function loadPost() {
           const plainText = bodyField.replace(/\s+/g, ' ').trim();
           const wordCount = plainText.split(' ').length;
           wordCountElement.textContent = wordCount.toLocaleString() + ' words';
+        }
+        
+        // Sync mobile sidebar values
+        const mobileReadingTimeElement = document.getElementById('mobileReadingTime');
+        if (mobileReadingTimeElement) {
+          mobileReadingTimeElement.textContent = calculateReadingTime(bodyField);
+        }
+        
+        const mobileWordCountElement = document.getElementById('mobileWordCount');
+        if (mobileWordCountElement) {
+          const plainText = bodyField.replace(/\s+/g, ' ').trim();
+          const wordCount = plainText.split(' ').length;
+          mobileWordCountElement.textContent = wordCount.toLocaleString() + ' words';
         }
       } else {
         postBody.innerHTML = 'No content available.';
@@ -216,14 +268,26 @@ async function loadPost() {
 function initSidebarProgress() {
   const progressBar = document.getElementById('sidebarProgress');
   const progressText = document.getElementById('sidebarProgressText');
+  const mobileProgressBar = document.getElementById('mobileSidebarProgress');
+  const mobileProgressText = document.getElementById('mobileSidebarProgressText');
+  
   if (!progressBar || !progressText) return;
 
   window.addEventListener('scroll', () => {
     const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
+    
     progressBar.style.width = scrolled + '%';
     progressText.textContent = Math.round(scrolled) + '% complete';
+    
+    // Sync mobile sidebar
+    if (mobileProgressBar) {
+      mobileProgressBar.style.width = scrolled + '%';
+    }
+    if (mobileProgressText) {
+      mobileProgressText.textContent = Math.round(scrolled) + '% complete';
+    }
   });
 }
 
@@ -248,10 +312,10 @@ async function loadRecommendedPosts(currentEntryId) {
     const cfg = window.FLC_CONTENTFUL || {};
     const postPagePath = cfg.postPagePath || "pages/post.html";
 
-    // Filter out current post and limit to 3 recommendations
+    // Filter out current post and limit to 2 recommendations
     const recommended = contentfulData.items
       .filter(item => item.sys.id !== currentEntryId)
-      .slice(0, 3);
+      .slice(0, 2);
 
     if (!recommended.length) {
       sidebarRecommended.innerHTML = '<p class="text-flcCharcoal/60 text-xs">No recommendations available.</p>';
@@ -265,7 +329,7 @@ async function loadRecommendedPosts(currentEntryId) {
       const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
       const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
 
-      return `
+      const postHtml = `
         <a href="${href}" class="block group">
           <div class="flex items-start gap-3">
             ${imageUrl ? `
@@ -280,7 +344,15 @@ async function loadRecommendedPosts(currentEntryId) {
           </div>
         </a>
       `;
+      
+      return postHtml;
     }).join('');
+    
+    // Sync to mobile sidebar
+    const mobileSidebarRecommended = document.getElementById('mobileSidebarRecommendedPosts');
+    if (mobileSidebarRecommended) {
+      mobileSidebarRecommended.innerHTML = sidebarRecommended.innerHTML;
+    }
   } catch (error) {
     console.error('Failed to load recommended posts:', error);
   }

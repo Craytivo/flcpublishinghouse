@@ -199,9 +199,10 @@ body {
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hero section title - solid color for visibility */
+/* Hero section title - solid color with subtle shadow for impact */
 #postTitle {
   color: #1A3A52;
+  text-shadow: 0 2px 4px rgba(26, 58, 82, 0.05);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
