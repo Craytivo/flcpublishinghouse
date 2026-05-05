@@ -237,6 +237,33 @@ body {
   animation: fadeScale 0.8s ease-out 0.3s both;
 }
 
+/* Video Section Styling */
+#youtubeVideoContainer {
+  position: relative;
+}
+
+#youtubeVideoContainer iframe {
+  border-radius: 20px;
+  box-shadow: 0 32px 96px rgba(26, 58, 82, 0.12);
+  transition: transform 0.7s ease, box-shadow 0.7s ease;
+}
+
+#youtubeVideoContainer iframe:hover {
+  transform: scale(1.02);
+  box-shadow: 0 40px 120px rgba(26, 58, 82, 0.15);
+}
+
+/* Video section heading */
+.video-section-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(154, 123, 79, 0.8);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
 /* Hero Layered Background Effects */
 .hero-layered-bg {
   position: relative;
