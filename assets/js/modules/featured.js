@@ -9,7 +9,16 @@ export async function initFeaturedPosts() {
 
   try {
     const cfg = window.FLC_CONTENTFUL || {};
-    const items = await getLatestSermonEntries();
+    const contentfulData = await getLatestSermonEntries();
+    
+    // Handle different possible data structures
+    let items = [];
+    if (Array.isArray(contentfulData)) {
+      items = contentfulData;
+    } else if (contentfulData && contentfulData.items && Array.isArray(contentfulData.items)) {
+      items = contentfulData.items;
+    }
+    
     const topThree = items.filter((item) => item && item.fields && item.sys && item.sys.id).slice(0, 3);
     
     if (!topThree.length) {
@@ -25,5 +34,10 @@ export async function initFeaturedPosts() {
     grid.innerHTML = topThree.map((item, index) => renderPostCard(item, index, postPagePath)).join("");
   } catch (error) {
     console.error("Failed to load featured posts section:", error);
+    grid.innerHTML = `
+      <div class="col-span-full text-center text-sm text-flcCharcoal/60">
+        Failed to load featured posts.
+      </div>
+    `;
   }
 }
