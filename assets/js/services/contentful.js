@@ -1,144 +1,88 @@
 // services/contentful.js - Contentful API service with caching
 
-let latestEntriesPromise = null;
-let detoxEntriesPromise = null;
+const cache = {};
 
-function getSermonSortTime(entry) {
-  const sermonDate = entry && entry.fields ? entry.fields.date : "";
-  const dateMs = sermonDate ? Date.parse(sermonDate) : NaN;
-  if (!Number.isNaN(dateMs)) return dateMs;
-  const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
-  const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
-  return Number.isNaN(updatedMs) ? 0 : updatedMs;
+function sortTime(entry) {
+  const d = entry?.fields?.date || entry?.fields?.startDate || entry?.sys?.updatedAt || '';
+  const ms = d ? Date.parse(d) : NaN;
+  return Number.isNaN(ms) ? 0 : ms;
 }
 
-function getDetoxSortTime(entry) {
-  const weekNumber = entry && entry.fields ? entry.fields.weekNumber : NaN;
-  if (!Number.isNaN(weekNumber)) return weekNumber;
-  const updatedAt = entry && entry.sys ? entry.sys.updatedAt : "";
-  const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
-  return Number.isNaN(updatedMs) ? 0 : updatedMs;
+function fetchEntries(params) {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return Promise.resolve({ items: [], includes: {} });
+  const env = cfg.environment || 'master';
+  const qs = new URLSearchParams({ access_token: cfg.accessToken, include: '2', ...params });
+  const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
+  return fetch(url, { headers: { Accept: 'application/json' } })
+    .then(r => r.ok ? r.json() : { items: [], includes: {} })
+    .catch(() => ({ items: [], includes: {} }));
 }
 
 export async function getLatestSermonEntries() {
-  if (latestEntriesPromise) return latestEntriesPromise;
-
+  if (cache.sermons) return cache.sermons;
   const cfg = window.FLC_CONTENTFUL || {};
-  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.contentType) {
-    latestEntriesPromise = Promise.resolve([]);
-    return latestEntriesPromise;
-  }
-
-  const env = cfg.environment || "master";
-  const params = new URLSearchParams({
-    access_token: cfg.accessToken,
-    content_type: cfg.contentType,
-    order: "-fields.date",
-    include: "2"
-  });
-  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
-
-  latestEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
-    .then((response) => (response.ok ? response.json() : { items: [], includes: {} }))
-    .then((payload) => {
-      const items = Array.isArray(payload.items) ? payload.items : [];
-      const includes = payload.includes || {};
-      return {
-        items: items.sort((a, b) => getSermonSortTime(b) - getSermonSortTime(a)),
-        includes: includes
-      };
-    })
-    .catch(() => ({ items: [], includes: {} }));
-
-  return latestEntriesPromise;
+  if (!cfg.contentType) { cache.sermons = { items: [], includes: {} }; return cache.sermons; }
+  cache.sermons = fetchEntries({ content_type: cfg.contentType, order: '-fields.date', limit: '24' })
+    .then(payload => ({
+      items: (payload.items || []).sort((a, b) => sortTime(b) - sortTime(a)),
+      includes: payload.includes || {}
+    }));
+  return cache.sermons;
 }
 
 export async function getDetoxEntries() {
-  if (detoxEntriesPromise) return detoxEntriesPromise;
-
+  if (cache.detox) return cache.detox;
   const cfg = window.FLC_CONTENTFUL || {};
-  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.detoxContentType) {
-    detoxEntriesPromise = Promise.resolve([]);
-    return detoxEntriesPromise;
-  }
-
-  const env = cfg.environment || "master";
-  const params = new URLSearchParams({
-    access_token: cfg.accessToken,
-    content_type: cfg.detoxContentType,
-    order: "fields.weekNumber",
-    limit: "100",
-    include: "2"
-  });
-  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
-
-  detoxEntriesPromise = fetch(endpoint, { headers: { Accept: "application/json" } })
-    .then((response) => (response.ok ? response.json() : { items: [], includes: {} }))
-    .then((payload) => {
-      const items = Array.isArray(payload.items) ? payload.items : [];
-      const filtered = items.filter((item) => item && item.fields && item.fields.published !== false);
-      return {
-        items: filtered.sort((a, b) => getDetoxSortTime(a) - getDetoxSortTime(b)),
-        includes: payload.includes || {}
-      };
-    })
-    .catch(() => ({ items: [], includes: {} }));
-
-  return detoxEntriesPromise;
+  if (!cfg.detoxContentType) { cache.detox = { items: [], includes: {} }; return cache.detox; }
+  cache.detox = fetchEntries({ content_type: cfg.detoxContentType, order: 'fields.weekNumber', limit: '100' })
+    .then(payload => {
+      const items = (payload.items || []).filter(i => i?.fields?.published !== false);
+      return { items, includes: payload.includes || {} };
+    });
+  return cache.detox;
 }
 
 export async function getDevotionalGuideEntries() {
+  if (cache.devotionals) return cache.devotionals;
   const cfg = window.FLC_CONTENTFUL || {};
-  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !cfg.devotionalGuideContentType) {
-    return [];
-  }
+  if (!cfg.devotionalGuideContentType) { cache.devotionals = []; return cache.devotionals; }
+  cache.devotionals = fetchEntries({ content_type: cfg.devotionalGuideContentType, order: '-fields.startDate', limit: '24' })
+    .then(payload => payload.items || []);
+  return cache.devotionals;
+}
 
-  const env = cfg.environment || "master";
-  const params = new URLSearchParams({
-    access_token: cfg.accessToken,
-    content_type: cfg.devotionalGuideContentType,
-    order: "-fields.startDate",
-    limit: "24"
-  });
-  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
+export async function getLatestAnyEntry() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return null;
 
-  try {
-    const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
-    if (!response.ok) return [];
-    const payload = await response.json();
-    return Array.isArray(payload.items) ? payload.items : [];
-  } catch (error) {
-    console.error("Failed to load devotional guides:", error);
-    return [];
-  }
+  const types = [cfg.contentType, cfg.devotionalGuideContentType].filter(Boolean);
+  const results = await Promise.all(
+    types.map(ct => fetchEntries({ content_type: ct, order: '-sys.updatedAt', limit: '1' }))
+  );
+
+  const candidates = results.flatMap(r => r.items || []);
+  if (!candidates.length) return null;
+
+  return candidates.reduce((best, entry) => sortTime(entry) > sortTime(best) ? entry : best);
 }
 
 export async function getEntryById(entryId) {
   const cfg = window.FLC_CONTENTFUL || {};
-  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) {
-    return null;
-  }
-
-  const env = cfg.environment || "master";
-  // Use collection endpoint with sys.id filter so includes (assets) are returned
-  const params = new URLSearchParams({
-    access_token: cfg.accessToken,
-    "sys.id": entryId,
-    include: "2"
-  });
-  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
-
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return null;
+  const env = cfg.environment || 'master';
+  const qs = new URLSearchParams({ access_token: cfg.accessToken, 'sys.id': entryId, include: '2' });
+  const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
   try {
-    const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
-    if (!response.ok) return null;
-    const payload = await response.json();
-    const entry = payload.items && payload.items[0];
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) return null;
+    const payload = await r.json();
+    const entry = payload.items?.[0];
     if (!entry) return null;
-    // Attach includes to the entry so callers can resolve linked assets
     entry._includes = payload.includes || {};
     return entry;
-  } catch (error) {
-    console.error("Failed to load entry by ID:", error);
+  } catch {
     return null;
   }
 }
+

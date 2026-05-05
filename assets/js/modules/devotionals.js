@@ -14,16 +14,19 @@ export async function initDevotionals() {
 
     const featuredGuide = publishedItems[0];
     const title = (featuredGuide.fields.title || "").trim();
-    const summaryRaw = featuredGuide.fields.descrition || featuredGuide.fields.body || "";
-    const summary = summaryRaw ? `${summaryRaw.slice(0, 120)}${summaryRaw.length > 120 ? "..." : ""}` : "Freshly published devotional guide from Freedom Life Church.";
+    const rawField = featuredGuide.fields.descrition || featuredGuide.fields.body || '';
+    const summaryText = typeof rawField === 'string' ? rawField : stripRichTextToPlain(rawField);
+    const summary = summaryText
+      ? summaryText.slice(0, 120) + (summaryText.length > 120 ? '...' : '')
+      : 'Freshly published devotional guide from Freedom Life Church.';
     const dateText = formatDateSafe(featuredGuide.fields.startDate);
-    const postPagePath = cfg.postPagePath || "pages/post.html";
+    const postPagePath = cfg.postPagePath || '/pages/post.html';
     const href = `${postPagePath}?entry=${encodeURIComponent(featuredGuide.sys.id)}`;
 
     const featuredDevotionalCard = document.querySelector('a[href="pages/devotionals.html"]');
     if (featuredDevotionalCard) {
       const titleEl = featuredDevotionalCard.querySelector('.text-flcNavy');
-      const descEl = featuredDevotionalCard.querySelector('.text-flcCharcoal/70');
+      const descEl = featuredDevotionalCard.querySelector('[class*="text-flcCharcoal"]');
       if (titleEl) titleEl.textContent = title;
       if (descEl) descEl.textContent = summary;
       featuredDevotionalCard.href = href;

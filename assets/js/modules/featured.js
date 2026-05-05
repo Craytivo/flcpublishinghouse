@@ -11,13 +11,7 @@ export async function initFeaturedPosts() {
     const cfg = window.FLC_CONTENTFUL || {};
     const contentfulData = await getLatestSermonEntries();
     
-    // Handle different possible data structures
-    let items = [];
-    if (Array.isArray(contentfulData)) {
-      items = contentfulData;
-    } else if (contentfulData && contentfulData.items && Array.isArray(contentfulData.items)) {
-      items = contentfulData.items;
-    }
+    const items = contentfulData?.items || [];
     
     const topThree = items.filter((item) => item && item.fields && item.sys && item.sys.id).slice(0, 3);
     
@@ -30,7 +24,7 @@ export async function initFeaturedPosts() {
       return;
     }
 
-    const postPagePath = cfg.postPagePath || "pages/post.html";
+    const postPagePath = cfg.postPagePath || '/pages/post.html';
     grid.innerHTML = topThree.map((item, index) => renderPostCard(item, index, postPagePath)).join("");
   } catch (error) {
     console.error("Failed to load featured posts section:", error);
