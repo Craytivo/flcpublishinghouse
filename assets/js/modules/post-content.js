@@ -102,10 +102,34 @@ async function loadPost() {
       postDate.textContent = formatDateSafe(entry.fields.date);
     }
 
-    // Optional excerpt
+    // Optional excerpt - use description field if available, otherwise fall back to summary/body/content
     if (postExcerpt) {
-      const summaryRaw = entry.fields.summary || entry.fields.body || entry.fields.content || '';
-      const summary = summaryRaw ? stripRichTextToPlain(summaryRaw).slice(0, 200) + '...' : '';
+      let summary = '';
+      
+      // Try description field first
+      if (entry.fields.description) {
+        const descriptionRaw = entry.fields.description;
+        summary = descriptionRaw ? stripRichTextToPlain(descriptionRaw).slice(0, 200) + '...' : '';
+      } else {
+        // Fall back to summary/body/content, but strip headings
+        const summaryRaw = entry.fields.summary || entry.fields.body || entry.fields.content || '';
+        if (summaryRaw) {
+          let plainText = stripRichTextToPlain(summaryRaw);
+          // Strip headings (lines that are all caps or start with common heading patterns)
+          plainText = plainText.split('\n')
+            .filter(line => {
+              const trimmed = line.trim();
+              // Filter out lines that are all caps, very short, or common heading patterns
+              return trimmed.length > 10 && 
+                     trimmed !== trimmed.toUpperCase() &&
+                     !trimmed.match(/^(scripture|passage|reference|text|verse|reading)$/i);
+            })
+            .join(' ')
+            .trim();
+          summary = plainText.slice(0, 200) + '...';
+        }
+      }
+      
       if (summary) {
         postExcerpt.textContent = summary;
       } else {
