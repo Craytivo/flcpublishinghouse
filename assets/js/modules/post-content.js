@@ -114,21 +114,32 @@ async function loadPost() {
     }
 
     // Determine content type to set appropriate CTA
+    // Don't use 'speaker' in isSermon - devotional guides also have speakers
     const isDevotionalGuide = entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide;
-    const isSermon = entry.fields.speaker || entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon;
+    const isSermon = !isDevotionalGuide && (entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon);
 
-    // Display pastor/preacher for sermons
-    if (postPastor && isSermon) {
-      const pastor = entry.fields.speaker || entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || '';
-      if (pastor) {
-        postPastor.textContent = pastor;
+    // Display pastor/preacher for sermons only (not devotional guides)
+    if (postPastor) {
+      if (isSermon) {
+        const pastor = entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || '';
+        if (pastor) {
+          postPastor.textContent = pastor;
+        } else {
+          postPastor.style.display = 'none';
+          const sep = document.getElementById('metaSeparator');
+          if (sep) sep.style.display = 'none';
+        }
+      } else {
+        postPastor.style.display = 'none';
+        const sep = document.getElementById('metaSeparator');
+        if (sep) sep.style.display = 'none';
       }
     }
 
     // Display date if available and not a date-range content
     if (postDate && entry.fields.date && !hasDateRange) {
       postDate.textContent = formatDateSafe(entry.fields.date);
-    } else if (postDate && hasDateRange) {
+    } else if (postDate) {
       postDate.style.display = 'none';
     }
     
