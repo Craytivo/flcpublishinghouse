@@ -38,19 +38,28 @@ function initMobileSidebar() {
   });
 }
 
-// Calculate reading time based on word count
 function calculateReadingTime(text) {
   if (!text) return '--';
-  
-  // Strip HTML tags to get plain text
   const plainText = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
   const wordCount = plainText.split(' ').length;
-  
-  // Average reading speed: 200-250 words per minute
-  const wordsPerMinute = 225;
-  const minutes = Math.ceil(wordCount / wordsPerMinute);
-  
+  const minutes = Math.ceil(wordCount / 225);
   return `${minutes} min`;
+}
+
+function updateReadingStats(plainText) {
+  const clean = plainText.replace(/\s+/g, ' ').trim();
+  const wordCount = clean.split(' ').length;
+  const readingTime = `${Math.ceil(wordCount / 225)} min`;
+  const wordCountStr = wordCount.toLocaleString() + ' words';
+
+  ['readingTime', 'mobileReadingTime'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = readingTime;
+  });
+  ['wordCount', 'mobileWordCount'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = wordCountStr;
+  });
 }
 
 async function loadPost() {
@@ -259,74 +268,16 @@ async function loadPost() {
 
     if (postBody) {
       const bodyField = entry.fields.content || entry.fields.body || entry.fields.summary || '';
-      
-      // If the body field is an object (rich text), convert it to HTML
+
       if (bodyField && typeof bodyField === 'object' && bodyField.nodeType) {
-        // Rich text object - render as HTML
         const bodyHtml = renderRichText(bodyField);
         postBody.innerHTML = bodyHtml || 'No content available.';
-        
-        // Calculate and display reading time
-        const readingTimeElement = document.getElementById('readingTime');
-        if (readingTimeElement) {
-          readingTimeElement.textContent = calculateReadingTime(bodyHtml);
-        }
-        
-        // Calculate and display word count
-        const wordCountElement = document.getElementById('wordCount');
-        if (wordCountElement) {
-          const plainText = bodyHtml.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-          const wordCount = plainText.split(' ').length;
-          wordCountElement.textContent = wordCount.toLocaleString() + ' words';
-        }
-        
-        // Sync mobile sidebar values
-        const mobileReadingTimeElement = document.getElementById('mobileReadingTime');
-        if (mobileReadingTimeElement) {
-          mobileReadingTimeElement.textContent = calculateReadingTime(bodyHtml);
-        }
-        
-        const mobileWordCountElement = document.getElementById('mobileWordCount');
-        if (mobileWordCountElement) {
-          const plainText = bodyHtml.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-          const wordCount = plainText.split(' ').length;
-          mobileWordCountElement.textContent = wordCount.toLocaleString() + ' words';
-        }
-      } else if (typeof bodyField === 'string') {
-        // Plain text - parse as markdown if marked is available
-        if (typeof marked !== 'undefined') {
-          postBody.innerHTML = marked.parse(bodyField);
-        } else {
-          // Fallback to basic paragraph formatting
-          postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
-        }
-        
-        // Calculate and display reading time
-        const readingTimeElement = document.getElementById('readingTime');
-        if (readingTimeElement) {
-          readingTimeElement.textContent = calculateReadingTime(bodyField);
-        }
-        
-        // Calculate and display word count
-        const wordCountElement = document.getElementById('wordCount');
-        if (wordCountElement) {
-          const plainText = bodyField.replace(/\s+/g, ' ').trim();
-          const wordCount = plainText.split(' ').length;
-          wordCountElement.textContent = wordCount.toLocaleString() + ' words';
-        }
-        
-        // Sync mobile sidebar values
-        const mobileReadingTimeElement = document.getElementById('mobileReadingTime');
-        if (mobileReadingTimeElement) {
-          mobileReadingTimeElement.textContent = calculateReadingTime(bodyField);
-        }
-        
-        const mobileWordCountElement = document.getElementById('mobileWordCount');
-        if (mobileWordCountElement) {
-          const plainText = bodyField.replace(/\s+/g, ' ').trim();
-          const wordCount = plainText.split(' ').length;
-          mobileWordCountElement.textContent = wordCount.toLocaleString() + ' words';
-        }
+        updateReadingStats(bodyHtml.replace(/<[^>]*>/g, ' '));
+      } else if (typeof bodyField === 'string' && bodyField.trim()) {
+        postBody.innerHTML = typeof marked !== 'undefined'
+          ? marked.parse(bodyField)
+          : `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
+        updateReadingStats(bodyField);
       } else {
         postBody.innerHTML = 'No content available.';
       }
