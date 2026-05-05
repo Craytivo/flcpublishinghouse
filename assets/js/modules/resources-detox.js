@@ -90,7 +90,7 @@ export async function initResourcesDetox() {
         id: item.sys.id,
         weekNumber: parseWeekNumber(item.fields),
         title: typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled',
-        url: `${cfg.postPagePath || '../pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
+        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
         fields: item.fields
       }))
       .sort((a, b) => {
@@ -105,7 +105,7 @@ export async function initResourcesDetox() {
       }
 
       if (detoxLinks) {
-        const overview = `<a href="../pages/spiritual-detox.html" class="download-btn">Series Overview</a>`;
+        const overview = `<a href="/pages/spiritual-detox.html" class="download-btn">Series Overview</a>`;
         const weekLinks = weeks.map((week, idx) => {
           const labelWeek = Number.isFinite(week.weekNumber) ? week.weekNumber : (idx + 1);
           return `<a href="${week.url}" class="download-btn">Week ${labelWeek}</a>`;
@@ -138,7 +138,7 @@ export async function initResourcesDetox() {
         const title = book.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const author = (book.author || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const sourceTitle = (book.sourceTitle || 'Spiritual Detox').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        const sourceUrl = book.sourceUrl || '../pages/spiritual-detox.html';
+        const sourceUrl = book.sourceUrl || '/pages/spiritual-detox.html';
         const rowMeta = author
           ? `${author} &middot; From <a href="${sourceUrl}" class="book-source">${sourceTitle}</a>`
           : `From <a href="${sourceUrl}" class="book-source">${sourceTitle}</a>`;

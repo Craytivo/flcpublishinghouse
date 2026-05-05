@@ -17,17 +17,11 @@ export async function initResourcesSermons() {
       .filter((item) => item && item.fields && item.sys)
       .map((item) => ({
         title: (item.fields.title || 'Untitled Sermon').trim(),
-        url: `${cfg.postPagePath || '../pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`
+        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`
       }))
       .filter((item) => item.title && item.url);
 
     if (sermons.length) {
-      if (sermonLinks) {
-        sermonLinks.innerHTML = sermons.map((sermon) => {
-          return `<a href="${sermon.url}" class="download-btn">${sermon.title}</a>`;
-        }).join('');
-      }
-
       if (sermonCount) {
         const suffix = sermons.length === 1 ? 'message' : 'messages';
         sermonCount.textContent = `${sermons.length} ${suffix}`;

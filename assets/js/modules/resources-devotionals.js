@@ -19,7 +19,7 @@ export async function initResourcesDevotionals() {
         title: typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled',
         slug: item.fields.slug || '',
         date: item.fields.startDate || '',
-        url: `${cfg.postPagePath || '../pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
+        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
         fields: item.fields
       }));
 
