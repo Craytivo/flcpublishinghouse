@@ -27,28 +27,29 @@ export function initLenis() {
   // requestAnimationFrame(raf);
 }
 
-// Text reveal animation (staggered character reveal)
+// Text reveal animation (staggered character reveal) - disabled for now
 export function initTextReveal(element) {
   if (!element) return;
   
-  const text = element.textContent;
-  const words = text.split(' ');
-  
-  element.innerHTML = words.map((word, wordIndex) => {
-    const letters = word.split('').map((letter, letterIndex) => {
-      return `<span class="hero-letter" style="transition-delay: ${wordIndex * 50 + letterIndex * 30}ms; opacity: 0; transform: translateY(100%); display: inline-block;">${letter}</span>`;
-    }).join('');
-    return `<span class="hero-word" style="display: inline-block; margin-right: 0.2em;">${letters}</span>`;
-  }).join('');
+  // Temporarily disabled to ensure title visibility
+  // const text = element.textContent;
+  // const words = text.split(' ');
+  // 
+  // element.innerHTML = words.map((word, wordIndex) => {
+  //   const letters = word.split('').map((letter, letterIndex) => {
+  //     return `<span class="hero-letter" style="transition-delay: ${wordIndex * 50 + letterIndex * 30}ms; opacity: 0; transform: translateY(100%); display: inline-block;">${letter}</span>`;
+  //   }).join('');
+  //   return `<span class="hero-word" style="display: inline-block; margin-right: 0.2em;">${letters}</span>`;
+  // }).join('');
 
   // Trigger animation after a short delay
-  setTimeout(() => {
-    const letters = element.querySelectorAll('.hero-letter');
-    letters.forEach(letter => {
-      letter.style.opacity = '1';
-      letter.style.transform = 'translateY(0)';
-    });
-  }, 100);
+  // setTimeout(() => {
+  //   const letters = element.querySelectorAll('.hero-letter');
+  //   letters.forEach(letter => {
+  //     letter.style.opacity = '1';
+  //     letter.style.transform = 'translateY(0)';
+  //   });
+  // }, 100);
 }
 
 // Magnetic effect for interactive elements
@@ -78,41 +79,42 @@ export function initMagneticEffect(element, strength = 0.3) {
   magneticElements.push(element);
 }
 
-// Scroll-based animations
+// Scroll-based animations - disabled for now
 export function initScrollAnimations() {
-  const heroTitle = document.getElementById('postTitle');
-  const heroExcerpt = document.getElementById('postExcerpt');
-  const heroImage = document.getElementById('heroImage');
-  const metaLine = document.getElementById('postPastor')?.parentElement;
-  
-  window.addEventListener('scroll', () => {
-    scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    
-    // Fade out title on scroll
-    if (heroTitle) {
-      const opacity = Math.max(0, 1 - scrollProgress * 2);
-      const translateY = scrollProgress * 50;
-      heroTitle.style.opacity = opacity;
-      heroTitle.style.transform = `translateY(${translateY}px)`;
-    }
-    
-    // Parallax effect on hero image
-    if (heroImage) {
-      const parallaxY = scrollProgress * 30;
-      heroImage.style.transform = `translateY(${parallaxY}px)`;
-    }
-    
-    // Reveal excerpt on scroll
-    if (heroExcerpt && scrollProgress > 0.1) {
-      heroExcerpt.style.opacity = Math.min(1, (scrollProgress - 0.1) * 3);
-    }
-    
-    // Animate meta line on scroll
-    if (metaLine && scrollProgress < 0.5) {
-      const metaOpacity = Math.max(0, 1 - scrollProgress * 2);
-      metaLine.style.opacity = metaOpacity;
-    }
-  });
+  // Temporarily disabled to ensure title visibility
+  // const heroTitle = document.getElementById('postTitle');
+  // const heroExcerpt = document.getElementById('postExcerpt');
+  // const heroImage = document.getElementById('heroImage');
+  // const metaLine = document.getElementById('postPastor')?.parentElement;
+  // 
+  // window.addEventListener('scroll', () => {
+  //   scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  //   
+  //   // Fade out title on scroll
+  //   if (heroTitle) {
+  //     const opacity = Math.max(0, 1 - scrollProgress * 2);
+  //     const translateY = scrollProgress * 50;
+  //     heroTitle.style.opacity = opacity;
+  //     heroTitle.style.transform = `translateY(${translateY}px)`;
+  //   }
+  //   
+  //   // Parallax effect on hero image
+  //   if (heroImage) {
+  //     const parallaxY = scrollProgress * 30;
+  //     heroImage.style.transform = `translateY(${parallaxY}px)`;
+  //   }
+  //   
+  //   // Reveal excerpt on scroll
+  //   if (heroExcerpt && scrollProgress > 0.1) {
+  //     heroExcerpt.style.opacity = Math.min(1, (scrollProgress - 0.1) * 3);
+  //   }
+  //   
+  //   // Animate meta line on scroll
+  //   if (metaLine && scrollProgress < 0.5) {
+  //     const metaOpacity = Math.max(0, 1 - scrollProgress * 2);
+  //     metaLine.style.opacity = metaOpacity;
+  //   }
+  // });
 }
 
 // Subtle particle effect (lightweight canvas)
