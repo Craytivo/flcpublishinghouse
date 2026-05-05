@@ -173,7 +173,8 @@ async function loadPost() {
       // Try description field first (note: Contentful has typo "descrition")
       if (entry.fields.descrition) {
         const descriptionRaw = entry.fields.descrition;
-        summary = descriptionRaw ? stripRichTextToPlain(descriptionRaw).slice(0, 200) + '...' : '';
+        const descPlain = descriptionRaw ? stripRichTextToPlain(descriptionRaw).trim() : '';
+        summary = descPlain.length > 0 ? descPlain.slice(0, 200) + (descPlain.length > 200 ? '...' : '') : '';
       } else {
         // Fall back to summary/body/content, but strip headings
         const summaryRaw = entry.fields.summary || entry.fields.body || entry.fields.content || '';
@@ -190,7 +191,7 @@ async function loadPost() {
             })
             .join(' ')
             .trim();
-          summary = plainText.slice(0, 200) + '...';
+          summary = plainText.length > 0 ? plainText.slice(0, 200) + (plainText.length > 200 ? '...' : '') : '';
         }
       }
       
