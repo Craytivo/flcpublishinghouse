@@ -306,11 +306,25 @@
       <!-- Sidebar (Fixed position on right, outside content flow) -->
       <aside class="hidden lg:block fixed right-8 top-24 w-72 z-50">
         <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px_rgba(26,58,82,0.04)]">
+          <!-- Section marker -->
+          <div class="mb-6">
+            <span class="text-[4rem] font-heading font-bold text-flcGold/5 leading-none block">03</span>
+          </div>
+          
+          <!-- Decorative line -->
+          <div class="w-px h-12 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
+          
           <h3 class="font-heading text-sm font-bold text-flcNavy mb-6 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
           <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-4">
             <div id="sidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight transition-all duration-300" style="width: 0%"></div>
           </div>
-          <p class="text-xs text-flcCharcoal/60" id="sidebarProgressText">0% complete</p>
+          <p class="text-xs text-flcCharcoal/60 mb-8" id="sidebarProgressText">0% complete</p>
+          
+          <!-- Reading Time -->
+          <div class="pt-6 border-t border-flcBorder/40">
+            <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
+            <p class="text-2xl font-heading font-bold text-flcNavy" id="readingTime">-- min</p>
+          </div>
           
           <div class="mt-8 pt-6 border-t border-flcBorder/40">
             <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Share</h3>

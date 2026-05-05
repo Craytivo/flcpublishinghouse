@@ -13,6 +13,21 @@ export function initPostFeatures() {
   initNotes();
 }
 
+// Calculate reading time based on word count
+function calculateReadingTime(text) {
+  if (!text) return '--';
+  
+  // Strip HTML tags to get plain text
+  const plainText = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  const wordCount = plainText.split(' ').length;
+  
+  // Average reading speed: 200-250 words per minute
+  const wordsPerMinute = 225;
+  const minutes = Math.ceil(wordCount / wordsPerMinute);
+  
+  return `${minutes} min`;
+}
+
 async function loadPost() {
   const loadingState = document.getElementById('loadingState');
   const errorState = document.getElementById('errorState');
@@ -135,9 +150,21 @@ async function loadPost() {
         // Rich text object - render as HTML
         const bodyHtml = renderRichText(bodyField);
         postBody.innerHTML = bodyHtml || 'No content available.';
+        
+        // Calculate and display reading time
+        const readingTimeElement = document.getElementById('readingTime');
+        if (readingTimeElement) {
+          readingTimeElement.textContent = calculateReadingTime(bodyHtml);
+        }
       } else if (typeof bodyField === 'string') {
         // Plain text - preserve line breaks and basic formatting
         postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
+        
+        // Calculate and display reading time
+        const readingTimeElement = document.getElementById('readingTime');
+        if (readingTimeElement) {
+          readingTimeElement.textContent = calculateReadingTime(bodyField);
+        }
       } else {
         postBody.innerHTML = 'No content available.';
       }
