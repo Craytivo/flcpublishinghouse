@@ -306,50 +306,51 @@
       <!-- Sidebar (Fixed position on right, outside content flow) -->
   <aside class="hidden lg:block fixed right-8 top-24 w-72 z-50">
     <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px_rgba(26,58,82,0.04)]">
-      <!-- Book icon -->
-      <div class="mb-6">
-        <svg class="w-12 h-12 text-flcGold/30" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-        </svg>
+      <!-- Decorative line -->
+      <div class="w-px h-16 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
+      
+      <!-- Reading Progress -->
+      <h3 class="font-heading text-sm font-bold text-flcNavy mb-6 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
+      <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-4">
+        <div id="sidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight transition-all duration-300" style="width: 0%"></div>
+      </div>
+      <p class="text-xs text-flcCharcoal/60 mb-8" id="sidebarProgressText">0% complete</p>
+      
+      <!-- Reading Time -->
+      <div class="pt-6 border-t border-flcBorder/40 mb-6">
+        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
+        <p class="text-2xl font-heading font-bold text-flcNavy" id="readingTime">-- min</p>
       </div>
       
-      <!-- Decorative line -->
-      <div class="w-px h-12 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
-          
-          <h3 class="font-heading text-sm font-bold text-flcNavy mb-6 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
-          <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-4">
-            <div id="sidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight transition-all duration-300" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-flcCharcoal/60 mb-8" id="sidebarProgressText">0% complete</p>
-          
-          <!-- Reading Time -->
-          <div class="pt-6 border-t border-flcBorder/40">
-            <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
-            <p class="text-2xl font-heading font-bold text-flcNavy" id="readingTime">-- min</p>
-          </div>
-          
-          <div class="mt-8 pt-6 border-t border-flcBorder/40">
-            <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Share</h3>
-            <div class="flex gap-3">
-              <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
-                <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
-                </svg>
-              </button>
-              <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
-                <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71-.05-1.37-.21-1.95-.52v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 16.9 22 12 22 11.7 22 11.42 22 11.14 22 11.14 22 11.14 22 11.14 22c5.93 0 10.95-4.48 11.64-10.48.23-.7.35-1.44.35-2.2 0-.06 0-.12-.01-.18z"/>
-                </svg>
-              </button>
-              <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
-                <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-              </button>
-            </div>
-          </div>
+      <!-- Word Count -->
+      <div class="pt-6 border-t border-flcBorder/40 mb-6">
+        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
+        <p class="text-2xl font-heading font-bold text-flcNavy" id="wordCount">-- words</p>
+      </div>
+      
+      <!-- Share -->
+      <div class="mt-8 pt-6 border-t border-flcBorder/40">
+        <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Share</h3>
+        <div class="flex gap-3">
+          <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
+            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+            </svg>
+          </button>
+          <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
+            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71-.05-1.37-.21-1.95-.52v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 16.9 22 12 22 11.7 22 11.42 22 11.14 22 11.14 22 11.14 22 11.14 22c5.93 0 10.95-4.48 11.64-10.48.23-.7.35-1.44.35-2.2 0-.06 0-.12-.01-.18z"/>
+            </svg>
+          </button>
+          <button class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200">
+            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </button>
         </div>
-      </aside>
+      </div>
+    </div>
+  </aside>
 
       <!-- Recommended Posts -->
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 fade-in-up">

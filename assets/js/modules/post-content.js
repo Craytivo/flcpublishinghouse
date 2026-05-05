@@ -156,6 +156,14 @@ async function loadPost() {
         if (readingTimeElement) {
           readingTimeElement.textContent = calculateReadingTime(bodyHtml);
         }
+        
+        // Calculate and display word count
+        const wordCountElement = document.getElementById('wordCount');
+        if (wordCountElement) {
+          const plainText = bodyHtml.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+          const wordCount = plainText.split(' ').length;
+          wordCountElement.textContent = wordCount.toLocaleString() + ' words';
+        }
       } else if (typeof bodyField === 'string') {
         // Plain text - preserve line breaks and basic formatting
         postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
@@ -164,6 +172,14 @@ async function loadPost() {
         const readingTimeElement = document.getElementById('readingTime');
         if (readingTimeElement) {
           readingTimeElement.textContent = calculateReadingTime(bodyField);
+        }
+        
+        // Calculate and display word count
+        const wordCountElement = document.getElementById('wordCount');
+        if (wordCountElement) {
+          const plainText = bodyField.replace(/\s+/g, ' ').trim();
+          const wordCount = plainText.split(' ').length;
+          wordCountElement.textContent = wordCount.toLocaleString() + ' words';
         }
       } else {
         postBody.innerHTML = 'No content available.';
