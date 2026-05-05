@@ -69,6 +69,13 @@
       }
     }
 
+    /* Prevent scroll-to-top overlapping the mobile sidebar toggle (lg:hidden) */
+    @media (max-width: 1023px) {
+      #scrollTopBtn {
+        bottom: 5.5rem;
+      }
+    }
+
     .section-kicker {
       font-size: 0.75rem;
       font-weight: 600;
