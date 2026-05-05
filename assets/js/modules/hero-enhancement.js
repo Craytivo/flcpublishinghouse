@@ -181,21 +181,13 @@ export function initHeroEnhancements() {
   
   // Initialize text reveal for title
   const heroTitle = document.getElementById('postTitle');
-  if (heroTitle) {
-    initTextReveal(heroTitle);
-  }
-  
-  // Initialize magnetic effect for title
-  if (heroTitle) {
-    initMagneticEffect(heroTitle, 0.15);
-  }
   
   // Initialize scroll animations
   initScrollAnimations();
   
-  // Add gradient mask to title
+  // Add subtle gradient to title
   if (heroTitle) {
-    heroTitle.style.background = 'linear-gradient(135deg, #1A3A52 0%, #9A7B4F 100%)';
+    heroTitle.style.background = 'linear-gradient(135deg, #1A3A52 0%, #2C4F6A 100%)';
     heroTitle.style.webkitBackgroundClip = 'text';
     heroTitle.style.webkitTextFillColor = 'transparent';
     heroTitle.style.backgroundClip = 'text';
