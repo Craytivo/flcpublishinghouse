@@ -106,9 +106,9 @@ async function loadPost() {
     if (postExcerpt) {
       let summary = '';
       
-      // Try description field first
-      if (entry.fields.description) {
-        const descriptionRaw = entry.fields.description;
+      // Try description field first (note: Contentful has typo "descrition")
+      if (entry.fields.descrition) {
+        const descriptionRaw = entry.fields.descrition;
         summary = descriptionRaw ? stripRichTextToPlain(descriptionRaw).slice(0, 200) + '...' : '';
       } else {
         // Fall back to summary/body/content, but strip headings
@@ -228,8 +228,13 @@ async function loadPost() {
           mobileWordCountElement.textContent = wordCount.toLocaleString() + ' words';
         }
       } else if (typeof bodyField === 'string') {
-        // Plain text - preserve line breaks and basic formatting
-        postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
+        // Plain text - parse as markdown if marked is available
+        if (typeof marked !== 'undefined') {
+          postBody.innerHTML = marked.parse(bodyField);
+        } else {
+          // Fallback to basic paragraph formatting
+          postBody.innerHTML = `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
+        }
         
         // Calculate and display reading time
         const readingTimeElement = document.getElementById('readingTime');
