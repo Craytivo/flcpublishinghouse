@@ -204,7 +204,7 @@ async function loadPost() {
 
     // Display featured image if available (in hero)
     if (postImageContainer) {
-      const imageUrl = getImageUrl(entry, {}, 'image') || getImageUrl(entry, {}, 'featuredImage');
+      const imageUrl = getImageUrl(entry, entry._includes || {}, 'image') || getImageUrl(entry, entry._includes || {}, 'featuredImage');
       if (imageUrl) {
         if (heroImage) {
           heroImage.src = imageUrl;

@@ -10,7 +10,6 @@
 export function getImageUrl(entry, includes = {}, fieldName = 'image') {
   if (!entry || !entry.fields) return null;
   
-  // Check if the entry has the image field directly
   if (entry.fields[fieldName]) {
     const imageField = entry.fields[fieldName];
     
@@ -18,12 +17,25 @@ export function getImageUrl(entry, includes = {}, fieldName = 'image') {
     if (typeof imageField === 'string') {
       return imageField;
     }
+
+    // If the asset is already resolved inline (has file.url)
+    if (imageField && imageField.fields && imageField.fields.file && imageField.fields.file.url) {
+      return imageField.fields.file.url;
+    }
     
-    // If it's an object with sys (linked asset)
-    if (imageField && imageField.sys && imageField.sys.type === 'Asset' && imageField.sys.id) {
-      const asset = includes.Asset && includes.Asset[imageField.sys.id];
-      if (asset && asset.fields && asset.fields.file) {
-        return asset.fields.file.url;
+    // If it's a linked asset reference, resolve from includes
+    if (imageField && imageField.sys && (imageField.sys.type === 'Asset' || imageField.sys.linkType === 'Asset') && imageField.sys.id) {
+      const assets = includes.Asset;
+      if (Array.isArray(assets)) {
+        const asset = assets.find(a => a.sys && a.sys.id === imageField.sys.id);
+        if (asset && asset.fields && asset.fields.file) {
+          return asset.fields.file.url;
+        }
+      } else if (assets && assets[imageField.sys.id]) {
+        const asset = assets[imageField.sys.id];
+        if (asset && asset.fields && asset.fields.file) {
+          return asset.fields.file.url;
+        }
       }
     }
   }

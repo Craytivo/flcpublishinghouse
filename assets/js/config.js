@@ -8,7 +8,7 @@ const FLC_CONTENTFUL = {
   contentType: "blogPage",
   detoxContentType: "detoxPost",
   devotionalGuideContentType: "devotionalGuide",
-  postPagePath: "pages/post.html"
+  postPagePath: "/pages/post.html"
 };
 
 // Set on window for global access

@@ -120,16 +120,23 @@ export async function getEntryById(entryId) {
   }
 
   const env = cfg.environment || "master";
+  // Use collection endpoint with sys.id filter so includes (assets) are returned
   const params = new URLSearchParams({
-    access_token: cfg.accessToken
+    access_token: cfg.accessToken,
+    "sys.id": entryId,
+    include: "2"
   });
-  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries/${entryId}?${params.toString()}`;
+  const endpoint = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${params.toString()}`;
 
   try {
     const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
     if (!response.ok) return null;
     const payload = await response.json();
-    return payload;
+    const entry = payload.items && payload.items[0];
+    if (!entry) return null;
+    // Attach includes to the entry so callers can resolve linked assets
+    entry._includes = payload.includes || {};
+    return entry;
   } catch (error) {
     console.error("Failed to load entry by ID:", error);
     return null;
