@@ -1,0 +1,234 @@
+<!-- Sermon Page Template -->
+<!-- 
+  Usage: Copy this template for new sermon pages
+  Replace placeholder content with sermon-specific details
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SERMON_TITLE - FLC Publishing House</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            flcNavy: '#1A3A52',
+            flcGold: '#9A7B4F',
+            flcGoldLight: '#B8956A',
+            flcCharcoal: '#2C2C2C',
+            flcCream: '#F5F1E8',
+            flcOffWhite: '#FAFAF8',
+            flcBorder: '#E5E0D8',
+          },
+          boxShadow: {
+            premium:
+              '0 10px 40px rgba(26, 58, 82, 0.10), 0 4px 12px rgba(26, 58, 82, 0.06)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #1A3A52;
+      color: white;
+      padding: 8px 16px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Pattern Dots */
+    .pattern-dots {
+      background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Fade In Up Animation */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-up {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9A7B4F;
+    }
+
+    /* Reading Progress Bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #9A7B4F, #B8956A);
+      z-index: 9999;
+      transition: width 0.1s ease;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 3rem;
+      height: 3rem;
+      background: #1A3A52;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.2);
+    }
+
+    .scroll-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top-btn:hover {
+      background: #9A7B4F;
+      transform: translateY(-2px);
+    }
+
+    .note-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 1rem;
+      border: 1px solid #E5E0D8;
+      border-radius: 0.5rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      resize: vertical;
+    }
+
+    .note-textarea:focus {
+      outline: none;
+      border-color: #9A7B4F;
+    }
+  </style>
+<link rel="stylesheet" href="../assets/css/site-theme.css" />
+<link rel="stylesheet" href="../assets/css/sermon-page.css" />
+</head>
+
+<body class="text-flcCharcoal text-base lg:text-lg">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+  
+  <!-- Header Container -->
+  <div id="headerContainer"
+       data-config='{"currentPage":"sermons","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
+  
+  <!-- Load Header Component -->
+  <script src="../assets/js/components/header-component.js"></script>
+  
+  <script type="module" src="../assets/js/config.js"></script>
+  <script type="module" src="../assets/js/pages/SERMON_JS_FILENAME.js"></script>
+  
+  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <!-- Hero Section -->
+    <section class="pt-40 pb-12 sm:pt-48 sm:pb-16 lg:pt-56 lg:pb-20 bg-white pattern-dots fade-in-up">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="section-kicker mb-4">Sermon Notes</p>
+        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
+          SERMON_TITLE
+        </h1>
+        <p class="text-lg text-flcCharcoal/70 mb-4">
+          SERMON_SUBTITLE
+        </p>
+        <p class="text-sm text-flcCharcoal/60 mb-8">
+          SERMON_DATE
+        </p>
+      </div>
+    </section>
+
+    <!-- YouTube Video Embed (Optional) -->
+    <!-- Replace YOUTUBE_VIDEO_ID with the actual video ID from YouTube URL -->
+    <!-- Example: https://www.youtube.com/watch?v=kBFOH2pxS4A -> kBFOH2pxS4A -->
+    <!-- SERMON_YOUTUBE_VIDEO -->
+
+    <!-- Sermon Content -->
+    <article class="sermon-content fade-in-up">
+      <!-- SERMON_BODY_CONTENT -->
+      <!-- Use these classes for styling:
+           - .scripture-callout for scripture quotes
+           - .pull-quote for key quotes
+           - .key-point for important points
+           - .discussion-questions for reflection questions
+           - .section-divider for visual breaks
+      -->
+    </article>
+
+    <!-- Notes Section -->
+    <section class="mt-12 pt-8 border-t border-flcBorder fade-in-up">
+      <h2 class="font-heading text-2xl font-bold text-flcNavy mb-6">Your Notes</h2>
+      <textarea 
+        class="note-textarea" 
+        data-note="main"
+        placeholder="Take notes here... (Your notes are saved automatically)"
+      ></textarea>
+    </section>
+
+    <!-- Back to Sermons -->
+    <div class="mt-12 text-center fade-in-up">
+      <a href="../pages/sermons.html" class="inline-flex items-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to All Sermons
+      </a>
+    </div>
+  </main>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-top-btn" id="scrollTop">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </div>
+
+  <!-- Footer Container -->
+  <div id="footerContainer"
+       data-config='{"currentPage":"sermons","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
+  
+  <!-- Load Footer Component -->
+  <script src="../assets/js/components/footer-component.js"></script>
+  
+  <script src="../assets/js/lib/site-theme.js"></script>
+</body>
+</html>

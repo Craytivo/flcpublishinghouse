@@ -10,12 +10,16 @@ import { initForm } from './modules/form.js';
 
 // Initialize all modules when DOM is ready
 function initApp() {
-  initHero();
-  initFeaturedPosts();
-  initDevotionals();
-  initScrollAnimations();
-  initScrollTop();
-  initForm();
+  try {
+    initHero();
+    initFeaturedPosts();
+    initDevotionals();
+    initScrollAnimations();
+    initScrollTop();
+    initForm();
+  } catch (error) {
+    console.error('Error initializing app:', error);
+  }
 }
 
 if (document.readyState === 'loading') {

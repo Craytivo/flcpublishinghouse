@@ -186,141 +186,159 @@
   <script src="assets/js/components/header-component.js"></script>
 
   <main id="main-content" class="min-h-screen">
-    <section class="py-20 sm:py-24 lg:py-32 bg-white pattern-dots fade-in-up">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="overflow-hidden bg-white fade-in-up">
+      <div class="grid lg:grid-cols-[55fr_45fr] min-h-[80vh] items-stretch">
+
+        <!-- Left: editorial text -->
+        <div class="relative flex flex-col justify-center px-6 sm:px-10 lg:px-12 xl:px-16 py-16 lg:py-20">
+          <div class="absolute inset-0 pattern-dots opacity-25 pointer-events-none"></div>
+          <div class="relative z-10 max-w-2xl pr-4 lg:pr-8 lg:mx-auto">
+            <div class="w-10 h-px bg-flcGold mb-6"></div>
             <p class="section-kicker text-flcGold mb-4">Welcome to FLC Publishing House</p>
-            <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
-              Grow in faith with resources you can trust
+            <h1 class="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] text-flcNavy leading-[1.06] mb-6">
+              Grow in faith<br>with resources<br>you can trust
             </h1>
-            <p class="text-flcCharcoal/85 text-base sm:text-lg leading-relaxed mb-4">
+            <p class="text-flcCharcoal/80 text-base sm:text-lg leading-relaxed mb-4">
               Every sermon note, devotional, and guide is rooted in biblical truth—designed to help you teach, lead, and grow with confidence.
             </p>
-            <p class="text-sm text-flcCharcoal/70 mb-2">
+            <p class="text-sm text-flcCharcoal/70 mb-1">
               A ministry of
-              <a href="https://freedomlifechurch.ca/about/" target="_blank" rel="noopener noreferrer" class="font-semibold text-flcNavy hover:text-flcGold transition-colors underline underline-offset-2">
-                Freedom Life Church
-              </a>
+              <a href="https://freedomlifechurch.ca/about/" target="_blank" rel="noopener noreferrer" class="font-semibold text-flcNavy hover:text-flcGold transition-colors underline underline-offset-2">Freedom Life Church</a>
               &mdash; Edmonton, AB.
             </p>
             <p class="text-sm text-flcCharcoal/50 mb-8">New resources published weekly</p>
-            <div class="flex flex-col sm:flex-row gap-4">
-              <a href="pages/resources.html" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+            <div class="flex flex-wrap gap-3">
+              <a href="pages/resources.html" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg text-sm">
                 Browse Sermons
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </a>
-              <a href="pages/devotionals.html" class="inline-flex items-center justify-center px-6 py-3 bg-white text-flcNavy font-semibold rounded-xl border-2 border-flcNavy hover:border-flcGold hover:text-flcGold transition-all duration-300 transform hover:-translate-y-0.5">
+              <a href="pages/devotionals.html" class="inline-flex items-center justify-center px-6 py-3 bg-white text-flcNavy font-semibold rounded-xl border-2 border-flcNavy hover:border-flcGold hover:text-flcGold transition-all duration-300 transform hover:-translate-y-0.5 text-sm">
                 Start Devotional
               </a>
-              <a href="https://freedomlifechurch.ca/about/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 text-flcGold font-semibold text-sm hover:text-flcNavy transition-colors">
+              <a href="https://freedomlifechurch.ca/about/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-3 text-flcGold font-semibold text-sm hover:text-flcNavy transition-colors">
                 About FLC
                 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
               </a>
             </div>
           </div>
-          <div class="lg:order-last">
-            <div class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
-              <p class="text-xs font-semibold tracking-wide text-flcGold uppercase mb-2">Latest Resource</p>
-              <h3 id="aboutFeaturedTitle" class="font-heading text-xl text-flcNavy mb-2 skeleton h-6 w-3/4 rounded"></h3>
-              <p id="aboutFeaturedSummary" class="text-sm text-flcCharcoal/80 mb-4 line-clamp-3 skeleton h-16 rounded"></p>
-              <div class="flex gap-4 text-xs text-flcCharcoal/70 mb-4">
-                <span id="aboutFeaturedDate" class="skeleton h-4 w-16 rounded"></span> · <span id="aboutFeaturedPastor" class="skeleton h-4 w-20 rounded"></span>
+        </div>
+
+        <!-- Right: photo panel + frosted Latest Resource card -->
+        <div class="relative min-h-[420px] lg:min-h-0">
+          <img src="assets/images/its-time-to-cross-over.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" loading="eager">
+          <div class="absolute inset-0 bg-gradient-to-br from-flcNavy/55 via-flcNavy/45 to-flcNavyDark/70"></div>
+          <div class="hidden lg:block absolute inset-y-0 left-0 z-10" style="width:55%;background:linear-gradient(to right,white 0%,white 12%,rgba(255,255,255,0.55) 55%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 45%,transparent 78%);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 45%,transparent 78%);"></div>
+          <!-- Frosted card -->
+          <div class="absolute inset-x-6 bottom-8 z-20 lg:inset-x-8">
+            <div class="bg-white/12 backdrop-blur-md rounded-2xl border border-white/20 p-6 shadow-xl">
+              <p class="text-xs font-semibold tracking-[0.14em] uppercase mb-3" style="color:#D4A85C;">Latest Resource</p>
+              <h3 id="aboutFeaturedTitle" class="font-heading text-xl text-white mb-2 skeleton h-6 w-3/4 rounded"></h3>
+              <p id="aboutFeaturedSummary" class="text-sm text-white/75 mb-4 line-clamp-3 skeleton h-16 rounded"></p>
+              <div class="flex items-center gap-2 text-xs text-white/55 mb-4">
+                <span id="aboutFeaturedDate" class="skeleton h-4 w-16 rounded"></span>
+                <span>&middot;</span>
+                <span id="aboutFeaturedPastor" class="skeleton h-4 w-20 rounded"></span>
               </div>
-              <a id="aboutFeaturedLink" href="pages/resources.html" class="inline-flex items-center text-flcNavy font-semibold hover:text-flcGold text-sm transition-colors">
+              <a id="aboutFeaturedLink" href="pages/resources.html" class="inline-flex items-center px-4 py-2 bg-white text-flcNavy font-semibold text-sm rounded-xl hover:bg-flcGold hover:text-white transition-all duration-200 shadow-sm">
                 Read now
-                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="py-20 sm:py-24 lg:py-32 bg-flcCream/30 fade-in-up">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-8">
-          <p class="section-kicker text-flcGold mb-3">Start Here</p>
-          <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Find your path</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <a href="pages/devotionals.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
-            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-              </svg>
-            </div>
-            <h3 class="font-heading text-xl text-flcNavy mb-2">New to Bible Study</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Build a daily habit with guided devotionals designed for personal growth.</p>
-            <p class="text-xs text-flcCharcoal/60 mb-4">Perfect for beginners and families.</p>
-            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
-              Start devotionals
-              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-          <a href="pages/resources.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
-            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-              </svg>
-            </div>
-            <h3 class="font-heading text-xl text-flcNavy mb-2">Teaching or Leading</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Sermon notes and teaching guides for pastors and small group leaders.</p>
-            <p class="text-xs text-flcCharcoal/60 mb-4">Designed for ministry preparation.</p>
-            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
-              Browse sermon notes
-              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-          <a href="pages/resources.html" class="card-link block bg-white rounded-2xl border border-flcBorder p-8 shadow-soft hover:border-flcGold/50">
-            <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-            </div>
-            <h3 class="font-heading text-xl text-flcNavy mb-2">Need Materials</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Printable guides, handouts, and ministry-ready resource packs.</p>
-            <p class="text-xs text-flcCharcoal/60 mb-4">Ready for Sunday prep and classroom use.</p>
-            <span class="inline-flex items-center text-flcGold font-semibold text-sm">
-              Get downloads
-              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </span>
-          </a>
+      <!-- Stats strip -->
+      <div class="bg-flcNavy">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-wrap justify-center gap-5 sm:gap-10 text-sm">
+          <span class="text-white/70"><span class="font-bold text-flcGold">10+</span> Sermons</span>
+          <span class="text-white/30 hidden sm:inline" aria-hidden="true">&middot;</span>
+          <span class="text-white/70"><span class="font-bold text-flcGold">Weekly</span> Devotionals</span>
+          <span class="text-white/30 hidden sm:inline" aria-hidden="true">&middot;</span>
+          <span class="text-white/70"><span class="font-bold text-flcGold">3</span> Series</span>
+          <span class="text-white/30 hidden sm:inline" aria-hidden="true">&middot;</span>
+          <span class="text-white/70"><span class="font-bold text-flcGold">Free</span> to Access</span>
         </div>
       </div>
     </section>
 
-    <section id="categories" class="py-20 sm:py-24 bg-white fade-in-up">
+    <!-- ═══ SCRIPTURE BAND ═══ -->
+    <section class="bg-flcNavyDark py-16 sm:py-20">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="w-8 h-px bg-flcGold mx-auto mb-8"></div>
+        <blockquote class="font-heading text-2xl sm:text-3xl lg:text-4xl text-white leading-[1.35] italic mb-6">
+          &ldquo;Your word is a lamp for my feet, a light on my path.&rdquo;
+        </blockquote>
+        <p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase">Psalm 119:105</p>
+        <div class="w-8 h-px bg-flcGold mx-auto mt-8"></div>
+      </div>
+    </section>
+
+    <!-- ═══ START HERE (Browse by Category merged/removed) ═══ -->
+    <section class="py-20 sm:py-24 lg:py-32 bg-flcCream/30 fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-6 mb-10">
-          <div>
-            <p class="section-kicker text-flcGold">Browse by Category</p>
-            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Choose your next step</h2>
-          </div>
-          <a href="pages/resources.html" class="hidden sm:inline text-flcNavy font-medium hover:text-flcGold">View full library</a>
+        <div class="mb-10 sm:mb-12">
+          <p class="section-kicker text-flcGold mb-3">Start Here</p>
+          <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">Find your path</h2>
         </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
-            <h3 class="font-heading text-xl text-flcNavy mb-2">Sermon Notes</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Structured notes for teaching, reflection, and group discussion.</p>
-            <p class="text-xs text-flcCharcoal/60">Best for pastors and small-group leaders.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="pages/devotionals.html" class="card-link group block bg-white rounded-2xl border border-flcBorder overflow-hidden shadow-soft hover:border-flcGold/50">
+            <div class="h-1.5 bg-gradient-to-r from-flcGold to-flcGoldLight"></div>
+            <div class="p-8">
+              <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-5">
+                <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold tracking-[0.12em] uppercase text-flcGold mb-2">Devotionals</p>
+              <h3 class="font-heading text-2xl text-flcNavy mb-3">New to Bible Study</h3>
+              <p class="text-sm text-flcCharcoal/75 mb-5 leading-relaxed">Build a daily habit with guided devotionals designed for personal growth and family life.</p>
+              <span class="inline-flex items-center text-flcGold font-semibold text-sm">
+                Start devotionals
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </div>
           </a>
-          <a href="pages/devotionals.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
-            <h3 class="font-heading text-xl text-flcNavy mb-2">Devotionals</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Week-by-week devotional tracks for personal and team growth.</p>
-            <p class="text-xs text-flcCharcoal/60">Best for daily discipleship and family devotion.</p>
+          <a href="pages/resources.html" class="card-link group block bg-white rounded-2xl border border-flcBorder overflow-hidden shadow-soft hover:border-flcGold/50">
+            <div class="h-1.5 bg-gradient-to-r from-flcNavy to-flcNavyLight"></div>
+            <div class="p-8">
+              <div class="w-12 h-12 bg-flcNavy/10 rounded-full flex items-center justify-center mb-5">
+                <svg class="w-6 h-6 text-flcNavy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold tracking-[0.12em] uppercase text-flcNavy/50 mb-2">Sermon Notes</p>
+              <h3 class="font-heading text-2xl text-flcNavy mb-3">Teaching or Leading</h3>
+              <p class="text-sm text-flcCharcoal/75 mb-5 leading-relaxed">Sermon notes and teaching guides for pastors and small group leaders preparing for ministry.</p>
+              <span class="inline-flex items-center text-flcNavy font-semibold text-sm group-hover:text-flcGold transition-colors">
+                Browse sermon notes
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </div>
           </a>
-          <a href="pages/resources.html" class="card-link block bg-white border border-flcBorder rounded-2xl p-8 hover:shadow-soft">
-            <h3 class="font-heading text-xl text-flcNavy mb-2">Downloads</h3>
-            <p class="text-sm text-flcCharcoal/75 mb-4">Printable guides, handouts, and ministry-ready resource packs.</p>
-            <p class="text-xs text-flcCharcoal/60">Best for Sunday prep and classroom handouts.</p>
+          <a href="pages/resources.html" class="card-link group block bg-white rounded-2xl border border-flcBorder overflow-hidden shadow-soft hover:border-flcGold/50">
+            <div class="h-1.5 bg-gradient-to-r from-flcGoldLight to-flcGold/60"></div>
+            <div class="p-8">
+              <div class="w-12 h-12 bg-flcGold/10 rounded-full flex items-center justify-center mb-5">
+                <svg class="w-6 h-6 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold tracking-[0.12em] uppercase text-flcGold mb-2">Downloads</p>
+              <h3 class="font-heading text-2xl text-flcNavy mb-3">Need Materials</h3>
+              <p class="text-sm text-flcCharcoal/75 mb-5 leading-relaxed">Printable guides, handouts, and ministry-ready resource packs for Sunday prep and classroom use.</p>
+              <span class="inline-flex items-center text-flcGold font-semibold text-sm">
+                Get downloads
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </div>
           </a>
         </div>
-
-        <div class="mt-12 pt-8 border-t border-flcBorder flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+        <div class="mt-10 pt-8 border-t border-flcBorder flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
           <p class="text-sm text-flcCharcoal/70">
-            <span class="font-semibold text-flcNavy">Pastor-developed</span> • Used weekly at Freedom Life Church
+            <span class="font-semibold text-flcNavy">Pastor-developed</span> &bull; Used weekly at Freedom Life Church
           </p>
           <div class="flex items-center gap-2 text-xs text-flcCharcoal/60">
             <svg class="w-4 h-4 text-flcGold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
@@ -330,60 +348,97 @@
       </div>
     </section>
 
-    <section class="py-20 sm:py-24 bg-flcCream/30 pattern-lines fade-in-up">
+    <!-- ═══ FEATURED POSTS — editorial magazine grid ═══ -->
+    <section class="py-20 sm:py-24 bg-white fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-8">
-          <p class="section-kicker text-flcGold">Latest</p>
-          <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">New and featured this month</h2>
+        <div class="flex items-end justify-between gap-6 mb-10">
+          <div>
+            <p class="section-kicker text-flcGold mb-2">Latest</p>
+            <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy">New and featured</h2>
+          </div>
+          <a href="pages/resources.html" class="hidden sm:inline-flex items-center text-flcNavy font-medium hover:text-flcGold text-sm transition-colors">
+            View full library
+            <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
         </div>
-
         <div id="featuredPostsGrid" class="grid lg:grid-cols-3 gap-6">
-          <article class="lg:col-span-2 bg-white rounded-2xl border border-flcBorder p-8 shadow-soft">
-            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Featured</p>
-            <h3 class="font-heading text-2xl sm:text-3xl text-flcNavy mt-2 skeleton h-8 w-3/4 rounded"></h3>
-            <p class="mt-3 text-flcCharcoal/80 skeleton h-20 rounded"></p>
-            <p class="mt-3 text-sm text-flcCharcoal/70 skeleton h-5 w-32 rounded"></p>
-            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
+          <!-- Large featured card -->
+          <article class="lg:col-span-2 relative bg-white rounded-2xl border border-flcBorder overflow-hidden shadow-soft">
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-flcGold to-flcGoldLight"></div>
+            <div class="p-8 pl-10">
+              <p class="text-xs font-semibold tracking-[0.14em] text-flcGold uppercase mb-3">Featured</p>
+              <h3 class="font-heading text-2xl sm:text-3xl text-flcNavy leading-tight mb-3 skeleton h-8 w-3/4 rounded"></h3>
+              <p class="text-flcCharcoal/80 leading-relaxed mb-3 skeleton h-20 rounded"></p>
+              <p class="text-sm text-flcCharcoal/60 mb-5 skeleton h-5 w-32 rounded"></p>
+              <a href="pages/resources.html" class="inline-flex items-center px-5 py-2.5 bg-flcNavy text-white font-semibold text-sm rounded-xl hover:bg-flcGold transition-colors">
+                Read now
+                <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </article>
-          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
-            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
-            <h3 class="font-heading text-xl text-flcNavy mt-2 skeleton h-6 w-3/4 rounded"></h3>
-            <p class="mt-3 text-flcCharcoal/80 skeleton h-16 rounded"></p>
-            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
-          </article>
-          <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft">
-            <p class="text-xs font-semibold tracking-wide text-flcGold uppercase">Sermon</p>
-            <h3 class="font-heading text-xl text-flcNavy mt-2 skeleton h-6 w-3/4 rounded"></h3>
-            <p class="mt-3 text-flcCharcoal/80 skeleton h-16 rounded"></p>
-            <a href="pages/resources.html" class="inline-flex mt-5 text-flcNavy font-semibold hover:text-flcGold">Read now</a>
-          </article>
+          <!-- Stacked sidebar cards -->
+          <div class="flex flex-col gap-6">
+            <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft flex-1">
+              <p class="text-xs font-semibold tracking-[0.12em] text-flcGold uppercase mb-2">Sermon</p>
+              <h3 class="font-heading text-lg text-flcNavy mb-3 skeleton h-6 w-3/4 rounded"></h3>
+              <p class="text-sm text-flcCharcoal/75 mb-4 skeleton h-14 rounded"></p>
+              <a href="pages/resources.html" class="inline-flex items-center text-flcNavy font-semibold hover:text-flcGold text-sm transition-colors">
+                Read now
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+            <article class="bg-white rounded-2xl border border-flcBorder p-6 shadow-soft flex-1">
+              <p class="text-xs font-semibold tracking-[0.12em] text-flcGold uppercase mb-2">Sermon</p>
+              <h3 class="font-heading text-lg text-flcNavy mb-3 skeleton h-6 w-3/4 rounded"></h3>
+              <p class="text-sm text-flcCharcoal/75 mb-4 skeleton h-14 rounded"></p>
+              <a href="pages/resources.html" class="inline-flex items-center text-flcNavy font-semibold hover:text-flcGold text-sm transition-colors">
+                Read now
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </article>
+          </div>
+        </div>
+        <div class="mt-6 sm:hidden text-center">
+          <a href="pages/resources.html" class="text-flcNavy font-medium hover:text-flcGold text-sm transition-colors">View full library &rarr;</a>
         </div>
       </div>
     </section>
 
-    <section class="py-20 sm:py-24 bg-white fade-in-up">
+    <!-- ═══ SUBSCRIBE ═══ -->
+    <section class="py-20 sm:py-24 bg-flcCream/30 pattern-lines fade-in-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-start">
           <div>
             <p class="section-kicker text-flcGold mb-3">Stay Connected</p>
             <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy mb-4">Subscribe for updates</h2>
-            <p class="text-flcCharcoal/85 mb-4">
+            <p class="text-flcCharcoal/85 mb-6">
               Get notified when new sermon notes, devotionals, and ministry tools are published.
             </p>
+            <ul class="space-y-2.5">
+              <li class="flex items-center gap-2.5 text-sm text-flcCharcoal/75">
+                <svg class="w-4 h-4 text-flcGold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                New sermons and devotionals every week
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-flcCharcoal/75">
+                <svg class="w-4 h-4 text-flcGold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Free downloadable guides and study materials
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-flcCharcoal/75">
+                <svg class="w-4 h-4 text-flcGold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                No spam &mdash; only resources worth your time
+              </li>
+            </ul>
           </div>
-
-          <div class="bg-flcCream/30 rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft" id="subscribe">
+          <div class="bg-white rounded-2xl border border-flcBorder p-6 sm:p-8 shadow-soft" id="subscribe">
             <form id="subscriptionForm" action="https://formspree.io/f/xqayqokw" method="POST" class="space-y-4">
               <label class="block">
                 <span class="text-sm font-medium text-flcNavy">Name</span>
                 <input name="name" type="text" required class="mt-1 w-full rounded-xl border border-flcBorder px-4 py-3 focus:outline-none focus:ring-2 focus:ring-flcGold/35 bg-white" />
               </label>
-
               <label class="block">
                 <span class="text-sm font-medium text-flcNavy">Email</span>
                 <input name="email" type="email" required class="mt-1 w-full rounded-xl border border-flcBorder px-4 py-3 focus:outline-none focus:ring-2 focus:ring-flcGold/35 bg-white" />
               </label>
-
               <button type="submit" class="w-full rounded-xl bg-flcNavy text-white font-semibold py-3 hover:bg-flcGold transition-colors">
                 Subscribe
               </button>
@@ -393,6 +448,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">

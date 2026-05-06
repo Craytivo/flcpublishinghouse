@@ -112,29 +112,30 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            'heading': ['Playfair Display', 'serif'],
-            'sans': ['Inter', 'sans-serif']
+            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
+            body:    ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
           },
           colors: {
-            flcNavy: '#1A3A52',
-            flcGold: '#9A7B4F',
-            flcGoldLight: '#B8956A',
+            flcNavy:     '#1A3A52',
+            flcNavyDark: '#0F2838',
+            flcNavyLight:'#2A4A62',
+            flcGold:     '#9A7B4F',
+            flcGoldLight:'#B8956A',
             flcCharcoal: '#2C2C2C',
-            flcCream: '#F5F1E8',
+            flcCream:    '#F5F1E8',
             flcOffWhite: '#FAFAF8',
-            flcBorder: '#E5E0D8'
-          }
-        }
-      }
-    }
-  </script>
+            flcBorder:   '#E8E6E1',
+          },
+        },
+      },
+    };
   </script>
   <style>
     /* Page Transition Overlay */
@@ -611,7 +612,7 @@
        data-config='{"currentPage":"devotionals","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
   
   <!-- Load Header Component -->
-  <script src="../assets/js/header-component.js"></script>
+  <script src="../assets/js/components/header-component.js"></script>
 
   <!-- Main Content -->
   <main id="main-content" class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">

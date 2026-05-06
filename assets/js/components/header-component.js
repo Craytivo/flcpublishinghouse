@@ -158,21 +158,19 @@ function createHeader(config = {}) {
   const computedDetoxWeek2Path = withBase('pages/spiritual-detox-week2.html');
   const computedDetoxWeek3Path = withBase('pages/spiritual-detox-week3.html');
 
-  const computedDevotionalWeek1Path = withBase('devotionals-pages/devotional-week1-hope.html');
-  const computedDevotionalWeek2Path = withBase('devotionals-pages/devotional-week2-love.html');
-  const computedDevotionalWeek3Path = withBase('devotionals-pages/devotional-week3-peace.html');
-  const computedDevotionalWeek4Path = withBase('devotionals-pages/devotional-week4-joy.html');
-
+  const computedSermonsPath = withBase('pages/sermons.html');
   const computedSermon1Path = withBase('sermons/sermon-im-under-pressure.html');
   const computedSermon2Path = withBase('sermons/sermon-purpose-protected-me.html');
   const computedSermon3Path = withBase('sermons/sermon-when-compassion-costs-you-sleep.html');
 
   const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
   const computedResourcesBooksPath = `${computedResourcesPath}#books`;
+  const computedReadingLibraryPath = withBase('pages/reading-library.html');
   const computedPostPagePath = withBase('pages/post.html');
 
   const menu = [
     { label: 'Home', href: computedHomePath, key: 'home' },
+    { label: 'Sermons', href: computedSermonsPath, key: 'sermons' },
     {
       label: 'Resources',
       href: computedResourcesPath,
@@ -180,11 +178,10 @@ function createHeader(config = {}) {
       children: [
         { label: 'All Resources', href: computedResourcesPath },
         { label: 'Spiritual Detox', href: computedDetoxPath },
-        { label: 'Sermons', href: computedResourcesPath },
         { label: 'Devotionals', href: computedResourcesPath },
         { label: 'Devotional Guides', href: `${computedResourcesPath}#devotionalGuides` },
         { label: 'Bible Studies', href: computedResourcesPath },
-        { label: 'Books', href: computedResourcesPath }
+        { label: 'Books', href: computedReadingLibraryPath }
       ]
     },
     {
@@ -316,9 +313,12 @@ function createHeader(config = {}) {
           </a>
           
           <!-- Mobile/Tablet Menu Button -->
-          <button id="mobileMenuBtn" class="lg:hidden p-2 sm:p-2.5 text-flcNavy hover:text-flcGold hover:bg-flcGold/5 rounded-lg transition-all duration-200">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="w-6 h-6 transition-transform duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg class="w-6 h-6 absolute inset-0 transition-transform duration-200 opacity-0 rotate-90" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
         </div>
@@ -326,25 +326,25 @@ function createHeader(config = {}) {
     </div>
     
     <!-- Mobile/Tablet Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite backdrop-blur-lg max-h-[80vh] overflow-y-auto">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-1">
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl max-h-[85vh] overflow-y-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
         ${menu.map(renderMobileSection).join('')}
         
         <!-- Mobile-only Search & Subscribe -->
-        <div class="pt-2 space-y-2 md:hidden">
-          <div class="search-bar relative px-4 pb-2">
+        <div class="pt-4 mt-4 border-t border-flcBorder space-y-3 md:hidden">
+          <div class="search-bar relative">
             <input
               type="text"
               id="resourceSearchMobile"
-              placeholder="Search..."
-              class="w-full px-4 py-2.5 pl-10 rounded-lg border border-flcBorder bg-white focus:outline-none focus:border-flcGold text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
+              placeholder="Search resources..."
+              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
             />
             <div id="resourceSearchResultsMobile" class="search-results hidden"></div>
-            <svg class="absolute left-7 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <a href="#" class="flex items-center justify-center mx-4 py-3 bg-flcNavy text-white rounded-lg font-semibold hover:bg-flcGold transition-colors">
+          <a href="#" class="flex items-center justify-center w-full py-3.5 bg-flcNavy text-white rounded-xl font-semibold hover:bg-flcGold transition-colors duration-200">
             Subscribe
           </a>
         </div>
@@ -374,17 +374,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     headerContainer.innerHTML = isDevotional ? createDevotionalHeader(config) : createHeader(config);
     
-    // Initialize mobile menu toggle
+    // Initialize mobile menu toggle with icon animation
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
     
-    if (mobileMenuBtn && mobileMenu) {
+    if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
       mobileMenuBtn.addEventListener('click', function() {
+        const isOpen = !mobileMenu.classList.contains('hidden');
         mobileMenu.classList.toggle('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+        
+        if (isOpen) {
+          menuIcon.classList.remove('opacity-0', 'rotate-90');
+          closeIcon.classList.add('opacity-0', 'rotate-90');
+        } else {
+          menuIcon.classList.add('opacity-0', 'rotate-90');
+          closeIcon.classList.remove('opacity-0', 'rotate-90');
+        }
       });
       mobileMenu.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', function() {
           mobileMenu.classList.add('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          menuIcon.classList.remove('opacity-0', 'rotate-90');
+          closeIcon.classList.add('opacity-0', 'rotate-90');
         });
       });
     }
@@ -428,8 +443,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return `${root}/${clean}`;
     }
 
-    const computedResourcesPath = config.resourcesPath || withBase('pages/resources.html');
+    const computedSermonsPath = config.resourcesPath || withBase('pages/resources.html');
     const computedDetoxPath = withBase('pages/spiritual-detox.html');
+    const computedSermonsPagePath = withBase('pages/sermons.html');
     const computedDetoxWeek1Path = withBase('pages/spiritual-detox-week1.html');
     const computedDetoxWeek2Path = withBase('pages/spiritual-detox-week2.html');
     const computedDetoxWeek3Path = withBase('pages/spiritual-detox-week3.html');
@@ -441,12 +457,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const computedSermon2Path = withBase('sermons/sermon-purpose-protected-me.html');
     const computedSermon3Path = withBase('sermons/sermon-when-compassion-costs-you-sleep.html');
     const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
-    const computedResourcesBooksPath = `${computedResourcesPath}#books`;
+    const computedResourcesBooksPath = `${computedSermonsPath}#books`;
+    const computedReadingLibraryPath = withBase('pages/reading-library.html');
     const computedPostPagePath = withBase('pages/post.html');
 
     const searchIndex = [
-      { title: 'Resources Hub', type: 'Resources', href: computedResourcesPath, tags: ['resources', 'download', 'hub'] },
-      { title: 'Books (Resources)', type: 'Resources', href: computedResourcesBooksPath, tags: ['books', 'reading'] },
+      { title: 'Sermons', type: 'Sermons', href: computedSermonsPagePath, tags: ['sermons', 'teaching', 'notes'] },
+      { title: 'Resources Hub', type: 'Resources', href: computedSermonsPath, tags: ['resources', 'download', 'hub'] },
+      { title: 'Consecration Reading Library', type: 'Books', href: computedReadingLibraryPath, tags: ['books', 'reading', 'library', 'consecration'] },
       { title: 'Spiritual Detox — Overview', type: 'Spiritual Detox', href: computedDetoxPath, tags: ['detox', 'kingdom blueprint'] },
       { title: 'Spiritual Detox — Week 1', type: 'Spiritual Detox', href: computedDetoxWeek1Path, tags: ['detox', 'week 1'] },
       { title: 'Spiritual Detox — Week 2', type: 'Spiritual Detox', href: computedDetoxWeek2Path, tags: ['detox', 'week 2'] },
