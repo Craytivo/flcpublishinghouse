@@ -1,17 +1,35 @@
 // modules/sermons.js - Sermon loading logic for sermons page
 
 import { getLatestSermonEntries } from '../services/contentful.js';
-import { formatDateSafe, removeSkeleton } from '../utils/format.js';
+import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
-import { getImageUrl, getImageAltText, generateSrcset } from '../utils/images.js';
+import { getImageUrl, getImageAltText } from '../utils/images.js';
 import { slugify } from '../utils/slugify.js';
-
-const INITIAL_DISPLAY_COUNT = 6;
-const LOAD_MORE_COUNT = 6;
 
 let allSermons = [];
 let currentFilter = 'all';
-let displayedCount = INITIAL_DISPLAY_COUNT;
+
+// Helper function to escape HTML
+function esc(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Helper function for animated render
+function animatedRender(container, html) {
+  container.style.opacity = '0';
+  container.style.transform = 'translateY(10px)';
+  container.innerHTML = html;
+  setTimeout(() => {
+    container.style.opacity = '1';
+    container.style.transform = 'translateY(0)';
+  }, 120);
+}
 
 // Map of static sermon files
 const staticSermonMap = {
@@ -23,9 +41,11 @@ const staticSermonMap = {
 
 export async function initSermons() {
   const sermonGrid = document.getElementById('sermonGrid');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
   const sermonCount = document.getElementById('sermonCount');
-  const loadMoreContainer = document.getElementById('loadMoreContainer');
-  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const filterTabs = document.getElementById('filterTabs');
+  const sermonLabelText = document.getElementById('sermonLabelText');
 
   try {
     const cfg = window.FLC_CONTENTFUL || {};
@@ -60,19 +80,20 @@ export async function initSermons() {
     if (allSermons.length) {
       if (sermonCount) {
         const suffix = allSermons.length === 1 ? 'sermon' : 'sermons';
-        sermonCount.textContent = `${allSermons.length} ${suffix}`;
+        sermonCount.textContent = `Showing ${allSermons.length} ${suffix}`;
       }
 
-      renderSermons();
+      renderFilterTabs();
+      await renderSermons();
 
-      // Setup filter buttons
-      setupFilters();
-
-      // Setup load more button
-      if (loadMoreBtn && loadMoreContainer) {
-        loadMoreBtn.addEventListener('click', () => {
-          displayedCount += LOAD_MORE_COUNT;
-          renderSermons();
+      // Setup filter tabs
+      if (filterTabs) {
+        filterTabs.addEventListener('click', async e => {
+          const btn = e.target.closest('.filter-btn');
+          if (!btn) return;
+          currentFilter = btn.dataset.filter;
+          updateFilterBtnStyles(currentFilter);
+          await renderSermons();
         });
       }
     }
@@ -81,42 +102,37 @@ export async function initSermons() {
     if (sermonCount) {
       sermonCount.textContent = 'Failed to load sermons';
     }
+    // Hide loading state on error
+    if (loadingState) loadingState.classList.add('hidden');
   }
 }
 
-function setupFilters() {
-  const filterAll = document.getElementById('filterAll');
-  const filterNewest = document.getElementById('filterNewest');
-  const filterOldest = document.getElementById('filterOldest');
+function renderFilterTabs() {
+  const container = document.getElementById('filterTabs');
+  if (!container) return;
 
-  if (filterAll) {
-    filterAll.addEventListener('click', () => setFilter('all', filterAll, filterNewest, filterOldest));
-  }
-  if (filterNewest) {
-    filterNewest.addEventListener('click', () => setFilter('newest', filterAll, filterNewest, filterOldest));
-  }
-  if (filterOldest) {
-    filterOldest.addEventListener('click', () => setFilter('oldest', filterAll, filterNewest, filterOldest));
-  }
+  const filters = [
+    { label: 'All', value: 'all' },
+    { label: 'Newest', value: 'newest' },
+    { label: 'Oldest', value: 'oldest' }
+  ];
+
+  container.innerHTML = filters.map(f => 
+    `<button class="filter-btn" data-filter="${esc(f.value)}">${esc(f.label)}</button>`
+  ).join('');
+
+  updateFilterBtnStyles(currentFilter);
 }
 
-function setFilter(filter, allBtn, newestBtn, oldestBtn) {
-  currentFilter = filter;
-  displayedCount = INITIAL_DISPLAY_COUNT;
-
-  // Update button styles
-  if (allBtn && newestBtn && oldestBtn) {
-    [allBtn, newestBtn, oldestBtn].forEach(btn => {
-      btn.classList.remove('active', 'border-flcGold', 'bg-flcGold/10', 'text-flcGold');
-      btn.classList.add('border-flcBorder', 'text-flcCharcoal');
-    });
-
-    const activeBtn = filter === 'all' ? allBtn : filter === 'newest' ? newestBtn : oldestBtn;
-    activeBtn.classList.add('active', 'border-flcGold', 'bg-flcGold/10', 'text-flcGold');
-    activeBtn.classList.remove('border-flcBorder', 'text-flcCharcoal');
-  }
-
-  renderSermons();
+function updateFilterBtnStyles(activeFilter) {
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(btn => {
+    if (btn.dataset.filter === activeFilter) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
 }
 
 function getFilteredSermons() {
@@ -127,74 +143,114 @@ function getFilteredSermons() {
   } else if (currentFilter === 'oldest') {
     filtered.sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
   } else {
-    // Default sort by date descending
     filtered.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
   }
 
   return filtered;
 }
 
-function renderSermons() {
+async function renderSermons() {
   const sermonGrid = document.getElementById('sermonGrid');
-  const loadMoreContainer = document.getElementById('loadMoreContainer');
-  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const sermonLabelText = document.getElementById('sermonLabelText');
+  const sermonCount = document.getElementById('sermonCount');
 
   if (!sermonGrid) return;
 
-  const filtered = getFilteredSermons();
-  const toDisplay = filtered.slice(0, displayedCount);
+  // Show loading state
+  if (loadingState) loadingState.classList.remove('hidden');
+  if (sermonGrid) sermonGrid.classList.add('hidden');
+  if (emptyState) emptyState.classList.add('hidden');
 
-  sermonGrid.innerHTML = toDisplay.map((sermon) => {
-    const dateLabel = sermon.date ? formatDateSafe(sermon.date) : '';
-    const summaryText = sermon.summary || 'Teaching notes and sermon resources.';
-    
-    // Image HTML if available
-    let imageHtml = '';
-    if (sermon.image) {
-      const srcset = generateSrcset(sermon.image);
-      const altText = sermon.altText || sermon.title;
-      imageHtml = `
-        <div class="mb-4 aspect-video bg-flcCream rounded-lg overflow-hidden">
-          <img 
-            src="${sermon.image}" 
-            srcset="${srcset}"
-            sizes="(max-width: 640px) 400px, 800px"
-            alt="${altText}"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      `;
-    }
-    
-    return `
-      <a href="${sermon.url}" class="sermon-card p-6" aria-label="Open ${sermon.title} sermon">
-        ${imageHtml}
-        <div class="${sermon.image ? '' : 'mb-4'}">
-          ${dateLabel ? `<p class="text-sm text-flcGold font-semibold mb-2">${dateLabel}</p>` : ''}
-          <h3 class="font-heading text-lg font-bold text-flcNavy">${sermon.title}</h3>
-          <p class="mt-2 text-sm text-flcCharcoal/60">
-            ${summaryText}
-          </p>
-        </div>
-        <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
-          <span class="text-xs text-flcCharcoal/50">Teaching Notes</span>
-          <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
-        </div>
-      </a>
-    `;
-  }).join('');
-
-  // Remove skeleton loading state
-  removeSkeleton(sermonGrid);
-
-  // Show/hide load more button
-  if (loadMoreContainer && loadMoreBtn) {
-    if (displayedCount < filtered.length) {
-      loadMoreContainer.classList.remove('hidden');
-      loadMoreBtn.textContent = `Load More (${filtered.length - displayedCount} remaining)`;
+  // Update label text
+  if (sermonLabelText) {
+    if (currentFilter === 'all') {
+      sermonLabelText.textContent = 'All Sermons';
     } else {
-      loadMoreContainer.classList.add('hidden');
+      sermonLabelText.textContent = currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
     }
+  }
+
+  const filtered = getFilteredSermons();
+
+  // Hide loading state and show results
+  if (loadingState) loadingState.classList.add('hidden');
+  if (sermonGrid) sermonGrid.classList.remove('hidden');
+
+  if (filtered.length > 0) {
+    sermonGrid.classList.remove('hidden');
+    const cardHtmls = filtered.map(renderCard);
+    animatedRender(sermonGrid, cardHtmls.join(''));
+  } else {
+    sermonGrid.classList.add('hidden');
+    if (emptyState) emptyState.classList.remove('hidden');
+  }
+
+  if (sermonCount) {
+    const suffix = filtered.length === 1 ? 'sermon' : 'sermons';
+    sermonCount.textContent = `Showing ${filtered.length} ${suffix}`;
+  }
+}
+
+function renderCard(sermon) {
+  const cardId = `card-${sermon.id}`;
+  const dateLabel = sermon.date ? formatDateSafe(sermon.date) : '';
+  const summaryText = sermon.summary || 'Teaching notes and sermon resources.';
+  
+  return `
+    <article class="sermon-card bg-white rounded-xl overflow-hidden shadow-sm"
+             id="${esc(cardId)}"
+             tabindex="0"
+             role="button"
+             aria-expanded="false"
+             onkeydown="handleCardKeydown(event, '${esc(cardId)}')">
+      <button class="w-full text-left p-6 flex items-start gap-5 cursor-pointer hover:bg-flcOffWhite/50 transition-colors focus:outline-none focus:ring-2 focus:ring-flcGold/50 rounded-lg"
+              onclick="toggleCard('${esc(cardId)}')"
+              aria-label="Toggle details for ${esc(sermon.title)}">
+        <div class="flex-1 min-w-0">
+          ${dateLabel ? `<p class="text-xs font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full inline-block mb-2" style="background:rgba(154,123,79,0.10);color:#9A7B4F;">${esc(dateLabel)}</p>` : ''}
+          <h3 class="font-heading text-lg leading-snug text-flcNavy mb-1">${esc(sermon.title)}</h3>
+          <p class="text-sm" style="color:rgba(44,44,44,0.55);">Teaching Notes</p>
+        </div>
+        <svg class="expand-icon w-5 h-5 flex-shrink-0 mt-1" style="color:rgba(44,44,44,0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="sermon-details px-6 pb-6" role="region" aria-label="Sermon details">
+        <p class="text-sm leading-relaxed mb-4 mt-2" style="color:rgba(44,44,44,0.8);">${esc(summaryText)}</p>
+        <a href="${esc(sermon.url)}" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg transition-colors bg-flcNavy text-white hover:bg-flcGold">
+          View Sermon
+          <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </article>`;
+}
+
+function toggleCard(cardId) {
+  const card = document.getElementById(cardId);
+  if (!card) return;
+  const details = card.querySelector('.sermon-details');
+  const icon = card.querySelector('.expand-icon');
+  const isExpanded = card.classList.contains('expanded');
+  card.classList.toggle('expanded', !isExpanded);
+  details?.classList.toggle('open', !isExpanded);
+  icon?.classList.toggle('rotated', !isExpanded);
+  card.setAttribute('aria-expanded', !isExpanded);
+}
+
+function handleCardKeydown(event, cardId) {
+  switch (event.key) {
+    case 'Enter':
+    case ' ':
+      event.preventDefault();
+      toggleCard(cardId);
+      break;
+    case 'Escape':
+      const card = document.getElementById(cardId);
+      if (card && card.classList.contains('expanded')) {
+        toggleCard(cardId);
+      }
+      break;
   }
 }
