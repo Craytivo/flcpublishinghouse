@@ -4,6 +4,7 @@ import { getLatestSermonEntries } from '../services/contentful.js';
 import { escapeHTML } from '../utils/sanitize.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
+import { slugify } from '../utils/slugify.js';
 
 function buildCard(item, postPagePath) {
   const f = item.fields;
@@ -17,7 +18,8 @@ function buildCard(item, postPagePath) {
   const kicker = isDevotional ? 'Devotional Guide' : 'Sermon';
   const dateText = formatDateSafe(f.date || f.startDate);
   const byline = escapeHTML(f.pastor || f.pastorName || f.preacher || f.speaker || 'FLC Team');
-  const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+  const titleSlug = slugify(f.title || '');
+  const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
   return { title, summary, kicker, dateText, byline, href };
 }
 

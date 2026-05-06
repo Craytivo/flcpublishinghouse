@@ -3,6 +3,7 @@
 import { getDetoxEntries } from '../services/contentful.js';
 import { formatDateSafe, removeSkeleton } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
+import { slugify } from '../utils/slugify.js';
 
 function parseWeekNumber(fields) {
   if (!fields || typeof fields !== 'object') return NaN;
@@ -86,13 +87,17 @@ export async function initResourcesDetox() {
     if (!items.length) return;
 
     const weeks = items
-      .map((item) => ({
-        id: item.sys.id,
-        weekNumber: parseWeekNumber(item.fields),
-        title: typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled',
-        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
-        fields: item.fields
-      }))
+      .map((item) => {
+        const title = typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled';
+        const titleSlug = slugify(title);
+        return {
+          id: item.sys.id,
+          weekNumber: parseWeekNumber(item.fields),
+          title: title,
+          url: `${cfg.postPagePath || '/pages/post.html'}?title=${encodeURIComponent(titleSlug)}`,
+          fields: item.fields
+        };
+      })
       .sort((a, b) => {
         const aw = Number.isFinite(a.weekNumber) ? a.weekNumber : 999;
         const bw = Number.isFinite(b.weekNumber) ? b.weekNumber : 999;

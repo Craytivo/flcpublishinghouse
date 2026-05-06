@@ -86,3 +86,60 @@ export async function getEntryById(entryId) {
   }
 }
 
+/**
+ * Slugify a string for URL comparison
+ */
+function slugify(text) {
+  if (!text || typeof text !== 'string') return '';
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-{2,}/g, '-')
+    .replace(/^\-+|\-+$/g, '');
+}
+
+/**
+ * Search for an entry by slugified title
+ * Searches across all configured content types
+ */
+export async function getEntryByTitle(titleSlug) {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !titleSlug) return null;
+  
+  const env = cfg.environment || 'master';
+  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
+  
+  for (const contentType of types) {
+    const qs = new URLSearchParams({ 
+      access_token: cfg.accessToken, 
+      content_type: contentType,
+      limit: '100'
+    });
+    const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
+    
+    try {
+      const r = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!r.ok) continue;
+      const payload = await r.json();
+      const items = payload.items || [];
+      
+      // Find matching entry by comparing slugified titles
+      const match = items.find(item => {
+        const title = item?.fields?.title;
+        if (!title) return false;
+        return slugify(title) === titleSlug;
+      });
+      
+      if (match) {
+        match._includes = payload.includes || {};
+        return match;
+      }
+    } catch {
+      continue;
+    }
+  }
+  
+  return null;
+}

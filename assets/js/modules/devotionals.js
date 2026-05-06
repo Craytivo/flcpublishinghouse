@@ -3,6 +3,7 @@
 import { getDevotionalGuideEntries } from '../services/contentful.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
+import { slugify } from '../utils/slugify.js';
 
 export async function initDevotionals() {
   try {
@@ -21,7 +22,8 @@ export async function initDevotionals() {
       : 'Freshly published devotional guide from Freedom Life Church.';
     const dateText = formatDateSafe(featuredGuide.fields.startDate);
     const postPagePath = cfg.postPagePath || '/pages/post.html';
-    const href = `${postPagePath}?entry=${encodeURIComponent(featuredGuide.sys.id)}`;
+    const titleSlug = slugify(title);
+    const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
 
     const featuredDevotionalCard = document.querySelector('a[href="pages/devotionals.html"]');
     if (featuredDevotionalCard) {

@@ -4,6 +4,7 @@ import { getLatestSermonEntries } from '../services/contentful.js';
 import { formatDateSafe, removeSkeleton } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText, generateSrcset } from '../utils/images.js';
+import { slugify } from '../utils/slugify.js';
 
 const INITIAL_DISPLAY_COUNT = 6;
 const LOAD_MORE_COUNT = 6;
@@ -39,13 +40,14 @@ export async function initSermons() {
           const title = (item.fields.title || 'Untitled Sermon').trim();
           const postPagePath = cfg.postPagePath || 'post.html';
           const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
+          const titleSlug = slugify(title);
           
           return {
             id: item.sys.id,
             title: title,
             summary: stripRichTextToPlain(item.fields.summary || ''),
             date: item.fields.date || '',
-            url: `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`,
+            url: `${postPagePath}?title=${encodeURIComponent(titleSlug)}`,
             image: imageUrl,
             altText: getImageAltText(item, 'image') || getImageAltText(item, 'featuredImage')
           };

@@ -3,6 +3,7 @@
 import { getLatestAnyEntry } from '../services/contentful.js';
 import { removeSkeleton, formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
+import { slugify } from '../utils/slugify.js';
 
 export async function initHero() {
   try {
@@ -29,7 +30,8 @@ export async function initHero() {
     const title = (f.title || 'Untitled').trim();
     const dateLabel = formatDateSafe(f.date || f.startDate);
     const byline = f.pastor || f.pastorName || f.preacher || f.speaker || '';
-    const href = `${postPagePath}?entry=${encodeURIComponent(entry.sys.id)}`;
+    const titleSlug = slugify(title);
+    const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
 
     const els = {
       title: document.getElementById('aboutFeaturedTitle'),

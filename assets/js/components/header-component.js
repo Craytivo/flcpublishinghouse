@@ -570,6 +570,17 @@ document.addEventListener('DOMContentLoaded', function() {
         .replace(/'/g, '&#39;');
     }
 
+    function slugify(text) {
+      if (!text || typeof text !== 'string') return '';
+      return text
+        .toLowerCase()
+        .trim()
+        .replace(/[\s_]+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-{2,}/g, '-')
+        .replace(/^\-+|\-+$/g, '');
+    }
+
     async function loadHeaderSuggestedPosts() {
       const desktopTarget = document.getElementById('headerSuggestedPostsDesktop');
       const mobileTarget = document.getElementById('headerSuggestedPostsMobile');
@@ -626,7 +637,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const renderHtml = top.map((item) => {
           const title = escapeHtml(String(item.fields.title).trim());
           const dateLabel = formatDateLabel(item.fields.date || item.fields.startDate);
-          const href = `${computedPostPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+          const titleSlug = slugify(item.fields.title || '');
+          const href = `${computedPostPagePath}?title=${encodeURIComponent(titleSlug)}`;
           return `
             <a href="${href}" class="block rounded-md px-2 py-1.5 hover:bg-flcGold/5 transition-colors">
               <span class="block text-xs font-medium text-flcNavy leading-snug">${title}</span>

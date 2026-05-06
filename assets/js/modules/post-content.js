@@ -1,12 +1,13 @@
 // modules/post-content.js - Contentful post loading logic for post page
 
-import { getEntryById } from '../services/contentful.js';
+import { getEntryById, getEntryByTitle } from '../services/contentful.js';
 import { getLatestSermonEntries } from '../services/contentful.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText, generateSrcset } from '../utils/images.js';
 import { renderRichText } from '../utils/richTextRenderer.js';
 import { initHeroEnhancements } from './hero-enhancement.js';
+import { slugify } from '../utils/slugify.js';
 
 export function initPostFeatures() {
   loadPost();
@@ -76,17 +77,20 @@ async function loadPost() {
 
   if (!loadingState || !errorState || !postContent) return;
 
-  // Get entry ID from URL
+  // Get entry title from URL (fallback to entry ID for backward compatibility)
   const urlParams = new URLSearchParams(window.location.search);
+  const titleSlug = urlParams.get('title');
   const entryId = urlParams.get('entry');
 
-  if (!entryId) {
+  if (!titleSlug && !entryId) {
     showError();
     return;
   }
 
   try {
-    const entry = await getEntryById(entryId);
+    const entry = titleSlug 
+      ? await getEntryByTitle(titleSlug)
+      : await getEntryById(entryId);
 
     if (!entry || !entry.fields) {
       showError();
@@ -322,7 +326,7 @@ async function loadPost() {
     }
 
     // Load recommended posts
-    loadRecommendedPosts(entryId);
+    loadRecommendedPosts(entry.sys.id, entry.fields.title);
 
     // Initialize sidebar progress
     initSidebarProgress();
@@ -379,7 +383,7 @@ function showError() {
   if (errorState) errorState.classList.remove('hidden');
 }
 
-async function loadRecommendedPosts(currentEntryId) {
+async function loadRecommendedPosts(currentEntryId, currentTitle) {
   const sidebarRecommended = document.getElementById('sidebarRecommendedPosts');
   if (!sidebarRecommended) return;
 
@@ -405,7 +409,8 @@ async function loadRecommendedPosts(currentEntryId) {
       const summaryRaw = item.fields.body || item.fields.content || item.fields.summary || '';
       const summary = summaryRaw ? stripRichTextToPlain(summaryRaw).slice(0, 60) + '...' : '';
       const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
-      const href = `${postPagePath}?entry=${encodeURIComponent(item.sys.id)}`;
+      const titleSlug = slugify(title);
+      const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
 
       const postHtml = `
         <a href="${href}" class="block group">
@@ -452,14 +457,16 @@ function initNotes() {
   const textareas = document.querySelectorAll('.note-textarea');
   if (!textareas.length) return;
 
-  // Get entry ID for note storage
+  // Get entry ID or title for note storage
   const urlParams = new URLSearchParams(window.location.search);
-  const entryId = urlParams.get('entry') || 'default';
+  const titleSlug = urlParams.get('title');
+  const entryId = urlParams.get('entry');
+  const storageKey = titleSlug || entryId || 'default';
 
   // Load saved notes
   textareas.forEach(textarea => {
     const noteId = textarea.getAttribute('data-note');
-    const savedNote = localStorage.getItem(`post-${entryId}-${noteId}`);
+    const savedNote = localStorage.getItem(`post-${storageKey}-${noteId}`);
     if (savedNote) {
       textarea.value = savedNote;
     }
@@ -469,7 +476,7 @@ function initNotes() {
   textareas.forEach(textarea => {
     textarea.addEventListener('input', function() {
       const noteId = this.getAttribute('data-note');
-      localStorage.setItem(`post-${entryId}-${noteId}`, this.value);
+      localStorage.setItem(`post-${storageKey}-${noteId}`, this.value);
     });
   });
 }

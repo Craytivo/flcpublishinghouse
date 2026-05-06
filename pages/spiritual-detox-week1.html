@@ -103,7 +103,8 @@
         }
 
         if (matched && matched.sys && matched.sys.id) {
-          const href = `${cfg.postPagePath}?entry=${encodeURIComponent(matched.sys.id)}`;
+          const titleSlug = (matched.fields.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+          const href = `${cfg.postPagePath}?title=${encodeURIComponent(titleSlug)}`;
           window.location.replace(href);
           return;
         }

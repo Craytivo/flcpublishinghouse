@@ -1,6 +1,7 @@
 // modules/resources-sermons.js - Sermon loading logic for resources page
 
 import { getLatestSermonEntries } from '../services/contentful.js';
+import { slugify } from '../utils/slugify.js';
 
 export async function initResourcesSermons() {
   const sermonCount = document.getElementById('sermonCountLabel');
@@ -12,10 +13,14 @@ export async function initResourcesSermons() {
     const { items } = await getLatestSermonEntries();
     const sermons = (items || [])
       .filter((item) => item && item.fields && item.sys)
-      .map((item) => ({
-        title: (item.fields.title || 'Untitled Sermon').trim(),
-        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`
-      }))
+      .map((item) => {
+        const title = (item.fields.title || 'Untitled Sermon').trim();
+        const titleSlug = slugify(title);
+        return {
+          title: title,
+          url: `${cfg.postPagePath || '/pages/post.html'}?title=${encodeURIComponent(titleSlug)}`
+        };
+      })
       .filter((item) => item.title && item.url);
 
     if (sermons.length) {

@@ -1,6 +1,7 @@
 // modules/resources-devotionals.js - Devotional loading logic for resources page
 
 import { getDevotionalGuideEntries } from '../services/contentful.js';
+import { slugify } from '../utils/slugify.js';
 
 export async function initResourcesDevotionals() {
   const devotionalGuideCountLabel = document.getElementById('devotionalGuideCountLabel');
@@ -14,14 +15,18 @@ export async function initResourcesDevotionals() {
     const guides = items
       .filter((item) => item && item.fields && item.sys)
       .filter((item) => item.fields.status !== 'draft')
-      .map((item) => ({
-        id: item.sys.id,
-        title: typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled',
-        slug: item.fields.slug || '',
-        date: item.fields.startDate || '',
-        url: `${cfg.postPagePath || '/pages/post.html'}?entry=${encodeURIComponent(item.sys.id)}`,
-        fields: item.fields
-      }));
+      .map((item) => {
+        const title = typeof item.fields.title === 'string' ? item.fields.title.trim() : 'Untitled';
+        const titleSlug = slugify(title);
+        return {
+          id: item.sys.id,
+          title: title,
+          slug: item.fields.slug || '',
+          date: item.fields.startDate || '',
+          url: `${cfg.postPagePath || '/pages/post.html'}?title=${encodeURIComponent(titleSlug)}`,
+          fields: item.fields
+        };
+      });
 
     if (guides.length) {
       if (devotionalGuideCountLabel) {

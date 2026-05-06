@@ -202,12 +202,79 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    sort: activeSort
+  }));
+}
+
+function fuzzyMatch(text, query) {
+  if (!query) return true;
+  const t = text.toLowerCase();
+  const q = query.toLowerCase();
+  let i = 0;
+  for (const char of t) {
+    if (char === q[i]) i++;
+    if (i === q.length) return true;
+  }
+  return false;
+}
+
+function highlightMatch(text, query) {
+  if (!query) return esc(text);
+  const q = query.toLowerCase();
+  const t = text;
+  let result = '';
+  let i = 0;
+  let j = 0;
+  while (i < t.length && j < q.length) {
+    if (t[i].toLowerCase() === q[j]) {
+      result += `<mark class="bg-flcGold/30 rounded px-0.5">${esc(t[i])}</mark>`;
+      j++;
+    } else {
+      result += esc(t[i]);
+    }
+    i++;
+  }
+  result += esc(t.slice(i));
+  return result;
+}
+
 // ─── State ──────────────────────────────────────────────────────────────────────
 let activeFilter = 'all';
 let activeSearch  = '';
+let activeSort   = 'featured'; // 'featured', 'title', 'author', 'theme'
 const coverCache = new Map();
 const FALLBACK_COVER = '../assets/images/books/fallback.svg';
+const STORAGE_KEY = 'flc_reading_library';
 
+// Load saved preferences
+let savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+// ─── Cached DOM elements ───────────────────────────────────────────────────────
+const DOM = {
+  libraryLabel: null,
+  libraryLabelText: null,
+  grid: null,
+  empty: null,
+  count: null,
+  searchInput: null,
+  clearBtn: null,
+  clearFiltersBtn: null,
+  searchSuggestions: null,
+  filterTabs: null,
+  backToTop: null,
+  sortSelect: null
+};
+
+// ─── Debounce utility ───────────────────────────────────────────────────────────
+function debounce(fn, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
 // ─── Open Library Cover Fetching ─────────────────────────────────────────────────
 async function getCoverByISBN(isbn) {
   const cacheKey = `isbn-${isbn}`;
@@ -263,6 +330,7 @@ function animatedRender(container, html) {
 async function renderCard(book) {
   const accent = THEME_ACCENTS[book.theme] || '#9A7B4F';
   const badgeBg = hexToRgba(accent, 0.10);
+  const gradientBg = `linear-gradient(135deg, ${hexToRgba(accent, 0.03)} 0%, ${hexToRgba(accent, 0.08)} 100%)`;
   const featuredBadge = book.featured
     ? `<span class="text-[10px] font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full" style="background:rgba(154,123,79,0.12);color:#9A7B4F;">Foundational</span>`
     : '';
@@ -272,39 +340,46 @@ async function renderCard(book) {
   return `
     <article class="book-card bg-white rounded-xl overflow-hidden shadow-sm"
              id="${esc(cardId)}"
-             data-theme="${esc(book.theme)}" data-slug="${esc(book.slug)}">
-      <button class="w-full text-left p-5 flex items-start gap-4 cursor-pointer hover:bg-flcOffWhite/50 transition-colors"
-              onclick="toggleCard('${esc(cardId)}')">
-        <div class="flex-1">
+             data-theme="${esc(book.theme)}" data-slug="${esc(book.slug)}"
+             tabindex="0"
+             role="button"
+             aria-expanded="false"
+             onkeydown="handleCardKeydown(event, '${esc(cardId)}')"
+             style="background: ${gradientBg};">
+      <button class="w-full text-left p-6 flex items-start gap-5 cursor-pointer hover:bg-flcOffWhite/50 transition-colors focus:outline-none focus:ring-2 focus:ring-flcGold/50 rounded-lg"
+              onclick="toggleCard('${esc(cardId)}')"
+              aria-label="Toggle details for ${esc(book.title)} by ${esc(book.author)}">
+        <div class="relative aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg overflow-hidden book-cover-container">
+          <img src="${esc(coverUrl)}" 
+               alt="Book cover for ${esc(book.title)}" 
+               loading="lazy"
+               class="book-cover-img w-full h-full object-contain opacity-0 transition-opacity duration-300"
+               data-fallback="${esc(FALLBACK_COVER)}"
+               onload="this.classList.remove('opacity-0')" />
+        </div>
+        <div class="flex-1 min-w-0">
           <div class="flex flex-wrap items-center gap-1.5 mb-2">
             <span class="text-[10px] font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full" style="background:${badgeBg};color:${accent};">${esc(book.theme)}</span>
             ${featuredBadge}
           </div>
-          <h3 class="font-heading text-lg leading-snug text-flcNavy mb-1">${esc(book.title)}</h3>
-          <p class="text-xs font-medium mb-0" style="color:rgba(44,44,44,0.55);">${esc(book.author)}</p>
+          <h3 class="font-heading text-lg leading-snug text-flcNavy mb-1 truncate">${highlightMatch(book.title, activeSearch)}</h3>
+          <p class="text-xs font-medium mb-0" style="color:rgba(44,44,44,0.55);">${highlightMatch(book.author, activeSearch)}</p>
         </div>
-        <svg class="expand-icon w-5 h-5 flex-shrink-0 mt-1" style="color:rgba(44,44,44,0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="expand-icon w-5 h-5 flex-shrink-0 mt-1" style="color:rgba(44,44,44,0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-      <div class="book-details px-5 pb-5">
-        <div class="flex flex-col sm:flex-row gap-4 mb-4">
-          <div class="relative aspect-[2/3] w-24 sm:w-28 flex-shrink-0 bg-flcOffWhite rounded-lg overflow-hidden">
-            <img src="${esc(coverUrl)}" 
-                 alt="Book cover for ${esc(book.title)}" 
-                 loading="lazy"
-                 class="w-full h-full object-contain"
-                 onerror="this.src='${esc(FALLBACK_COVER)}'" />
-          </div>
-          <p class="text-sm leading-relaxed" style="color:rgba(44,44,44,0.8);">${esc(book.summary)}</p>
-        </div>
+      <div class="book-details px-6 pb-6" role="region" aria-label="Book details">
+        <p class="text-sm leading-relaxed mb-4 mt-2" style="color:rgba(44,44,44,0.8);">${esc(book.summary)}</p>
         <a href="${esc(book.link)}" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors"
-           style="background:#1A3A52;color:white;"
-           onmouseover="this.style.background='#9A7B4F'" onmouseout="this.style.background='#1A3A52'">
+           class="book-view-btn inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg transition-colors">
           View Book
           <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
+        <button onclick="shareBook('${esc(book.link)}', '${esc(book.title)}')" class="inline-flex items-center px-4 py-2.5 text-sm font-medium rounded-lg border border-flcBorder text-flcCharcoal/70 hover:bg-flcOffWhite hover:text-flcNavy transition-colors">
+          <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+          Share
+        </button>
       </div>
     </article>`;
 }
@@ -318,6 +393,148 @@ function toggleCard(cardId) {
   card.classList.toggle('expanded', !isExpanded);
   details?.classList.toggle('open', !isExpanded);
   icon?.classList.toggle('rotated', !isExpanded);
+  card.setAttribute('aria-expanded', !isExpanded);
+}
+
+function handleCardKeydown(event, cardId) {
+  switch (event.key) {
+    case 'Enter':
+    case ' ':
+      event.preventDefault();
+      toggleCard(cardId);
+      break;
+    case 'Escape':
+      const card = document.getElementById(cardId);
+      if (card && card.classList.contains('expanded')) {
+        toggleCard(cardId);
+      }
+      break;
+  }
+}
+
+function exportReadingList() {
+  const { page } = LIBRARY_DATA;
+  const { books } = page;
+  
+  // Get currently filtered books
+  let filtered = books;
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(b => b.theme === activeFilter);
+  }
+  if (activeSearch) {
+    filtered = filtered.filter(b =>
+      fuzzyMatch(b.title, activeSearch) || 
+      fuzzyMatch(b.author, activeSearch) || 
+      fuzzyMatch(b.theme, activeSearch)
+    );
+  }
+  filtered = sortBooks(filtered);
+  
+  // Create text format
+  let text = 'Consecration Reading Library\n';
+  text += '================================\n\n';
+  
+  if (activeFilter !== 'all' || activeSearch) {
+    text += `Filtered view: ${activeFilter === 'all' ? 'All' : activeFilter}${activeSearch ? ' - Search: ' + activeSearch : ''}\n\n`;
+  }
+  
+  filtered.forEach((book, index) => {
+    text += `${index + 1}. ${book.title}\n`;
+    text += `   Author: ${book.author}\n`;
+    text += `   Theme: ${book.theme}\n`;
+    if (book.featured) text += '   [Foundational]\n';
+    text += `   Link: ${book.link}\n`;
+    text += `   ${book.summary}\n\n`;
+  });
+  
+  text += `\nTotal: ${filtered.length} books\n`;
+  text += `Generated: ${new Date().toLocaleDateString()}\n`;
+  
+  // Copy to clipboard
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Reading list copied to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    alert('Failed to copy to clipboard. Please try again.');
+  });
+}
+
+function shareBook(link, title) {
+  const shareText = `Check out "${title}" from the Consecration Reading Library: ${link}`;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: shareText,
+      url: link
+    }).catch(err => {
+      console.log('Share failed:', err);
+      // Fallback to clipboard
+      copyToClipboard(link, title);
+    });
+  } else {
+    copyToClipboard(link, title);
+  }
+}
+
+function copyToClipboard(link, title) {
+  navigator.clipboard.writeText(link).then(() => {
+    alert(`Link for "${title}" copied to clipboard!`);
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    alert('Failed to copy link. Please try again.');
+  });
+}
+
+function getSearchSuggestions(query, books) {
+  if (!query || query.length < 2) return [];
+  const q = query.toLowerCase();
+  const suggestions = new Set();
+  
+  books.forEach(book => {
+    // Add title matches
+    if (book.title.toLowerCase().includes(q)) {
+      suggestions.add(book.title);
+    }
+    // Add author matches
+    if (book.author.toLowerCase().includes(q)) {
+      suggestions.add(book.author);
+    }
+    // Add theme matches
+    if (book.theme.toLowerCase().includes(q)) {
+      suggestions.add(book.theme);
+    }
+  });
+  
+  return Array.from(suggestions).slice(0, 8);
+}
+
+function renderSuggestions(suggestions) {
+  if (!DOM.searchSuggestions) return;
+  
+  if (suggestions.length === 0) {
+    DOM.searchSuggestions.classList.add('hidden');
+    return;
+  }
+  
+  DOM.searchSuggestions.innerHTML = suggestions.map(s => `
+    <button class="w-full text-left px-4 py-2 text-sm hover:bg-flcOffWhite transition-colors focus:outline-none focus:bg-flcOffWhite"
+            onclick="selectSuggestion('${esc(s)}')">
+      ${esc(s)}
+    </button>
+  `).join('');
+  
+  DOM.searchSuggestions.classList.remove('hidden');
+}
+
+function selectSuggestion(suggestion) {
+  if (DOM.searchInput) {
+    DOM.searchInput.value = suggestion;
+    activeSearch = suggestion;
+    DOM.searchSuggestions.classList.add('hidden');
+    const { page } = LIBRARY_DATA;
+    filterAndRender(page.books);
+  }
 }
 
 // ─── Filter tabs renderer ─────────────────────────────────────────────────────
@@ -329,7 +546,10 @@ function renderFilterTabs(themes, books) {
   themes.forEach(t => { counts[t] = 0; });
   books.forEach(b => { if (counts[b.theme] !== undefined) counts[b.theme]++; });
 
-  const tabData = [{ label: 'All', value: 'all', count: books.length }, ...themes.map(t => ({ label: t, value: t, count: counts[t] }))];
+  const tabData = [
+    { label: 'All', value: 'all', count: books.length },
+    ...themes.map(t => ({ label: t, value: t, count: counts[t] }))
+  ];
 
   container.innerHTML = tabData.map((tab, i) => {
     const active = i === 0;
@@ -371,38 +591,81 @@ function updateFilterBtnStyles(theme) {
   });
 }
 
+function sortBooks(books) {
+  const sorted = [...books];
+  switch (activeSort) {
+    case 'featured':
+      sorted.sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return 0;
+      });
+      break;
+    case 'title':
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case 'author':
+      sorted.sort((a, b) => a.author.localeCompare(b.author));
+      break;
+    case 'theme':
+      sorted.sort((a, b) => a.theme.localeCompare(b.theme));
+      break;
+  }
+  return sorted;
+}
+
 async function filterAndRender(books) {
   const search = activeSearch.toLowerCase().trim();
-  const libraryLabel = document.getElementById('libraryLabel');
-  const libraryLabelText = document.getElementById('libraryLabelText');
-  const grid = document.getElementById('bookGrid');
-  const empty = document.getElementById('emptyState');
-  const count = document.getElementById('bookCount');
-
-  if (libraryLabelText) {
-    libraryLabelText.textContent = search ? 'Search Results' : activeFilter === 'all' ? 'Library' : activeFilter;
-  }
-
-  let filtered = books;
-  if (activeFilter !== 'all') filtered = filtered.filter(b => b.theme === activeFilter);
-  if (search) filtered = filtered.filter(b =>
-    `${b.title} ${b.author} ${b.theme}`.toLowerCase().includes(search)
-  );
-
-  if (grid) {
-    if (filtered.length > 0) {
-      grid.classList.remove('hidden');
-      const cardHtmls = await Promise.all(filtered.map(renderCard));
-      animatedRender(grid, cardHtmls.join(''));
+  
+  if (DOM.libraryLabelText) {
+    if (search) {
+      DOM.libraryLabelText.textContent = 'Search Results';
+    } else if (activeFilter === 'all') {
+      DOM.libraryLabelText.textContent = 'Library';
     } else {
-      grid.classList.add('hidden');
+      DOM.libraryLabelText.textContent = activeFilter;
     }
   }
 
-  if (empty) empty.classList.toggle('hidden', filtered.length > 0);
+  // Show/hide Clear Filters button
+  const hasActiveFilters = activeFilter !== 'all' || search !== '' || activeSort !== 'featured';
+  if (DOM.clearFiltersBtn) {
+    DOM.clearFiltersBtn.classList.toggle('hidden', !hasActiveFilters);
+  }
 
-  if (count) {
-    count.textContent = `Showing ${filtered.length} of ${books.length} book${books.length !== 1 ? 's' : ''}`;
+  let filtered = books;
+  
+  // Apply filter
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(b => b.theme === activeFilter);
+  }
+  
+  // Apply search with fuzzy matching
+  if (search) {
+    filtered = filtered.filter(b =>
+      fuzzyMatch(b.title, search) || 
+      fuzzyMatch(b.author, search) || 
+      fuzzyMatch(b.theme, search)
+    );
+  }
+  
+  // Apply sorting
+  filtered = sortBooks(filtered);
+
+  if (DOM.grid) {
+    if (filtered.length > 0) {
+      DOM.grid.classList.remove('hidden');
+      const cardHtmls = await Promise.all(filtered.map(renderCard));
+      animatedRender(DOM.grid, cardHtmls.join(''));
+    } else {
+      DOM.grid.classList.add('hidden');
+    }
+  }
+
+  if (DOM.empty) DOM.empty.classList.toggle('hidden', filtered.length > 0);
+
+  if (DOM.count) {
+    DOM.count.textContent = `Showing ${filtered.length} of ${books.length} book${books.length !== 1 ? 's' : ''}`;
   }
 }
 
@@ -411,13 +674,37 @@ async function initReadingLibrary() {
   const { page } = LIBRARY_DATA;
   const { books, themes } = page;
 
+  // Load saved sort preference
+  if (savedState.sort) {
+    activeSort = savedState.sort;
+  }
+
+  // Cache DOM elements
+  DOM.libraryLabel = document.getElementById('libraryLabel');
+  DOM.libraryLabelText = document.getElementById('libraryLabelText');
+  DOM.grid = document.getElementById('bookGrid');
+  DOM.empty = document.getElementById('emptyState');
+  DOM.count = document.getElementById('bookCount');
+  DOM.searchInput = document.getElementById('bookSearch');
+  DOM.clearBtn = document.getElementById('clearSearch');
+  DOM.clearFiltersBtn = document.getElementById('clearFilters');
+  DOM.searchSuggestions = document.getElementById('searchSuggestions');
+  DOM.filterTabs = document.getElementById('filterTabs');
+  DOM.backToTop = document.getElementById('backToTop');
+  DOM.sortSelect = document.getElementById('sortSelect');
+
   const introEl = document.getElementById('libraryIntro');
   if (introEl) introEl.textContent = page.intro;
+
+  // Set initial sort value
+  if (DOM.sortSelect) {
+    DOM.sortSelect.value = activeSort;
+  }
 
   renderFilterTabs(themes, books);
   await filterAndRender(books);
 
-  document.getElementById('filterTabs')?.addEventListener('click', async e => {
+  DOM.filterTabs?.addEventListener('click', async e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
     activeFilter = btn.dataset.filter;
@@ -425,29 +712,86 @@ async function initReadingLibrary() {
     await filterAndRender(books);
   });
 
-  const searchInput = document.getElementById('bookSearch');
-  const clearBtn    = document.getElementById('clearSearch');
-
-  searchInput?.addEventListener('input', async () => {
-    activeSearch = searchInput.value;
-    clearBtn?.classList.toggle('hidden', !activeSearch);
+  // Sort select handler
+  DOM.sortSelect?.addEventListener('change', async e => {
+    activeSort = e.target.value;
+    saveState();
     await filterAndRender(books);
   });
 
-  clearBtn?.addEventListener('click', async () => {
-    if (searchInput) searchInput.value = '';
+  const debouncedSearch = debounce(async () => {
+    activeSearch = DOM.searchInput.value;
+    DOM.clearBtn?.classList.toggle('hidden', !activeSearch);
+    
+    // Update suggestions
+    const suggestions = getSearchSuggestions(activeSearch, books);
+    renderSuggestions(suggestions);
+    
+    await filterAndRender(books);
+  }, 300);
+
+  DOM.searchInput?.addEventListener('input', debouncedSearch);
+  
+  // Hide suggestions when clicking outside
+  document.addEventListener('click', e => {
+    if (DOM.searchSuggestions && !DOM.searchSuggestions.contains(e.target) && e.target !== DOM.searchInput) {
+      DOM.searchSuggestions.classList.add('hidden');
+    }
+  });
+  
+  // Hide suggestions on Escape
+  DOM.searchInput?.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && DOM.searchSuggestions) {
+      DOM.searchSuggestions.classList.add('hidden');
+    }
+  });
+
+  DOM.clearBtn?.addEventListener('click', async () => {
+    if (DOM.searchInput) DOM.searchInput.value = '';
     activeSearch = '';
-    clearBtn.classList.add('hidden');
+    DOM.clearBtn.classList.add('hidden');
     await filterAndRender(books);
   });
 
-  const backToTop = document.getElementById('backToTop');
-  if (backToTop) {
+  DOM.clearFiltersBtn?.addEventListener('click', async () => {
+    activeFilter = 'all';
+    activeSearch = '';
+    activeSort = 'featured';
+    if (DOM.searchInput) DOM.searchInput.value = '';
+    if (DOM.sortSelect) DOM.sortSelect.value = 'featured';
+    updateFilterBtnStyles('all');
+    saveState();
+    await filterAndRender(books);
+  });
+
+  document.getElementById('exportList')?.addEventListener('click', exportReadingList);
+
+  if (DOM.backToTop) {
     window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('visible', window.scrollY > 300);
+      DOM.backToTop.classList.toggle('visible', window.scrollY > 300);
     }, { passive: true });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    DOM.backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+
+  // Event delegation for image error fallback
+  document.addEventListener('error', e => {
+    if (e.target.classList.contains('book-cover-img')) {
+      e.target.src = e.target.dataset.fallback;
+      e.target.classList.remove('opacity-0');
+    }
+  }, true);
+
+  // Keyboard navigation for filter tabs
+  DOM.filterTabs?.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const buttons = Array.from(DOM.filterTabs.querySelectorAll('.filter-btn'));
+      const currentIndex = buttons.indexOf(document.activeElement);
+      const direction = e.key === 'ArrowRight' ? 1 : -1;
+      const nextIndex = (currentIndex + direction + buttons.length) % buttons.length;
+      buttons[nextIndex].focus();
+      buttons[nextIndex].click();
+    }
+  });
 
   const observer = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),

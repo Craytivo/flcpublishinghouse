@@ -11,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <script>
     tailwind.config = {
       theme: {
@@ -68,14 +68,6 @@
       color: #9A7B4F;
     }
 
-    .book-card {
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .book-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(26,58,82,0.12) !important;
-    }
-
     /* Hide scrollbar on filter strip */
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -87,6 +79,26 @@
       z-index: 20;
       background: #FAFAF8;
       border-bottom: 1px solid #E5E0D8;
+    }
+
+    /* Mobile filter improvements */
+    @media (max-width: 640px) {
+      #filterTabs {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+      #filterTabs .filter-btn {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+      #filterBar .flex-col {
+        gap: 0.75rem;
+      }
+      #filterBar input,
+      #filterBar select,
+      #filterBar button {
+        min-height: 44px; /* Touch target size */
+      }
     }
 
     /* Back to top */
@@ -102,6 +114,10 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(26,58,82,0.08);
     }
+    .book-card:focus-visible {
+      outline: 2px solid #9A7B4F;
+      outline-offset: 2px;
+    }
     .book-card.expanded {
       border-color: #9A7B4F;
       box-shadow: 0 12px 32px rgba(26,58,82,0.1);
@@ -113,7 +129,7 @@
       opacity: 0;
     }
     .book-details.open {
-      max-height: 400px;
+      max-height: 600px;
       opacity: 1;
     }
     .expand-icon {
@@ -122,6 +138,48 @@
     .expand-icon.rotated {
       transform: rotate(180deg);
     }
+
+    .book-view-btn {
+      background: #1A3A52;
+      color: white;
+    }
+    .book-view-btn:hover {
+      background: #9A7B4F;
+    }
+
+    /* Search highlighting */
+    mark {
+      background: rgba(154, 123, 79, 0.3);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+    }
+    @keyframes skeleton-loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Favorite button animation */
+    .favorite-btn svg {
+      transition: transform 0.2s ease, fill 0.2s ease, color 0.2s ease;
+    }
+    .favorite-btn:hover svg {
+      transform: scale(1.1);
+    }
+    .favorite-btn[aria-pressed="true"] svg {
+      animation: heart-pop 0.3s ease;
+    }
+    @keyframes heart-pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
   </style>
   <link rel="stylesheet" href="../assets/css/site-theme.css" />
 </head>
@@ -129,16 +187,114 @@
 <body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
   <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <div id="headerContainer"
-       data-config='{"currentPage":"reading-library","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  <script src="../assets/js/components/header-component.js"></script>
+  <!-- Static Header -->
+  <header id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
+        <!-- Logo -->
+        <a href="../index.html" class="flex items-center group flex-shrink-0">
+          <img src="../assets/images/Logo.png" alt="FLC Publishing House" class="w-auto h-[105px] group-hover:scale-105 transition-all duration-300" style="object-fit: contain;">
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a href="../index.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Home</a>
+          <a href="sermons.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Sermons</a>
+          <a href="resources.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Resources</a>
+          <a href="reading-library.html" class="px-4 py-2 text-flcGold font-semibold text-sm lg:text-base transition-all duration-200">Reading Library</a>
+          <a href="devotionals.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Devotionals</a>
+          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200 inline-flex items-center gap-1.5">
+            Church
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+        </nav>
+        
+        <!-- Right Actions -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <!-- Search Button -->
+          <button id="searchBtn" class="hidden md:block p-2 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Search">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          
+          <!-- Mobile Menu Button -->
+          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="w-6 h-6 absolute inset-0 transition-all duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg class="w-6 h-6 absolute inset-0 opacity-0 rotate-90 transition-all duration-200" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
+        <a href="../index.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Home</a>
+        <a href="sermons.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Sermons</a>
+        <a href="resources.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Resources</a>
+        <a href="reading-library.html" class="block py-3 px-4 text-flcGold font-semibold rounded-lg transition-all duration-200 font-medium">Reading Library</a>
+        <a href="devotionals.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Devotionals</a>
+        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Church</a>
+        
+        <!-- Mobile Search -->
+        <div class="pt-4 mt-4 border-t border-flcBorder">
+          <div class="relative">
+            <input
+              type="text"
+              id="mobileSearchInput"
+              placeholder="Search..."
+              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
+            />
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Search Modal -->
+  <div id="searchModal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="searchModalBackdrop"></div>
+    <div class="relative max-w-2xl mx-auto mt-20 px-4">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="p-4">
+          <div class="relative">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search resources..."
+              class="w-full px-4 py-3 pl-12 rounded-xl border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-lg text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
+              autofocus
+            />
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-flcCharcoal/40 hover:text-flcNavy hover:scale-110 transition-all duration-200" aria-label="Close search">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="searchResults" class="max-h-96 overflow-y-auto p-4 border-t border-flcBorder">
+          <p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main id="main-content">
 
     <!-- ═══ HERO ═══ -->
     <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden fade-in-up">
       <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
-      <div class="absolute inset-0 bg-gradient-to-b from-flcOffWhite/0 via-flcOffWhite/0 to-flcOffWhite pointer-events-none"></div>
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
           <p class="section-kicker mb-4">Freedom Life Church</p>
@@ -151,18 +307,47 @@
       </div>
     </section>
 
+    <!-- ═══ SCRIPTURE BAND ═══ -->
+    <section class="bg-flcNavyDark py-12 sm:py-16">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="w-8 h-px bg-flcGold mx-auto mb-6"></div>
+        <blockquote class="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-[1.35] italic mb-4">
+          &ldquo;The fear of the Lord is the beginning of knowledge, but fools despise wisdom and instruction.&rdquo;
+        </blockquote>
+        <p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase">Proverbs 1:7</p>
+        <div class="w-8 h-px bg-flcGold mx-auto mt-6"></div>
+      </div>
+    </section>
+
     <!-- ═══ FILTER BAR ═══ -->
     <div id="filterBar" class="py-4">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div id="filterTabs" class="flex gap-2 overflow-x-auto scrollbar-hide pb-0.5"></div>
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-3">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-3 relative">
           <div class="relative flex-1 sm:flex-none">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style="color:rgba(44,44,44,0.35);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input id="bookSearch" type="text" placeholder="Search title or author…"
-              class="w-full sm:w-64 pl-10 pr-8 py-2 text-sm border border-flcBorder rounded-full bg-white focus:outline-none focus:border-flcNavy transition-colors"
-              style="color:#2C2C2C;"/>
-            <button id="clearSearch" class="hidden absolute right-3 top-1/2 -translate-y-1/2" style="color:rgba(44,44,44,0.4);" aria-label="Clear search">
+              class="w-full sm:w-64 pl-10 pr-8 py-2 text-sm border border-flcBorder rounded-full bg-white focus:outline-none focus:border-flcNavy transition-colors text-flcCharcoal"/>
+            <button id="clearSearch" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-flcCharcoal/40" aria-label="Clear search">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="searchSuggestions" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-flcBorder overflow-hidden z-30 max-h-64 overflow-y-auto"></div>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <label for="sortSelect" class="text-xs font-medium text-flcCharcoal/60">Sort:</label>
+            <div class="relative">
+              <select id="sortSelect" class="text-xs px-3 py-2 pr-8 rounded-lg border border-flcBorder bg-white focus:outline-none focus:border-flcGold text-flcCharcoal appearance-none cursor-pointer">
+                <option value="featured">Featured</option>
+                <option value="title">Title (A-Z)</option>
+                <option value="author">Author (A-Z)</option>
+                <option value="theme">Theme</option>
+              </select>
+              <svg class="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <button id="clearFilters" class="hidden text-xs px-3 py-2 rounded-lg border border-flcBorder bg-white text-flcCharcoal/70 hover:bg-flcOffWhite hover:text-flcNavy transition-colors">
+              Clear Filters
             </button>
           </div>
           <p id="bookCount" class="text-xs font-medium tracking-wide sm:ml-auto whitespace-nowrap" style="color:rgba(44,44,44,0.5);"></p>
@@ -195,13 +380,21 @@
               This library will expand as new titles are added. Each book is evaluated for theological integrity, pastoral usefulness, and its capacity to form rather than merely inform. Suggestions rooted in those same convictions are welcome.
             </p>
           </div>
-          <a href="../index.html#subscribe"
-             class="flex-shrink-0 inline-flex items-center px-5 py-2.5 bg-flcNavy text-white font-semibold text-sm rounded-xl hover:bg-flcGold transition-colors duration-200">
-            Stay updated
-            <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
+          <div class="flex items-center gap-3">
+            <button id="exportList" class="flex-shrink-0 inline-flex items-center px-5 py-2.5 bg-flcNavy text-white font-semibold text-sm rounded-xl hover:bg-flcGold transition-colors duration-200">
+              Export List
+              <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+            </button>
+            <a href="../index.html#subscribe"
+               class="flex-shrink-0 inline-flex items-center px-5 py-2.5 border border-flcNavy text-flcNavy font-semibold text-sm rounded-xl hover:bg-flcNavy hover:text-white transition-colors duration-200">
+              Stay updated
+              <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -209,14 +402,134 @@
   </main>
 
   <div id="footerContainer"
-       data-config='{"currentPage":"reading-library","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  <script src="../assets/js/components/footer-component.js"></script>
+       data-config='{"currentPage":"reading-library","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/reading-library.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
+  <script src="../assets/js/components/footer-component.js" defer></script>
   <!-- Back to top -->
-  <button id="backToTop" class="fixed bottom-6 right-6 z-30 w-10 h-10 flex items-center justify-center rounded-full shadow-lg transition-all duration-300" style="background:#1A3A52;color:white;" aria-label="Back to top">
+  <button id="backToTop" class="fixed bottom-6 right-6 z-30 w-10 h-10 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 bg-flcNavy text-white" aria-label="Back to top">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
   </button>
 
-  <script src="../assets/js/lib/site-theme.js"></script>
-  <script src="../assets/js/pages/reading-library.js"></script>
+  <script src="../assets/js/lib/site-theme.js" defer></script>
+  <script src="../assets/js/pages/reading-library.js" defer></script>
+  
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIcon = document.getElementById('menuIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      
+      if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
+        mobileMenuBtn.addEventListener('click', function() {
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+          
+          if (isOpen) {
+            menuIcon.classList.remove('opacity-0');
+            closeIcon.classList.add('opacity-0');
+          } else {
+            menuIcon.classList.add('opacity-0');
+            closeIcon.classList.remove('opacity-0');
+          }
+        });
+        
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            menuIcon.classList.remove('opacity-0');
+            closeIcon.classList.add('opacity-0');
+          });
+        });
+      }
+      
+      // Search modal
+      const searchBtn = document.getElementById('searchBtn');
+      const searchModal = document.getElementById('searchModal');
+      const closeSearch = document.getElementById('closeSearch');
+      const searchModalBackdrop = document.getElementById('searchModalBackdrop');
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+      
+      // Search index
+      const searchIndex = [
+        { title: 'Home', href: '../index.html', type: 'Page' },
+        { title: 'Sermons', href: 'sermons.html', type: 'Page' },
+        { title: 'Resources', href: 'resources.html', type: 'Page' },
+        { title: 'Reading Library', href: 'reading-library.html', type: 'Page' },
+        { title: 'Devotionals', href: 'devotionals.html', type: 'Page' },
+        { title: 'Spiritual Detox', href: 'spiritual-detox.html', type: 'Page' },
+        { title: 'Freedom Life Church', href: 'https://freedomlifechurch.ca/', type: 'External' }
+      ];
+      
+      function openSearch() {
+        searchModal.classList.remove('hidden');
+        setTimeout(() => searchInput.focus(), 100);
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeSearchModal() {
+        searchModal.classList.add('hidden');
+        document.body.style.overflow = '';
+        searchInput.value = '';
+        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
+      }
+      
+      function performSearch(query) {
+        if (!query || query.trim() === '') {
+          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
+          return;
+        }
+        
+        const q = query.toLowerCase().trim();
+        const results = searchIndex.filter(item => 
+          item.title.toLowerCase().includes(q) || 
+          item.type.toLowerCase().includes(q)
+        );
+        
+        if (results.length === 0) {
+          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">No results found.</p>';
+          return;
+        }
+        
+        const html = results.map(item => `
+          <a href="${item.href}" ${item.type === 'External' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block p-3 rounded-lg hover:bg-flcGold/5 transition-colors">
+            <div class="font-medium text-flcNavy">${item.title}</div>
+            <div class="text-xs text-flcCharcoal/50 mt-1">${item.type}</div>
+          </a>
+        `).join('');
+        
+        if (searchResults) searchResults.innerHTML = html;
+      }
+      
+      if (searchBtn) {
+        searchBtn.addEventListener('click', openSearch);
+      }
+      
+      if (closeSearch) {
+        closeSearch.addEventListener('click', closeSearchModal);
+      }
+      
+      if (searchModalBackdrop) {
+        searchModalBackdrop.addEventListener('click', closeSearchModal);
+      }
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          performSearch(this.value);
+        });
+      }
+      
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+          closeSearchModal();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
