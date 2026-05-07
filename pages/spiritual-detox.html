@@ -1,553 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Spiritual Detox - The Kingdom Blueprint | FLC Publishing House</title>
-  <meta name="description" content="Spiritual Detox: January 12-31. Theme: The Kingdom Blueprint. Weekly Bible studies Jan 15, 22, 29 at 6:30 PM." />
+ <!-- Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM40N0DYXP"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-CM40N0DYXP');
+ </script>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+ <title>Spiritual Detox - The Kingdom Blueprint | FLC Publishing House</title>
+ <meta name="description" content="Spiritual Detox: January 12-31. Theme: The Kingdom Blueprint. Weekly Bible studies Jan 15, 22, 29 at 6:30 PM." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png" />
+ <!-- Favicon -->
+ <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png" />
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+ <!-- Tailwind CSS -->
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="../assets/js/tailwind-config.js"></script>
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link
+ href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap"
+ rel="stylesheet"
+ />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
+ <style>
+ /* Skip Link */
+ .skip-link {
+ position: absolute;
+ top: -40px;
+ left: 0;
+ background: #1A3A52;
+ color: white;
+ padding: 8px 16px;
+ z-index: 100;
+ transition: top 0.3s;
+ }
+ .skip-link:focus {
+ top: 0;
+ }
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
-            body:    ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-          },
-          colors: {
-            flcNavy:     '#1A3A52',
-            flcNavyDark: '#0F2838',
-            flcNavyLight:'#2A4A62',
-            flcGold:     '#9A7B4F',
-            flcGoldLight:'#B8956A',
-            flcCharcoal: '#2C2C2C',
-            flcCream:    '#F5F1E8',
-            flcOffWhite: '#FAFAF8',
-            flcBorder:   '#E8E6E1',
-          },
-          boxShadow: {
-            premium:
-              "0 10px 40px rgba(26, 58, 82, 0.10), 0 4px 12px rgba(26, 58, 82, 0.06)",
-          },
-        },
-      },
-    };
-  </script>
+ /* Pattern Dots */
+ .pattern-dots {
+ background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+ background-size: 24px 24px;
+ }
 
-  <style>
-    /* Skip Link */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #1A3A52;
-      color: white;
-      padding: 8px 16px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
+ /* Fade In Up Animation */
+ .fade-in-up {
+ opacity: 0;
+ transform: translateY(20px);
+ transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+ }
 
-    /* Pattern Dots */
-    .pattern-dots {
-      background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
+ .fade-in-up.visible {
+ opacity: 1;
+ transform: translateY(0);
+ }
 
-    /* Fade In Up Animation */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
+ @media (prefers-reduced-motion: reduce) {
+ .fade-in-up {
+ opacity: 1;
+ transform: translateY(0);
+ }
+ }
 
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+ .section-kicker {
+ font-size: 0.75rem;
+ font-weight: 600;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ color: #9A7B4F;
+ }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-up {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+ .week-card {
+ border: 1px solid #E5E0D8;
+ border-radius: 1rem;
+ background: white;
+ box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
+ transition: all 0.3s ease;
+ text-decoration: none;
+ display: flex;
+ flex-direction: column;
+ }
 
-    .section-kicker {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #9A7B4F;
-    }
+ .week-card:hover {
+ transform: translateY(-4px);
+ box-shadow: 0 18px 42px rgba(26, 58, 82, 0.12);
+ }
 
-    .week-card {
-      border: 1px solid #E5E0D8;
-      border-radius: 1rem;
-      background: white;
-      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-    }
+ .week-badge {
+ width: 52px;
+ height: 52px;
+ border-radius: 14px;
+ display: grid;
+ place-items: center;
+ font-weight: 800;
+ color: white;
+ background: linear-gradient(135deg, #9A7B4F, #B8956A);
+ box-shadow: 0 10px 24px rgba(154, 123, 79, 0.14);
+ }
 
-    .week-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 42px rgba(26, 58, 82, 0.12);
-    }
+ .pill {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.45rem;
+ font-size: 0.85rem;
+ color: rgba(44, 44, 44, 0.65);
+ padding: 0.35rem 0.7rem;
+ border: 1px solid #E5E0D8;
+ border-radius: 9999px;
+ background: white;
+ white-space: nowrap;
+ }
 
-    .week-badge {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      color: white;
-      background: linear-gradient(135deg, #9A7B4F, #B8956A);
-      box-shadow: 0 10px 24px rgba(154, 123, 79, 0.14);
-    }
+ .btn-primary {
+ background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
+ color: white;
+ border-radius: 0.75rem;
+ padding: 0.75rem 1.5rem;
+ font-weight: 600;
+ transition: all 0.3s ease;
+ text-decoration: none;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.85rem;
-      color: rgba(44, 44, 44, 0.65);
-      padding: 0.35rem 0.7rem;
-      border: 1px solid #E5E0D8;
-      border-radius: 9999px;
-      background: white;
-      white-space: nowrap;
-    }
+ .btn-primary:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 4px 12px rgba(154, 123, 79, 0.3);
+ }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #9A7B4F 0%, #B8956A 100%);
-      color: white;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
+ .btn-ghost {
+ background: white;
+ border: 1px solid #E5E0D8;
+ border-radius: 0.75rem;
+ padding: 0.75rem 1.5rem;
+ font-weight: 600;
+ transition: all 0.3s ease;
+ text-decoration: none;
+ color: #1A3A52;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(154, 123, 79, 0.3);
-    }
+ .btn-ghost:hover {
+ border-color: #9A7B4F;
+ color: #9A7B4F;
+ }
 
-    .btn-ghost {
-      background: white;
-      border: 1px solid #E5E0D8;
-      border-radius: 0.75rem;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: #1A3A52;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-ghost:hover {
-      border-color: #9A7B4F;
-      color: #9A7B4F;
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
-    }
-  </style>
-<link rel="stylesheet" href="../assets/css/site-theme.css" />
+ .divider {
+ height: 1px;
+ background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+ }
+ </style>
+<style>body{opacity:0}body.pt-ready{opacity:1}</style>
+<link rel="stylesheet" href="../assets/css/base.css" />
+ <link rel="stylesheet" href="../assets/css/layout.css" />
+ <link rel="stylesheet" href="../assets/css/typography.css" />
+ <link rel="stylesheet" href="../assets/css/utilities.css" />
+ <link rel="stylesheet" href="../assets/css/consolidated-styles.css" />
+<link rel="stylesheet" href="../assets/css/components.css" />
+<link rel="stylesheet" href="../assets/css/animations.css" />
 </head>
 
-<body class="text-flcCharcoal text-base lg:text-lg">
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  
-  <!-- Static Header -->
-  <header id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
-        <!-- Logo -->
-        <a href="../index.html" class="flex items-center group flex-shrink-0">
-          <img src="../assets/images/Logo.png" alt="FLC Publishing House" class="w-auto h-[105px] group-hover:scale-105 transition-all duration-300" style="object-fit: contain;">
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-1">
-          <a href="../index.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Home</a>
-          <a href="sermons.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Sermons</a>
-          <a href="resources.html" class="px-4 py-2 text-flcGold font-semibold text-sm lg:text-base transition-all duration-200">Resources</a>
-          <a href="reading-library.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Reading Library</a>
-          <a href="devotionals.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Devotionals</a>
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200 inline-flex items-center gap-1.5">
-            Church
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          </a>
-        </nav>
-        
-        <!-- Right Actions -->
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <!-- Search Button -->
-          <button id="searchBtn" class="hidden md:block p-2 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Search">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-          
-          <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
-            <svg class="w-6 h-6 absolute inset-0 transition-all duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <svg class="w-6 h-6 absolute inset-0 opacity-0 rotate-90 transition-all duration-200" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
-        <a href="../index.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Home</a>
-        <a href="sermons.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Sermons</a>
-        <a href="resources.html" class="block py-3 px-4 text-flcGold font-semibold rounded-lg transition-all duration-200 font-medium">Resources</a>
-        <a href="reading-library.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Reading Library</a>
-        <a href="devotionals.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Devotionals</a>
-        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Church</a>
-        
-        <!-- Mobile Search -->
-        <div class="pt-4 mt-4 border-t border-flcBorder">
-          <div class="relative">
-            <input
-              type="text"
-              id="mobileSearchInput"
-              placeholder="Search..."
-              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Search Modal -->
-  <div id="searchModal" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="searchModalBackdrop"></div>
-    <div class="relative max-w-2xl mx-auto mt-20 px-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-4">
-          <div class="relative">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search resources..."
-              class="w-full px-4 py-3 pl-12 rounded-xl border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-lg text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-              autofocus
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-flcCharcoal/40 hover:text-flcNavy hover:scale-110 transition-all duration-200" aria-label="Close search">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div id="searchResults" class="max-h-96 overflow-y-auto p-4 border-t border-flcBorder">
-          <p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script type="module" src="../assets/js/config.js"></script>
-  <script type="module" src="../assets/js/pages/spiritual-detox.js"></script>
-  
-  <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-    <!-- Hero Section -->
-    <section class="pt-40 pb-20 sm:pt-48 sm:pb-24 lg:pt-56 lg:pb-32 bg-white pattern-dots fade-in-up">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="section-kicker mb-4">January 12-31</p>
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-4">
-          Spiritual Detox
-        </h1>
-        <p class="text-lg text-flcCharcoal/70 mb-6">
-          Theme: <span class="text-flcGold font-semibold">The Kingdom Blueprint</span>
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <a href="spiritual-detox-week1.html" class="btn-primary px-6 py-3 text-sm sm:text-base w-full sm:w-auto">
-            Open Week 1
-          </a>
-          <a href="#weeks" class="btn-ghost px-6 py-3 text-sm sm:text-base w-full sm:w-auto">
-            View All Weeks
-          </a>
-        </div>
-        <div class="flex flex-wrap gap-3 justify-center">
-          <span class="pill">Bible Studies: Jan 15, 22, 29 · 6:30 PM</span>
-          <span class="pill">Weekly newsletters + reflection prompts</span>
-          <span class="pill">No small groups this season</span>
-        </div>
-      </div>
-    </section>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+ <a href="#main-content" class="skip-link">Skip to content</a>
+ <div id="headerContainer" data-current-page="detox" data-base-path=".."></div> <!-- Search Modal  Command Palette -->
+ <div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+ <div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+ <div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4">
+ <div class="bg-white rounded-2xl shadow-elevated overflow-hidden search-modal-enter border border-flcBorder/40">
+ <div class="p-4 pb-3">
+ <div class="relative">
+ <input type="text" id="searchInput" placeholder="Search sermons, devotionals, resources..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40 motion-fast" autofocus autocomplete="off" aria-describedby="searchHint" />
+ <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+ <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+ <kbd class="hidden sm:inline-block text-[0.65rem] text-flcCharcoal/35 bg-flcOffWhite border border-flcBorder/60 rounded px-1.5 py-0.5 font-mono">Esc</kbd>
+ <button id="closeSearch" class="p-1.5 text-flcCharcoal/35 hover:text-flcNavy motion-fast rounded-lg hover:bg-flcOffWhite" aria-label="Close search"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+ </div>
+ </div>
+ <p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Use <kbd class="font-mono"></kbd> to navigate, <kbd class="font-mono">Enter</kbd> to select</p>
+ </div>
+ <div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox">
+ <p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <script type="module" src="../assets/js/config.js"></script>
+ <script type="module" src="../assets/js/pages/spiritual-detox.js"></script>
+ 
+ <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+ <!-- Hero Section -->
+ <section class="pt-40 pb-20 sm:pt-48 sm:pb-24 lg:pt-56 lg:pb-32 bg-white pattern-dots fade-in-up">
+ <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+ <p class="section-kicker mb-4">January 12-31</p>
+ <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-4">
+ Spiritual Detox
+ </h1>
+ <p class="text-lg text-flcCharcoal/70 mb-6">
+ Theme: <span class="text-flcGold font-semibold">The Kingdom Blueprint</span>
+ </p>
+ <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+ <a href="spiritual-detox-week1.html" class="btn-primary px-6 py-3 text-sm sm:text-base w-full sm:w-auto">
+ Open Week 1
+ </a>
+ <a href="#weeks" class="btn-ghost px-6 py-3 text-sm sm:text-base w-full sm:w-auto">
+ View All Weeks
+ </a>
+ </div>
+ <div class="flex flex-wrap gap-3 justify-center">
+ <span class="pill">Bible Studies: Jan 15, 22, 29 · 6:30 PM</span>
+ <span class="pill">Weekly newsletters + reflection prompts</span>
+ <span class="pill">No small groups this season</span>
+ </div>
+ </div>
+ </section>
 
-    <!-- Weekly Resources Section -->
-    <section id="weeks" class="mt-12 sm:mt-16 fade-in-up">
-      <div class="flex items-end justify-between gap-6 flex-wrap mb-8">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-flcNavy">
-            Weekly Resources
-          </h2>
-          <p class="mt-2 text-sm sm:text-base text-flcCharcoal/70 max-w-2xl">
-            Materials are posted here weekly. Open the latest week below.
-          </p>
-        </div>
-        <a href="spiritual-detox-week3.html" class="btn-primary px-5 py-2.5 text-sm w-full sm:w-auto">
-          Latest: Week 3
-        </a>
-      </div>
+ <!-- Weekly Resources Section -->
+ <section id="weeks" class="mt-12 sm:mt-16 fade-in-up">
+ <div class="flex items-end justify-between gap-6 flex-wrap mb-8">
+ <div>
+ <h2 class="text-2xl sm:text-3xl font-heading font-bold text-flcNavy">
+ Weekly Resources
+ </h2>
+ <p class="mt-2 text-sm sm:text-base text-flcCharcoal/70 max-w-2xl">
+ Materials are posted here weekly. Open the latest week below.
+ </p>
+ </div>
+ <a href="spiritual-detox-week3.html" class="btn-primary px-5 py-2.5 text-sm w-full sm:w-auto">
+ Latest: Week 3
+ </a>
+ </div>
 
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Week 1 -->
-        <a href="spiritual-detox-week1.html" class="week-card p-6" aria-label="Open Week 1 Newsletter">
-          <div class="flex gap-4 mb-4">
-            <div class="week-badge">1</div>
-            <div>
-              <h3 class="font-heading text-lg font-bold text-flcNavy">Week 1 Newsletter</h3>
-              <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
-            </div>
-          </div>
-          <p class="text-flcCharcoal/80 flex-1">
-            Full newsletter, reflection prompts, and printable guide for Week 1.
-          </p>
-          <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
-            <span class="pill">Starts: Jan 12</span>
-            <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
-          </div>
-        </a>
+ <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+ <!-- Week 1 -->
+ <a href="spiritual-detox-week1.html" class="week-card p-6" aria-label="Open Week 1 Newsletter">
+ <div class="flex gap-4 mb-4">
+ <div class="week-badge">1</div>
+ <div>
+ <h3 class="font-heading text-lg font-bold text-flcNavy">Week 1 Newsletter</h3>
+ <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
+ </div>
+ </div>
+ <p class="text-flcCharcoal/80 flex-1">
+ Full newsletter, reflection prompts, and printable guide for Week 1.
+ </p>
+ <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
+ <span class="pill">Starts: Jan 12</span>
+ <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
+ </div>
+ </a>
 
-        <!-- Week 2 -->
-        <a href="spiritual-detox-week2.html" class="week-card p-6" aria-label="Open Week 2 Newsletter">
-          <div class="flex gap-4 mb-4">
-            <div class="week-badge">2</div>
-            <div>
-              <h3 class="font-heading text-lg font-bold text-flcNavy">Week 2 Newsletter</h3>
-              <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
-            </div>
-          </div>
-          <p class="text-flcCharcoal/80 flex-1">
-            Uncommon Provision · Relational Discernment · Worship: Presence over performance.
-          </p>
-          <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
-            <span class="pill">Starts: Jan 19</span>
-            <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
-          </div>
-        </a>
+ <!-- Week 2 -->
+ <a href="spiritual-detox-week2.html" class="week-card p-6" aria-label="Open Week 2 Newsletter">
+ <div class="flex gap-4 mb-4">
+ <div class="week-badge">2</div>
+ <div>
+ <h3 class="font-heading text-lg font-bold text-flcNavy">Week 2 Newsletter</h3>
+ <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
+ </div>
+ </div>
+ <p class="text-flcCharcoal/80 flex-1">
+ Uncommon Provision · Relational Discernment · Worship: Presence over performance.
+ </p>
+ <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
+ <span class="pill">Starts: Jan 19</span>
+ <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
+ </div>
+ </a>
 
-        <!-- Week 3 -->
-        <a href="spiritual-detox-week3.html" class="week-card p-6" aria-label="Open Week 3 Newsletter">
-          <div class="flex gap-4 mb-4">
-            <div class="week-badge">3</div>
-            <div>
-              <h3 class="font-heading text-lg font-bold text-flcNavy">Week 3 Newsletter</h3>
-              <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
-            </div>
-          </div>
-          <p class="text-flcCharcoal/80 flex-1">
-            Exposing the Lie of the Idol · Famine seasons clarify what cannot save.
-          </p>
-          <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
-            <span class="pill">Starts: Jan 26</span>
-            <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
-          </div>
-        </a>
-      </div>
-    </section>
+ <!-- Week 3 -->
+ <a href="spiritual-detox-week3.html" class="week-card p-6" aria-label="Open Week 3 Newsletter">
+ <div class="flex gap-4 mb-4">
+ <div class="week-badge">3</div>
+ <div>
+ <h3 class="font-heading text-lg font-bold text-flcNavy">Week 3 Newsletter</h3>
+ <p class="mt-1 text-sm text-flcCharcoal/60">Available now</p>
+ </div>
+ </div>
+ <p class="text-flcCharcoal/80 flex-1">
+ Exposing the Lie of the Idol · Famine seasons clarify what cannot save.
+ </p>
+ <div class="mt-4 pt-4 border-t border-flcBorder flex items-center justify-between">
+ <span class="pill">Starts: Jan 26</span>
+ <span class="btn-primary px-4 py-2 text-xs sm:text-sm" aria-hidden="true">Open</span>
+ </div>
+ </a>
+ </div>
+ </section>
 
-    <!-- What to Expect Section -->
-    <section class="mt-12 sm:mt-16 max-w-3xl mx-auto fade-in-up">
-      <div class="divider mb-8"></div>
-      <h2 class="text-2xl sm:text-3xl font-heading font-bold text-flcNavy mb-6">
-        What to Expect
-      </h2>
-      <ul class="list-disc text-flcCharcoal/80 space-y-3">
-        <li><strong>Dates:</strong> January 12-31 - <span class="text-flcGold font-semibold">The Kingdom Blueprint</span></li>
-        <li><strong>Bible Studies:</strong> Jan 15, Jan 22, Jan 29 (6:30 PM)</li>
-        <li><strong>Weekly newsletters</strong> with reflection prompts and Scripture readings</li>
-        <li><strong>Church-wide focus:</strong> no small groups this season</li>
-      </ul>
-      <p class="mt-6 text-flcCharcoal/80">
-        Materials are posted here weekly. If you want updates, subscribe so you don't miss when new weeks go live.
-      </p>
-    </section>
-  </main>
+ <!-- What to Expect Section -->
+ <section class="mt-12 sm:mt-16 max-w-3xl mx-auto fade-in-up">
+ <div class="divider mb-8"></div>
+ <h2 class="text-2xl sm:text-3xl font-heading font-bold text-flcNavy mb-6">
+ What to Expect
+ </h2>
+ <ul class="list-disc text-flcCharcoal/80 space-y-3">
+ <li><strong>Dates:</strong> January 12-31 - <span class="text-flcGold font-semibold">The Kingdom Blueprint</span></li>
+ <li><strong>Bible Studies:</strong> Jan 15, Jan 22, Jan 29 (6:30 PM)</li>
+ <li><strong>Weekly newsletters</strong> with reflection prompts and Scripture readings</li>
+ <li><strong>Church-wide focus:</strong> no small groups this season</li>
+ </ul>
+ <p class="mt-6 text-flcCharcoal/80">
+ Materials are posted here weekly. If you want updates, subscribe so you don't miss when new weeks go live.
+ </p>
+ </section>
+ </main>
 
-  <!-- Footer Container -->
-  <div id="footerContainer"
-       data-config='{"currentPage":"detox","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  
-  <!-- Load Footer Component -->
-  <script src="../assets/js/components/footer-component.js"></script>
-  
-  <script src="../assets/js/lib/site-theme.js"></script>
-  
-  <script>
-    // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuIcon = document.getElementById('menuIcon');
-      const closeIcon = document.getElementById('closeIcon');
-      
-      if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuBtn.addEventListener('click', function() {
-          const isOpen = !mobileMenu.classList.contains('hidden');
-          mobileMenu.classList.toggle('hidden');
-          mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-          
-          if (isOpen) {
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          } else {
-            menuIcon.classList.add('opacity-0');
-            closeIcon.classList.remove('opacity-0');
-          }
-        });
-        
-        // Close menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          });
-        });
-      }
-      
-      // Search modal
-      const searchBtn = document.getElementById('searchBtn');
-      const searchModal = document.getElementById('searchModal');
-      const closeSearch = document.getElementById('closeSearch');
-      const searchModalBackdrop = document.getElementById('searchModalBackdrop');
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
-      
-      // Search index
-      const searchIndex = [
-        { title: 'Home', href: '../index.html', type: 'Page' },
-        { title: 'Sermons', href: 'sermons.html', type: 'Page' },
-        { title: 'Resources', href: 'resources.html', type: 'Page' },
-        { title: 'Reading Library', href: 'reading-library.html', type: 'Page' },
-        { title: 'Devotionals', href: 'devotionals.html', type: 'Page' },
-        { title: 'Spiritual Detox', href: 'spiritual-detox.html', type: 'Page' },
-        { title: 'Freedom Life Church', href: 'https://freedomlifechurch.ca/', type: 'External' }
-      ];
-      
-      function openSearch() {
-        searchModal.classList.remove('hidden');
-        setTimeout(() => searchInput.focus(), 100);
-        document.body.style.overflow = 'hidden';
-      }
-      
-      function closeSearchModal() {
-        searchModal.classList.add('hidden');
-        document.body.style.overflow = '';
-        searchInput.value = '';
-        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-      }
-      
-      function performSearch(query) {
-        if (!query || query.trim() === '') {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-          return;
-        }
-        
-        const q = query.toLowerCase().trim();
-        const results = searchIndex.filter(item => 
-          item.title.toLowerCase().includes(q) || 
-          item.type.toLowerCase().includes(q)
-        );
-        
-        if (results.length === 0) {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">No results found.</p>';
-          return;
-        }
-        
-        const html = results.map(item => `
-          <a href="${item.href}" ${item.type === 'External' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block p-3 rounded-lg hover:bg-flcGold/5 transition-colors">
-            <div class="font-medium text-flcNavy">${item.title}</div>
-            <div class="text-xs text-flcCharcoal/50 mt-1">${item.type}</div>
-          </a>
-        `).join('');
-        
-        if (searchResults) searchResults.innerHTML = html;
-      }
-      
-      if (searchBtn) {
-        searchBtn.addEventListener('click', openSearch);
-      }
-      
-      if (closeSearch) {
-        closeSearch.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchModalBackdrop) {
-        searchModalBackdrop.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchInput) {
-        searchInput.addEventListener('input', function() {
-          performSearch(this.value);
-        });
-      }
-      
-      // Close on Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-          closeSearchModal();
-        }
-      });
-    });
-  </script>
+ <!-- Footer Container -->
+ <div id="footerContainer" data-current-page="detox" data-base-path=".."></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

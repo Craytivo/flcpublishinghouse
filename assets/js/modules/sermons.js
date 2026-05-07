@@ -67,6 +67,7 @@ export async function initSermons() {
             title: title,
             summary: stripRichTextToPlain(item.fields.summary || ''),
             date: item.fields.date || '',
+            readingTime: item.fields.readingTime || null,
             url: `${postPagePath}?title=${encodeURIComponent(titleSlug)}`,
             image: imageUrl,
             altText: getImageAltText(item, 'image') || getImageAltText(item, 'featuredImage')
@@ -77,13 +78,15 @@ export async function initSermons() {
 
     allSermons = sermons;
 
+    // Always render filter tabs
+    renderFilterTabs();
+
     if (allSermons.length) {
       if (sermonCount) {
         const suffix = allSermons.length === 1 ? 'sermon' : 'sermons';
         sermonCount.textContent = `Showing ${allSermons.length} ${suffix}`;
       }
 
-      renderFilterTabs();
       await renderSermons();
 
       // Setup filter tabs
@@ -196,61 +199,17 @@ async function renderSermons() {
 function renderCard(sermon) {
   const cardId = `card-${sermon.id}`;
   const dateLabel = sermon.date ? formatDateSafe(sermon.date) : '';
-  const summaryText = sermon.summary || 'Teaching notes and sermon resources.';
   
   return `
-    <article class="sermon-card bg-white rounded-xl overflow-hidden shadow-sm"
-             id="${esc(cardId)}"
-             tabindex="0"
-             role="button"
-             aria-expanded="false"
-             onkeydown="handleCardKeydown(event, '${esc(cardId)}')">
-      <button class="w-full text-left p-6 flex items-start gap-5 cursor-pointer hover:bg-flcOffWhite/50 transition-colors focus:outline-none focus:ring-2 focus:ring-flcGold/50 rounded-lg"
-              onclick="toggleCard('${esc(cardId)}')"
-              aria-label="Toggle details for ${esc(sermon.title)}">
-        <div class="flex-1 min-w-0">
-          ${dateLabel ? `<p class="text-xs font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full inline-block mb-2" style="background:rgba(154,123,79,0.10);color:#9A7B4F;">${esc(dateLabel)}</p>` : ''}
-          <h3 class="font-heading text-lg leading-snug text-flcNavy mb-1">${esc(sermon.title)}</h3>
-          <p class="text-sm" style="color:rgba(44,44,44,0.55);">Teaching Notes</p>
-        </div>
-        <svg class="expand-icon w-5 h-5 flex-shrink-0 mt-1" style="color:rgba(44,44,44,0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </button>
-      <div class="sermon-details px-6 pb-6" role="region" aria-label="Sermon details">
-        <p class="text-sm leading-relaxed mb-4 mt-2" style="color:rgba(44,44,44,0.8);">${esc(summaryText)}</p>
-        <a href="${esc(sermon.url)}" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-lg transition-colors bg-flcNavy text-white hover:bg-flcGold">
-          View Sermon
-          <svg class="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-        </a>
+    <a href="${esc(sermon.url)}" class="sermon-card bg-white rounded-xl overflow-hidden shadow-sm p-6 flex flex-col h-full hover:-translate-y-1 transition-transform">
+      <div class="flex-1">
+        ${dateLabel ? `<p class="text-xs font-semibold tracking-[0.1em] uppercase px-2 py-0.5 rounded-full inline-block mb-2" style="background:rgba(154,123,79,0.10);color:#9A7B4F;">${esc(dateLabel)}</p>` : ''}
+        <h3 class="font-heading text-lg leading-snug text-flcNavy mb-1">${esc(sermon.title)}</h3>
       </div>
-    </article>`;
-}
-
-function toggleCard(cardId) {
-  const card = document.getElementById(cardId);
-  if (!card) return;
-  const details = card.querySelector('.sermon-details');
-  const icon = card.querySelector('.expand-icon');
-  const isExpanded = card.classList.contains('expanded');
-  card.classList.toggle('expanded', !isExpanded);
-  details?.classList.toggle('open', !isExpanded);
-  icon?.classList.toggle('rotated', !isExpanded);
-  card.setAttribute('aria-expanded', !isExpanded);
-}
-
-function handleCardKeydown(event, cardId) {
-  switch (event.key) {
-    case 'Enter':
-    case ' ':
-      event.preventDefault();
-      toggleCard(cardId);
-      break;
-    case 'Escape':
-      const card = document.getElementById(cardId);
-      if (card && card.classList.contains('expanded')) {
-        toggleCard(cardId);
-      }
-      break;
-  }
+      <div class="flex items-center justify-between mt-3">
+        <svg class="w-5 h-5 flex-shrink-0" style="color:rgba(44,44,44,0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+      </div>
+    </a>`;
 }

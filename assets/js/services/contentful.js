@@ -56,7 +56,7 @@ export async function getLatestAnyEntry() {
   const cfg = window.FLC_CONTENTFUL || {};
   if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return null;
 
-  const types = [cfg.contentType, cfg.devotionalGuideContentType].filter(Boolean);
+  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
   const results = await Promise.all(
     types.map(ct => fetchEntries({ content_type: ct, order: '-sys.updatedAt', limit: '1' }))
   );
@@ -65,6 +65,31 @@ export async function getLatestAnyEntry() {
   if (!candidates.length) return null;
 
   return candidates.reduce((best, entry) => sortTime(entry) > sortTime(best) ? entry : best);
+}
+
+export async function getAllLatestEntries(limit = 24) {
+  if (cache.allLatest) return cache.allLatest;
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) { cache.allLatest = { items: [], includes: {} }; return cache.allLatest; }
+
+  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
+  cache.allLatest = Promise.all(
+    types.map(ct => fetchEntries({ content_type: ct, order: '-sys.updatedAt', limit: String(limit) }))
+  ).then(results => {
+    const items = results.flatMap(r => r.items || [])
+      .filter(i => i && i.fields && i.sys && i.sys.id)
+      .sort((a, b) => sortTime(b) - sortTime(a))
+      .slice(0, limit);
+    const includes = results.reduce((acc, r) => {
+      const inc = r.includes || {};
+      for (const key of Object.keys(inc)) {
+        acc[key] = [...(acc[key] || []), ...(inc[key] || [])];
+      }
+      return acc;
+    }, {});
+    return { items, includes };
+  });
+  return cache.allLatest;
 }
 
 export async function getEntryById(entryId) {

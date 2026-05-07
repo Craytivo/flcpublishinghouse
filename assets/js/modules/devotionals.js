@@ -5,6 +5,22 @@ import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { slugify } from '../utils/slugify.js';
 
+function stripMarkdown(str) {
+  return str
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/(\*\*|__)(.*?)\1/g, '$2')
+    .replace(/(\*|_)(.*?)\1/g, '$2')
+    .replace(/~~(.*?)~~/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/`{1,3}[^`]*`{1,3}/g, '')
+    .replace(/^[-*+]\s+/gm, '')
+    .replace(/^\d+\.\s+/gm, '')
+    .replace(/^>\s+/gm, '')
+    .replace(/\n{2,}/g, ' ')
+    .replace(/\n/g, ' ')
+    .trim();
+}
+
 export async function initDevotionals() {
   try {
     const cfg = window.FLC_CONTENTFUL || {};
@@ -16,7 +32,7 @@ export async function initDevotionals() {
     const featuredGuide = publishedItems[0];
     const title = (featuredGuide.fields.title || "").trim();
     const rawField = featuredGuide.fields.descrition || featuredGuide.fields.body || '';
-    const summaryText = typeof rawField === 'string' ? rawField : stripRichTextToPlain(rawField);
+    const summaryText = typeof rawField === 'string' ? stripMarkdown(rawField) : stripRichTextToPlain(rawField);
     const summary = summaryText
       ? summaryText.slice(0, 120) + (summaryText.length > 120 ? '...' : '')
       : 'Freshly published devotional guide from Freedom Life Church.';

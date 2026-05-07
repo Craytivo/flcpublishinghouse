@@ -1,480 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sermons - FLC Publishing House</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
-            body:    ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-          },
-          colors: {
-            flcNavy:     '#1A3A52',
-            flcNavyDark: '#0F2838',
-            flcNavyLight:'#2A4A62',
-            flcGold:     '#9A7B4F',
-            flcGoldLight:'#B8956A',
-            flcCharcoal: '#2C2C2C',
-            flcCream:    '#F5F1E8',
-            flcOffWhite: '#FAFAF8',
-            flcBorder:   '#E8E6E1',
-          },
-          boxShadow: {
-            premium:
-              '0 10px 40px rgba(26, 58, 82, 0.10), 0 4px 12px rgba(26, 58, 82, 0.06)',
-          },
-        },
-      },
-    };
-  </script>
+ <!-- Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM40N0DYXP"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-CM40N0DYXP');
+ </script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ <title>Sermons - FLC Publishing House</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="../assets/js/tailwind-config.js"></script>
 
-  <style>
-    /* Skip Link */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #1A3A52;
-      color: white;
-      padding: 8px 16px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
+ <style>
+ /* Skip Link */
+ .skip-link {
+ position: absolute;
+ top: -40px;
+ left: 0;
+ background: #1A3A52;
+ color: white;
+ padding: 8px 16px;
+ z-index: 100;
+ transition: top 0.3s;
+ }
+ .skip-link:focus {
+ top: 0;
+ }
 
-    /* Pattern Dots */
-    .pattern-dots {
-      background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
+ /* Pattern Dots */
+ .pattern-dots {
+ background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+ background-size: 24px 24px;
+ }
 
-    /* Fade In Up Animation */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
+ /* Fade In Up Animation */
+ .fade-in-up {
+ opacity: 0;
+ transform: translateY(20px);
+ transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+ }
 
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+ .fade-in-up.visible {
+ opacity: 1;
+ transform: translateY(0);
+ }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-up {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+ @media (prefers-reduced-motion: reduce) {
+ .fade-in-up {
+ opacity: 1;
+ transform: translateY(0);
+ }
+ }
 
-    .section-kicker {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #9A7B4F;
-    }
+ .section-kicker {
+ font-size: 0.72rem;
+ font-weight: 700;
+ letter-spacing: 0.16em;
+ text-transform: uppercase;
+ color: #9A7B4F;
+ }
 
-    /* Filter tabs */
-    .filter-btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border-radius: 0.5rem;
-      border: 1px solid #E8E6E1;
-      background: white;
-      color: rgba(44, 44, 44, 0.7);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+ /* Filter tabs */
+ .filter-btn {
+ padding: 0.5rem 1rem;
+ font-size: 0.875rem;
+ font-weight: 500;
+ border-radius: 0.5rem;
+ border: 1px solid #E8E6E1;
+ background: white;
+ color: rgba(44, 44, 44, 0.7);
+ cursor: pointer;
+ transition: all 0.2s ease;
+ }
 
-    .filter-btn:hover {
-      border-color: #9A7B4F;
-      color: #9A7B4F;
-    }
+ .filter-btn:hover {
+ border-color: #9A7B4F;
+ color: #9A7B4F;
+ }
 
-    .filter-btn.active {
-      border-color: #9A7B4F;
-      background: rgba(154, 123, 79, 0.1);
-      color: #9A7B4F;
-      font-weight: 600;
-    }
+ .filter-btn.active {
+ border-color: #9A7B4F;
+ background: rgba(154, 123, 79, 0.1);
+ color: #9A7B4F;
+ font-weight: 600;
+ }
 
-    /* Accordion cards */
-    .sermon-card {
-      border: 1px solid #E8E6E1;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .sermon-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 58, 82, 0.08);
-    }
-    .sermon-card.expanded {
-      border-color: #9A7B4F;
-    }
-    .sermon-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-      opacity: 0;
-    }
-    .sermon-details.open {
-      max-height: 500px;
-      opacity: 1;
-    }
-    .expand-icon {
-      transition: transform 0.3s ease;
-    }
-    .expand-icon.rotated {
-      transform: rotate(180deg);
-    }
+ .divider {
+ height: 1px;
+ background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
+ }
 
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
-    }
+ .skeleton {
+ background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+ background-size: 200% 100%;
+ animation: skeleton-loading 1.5s infinite;
+ }
 
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: skeleton-loading 1.5s infinite;
-    }
-
-    @keyframes skeleton-loading {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-  </style>
-<link rel="stylesheet" href="../assets/css/site-theme.css" />
+ @keyframes skeleton-loading {
+ 0% { background-position: 200% 0; }
+ 100% { background-position: -200% 0; }
+ }
+ </style>
+<style>body{opacity:0}body.pt-ready{opacity:1}</style>
+<link rel="stylesheet" href="../assets/css/base.css" />
+ <link rel="stylesheet" href="../assets/css/layout.css" />
+ <link rel="stylesheet" href="../assets/css/typography.css" />
+ <link rel="stylesheet" href="../assets/css/utilities.css" />
+ <link rel="stylesheet" href="../assets/css/consolidated-styles.css" />
+<link rel="stylesheet" href="../assets/css/components.css" />
+<link rel="stylesheet" href="../assets/css/animations.css" />
 </head>
 
-<body class="text-flcCharcoal text-base lg:text-lg">
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  
-  <!-- Static Header -->
-  <header id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
-        <!-- Logo -->
-        <a href="../index.html" class="flex items-center group flex-shrink-0">
-          <img src="../assets/images/Logo.png" alt="FLC Publishing House" class="w-auto h-[105px] group-hover:scale-105 transition-all duration-300" style="object-fit: contain;">
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-1">
-          <a href="../index.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Home</a>
-          <a href="sermons.html" class="px-4 py-2 text-flcGold font-semibold text-sm lg:text-base transition-all duration-200">Sermons</a>
-          <a href="resources.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Resources</a>
-          <a href="reading-library.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Reading Library</a>
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200 inline-flex items-center gap-1.5">
-            Church
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          </a>
-        </nav>
-        
-        <!-- Right Actions -->
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <!-- Search Button -->
-          <button id="searchBtn" class="hidden md:block p-2 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Search">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-          
-          <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
-            <svg class="w-6 h-6 absolute inset-0 transition-all duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <svg class="w-6 h-6 absolute inset-0 opacity-0 rotate-90 transition-all duration-200" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
-        <a href="../index.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Home</a>
-        <a href="sermons.html" class="block py-3 px-4 text-flcGold font-semibold rounded-lg transition-all duration-200 font-medium">Sermons</a>
-        <a href="resources.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Resources</a>
-        <a href="reading-library.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Reading Library</a>
-        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Church</a>
-        
-        <!-- Mobile Search -->
-        <div class="pt-4 mt-4 border-t border-flcBorder">
-          <div class="relative">
-            <input
-              type="text"
-              id="mobileSearchInput"
-              placeholder="Search..."
-              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Search Modal -->
-  <div id="searchModal" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="searchModalBackdrop"></div>
-    <div class="relative max-w-2xl mx-auto mt-20 px-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-4">
-          <div class="relative">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search resources..."
-              class="w-full px-4 py-3 pl-12 rounded-xl border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-lg text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-              autofocus
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-flcCharcoal/40 hover:text-flcNavy hover:scale-110 transition-all duration-200" aria-label="Close search">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div id="searchResults" class="max-h-96 overflow-y-auto p-4 border-t border-flcBorder">
-          <p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script type="module" src="../assets/js/config.js"></script>
-  <script type="module" src="../assets/js/pages/sermons.js"></script>
-  
-  <main id="main-content" class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden">
-      <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
-      <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="section-kicker mb-4">Sermons</p>
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
-          Teaching Notes & Sermon Resources
-        </h1>
-        <p class="text-lg text-flcCharcoal/70 mb-4">
-          Access sermon notes, outlines, and teaching materials for personal study and group preparation.
-        </p>
-        <p class="text-sm text-flcCharcoal/60 mb-8">
-          Our sermon resources are designed to help you engage with the message long after Sunday morning. Each sermon includes teaching notes, Scripture references, and discussion questions for personal reflection or group study.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#sermon-list" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg text-sm">
-            Browse All Sermons
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+ <a href="#main-content" class="skip-link">Skip to content</a>
+ <div id="headerContainer" data-current-page="sermons" data-base-path=".."></div> <!-- Search Modal  Command Palette -->
+ <div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+ <div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+ <div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4">
+ <div class="bg-white rounded-2xl shadow-elevated overflow-hidden search-modal-enter border border-flcBorder/40">
+ <div class="p-4 pb-3">
+ <div class="relative">
+ <input type="text" id="searchInput" placeholder="Search sermons, devotionals, resources..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40 motion-fast" autofocus autocomplete="off" aria-describedby="searchHint" />
+ <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+ <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+ <kbd class="hidden sm:inline-block text-[0.65rem] text-flcCharcoal/35 bg-flcOffWhite border border-flcBorder/60 rounded px-1.5 py-0.5 font-mono">Esc</kbd>
+ <button id="closeSearch" class="p-1.5 text-flcCharcoal/35 hover:text-flcNavy motion-fast rounded-lg hover:bg-flcOffWhite" aria-label="Close search"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+ </div>
+ </div>
+ <p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Use <kbd class="font-mono"></kbd> to navigate, <kbd class="font-mono">Enter</kbd> to select</p>
+ </div>
+ <div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox">
+ <p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <script type="module" src="../assets/js/config.js"></script>
+ <script type="module" src="../assets/js/pages/sermons.js"></script>
+ 
+ <main id="main-content" class="min-h-screen">
+ <!-- Hero Section -->
+ <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden">
+ <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+ <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+ <p class="section-kicker mb-4">Sermons</p>
+ <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
+ Teaching Notes & Sermon Resources
+ </h1>
+ <p class="text-lg text-flcCharcoal/70 mb-4">
+ Access sermon notes, outlines, and teaching materials for personal study and group preparation.
+ </p>
+ <p class="text-sm text-flcCharcoal/60 mb-8">
+ Our sermon resources are designed to help you engage with the message long after Sunday morning. Each sermon includes teaching notes, Scripture references, and discussion questions for personal reflection or group study.
+ </p>
+ <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+ <a href="#sermon-list" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold motion-smooth transform hover:-translate-y-0.5 shadow-editorial hover:shadow-lg text-sm">
+ Browse All Sermons
+ <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+ </a>
+ </div>
+ </div>
+ </section>
 
-    <!-- ═══ SCRIPTURE BAND ═══ -->
-    <section class="bg-flcNavyDark py-12 sm:py-16">
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <div class="w-8 h-px bg-flcGold mx-auto mb-6"></div>
-        <blockquote class="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-[1.35] italic mb-4">
-          &ldquo;Preach the word; be prepared in season and out of season; correct, rebuke and encourage—with great patience and careful instruction.&rdquo;
-        </blockquote>
-        <p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase">2 Timothy 4:2</p>
-        <div class="w-8 h-px bg-flcGold mx-auto mt-6"></div>
-      </div>
-    </section>
+ <!-- ═══ SCRIPTURE BAND ═══ -->
+ <section class="bg-flcNavyDark py-12 sm:py-16">
+ <div class="max-w-3xl mx-auto px-6 text-center">
+ <div class="w-8 h-px bg-flcGold mx-auto mb-6"></div>
+ <blockquote class="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-[1.35] italic mb-4">
+ &ldquo;Preach the word; be prepared in season and out of season; correct, rebuke and encourage—with great patience and careful instruction.&rdquo;
+ </blockquote>
+ <p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase">2 Timothy 4:2</p>
+ <div class="w-8 h-px bg-flcGold mx-auto mt-6"></div>
+ </div>
+ </section>
 
-    <!-- ═══ SERMON LIST ═══ -->
-    <section id="sermon-list" class="py-10 sm:py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div id="sermonLabel" class="flex items-center gap-4 mb-7">
-          <p class="section-kicker" id="sermonLabelText">All Sermons</p>
-          <div class="flex-1 h-px bg-flcBorder"></div>
-        </div>
-        <div id="filterTabs" class="flex gap-2 overflow-x-auto scrollbar-hide pb-0.5"></div>
-        <div class="mt-4 flex items-center gap-2">
-          <p id="sermonCount" class="text-xs font-medium tracking-wide" style="color:rgba(44,44,44,0.5);"></p>
-        </div>
+ <!-- ═══ SERMON LIST ═══ -->
+ <section id="sermon-list" class="py-10 sm:py-12">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div id="sermonLabel" class="flex items-center gap-4 mb-7">
+ <p class="section-kicker" id="sermonLabelText">All Sermons</p>
+ <div class="flex-1 h-px bg-flcBorder"></div>
+ </div>
+ <div id="filterTabs" class="flex gap-2 overflow-x-auto scrollbar-hide pb-0.5"></div>
+ <div class="mt-4 flex items-center gap-2">
+ <p id="sermonCount" class="text-xs font-medium tracking-wide" style="color:rgba(44,44,44,0.5);"></p>
+ </div>
 
-        <div id="sermonGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
-        <div id="loadingState" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
-            <div class="flex items-start gap-5 mb-4">
-              <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
-              <div class="flex-1">
-                <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
-                <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
-            <div class="flex items-start gap-5 mb-4">
-              <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
-              <div class="flex-1">
-                <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
-                <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6 hidden lg:block">
-            <div class="flex items-start gap-5 mb-4">
-              <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
-              <div class="flex-1">
-                <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
-                <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="emptyState" class="hidden text-center py-20">
-          <p class="font-heading text-2xl text-flcNavy mb-2">No sermons found.</p>
-          <p class="text-sm" style="color:rgba(44,44,44,0.6);">Try a different filter.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+ <div id="sermonGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
+ <div id="loadingState" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6 hidden lg:block">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div id="emptyState" class="hidden text-center py-20">
+ <p class="font-heading text-2xl text-flcNavy mb-2">No sermons found.</p>
+ <p class="text-sm" style="color:rgba(44,44,44,0.6);">Try a different filter.</p>
+ </div>
+ </div>
+ </section>
+ </main>
 
-  <!-- Footer Container -->
-  <div id="footerContainer"
-       data-config='{"currentPage":"sermons","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  
-  <!-- Load Footer Component -->
-  <script src="../assets/js/components/footer-component.js"></script>
-  
-  <script src="../assets/js/lib/site-theme.js"></script>
-  
-  <script>
-    // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuIcon = document.getElementById('menuIcon');
-      const closeIcon = document.getElementById('closeIcon');
-      
-      if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuBtn.addEventListener('click', function() {
-          const isOpen = !mobileMenu.classList.contains('hidden');
-          mobileMenu.classList.toggle('hidden');
-          mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-          
-          if (isOpen) {
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          } else {
-            menuIcon.classList.add('opacity-0');
-            closeIcon.classList.remove('opacity-0');
-          }
-        });
-        
-        // Close menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          });
-        });
-      }
-      
-      // Search modal
-      const searchBtn = document.getElementById('searchBtn');
-      const searchModal = document.getElementById('searchModal');
-      const closeSearch = document.getElementById('closeSearch');
-      const searchModalBackdrop = document.getElementById('searchModalBackdrop');
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
-      
-      // Search index
-      const searchIndex = [
-        { title: 'Home', href: '../index.html', type: 'Page' },
-        { title: 'Sermons', href: 'sermons.html', type: 'Page' },
-        { title: 'Resources', href: 'resources.html', type: 'Page' },
-        { title: 'Reading Library', href: 'reading-library.html', type: 'Page' },
-        { title: 'Devotionals', href: 'devotionals.html', type: 'Page' },
-        { title: 'Spiritual Detox', href: 'spiritual-detox.html', type: 'Page' },
-        { title: 'Freedom Life Church', href: 'https://freedomlifechurch.ca/', type: 'External' }
-      ];
-      
-      function openSearch() {
-        searchModal.classList.remove('hidden');
-        setTimeout(() => searchInput.focus(), 100);
-        document.body.style.overflow = 'hidden';
-      }
-      
-      function closeSearchModal() {
-        searchModal.classList.add('hidden');
-        document.body.style.overflow = '';
-        searchInput.value = '';
-        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-      }
-      
-      function performSearch(query) {
-        if (!query || query.trim() === '') {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-          return;
-        }
-        
-        const q = query.toLowerCase().trim();
-        const results = searchIndex.filter(item => 
-          item.title.toLowerCase().includes(q) || 
-          item.type.toLowerCase().includes(q)
-        );
-        
-        if (results.length === 0) {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">No results found.</p>';
-          return;
-        }
-        
-        const html = results.map(item => `
-          <a href="${item.href}" ${item.type === 'External' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block p-3 rounded-lg hover:bg-flcGold/5 transition-colors">
-            <div class="font-medium text-flcNavy">${item.title}</div>
-            <div class="text-xs text-flcCharcoal/50 mt-1">${item.type}</div>
-          </a>
-        `).join('');
-        
-        if (searchResults) searchResults.innerHTML = html;
-      }
-      
-      if (searchBtn) {
-        searchBtn.addEventListener('click', openSearch);
-      }
-      
-      if (closeSearch) {
-        closeSearch.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchModalBackdrop) {
-        searchModalBackdrop.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchInput) {
-        searchInput.addEventListener('input', function() {
-          performSearch(this.value);
-        });
-      }
-      
-      // Close on Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-          closeSearchModal();
-        }
-      });
-    });
-  </script>
+ <!-- Footer Container -->
+ <div id="footerContainer" data-current-page="sermons" data-base-path=".."></div>
 </body>
 </html>

@@ -1,14 +1,24 @@
 // pages/sermons.js - Entry point for sermons page
 
 import '../config.js';
-import { initScrollAnimations } from '../modules/animations.js';
+import { initHeader } from '../header.js';
+import { initFooter } from '../footer.js';
+import { initNavigation } from '../navigation.js';
+import { initScrollAnimations, initSearchModal, initPageTransition } from '../modules/animations.js';
 import { initScrollTop } from '../modules/scrollTop.js';
+import { initSearch } from '../modules/search.js';
 import { initSermons } from '../modules/sermons.js';
 
 // Initialize all modules when DOM is ready
-function initSermonsPage() {
+async function initSermonsPage() {
   try {
+    await initHeader();
+    await initFooter();
+    initNavigation();
     initScrollAnimations();
+    initSearchModal();
+    await initSearch();
+    initPageTransition();
     initScrollTop();
     initSermons();
   } catch (error) {

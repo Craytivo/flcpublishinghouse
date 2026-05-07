@@ -1,0 +1,49 @@
+:root {
+  --site-max: 80rem;
+  --site-gutter: clamp(1rem, 3vw, 2rem);
+  --section-y: clamp(4rem, 8vw, 8rem);
+  --section-y-tight: clamp(2.75rem, 6vw, 5rem);
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --shadow-soft: 0 18px 50px rgba(15, 40, 56, 0.08);
+  --shadow-lift: 0 24px 70px rgba(15, 40, 56, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(154, 123, 79, 0.7);
+  outline-offset: 3px;
+}
+
+body.is-nav-open {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

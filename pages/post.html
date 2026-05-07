@@ -1,682 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Post - FLC Publishing House</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
-            body:    ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-          },
-          colors: {
-            flcNavy:     '#1A3A52',
-            flcNavyDark: '#0F2838',
-            flcNavyLight:'#2A4A62',
-            flcGold:     '#9A7B4F',
-            flcGoldLight:'#B8956A',
-            flcCharcoal: '#2C2C2C',
-            flcCream:    '#F5F1E8',
-            flcOffWhite: '#FAFAF8',
-            flcBorder:   '#E8E6E1',
-          },
-          boxShadow: {
-            premium:
-              '0 10px 40px rgba(26, 58, 82, 0.10), 0 4px 12px rgba(26, 58, 82, 0.06)',
-          },
-        },
-      },
-    };
-  </script>
+ <!-- Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM40N0DYXP"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-CM40N0DYXP');
+ </script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ <title>Post - FLC Publishing House</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="../assets/js/tailwind-config.js"></script>
 
-  <style>
-    /* Skip Link */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #1A3A52;
-      color: white;
-      padding: 8px 16px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
+ <style>
+ /* Skip Link */
+ .skip-link {
+ position: absolute;
+ top: -40px;
+ left: 0;
+ background: #1A3A52;
+ color: white;
+ padding: 8px 16px;
+ z-index: 100;
+ transition: top 0.3s;
+ }
+ .skip-link:focus {
+ top: 0;
+ }
 
-    /* Pattern Dots */
-    .pattern-dots {
-      background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
+ /* Pattern Dots */
+ .pattern-dots {
+ background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+ background-size: 24px 24px;
+ }
 
-    /* Fade In Up Animation */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    }
+ /* Fade In Up Animation */
+ .fade-in-up {
+ opacity: 0;
+ transform: translateY(8px);
+ transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+ }
 
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+ .fade-in-up.visible {
+ opacity: 1;
+ transform: translateY(0);
+ }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-up {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+ @media (prefers-reduced-motion: reduce) {
+ .fade-in-up {
+ opacity: 1;
+ transform: translateY(0);
+ }
+ }
 
-    .section-kicker {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #9A7B4F;
-    }
+ .section-kicker {
+ font-size: 0.75rem;
+ font-weight: 600;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ color: #9A7B4F;
+ }
 
-    /* Reading Progress Bar */
-    .reading-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, #9A7B4F, #B8956A);
-      z-index: 9999;
-      transition: width 0.1s ease;
-    }
+ /* Reading Progress Bar */
+ .reading-progress {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 0%;
+ height: 3px;
+ background: linear-gradient(90deg, #9A7B4F, #B8956A);
+ z-index: 9999;
+ transition: width 0.1s ease;
+ }
 
-    /* Scroll to Top Button */
-    .scroll-top-btn {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 3rem;
-      height: 3rem;
-      background: #1A3A52;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(26, 58, 82, 0.2);
-    }
+ /* Scroll to Top Button */
+ .scroll-top-btn {
+ position: fixed;
+ bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+ right: 2rem;
+ width: 3rem;
+ height: 3rem;
+ background: #1A3A52;
+ color: white;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ opacity: 0;
+ visibility: hidden;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ box-shadow: 0 4px 12px rgba(26, 58, 82, 0.2);
+ }
 
-    .scroll-top-btn.visible {
-      opacity: 1;
-      visibility: visible;
-    }
+ .scroll-top-btn.visible {
+ opacity: 1;
+ visibility: visible;
+ }
 
-    .scroll-top-btn:hover {
-      background: #9A7B4F;
-      transform: translateY(-2px);
-    }
+ .scroll-top-btn:hover {
+ background: #9A7B4F;
+ transform: translateY(-2px);
+ }
 
-    .post-content {
-      line-height: 1.75;
-    }
+ .note-textarea {
+ width: 100%;
+ min-height: 100px;
+ padding: 1rem;
+ border: 1px solid #E5E0D8;
+ border-radius: 0.5rem;
+ font-family: inherit;
+ font-size: 0.875rem;
+ resize: vertical;
+ }
 
-    .post-content p {
-      margin-bottom: 1.25rem;
-    }
+ .note-textarea:focus {
+ outline: none;
+ border-color: #9A7B4F;
+ }
 
-    .post-content h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #1A3A52;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
+ /* Skeleton Loading */
+ .skeleton {
+ background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+ background-size: 200% 100%;
+ animation: skeleton-loading 1.5s infinite;
+ }
 
-    .post-content h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #1A3A52;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .post-content ul, .post-content ol {
-      margin-bottom: 1.25rem;
-      padding-left: 1.5rem;
-    }
-
-    .post-content li {
-      margin-bottom: 0.5rem;
-    }
-
-    .post-content blockquote {
-      background: linear-gradient(135deg, #F5F1E8 0%, #FAFAF8 100%);
-      border-left: 4px solid #9A7B4F;
-      padding: 1.5rem;
-      margin: 2rem 0;
-      border-radius: 0.5rem;
-      font-style: italic;
-      color: #1A3A52;
-    }
-
-    .post-content a {
-      color: #9A7B4F;
-      text-decoration: underline;
-    }
-
-    .post-content a:hover {
-      color: #1A3A52;
-    }
-
-    .post-content strong {
-      color: #1A3A52;
-      font-weight: 600;
-    }
-
-    .note-textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 1rem;
-      border: 1px solid #E5E0D8;
-      border-radius: 0.5rem;
-      font-family: inherit;
-      font-size: 0.875rem;
-      resize: vertical;
-    }
-
-    .note-textarea:focus {
-      outline: none;
-      border-color: #9A7B4F;
-    }
-
-    /* Skeleton Loading */
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: skeleton-loading 1.5s infinite;
-    }
-
-    @keyframes skeleton-loading {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-  </style>
-  <link rel="stylesheet" href="../assets/css/site-theme.css" />
-  <link rel="stylesheet" href="../assets/css/sermon-page.css" />
+ @keyframes skeleton-loading {
+ 0% { background-position: 200% 0; }
+ 100% { background-position: -200% 0; }
+ }
+ </style>
+ <style>body{opacity:0}body.pt-ready{opacity:1}</style>
+ <link rel="stylesheet" href="../assets/css/base.css" />
+ <link rel="stylesheet" href="../assets/css/layout.css" />
+ <link rel="stylesheet" href="../assets/css/typography.css" />
+ <link rel="stylesheet" href="../assets/css/utilities.css" />
+ <link rel="stylesheet" href="../assets/css/consolidated-styles.css" />
+ <link rel="stylesheet" href="../assets/css/components.css" />
+ <link rel="stylesheet" href="../assets/css/animations.css" />
 </head>
 
-<body class="text-flcCharcoal text-base lg:text-lg">
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  
-  <!-- Reading Progress Bar -->
-  <div class="reading-progress" id="readingProgress"></div>
-  
-  <!-- Static Header -->
-  <header id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
-        <!-- Logo -->
-        <a href="../index.html" class="flex items-center group flex-shrink-0">
-          <img src="../assets/images/Logo.png" alt="FLC Publishing House" class="w-auto h-[105px] group-hover:scale-105 transition-all duration-300" style="object-fit: contain;">
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-1">
-          <a href="../index.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Home</a>
-          <a href="sermons.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Sermons</a>
-          <a href="resources.html" class="px-4 py-2 text-flcGold font-semibold text-sm lg:text-base transition-all duration-200">Resources</a>
-          <a href="reading-library.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Reading Library</a>
-          <a href="devotionals.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Devotionals</a>
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200 inline-flex items-center gap-1.5">
-            Church
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          </a>
-        </nav>
-        
-        <!-- Right Actions -->
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <!-- Search Button -->
-          <button id="searchBtn" class="hidden md:block p-2 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Search">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-          
-          <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
-            <svg class="w-6 h-6 absolute inset-0 transition-all duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <svg class="w-6 h-6 absolute inset-0 opacity-0 rotate-90 transition-all duration-200" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
-        <a href="../index.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Home</a>
-        <a href="sermons.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Sermons</a>
-        <a href="resources.html" class="block py-3 px-4 text-flcGold font-semibold rounded-lg transition-all duration-200 font-medium">Resources</a>
-        <a href="reading-library.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Reading Library</a>
-        <a href="devotionals.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Devotionals</a>
-        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Church</a>
-        
-        <!-- Mobile Search -->
-        <div class="pt-4 mt-4 border-t border-flcBorder">
-          <div class="relative">
-            <input
-              type="text"
-              id="mobileSearchInput"
-              placeholder="Search..."
-              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Search Modal -->
-  <div id="searchModal" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="searchModalBackdrop"></div>
-    <div class="relative max-w-2xl mx-auto mt-20 px-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-4">
-          <div class="relative">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search resources..."
-              class="w-full px-4 py-3 pl-12 rounded-xl border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-lg text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-              autofocus
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-flcCharcoal/40 hover:text-flcNavy hover:scale-110 transition-all duration-200" aria-label="Close search">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div id="searchResults" class="max-h-96 overflow-y-auto p-4 border-t border-flcBorder">
-          <p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script type="module" src="../assets/js/pages/post.js"></script>
-  
-  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-    <!-- Loading State -->
-    <div id="loadingState" class="fade-in-up">
-      <div class="h-8 w-32 skeleton rounded mb-4"></div>
-      <div class="h-12 w-3/4 skeleton rounded mb-6"></div>
-      <div class="h-4 w-full skeleton rounded mb-3"></div>
-      <div class="h-4 w-full skeleton rounded mb-3"></div>
-      <div class="h-4 w-2/3 skeleton rounded mb-3"></div>
-    </div>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+ <a href="#main-content" class="skip-link">Skip to content</a>
+ 
+ <!-- Reading Progress Bar -->
+ <div class="reading-progress" id="readingProgress"></div>
+ <div id="headerContainer" data-current-page="post" data-base-path=".."></div> <!-- Search Modal Command Palette -->
+ <div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+ <div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+ <div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4">
+ <div class="bg-white rounded-2xl shadow-elevated overflow-hidden search-modal-enter border border-flcBorder/40">
+ <div class="p-4 pb-3">
+ <div class="relative">
+ <input type="text" id="searchInput" placeholder="Search sermons, devotionals, resources..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40 motion-fast" autofocus autocomplete="off" aria-describedby="searchHint" />
+ <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+ <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+ <kbd class="hidden sm:inline-block text-[0.65rem] text-flcCharcoal/35 bg-flcOffWhite border border-flcBorder/60 rounded px-1.5 py-0.5 font-mono">Esc</kbd>
+ <button id="closeSearch" class="p-1.5 text-flcCharcoal/35 hover:text-flcNavy motion-fast rounded-lg hover:bg-flcOffWhite" aria-label="Close search"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+ </div>
+ </div>
+ <p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Use <kbd class="font-mono"></kbd> to navigate, <kbd class="font-mono">Enter</kbd> to select</p>
+ </div>
+ <div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox">
+ <p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+ <script type="module" src="../assets/js/pages/post.js"></script>
+ 
+ <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+ <!-- Loading State -->
+ <div id="loadingState" class="fade-in-up">
+ <div class="h-8 w-32 skeleton rounded mb-4"></div>
+ <div class="h-12 w-3/4 skeleton rounded mb-6"></div>
+ <div class="h-4 w-full skeleton rounded mb-3"></div>
+ <div class="h-4 w-full skeleton rounded mb-3"></div>
+ <div class="h-4 w-2/3 skeleton rounded mb-3"></div>
+ </div>
 
-    <!-- Error State -->
-    <div id="errorState" class="hidden text-center py-20">
-      <p class="text-flcCharcoal/70 mb-4">Failed to load post. Please try again later.</p>
-      <a href="../pages/sermons.html" class="btn-primary px-6 py-3 text-sm sm:text-base">
-        Back to Sermons
-      </a>
-    </div>
+ <!-- Error State -->
+ <div id="errorState" class="hidden text-center py-20">
+ <p class="text-flcCharcoal/70 mb-4">Failed to load post. Please try again later.</p>
+ <a href="../pages/sermons.html" class="btn-primary px-6 py-3 text-sm sm:text-base">
+ Back to Sermons
+ </a>
+ </div>
 
-    <!-- Post Content -->
-    <article id="postContent" class="hidden">
-      <!-- Hero Section -->
-      <section class="relative pt-16 sm:pt-20 pb-12 sm:pb-16 lg:pt-32 lg:pb-24 overflow-hidden fade-in-up" id="heroSection">
-        <!-- Decorative line elements -->
-        <div class="absolute top-24 left-8 w-px h-40 bg-gradient-to-b from-transparent via-flcGold/40 to-transparent hidden lg:block"></div>
-        <div class="absolute top-36 right-12 w-32 h-px bg-gradient-to-r from-transparent via-flcGold/30 to-transparent hidden lg:block"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <!-- Asymmetric Layout -->
-          <div class="flex flex-col lg:flex-row lg:gap-16">
-            <!-- Left Column - Meta Line -->
-            <div class="lg:w-1/4 lg:pt-8">
-              <div class="flex items-center space-x-4 mb-8 lg:flex-col lg:items-start lg:space-x-0 lg:space-y-3">
-                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium" id="postPastor"></p>
-                <span class="text-flcGold/30 lg:hidden" id="metaSeparator">•</span>
-                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium" id="postDate"></p>
-                <!-- Devotional Guide specific fields -->
-                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postStartDate"></p>
-                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postEndDate"></p>
-                <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium hidden" id="postSpeaker"></p>
-              </div>
-            </div>
-            
-            <!-- Right Column - Title, Excerpt, Image, Video -->
-            <div class="lg:w-3/4 text-center lg:text-left">
-              <!-- Title -->
-              <h1 class="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] text-flcNavy leading-[1.1] tracking-[-0.035em] mb-4" id="postTitle"></h1>
-              
-              <!-- Subtitle -->
-              <p class="text-xl lg:text-2xl text-flcCharcoal/60 font-heading tracking-tight mb-3 hidden" id="postSubtitle"></p>
-              
-              <!-- Optional excerpt -->
-              <p class="text-[1.15rem] text-flcCharcoal/70 leading-[1.8] max-w-[70ch] mb-12" id="postExcerpt"></p>
-              
-              <!-- Featured Image -->
-              <div id="postImageContainer" class="max-w-4xl mx-auto lg:mx-0 mb-12 hidden">
-                <div class="relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)] group">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img id="heroImage" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]" loading="eager" alt="" />
-                </div>
-              </div>
+ <!-- Post Content -->
+ <article id="postContent" class="hidden">
+ <!-- Hero Section -->
+ <section class="relative pt-8 sm:pt-20 pb-8 sm:pb-16 lg:pt-32 lg:pb-24 overflow-hidden fade-in-up" id="heroSection">
+ <!-- Decorative line elements -->
+ <div class="absolute top-24 left-8 w-px h-40 bg-gradient-to-b from-transparent via-flcGold/40 to-transparent hidden lg:block"></div>
+ <div class="absolute top-36 right-12 w-32 h-px bg-gradient-to-r from-transparent via-flcGold/30 to-transparent hidden lg:block"></div>
+ 
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <!-- Asymmetric Layout -->
+ <div class="flex flex-col lg:flex-row lg:gap-16">
+ <!-- Left Column - Meta Line -->
+ <div class="lg:w-1/4 lg:pt-8">
+ <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 mb-6 sm:mb-8 lg:flex-col lg:items-start lg:gap-x-0 lg:gap-y-3">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium" id="postPastor"></p>
+ <span class="text-flcGold/30 lg:hidden" id="metaSeparator">•</span>
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium" id="postDate"></p>
+ <!-- Devotional Guide specific fields -->
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postStartDate"></p>
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postEndDate"></p>
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium hidden" id="postSpeaker"></p>
+ </div>
+ </div>
+ 
+ <!-- Right Column - Title, Excerpt, Image, Video -->
+ <div class="lg:w-3/4 text-center lg:text-left">
+ <!-- Title -->
+ <h1 class="font-heading font-bold text-[clamp(1.75rem,5vw,4rem)] text-flcNavy leading-[1.1] tracking-[-0.025em] mb-4 break-words" id="postTitle"></h1>
+ 
+ <!-- Subtitle -->
+ <p class="text-xl lg:text-2xl text-flcCharcoal/60 font-heading tracking-tight mb-3 hidden" id="postSubtitle"></p>
+ 
+ <!-- Optional excerpt -->
+ <p class="text-base sm:text-[1.15rem] text-flcCharcoal/70 leading-[1.7] sm:leading-[1.8] max-w-[70ch] mb-8 sm:mb-12 break-words" id="postExcerpt"></p>
+ 
+ <!-- Featured Image -->
+ <div id="postImageContainer" class="max-w-4xl mx-auto lg:mx-0 mb-8 sm:mb-12 hidden">
+ <div class="relative rounded-xl sm:rounded-[20px] overflow-hidden shadow-[0_16px_48px_rgba(26,58,82,0.1)] sm:shadow-[0_32px_96px_rgba(26,58,82,0.12)] group">
+ <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+ <img id="heroImage" class="w-full h-auto motion-fast group-hover:scale-[1.03]" loading="eager" alt="" />
+ </div>
+ </div>
 
-              <!-- YouTube Video Embed -->
-              <div id="youtubeVideoContainer" class="max-w-4xl mx-auto lg:mx-0 hidden">
-                <!-- Video will be embedded here -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+ <!-- YouTube Video Embed -->
+ <div id="youtubeVideoContainer" class="max-w-4xl mx-auto lg:mx-0 hidden">
+ <!-- Video will be embedded here -->
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-      <!-- Main Content -->
-      <div class="relative px-4 sm:px-6 lg:px-8">
-        <!-- Post Body -->
-        <div class="post-content fade-in-up" id="postBody">
-          <!-- Content will be loaded here -->
-        </div>
-      </div>
+ <!-- Main Content -->
+ <div class="relative px-0 sm:px-6 lg:px-8">
+ <!-- Post Body -->
+ <div class="post-content fade-in-up" id="postBody">
+ <!-- Content will be loaded here -->
+ </div>
+ </div>
 
-            <!-- Mobile Sidebar Toggle -->
-  <button id="mobileSidebarToggle" class="lg:hidden fixed bottom-6 left-6 w-14 h-14 bg-flcNavy text-white rounded-full shadow-lg z-50 flex items-center justify-center">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-    </svg>
-  </button>
+ <!-- Mobile Sidebar Toggle -->
+ <button id="mobileSidebarToggle" class="xl:hidden fixed bottom-6 left-6 w-12 h-12 sm:w-14 sm:h-14 bg-flcNavy text-white rounded-full shadow-lg z-50 flex items-center justify-center" style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px))">
+ <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+ </svg>
+ </button>
 
-  <!-- Mobile Sidebar Bottom Sheet -->
-  <div id="mobileSidebar" class="lg:hidden fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobileSidebarOverlay"></div>
-    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 transform transition-transform duration-300 translate-y-full" id="mobileSidebarContent">
-      <div class="w-12 h-1 bg-flcBorder/50 rounded-full mx-auto mb-6"></div>
-      
-      <!-- Reading Progress -->
-      <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
-      <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-3">
-        <div id="mobileSidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight transition-all duration-300" style="width: 0%"></div>
-      </div>
-      <p class="text-xs text-flcCharcoal/60 mb-6" id="mobileSidebarProgressText">0% complete</p>
-      
-      <!-- Reading Time -->
-      <div class="pt-4 border-t border-flcBorder/40 mb-4">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
-        <p class="text-2xl font-heading font-bold text-flcNavy" id="mobileReadingTime">-- min</p>
-      </div>
-      
-      <!-- Word Count -->
-      <div class="pt-4 border-t border-flcBorder/40 mb-4">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
-        <p class="text-2xl font-heading font-bold text-flcNavy" id="mobileWordCount">-- words</p>
-      </div>
-      
-      <!-- Recommended Posts -->
-      <div class="pt-4 border-t border-flcBorder/40 mb-4">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Recommended</p>
-        <div id="mobileSidebarRecommendedPosts" class="space-y-4">
-          <!-- Recommended posts will be loaded here -->
-        </div>
-      </div>
-    </div>
-  </div>
+ <!-- Mobile Sidebar Bottom Sheet -->
+ <div id="mobileSidebar" class="xl:hidden fixed inset-0 z-50 hidden">
+ <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobileSidebarOverlay"></div>
+ <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] max-h-[80vh] overflow-y-auto transform motion-fast translate-y-full" id="mobileSidebarContent">
+ <div class="w-12 h-1 bg-flcBorder/50 rounded-full mx-auto mb-6"></div>
+ 
+ <!-- Reading Progress -->
+ <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
+ <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-3">
+ <div id="mobileSidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight motion-smooth" style="width: 0%"></div>
+ </div>
+ <p class="text-xs text-flcCharcoal/60 mb-6" id="mobileSidebarProgressText">0% complete</p>
+ 
+ <!-- Reading Time -->
+ <div class="pt-4 border-t border-flcBorder/40 mb-4">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
+ <p class="text-2xl font-heading font-bold text-flcNavy" id="mobileReadingTime">-- min</p>
+ </div>
+ 
+ <!-- Word Count -->
+ <div class="pt-4 border-t border-flcBorder/40 mb-4">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
+ <p class="text-2xl font-heading font-bold text-flcNavy" id="mobileWordCount">-- words</p>
+ </div>
+ 
+ <!-- Recommended Posts -->
+ <div class="pt-4 border-t border-flcBorder/40 mb-4">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Recommended</p>
+ <div id="mobileSidebarRecommendedPosts" class="space-y-4">
+ <!-- Recommended posts will be loaded here -->
+ </div>
+ </div>
+ </div>
+ </div>
 
-      <!-- Sidebar (Fixed position on right, outside content flow) -->
-  <aside class="hidden lg:block fixed right-8 top-24 w-72 max-w-[18rem] z-50">
-    <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px rgba(26,58,82,0.04)]">
-      <!-- Decorative line -->
-      <div class="w-px h-16 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
-      
-      <!-- Reading Progress -->
-      <h3 class="font-heading text-sm font-bold text-flcNavy mb-6 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
-      <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-4">
-        <div id="sidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight transition-all duration-300" style="width: 0%"></div>
-      </div>
-      <p class="text-xs text-flcCharcoal/60 mb-8" id="sidebarProgressText">0% complete</p>
-      
-      <!-- Reading Time -->
-      <div class="pt-6 border-t border-flcBorder/40 mb-6">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
-        <p class="text-2xl font-heading font-bold text-flcNavy" id="readingTime">-- min</p>
-      </div>
-      
-      <!-- Word Count -->
-      <div class="pt-6 border-t border-flcBorder/40 mb-6">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
-        <p class="text-2xl font-heading font-bold text-flcNavy" id="wordCount">-- words</p>
-      </div>
-      
-      <!-- Recommended Posts -->
-      <div class="pt-6 border-t border-flcBorder/40 mb-6">
-        <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Recommended</p>
-        <div id="sidebarRecommendedPosts" class="space-y-4">
-          <!-- Recommended posts will be loaded here -->
-        </div>
-      </div>
-      
-      <!-- Share -->
-      <div class="mt-8 pt-6 border-t border-flcBorder/40">
-        <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Share</h3>
-        <div class="flex gap-3">
-          <button id="shareNative" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200" title="Share">
-            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
-            </svg>
-          </button>
-          <button id="shareTwitter" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200" title="Share on X (Twitter)">
-            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71-.05-1.37-.21-1.95-.52v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 16.9 22 12c.23-.7.35-1.44.35-2.2 0-.06 0-.12-.01-.18z"/>
-            </svg>
-          </button>
-          <button id="shareEmail" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center transition-colors duration-200" title="Share via Email">
-            <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </aside>
+ <!-- Sidebar (Fixed position on right, outside content flow) -->
+ <aside class="hidden xl:block fixed right-8 top-24 w-72 max-w-[18rem] z-50">
+ <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 shadow-[0_8px_32px rgba(26,58,82,0.04)]">
+ <!-- Decorative line -->
+ <div class="w-px h-16 bg-gradient-to-b from-flcGold/20 to-transparent mb-6"></div>
+ 
+ <!-- Reading Progress -->
+ <h3 class="font-heading text-sm font-bold text-flcNavy mb-6 tracking-tight uppercase tracking-[0.08em]">Reading Progress</h3>
+ <div class="relative h-1 bg-flcBorder/50 rounded-full overflow-hidden mb-4">
+ <div id="sidebarProgress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-flcGold to-flcGoldLight motion-smooth" style="width: 0%"></div>
+ </div>
+ <p class="text-xs text-flcCharcoal/60 mb-8" id="sidebarProgressText">0% complete</p>
+ 
+ <!-- Reading Time -->
+ <div class="pt-6 border-t border-flcBorder/40 mb-6">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Reading Time</p>
+ <p class="text-2xl font-heading font-bold text-flcNavy" id="readingTime">-- min</p>
+ </div>
+ 
+ <!-- Word Count -->
+ <div class="pt-6 border-t border-flcBorder/40 mb-6">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-2">Word Count</p>
+ <p class="text-2xl font-heading font-bold text-flcNavy" id="wordCount">-- words</p>
+ </div>
+ 
+ <!-- Recommended Posts -->
+ <div class="pt-6 border-t border-flcBorder/40 mb-6">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Recommended</p>
+ <div id="sidebarRecommendedPosts" class="space-y-4">
+ <!-- Recommended posts will be loaded here -->
+ </div>
+ </div>
+ 
+ <!-- Share -->
+ <div class="mt-8 pt-6 border-t border-flcBorder/40">
+ <h3 class="font-heading text-sm font-bold text-flcNavy mb-4 tracking-tight uppercase tracking-[0.08em]">Share</h3>
+ <div class="flex gap-3">
+ <button id="shareNative" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center motion-fast" title="Share">
+ <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+ </svg>
+ </button>
+ <button id="shareTwitter" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center motion-fast" title="Share on X (Twitter)">
+ <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71-.05-1.37-.21-1.95-.52v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 16.9 22 12c.23-.7.35-1.44.35-2.2 0-.06 0-.12-.01-.18z"/>
+ </svg>
+ </button>
+ <button id="shareEmail" class="w-10 h-10 rounded-full bg-flcNavy/5 hover:bg-flcNavy/10 flex items-center justify-center motion-fast" title="Share via Email">
+ <svg class="w-4 h-4 text-flcNavy/70" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+ </svg>
+ </button>
+ </div>
+ </div>
+ </div>
+ </aside>
 
-      <!-- Notes Section -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 lg:mt-32 mb-20 fade-in-up">
-        <!-- Decorative line elements -->
-        <div class="absolute bottom-32 left-8 w-px h-24 bg-gradient-to-b from-flcGold/20 to-transparent hidden lg:block"></div>
-        <div class="absolute bottom-40 right-12 w-20 h-px bg-gradient-to-r from-transparent via-flcGold/20 to-transparent hidden lg:block"></div>
-        
-        <!-- Full Width Layout -->
-        <div class="w-full">
-          <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Personal Notes</p>
-          <h2 class="font-heading text-3xl lg:text-4xl font-bold text-flcNavy mb-8 tracking-tight">Your Notes</h2>
-          
-          <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 sm:p-8 shadow-[0_8px_32px_rgba(26,58,82,0.04)]">
-            <textarea 
-              class="note-textarea w-full min-h-64 p-4 bg-transparent border-0 text-base leading-relaxed resize-none focus:outline-none placeholder:text-flcCharcoal/40" 
-              data-note="main"
-              placeholder="Take notes here... (Your notes are saved automatically)"
-            ></textarea>
-          </div>
-        </div>
-      </section>
+ <!-- Notes Section -->
+ <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-24 lg:mt-32 mb-10 sm:mb-20 fade-in-up">
+ <!-- Decorative line elements -->
+ <div class="absolute bottom-32 left-8 w-px h-24 bg-gradient-to-b from-flcGold/20 to-transparent hidden lg:block"></div>
+ <div class="absolute bottom-40 right-12 w-20 h-px bg-gradient-to-r from-transparent via-flcGold/20 to-transparent hidden lg:block"></div>
+ 
+ <!-- Full Width Layout -->
+ <div class="w-full">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Personal Notes</p>
+ <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-flcNavy mb-6 sm:mb-8 tracking-tight">Your Notes</h2>
+ 
+ <div class="bg-white/60 backdrop-blur-sm rounded-2xl border border-flcBorder/40 p-6 sm:p-8 shadow-[0_8px_32px_rgba(26,58,82,0.04)]">
+ <textarea 
+ class="note-textarea w-full min-h-40 sm:min-h-64 p-3 sm:p-4 bg-transparent border-0 text-base leading-relaxed resize-none focus:outline-none placeholder:text-flcCharcoal/40" 
+ data-note="main"
+ placeholder="Take notes here... (Your notes are saved automatically)"
+ ></textarea>
+ </div>
+ </div>
+ </section>
 
-      <!-- Back to Sermons CTA -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 fade-in-up">
-        <!-- Full Width Layout -->
-        <div class="w-full">
-          <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Continue Exploring</p>
-          <h2 class="font-heading text-3xl lg:text-4xl font-bold text-flcNavy mb-8 tracking-tight" id="ctaTitle">More Sermons</h2>
-          
-          <a href="../pages/sermons.html" class="inline-flex items-center group" id="ctaLink">
-            <span class="text-lg font-heading font-semibold text-flcNavy group-hover:text-flcGold transition-colors duration-300 mr-4" id="ctaText">Back to All Sermons</span>
-            <div class="w-12 h-12 rounded-full border-2 border-flcNavy/20 group-hover:border-flcGold flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-              <svg class="w-5 h-5 text-flcNavy/70 group-hover:text-flcGold transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-              </svg>
-            </div>
-          </a>
-        </div>
-      </section>
-    </article>
-  </main>
+ <!-- Back to Sermons CTA -->
+ <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-20 fade-in-up">
+ <!-- Full Width Layout -->
+ <div class="w-full">
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium mb-4">Continue Exploring</p>
+ <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-flcNavy mb-6 sm:mb-8 tracking-tight" id="ctaTitle">More Sermons</h2>
+ 
+ <a href="../pages/sermons.html" class="inline-flex items-center group" id="ctaLink">
+ <span class="text-base sm:text-lg font-heading font-semibold text-flcNavy group-hover:text-flcGold motion-fast mr-3 sm:mr-4" id="ctaText">Back to All Sermons</span>
+ <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-flcNavy/20 group-hover:border-flcGold flex items-center justify-center flex-shrink-0 motion-smooth">
+ <svg class="w-5 h-5 text-flcNavy/70 group-hover:text-flcGold motion-fast" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+ </svg>
+ </div>
+ </a>
+ </div>
+ </section>
+ </article>
+ </main>
 
-  <!-- Scroll to Top Button -->
-  <div class="scroll-top-btn" id="scrollTopBtn">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-    </svg>
-  </div>
+ <!-- Scroll to Top Button -->
+ <div class="scroll-top-btn" id="scrollTopBtn">
+ <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+ </svg>
+ </div>
 
-  <!-- Footer Container -->
-  <div id="footerContainer"
-       data-config='{"currentPage":"post","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  
-  <!-- Load Footer Component -->
-  <script src="../assets/js/components/footer-component.js"></script>
-  
-  <script src="../assets/js/lib/site-theme.js"></script>
-  
-  <script>
-    // Mobile menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuIcon = document.getElementById('menuIcon');
-      const closeIcon = document.getElementById('closeIcon');
-      
-      if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuBtn.addEventListener('click', function() {
-          const isOpen = !mobileMenu.classList.contains('hidden');
-          mobileMenu.classList.toggle('hidden');
-          mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-          
-          if (isOpen) {
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          } else {
-            menuIcon.classList.add('opacity-0');
-            closeIcon.classList.remove('opacity-0');
-          }
-        });
-        
-        // Close menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            menuIcon.classList.remove('opacity-0');
-            closeIcon.classList.add('opacity-0');
-          });
-        });
-      }
-      
-      // Search modal
-      const searchBtn = document.getElementById('searchBtn');
-      const searchModal = document.getElementById('searchModal');
-      const closeSearch = document.getElementById('closeSearch');
-      const searchModalBackdrop = document.getElementById('searchModalBackdrop');
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
-      
-      // Search index
-      const searchIndex = [
-        { title: 'Home', href: '../index.html', type: 'Page' },
-        { title: 'Sermons', href: 'sermons.html', type: 'Page' },
-        { title: 'Resources', href: 'resources.html', type: 'Page' },
-        { title: 'Reading Library', href: 'reading-library.html', type: 'Page' },
-        { title: 'Devotionals', href: 'devotionals.html', type: 'Page' },
-        { title: 'Spiritual Detox', href: 'spiritual-detox.html', type: 'Page' },
-        { title: 'Freedom Life Church', href: 'https://freedomlifechurch.ca/', type: 'External' }
-      ];
-      
-      function openSearch() {
-        searchModal.classList.remove('hidden');
-        setTimeout(() => searchInput.focus(), 100);
-        document.body.style.overflow = 'hidden';
-      }
-      
-      function closeSearchModal() {
-        searchModal.classList.add('hidden');
-        document.body.style.overflow = '';
-        searchInput.value = '';
-        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-      }
-      
-      function performSearch(query) {
-        if (!query || query.trim() === '') {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-          return;
-        }
-        
-        const q = query.toLowerCase().trim();
-        const results = searchIndex.filter(item => 
-          item.title.toLowerCase().includes(q) || 
-          item.type.toLowerCase().includes(q)
-        );
-        
-        if (results.length === 0) {
-          if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">No results found.</p>';
-          return;
-        }
-        
-        const html = results.map(item => `
-          <a href="${item.href}" ${item.type === 'External' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block p-3 rounded-lg hover:bg-flcGold/5 transition-colors">
-            <div class="font-medium text-flcNavy">${item.title}</div>
-            <div class="text-xs text-flcCharcoal/50 mt-1">${item.type}</div>
-          </a>
-        `).join('');
-        
-        if (searchResults) searchResults.innerHTML = html;
-      }
-      
-      if (searchBtn) {
-        searchBtn.addEventListener('click', openSearch);
-      }
-      
-      if (closeSearch) {
-        closeSearch.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchModalBackdrop) {
-        searchModalBackdrop.addEventListener('click', closeSearchModal);
-      }
-      
-      if (searchInput) {
-        searchInput.addEventListener('input', function() {
-          performSearch(this.value);
-        });
-      }
-      
-      // Close on Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-          closeSearchModal();
-        }
-      });
-    });
-  </script>
+ <!-- Footer Container -->
+ <div id="footerContainer" data-current-page="post" data-base-path=".."></div>
 </body>
 </html>

@@ -10,7 +10,7 @@ function createFooter() {
   const homePath = config.homePath || '../index.html';
   const devotionalsPath = config.devotionalsPath || 'devotionals.html';
   const resourcesPath = config.resourcesPath || 'resources.html';
-  const latestSermonPath = config.latestSermonPath || '../sermons/sermon-im-under-pressure.html';
+  const latestSermonPath = config.latestSermonPath || '../pages/post.html?title=im-under-pressure';
 
   const sermonsPath = config.sermonsPath || resourcesPath;
   const detoxPath = config.detoxPath || '../pages/spiritual-detox.html';

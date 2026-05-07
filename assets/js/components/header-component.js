@@ -159,14 +159,14 @@ function createHeader(config = {}) {
   const computedDetoxWeek3Path = withBase('pages/spiritual-detox-week3.html');
 
   const computedSermonsPath = withBase('pages/sermons.html');
-  const computedSermon1Path = withBase('sermons/sermon-im-under-pressure.html');
-  const computedSermon2Path = withBase('sermons/sermon-purpose-protected-me.html');
-  const computedSermon3Path = withBase('sermons/sermon-when-compassion-costs-you-sleep.html');
+  const computedPostPagePath = withBase('pages/post.html');
+  const computedSermon1Path = `${computedPostPagePath}?title=im-under-pressure`;
+  const computedSermon2Path = `${computedPostPagePath}?title=purpose-protected-me`;
+  const computedSermon3Path = `${computedPostPagePath}?title=when-compassion-costs-you-sleep`;
 
   const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
   const computedResourcesBooksPath = `${computedResourcesPath}#books`;
   const computedReadingLibraryPath = withBase('pages/reading-library.html');
-  const computedPostPagePath = withBase('pages/post.html');
 
   const menu = [
     { label: 'Home', href: computedHomePath, key: 'home' },
@@ -370,40 +370,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const headerContainer = document.getElementById('headerContainer');
   if (headerContainer) {
     const config = JSON.parse(headerContainer.getAttribute('data-config') || '{}');
+    if (!config.basePath && headerContainer.getAttribute('data-base-path')) {
+      config.basePath = headerContainer.getAttribute('data-base-path');
+    }
+    if (!config.currentPage && headerContainer.getAttribute('data-current-page')) {
+      config.currentPage = headerContainer.getAttribute('data-current-page');
+    }
     const isDevotional = headerContainer.getAttribute('data-type') === 'devotional';
     
     headerContainer.innerHTML = isDevotional ? createDevotionalHeader(config) : createHeader(config);
     
-    // Initialize mobile menu toggle with icon animation
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeIcon = document.getElementById('closeIcon');
-    
-    if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
-      mobileMenuBtn.addEventListener('click', function() {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-        
-        if (isOpen) {
-          menuIcon.classList.remove('opacity-0', 'rotate-90');
-          closeIcon.classList.add('opacity-0', 'rotate-90');
-        } else {
-          menuIcon.classList.add('opacity-0', 'rotate-90');
-          closeIcon.classList.remove('opacity-0', 'rotate-90');
-        }
-      });
-      mobileMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          mobileMenuBtn.setAttribute('aria-expanded', 'false');
-          menuIcon.classList.remove('opacity-0', 'rotate-90');
-          closeIcon.classList.add('opacity-0', 'rotate-90');
-        });
-      });
-    }
-    
+    // Mobile menu and search modal animations are handled by animations.js
     // Connect subscribe buttons to modal
     setTimeout(function() {
       const subscribeButtons = document.querySelectorAll('.subscribe-btn');
@@ -453,13 +430,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const computedDevotionalWeek2Path = withBase('devotionals-pages/devotional-week2-love.html');
     const computedDevotionalWeek3Path = withBase('devotionals-pages/devotional-week3-peace.html');
     const computedDevotionalWeek4Path = withBase('devotionals-pages/devotional-week4-joy.html');
-    const computedSermon1Path = withBase('sermons/sermon-im-under-pressure.html');
-    const computedSermon2Path = withBase('sermons/sermon-purpose-protected-me.html');
-    const computedSermon3Path = withBase('sermons/sermon-when-compassion-costs-you-sleep.html');
     const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
     const computedResourcesBooksPath = `${computedSermonsPath}#books`;
     const computedReadingLibraryPath = withBase('pages/reading-library.html');
     const computedPostPagePath = withBase('pages/post.html');
+    const computedSermon1Path = `${computedPostPagePath}?title=im-under-pressure`;
+    const computedSermon2Path = `${computedPostPagePath}?title=purpose-protected-me`;
+    const computedSermon3Path = `${computedPostPagePath}?title=when-compassion-costs-you-sleep`;
 
     const searchIndex = [
       { title: 'Sermons', type: 'Sermons', href: computedSermonsPagePath, tags: ['sermons', 'teaching', 'notes'] },
@@ -472,14 +449,58 @@ document.addEventListener('DOMContentLoaded', function() {
       { title: "I'm Under Pressure", type: 'Sermon', href: computedSermon1Path, tags: ['sermon', 'pressure'] },
       { title: 'Purpose Protected Me', type: 'Sermon', href: computedSermon2Path, tags: ['sermon', 'purpose'] },
       { title: 'When Compassion Costs You Sleep', type: 'Sermon', href: computedSermon3Path, tags: ['sermon', 'compassion'] },
-      { title: 'Devotional — Week 1 (Hope)', type: 'Devotional', href: computedDevotionalWeek1Path, tags: ['devotional', 'hope'] },
-      { title: 'Devotional — Week 2 (Love)', type: 'Devotional', href: computedDevotionalWeek2Path, tags: ['devotional', 'love'] },
-      { title: 'Devotional — Week 3 (Peace)', type: 'Devotional', href: computedDevotionalWeek3Path, tags: ['devotional', 'peace'] },
-      { title: 'Devotional — Week 4 (Joy)', type: 'Devotional', href: computedDevotionalWeek4Path, tags: ['devotional', 'joy'] },
+      { title: 'Devotional — Week 1 (Hope)', type: 'Seasonal Devotional', href: computedDevotionalWeek1Path, tags: ['devotional', 'seasonal', 'advent', 'hope'] },
+      { title: 'Devotional — Week 2 (Love)', type: 'Seasonal Devotional', href: computedDevotionalWeek2Path, tags: ['devotional', 'seasonal', 'advent', 'love'] },
+      { title: 'Devotional — Week 3 (Peace)', type: 'Seasonal Devotional', href: computedDevotionalWeek3Path, tags: ['devotional', 'seasonal', 'advent', 'peace'] },
+      { title: 'Devotional — Week 4 (Joy)', type: 'Seasonal Devotional', href: computedDevotionalWeek4Path, tags: ['devotional', 'seasonal', 'advent', 'joy'] },
       { title: 'Bible Study — Advent Hope', type: 'Bible Study', href: computedBibleStudyPath, tags: ['bible study', 'advent', 'hope'] }
     ];
 
-    function initSearch(inputEl, resultsEl) {
+    // Fetch dynamic Contentful entries and append to searchIndex
+    (async function loadDynamicEntries() {
+      const cfg = window.FLC_CONTENTFUL || {};
+      if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return;
+      const env = cfg.environment || 'master';
+      const types = [
+        { ct: cfg.contentType, label: 'Sermon', dateField: 'date' },
+        { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' }
+      ].filter(t => t.ct);
+
+      try {
+        const results = await Promise.all(types.map(t =>
+          fetch(`https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
+            access_token: cfg.accessToken,
+            content_type: t.ct,
+            order: `-fields.${t.dateField}`,
+            limit: '20'
+          })}`, { headers: { Accept: 'application/json' } })
+            .then(r => r.ok ? r.json() : { items: [] })
+            .then(data => (data.items || []).map(item => ({ item, label: t.label })))
+            .catch(() => [])
+        ));
+
+        results.flat().forEach(({ item, label }) => {
+          const f = item.fields || {};
+          const title = (f.title || '').trim();
+          if (!title) return;
+          const titleSlug = title.toLowerCase().replace(/[\s_]+/g, '-').replace(/[^\w\-]+/g, '').replace(/-{2,}/g, '-').replace(/^-+|-+$/g, '');
+          const href = `${computedPostPagePath}?title=${encodeURIComponent(titleSlug)}`;
+          const existing = searchIndex.find(e => e.title === title);
+          if (!existing) {
+            const tags = [label.toLowerCase(), ...(f.tags || []), f.pastor || '', f.speaker || ''].map(t => String(t).toLowerCase()).filter(Boolean);
+            searchIndex.push({ title, type: label, href, tags });
+          }
+        });
+      } catch (e) { /* static index still works */ }
+    })();
+
+    function highlightMatch(text, query) {
+      if (!query) return text;
+      const esc = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return text.replace(new RegExp(`(${esc})`, 'gi'), '<mark class="bg-flcGold/15 text-flcNavy rounded px-0.5">$1</mark>');
+    }
+
+    function initSearch(inputEl, resultsEl, isModal) {
       if (!inputEl || !resultsEl) return;
       let activeType = 'All';
 
@@ -512,9 +533,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
       function renderResults(query) {
         const items = filterItems(query);
+        const q = query.trim();
+
+        if (isModal) {
+          // Grouped, accessible rendering for command-palette modal
+          if (!q && items.length) {
+            // Show all grouped by type when empty
+            const grouped = {};
+            items.forEach(item => {
+              (grouped[item.type] = grouped[item.type] || []).push(item);
+            });
+            let html = '';
+            Object.entries(grouped).forEach(([type, entries]) => {
+              html += `<div class="mb-2"><p class="text-[0.65rem] font-semibold tracking-[0.14em] text-flcCharcoal/40 uppercase px-2 pt-3 pb-1">${type}</p>`;
+              entries.forEach(item => {
+                html += `<div role="option" aria-selected="false" class="search-result-item rounded-lg px-3 py-2.5 cursor-pointer hover:bg-flcGold/5 motion-fast"><a href="${item.href}" class="block no-underline"><span class="block text-sm font-medium text-flcNavy">${item.title}</span><span class="block text-xs text-flcCharcoal/45 mt-0.5">${item.type}</span></a></div>`;
+              });
+              html += '</div>';
+            });
+            resultsEl.innerHTML = html;
+          } else if (items.length) {
+            const grouped = {};
+            items.forEach(item => {
+              (grouped[item.type] = grouped[item.type] || []).push(item);
+            });
+            let html = '';
+            Object.entries(grouped).forEach(([type, entries]) => {
+              html += `<div class="mb-2"><p class="text-[0.65rem] font-semibold tracking-[0.14em] text-flcCharcoal/40 uppercase px-2 pt-3 pb-1">${type}</p>`;
+              entries.forEach(item => {
+                html += `<div role="option" aria-selected="false" class="search-result-item rounded-lg px-3 py-2.5 cursor-pointer hover:bg-flcGold/5 motion-fast"><a href="${item.href}" class="block no-underline"><span class="block text-sm font-medium text-flcNavy">${highlightMatch(item.title, q)}</span><span class="block text-xs text-flcCharcoal/45 mt-0.5">${item.type}</span></a></div>`;
+              });
+              html += '</div>';
+            });
+            resultsEl.innerHTML = html;
+          } else {
+            resultsEl.innerHTML = '<div class="text-center py-10"><p class="text-sm text-flcCharcoal/45">No results found.</p><p class="text-xs text-flcCharcoal/30 mt-1">Try a different keyword.</p></div>';
+          }
+          return;
+        }
+
+        // Inline header dropdown rendering (unchanged)
         const filterHtml = buildFilters(searchIndex);
         const listHtml = items.length
-          ? `<ul>${items.map((item) => `<li><a href="${item.href}"><div class="font-semibold">${item.title}</div><div class="meta">${item.type}</div></a></li>`).join('')}</ul>`
+          ? `<ul>${items.map((item) => `<li><a href="${item.href}"><div class="font-semibold">${highlightMatch(item.title, q)}</div><div class="meta">${item.type}</div></a></li>`).join('')}</ul>`
           : `<div class="empty">No results found. Try a different keyword.</div>`;
 
         resultsEl.innerHTML = `${filterHtml}${listHtml}`;
@@ -526,12 +587,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       inputEl.addEventListener('input', () => renderResults(inputEl.value));
-      inputEl.addEventListener('focus', () => renderResults(inputEl.value));
-      document.addEventListener('click', (e) => {
-        if (!resultsEl.contains(e.target) && e.target !== inputEl) {
-          closeResults();
-        }
+      inputEl.addEventListener('focus', () => {
+        if (!isModal) renderResults(inputEl.value);
       });
+      if (!isModal) {
+        document.addEventListener('click', (e) => {
+          if (!resultsEl.contains(e.target) && e.target !== inputEl) {
+            closeResults();
+          }
+        });
+      }
 
       resultsEl.addEventListener('click', (e) => {
         const chip = e.target.closest('.filter-chip');
@@ -542,8 +607,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    initSearch(document.getElementById('resourceSearch'), document.getElementById('resourceSearchResults'));
-    initSearch(document.getElementById('resourceSearchMobile'), document.getElementById('resourceSearchResultsMobile'));
+    initSearch(document.getElementById('resourceSearch'), document.getElementById('resourceSearchResults'), false);
+    initSearch(document.getElementById('resourceSearchMobile'), document.getElementById('resourceSearchResultsMobile'), false);
+    initSearch(document.getElementById('searchInput'), document.getElementById('searchResults'), true);
 
     function formatDateLabel(value) {
       if (!value || typeof value !== 'string') return '';

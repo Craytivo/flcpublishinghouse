@@ -1,0 +1,322 @@
+/* Reading Library — page-specific (no duplicate of consolidated skip-link / scrollbar-hide) */
+
+.pattern-dots {
+  background-image: radial-gradient(circle, #e5e0d8 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .book-card.card-enter {
+    opacity: 1;
+    transform: none;
+  }
+  .filter-btn {
+    transition: none;
+  }
+  #emptyState:not(.hidden) {
+    animation: none;
+  }
+}
+
+#filterBar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(250, 250, 248, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(229, 224, 216, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+#filterBar.scrolled {
+  box-shadow: 0 4px 24px rgba(26, 58, 82, 0.06);
+}
+
+/* Filter tabs — wrap on desktop, scroll on mobile */
+#filterTabs {
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+@media (max-width: 640px) {
+  /* Horizontal-scroll pills on phones */
+  #filterTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    scrollbar-width: none;
+  }
+  #filterTabs::-webkit-scrollbar {
+    display: none;
+  }
+  #filterTabs .filter-btn {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    padding: 0.4375rem 0.75rem;
+  }
+  /* Touch targets */
+  #filterBar input,
+  #filterBar select,
+  #filterBar button {
+    min-height: 44px;
+  }
+  /* Full-width search */
+  #bookSearch {
+    width: 100%;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+  /* Full-width sort */
+  .sort-field {
+    width: 100%;
+  }
+  .sort-field select {
+    width: 100%;
+  }
+  /* Center count */
+  #bookCount {
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  #filterTabs .filter-btn {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.6875rem;
+  }
+  .filter-count {
+    display: none;
+  }
+}
+
+#backToTop {
+  opacity: 0;
+  pointer-events: none;
+}
+#backToTop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Filter pills ── */
+.filter-btn {
+  background: #fff;
+  color: rgba(44, 44, 44, 0.6);
+  border-color: rgba(229, 224, 216, 0.8);
+  padding: 0.4375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+.filter-btn:hover {
+  border-color: rgba(154, 123, 79, 0.3);
+  color: #9a7b4f;
+  background: rgba(154, 123, 79, 0.04);
+}
+.filter-btn[aria-pressed="true"] {
+  background: var(--flc-navy, #1a3a52);
+  color: #fff;
+  border-color: var(--flc-navy, #1a3a52);
+  font-weight: 600;
+  box-shadow: 0 1px 6px rgba(26, 58, 82, 0.12);
+}
+.filter-count {
+  background: rgba(245, 241, 232, 0.8);
+  color: rgba(44, 44, 44, 0.45);
+  font-size: 0.625rem;
+  min-width: 1.125rem;
+  text-align: center;
+}
+.filter-btn[aria-pressed="true"] .filter-count {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Book cards — theme accent via CSS variable */
+.book-card {
+  --accent: #9a7b4f;
+  border: 1px solid #e8e6e1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 3%, white),
+      color-mix(in srgb, var(--accent) 8%, white)
+    );
+}
+
+/* Staggered card entrance animation */
+.book-card.card-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.book-card.card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.book-card[data-theme="Holiness of God"] {
+  --accent: #9a7b4f;
+}
+.book-card[data-theme="Discipleship"] {
+  --accent: #1a3a52;
+}
+.book-card[data-theme="Spiritual Formation"] {
+  --accent: #5e4f7a;
+}
+.book-card[data-theme="Christian Leadership"] {
+  --accent: #2a537a;
+}
+.book-card[data-theme="Church & Mission"] {
+  --accent: #3a6b50;
+}
+.book-card[data-theme="Sin & Repentance"] {
+  --accent: #7a3535;
+}
+.book-card[data-theme="Wholeness & Care"] {
+  --accent: #3a6b6b;
+}
+
+.book-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 82, 0.08);
+}
+.book-card:focus-visible {
+  outline: 2px solid #9a7b4f;
+  outline-offset: 2px;
+}
+.book-card.expanded {
+  border-color: #9a7b4f;
+  box-shadow: 0 12px 32px rgba(26, 58, 82, 0.1);
+}
+
+.theme-badge {
+  background: color-mix(in srgb, var(--accent) 12%, white);
+  color: var(--accent);
+}
+
+.book-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+.book-details.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.expand-icon {
+  transition: transform 0.2s ease;
+  color: rgba(44, 44, 44, 0.3);
+}
+.expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.book-view-btn {
+  background: #1a3a52;
+  color: #fff;
+}
+.book-view-btn:hover {
+  background: #9a7b4f;
+}
+
+#bookGrid mark {
+  background: rgba(154, 123, 79, 0.3);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.foundational-badge {
+  background: rgba(154, 123, 79, 0.12);
+  color: #9a7b4f;
+}
+
+.book-card__meta {
+  color: rgba(44, 44, 44, 0.55);
+}
+
+.book-card__summary {
+  color: rgba(44, 44, 44, 0.8);
+}
+
+/* ── Search suggestions dropdown ── */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.suggestion-item:hover,
+.suggestion-item:focus {
+  background: #fafaf8;
+}
+.suggestion-item + .suggestion-item {
+  border-top: 1px solid rgba(229, 224, 216, 0.35);
+}
+.suggestion-type {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(44, 44, 44, 0.35);
+  flex-shrink: 0;
+  width: 2.75rem;
+}
+.suggestion-text {
+  font-size: 0.8125rem;
+  color: #1a3a52;
+  font-weight: 500;
+}
+.suggestion-text mark {
+  background: rgba(154, 123, 79, 0.2);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ── Search result badge ── */
+#searchResultBadge:not(.hidden) {
+  animation: badgePop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes badgePop {
+  0% { transform: translateY(-50%) scale(0.85); opacity: 0; }
+  100% { transform: translateY(-50%) scale(1); opacity: 1; }
+}
+
+/* ── Clear filters ── */
+#clearFilters:not(.hidden) {
+  display: inline-flex;
+}
+
+/* ── Empty state ── */
+#emptyState:not(.hidden) {
+  animation: emptyFadeIn 0.35s ease;
+}
+@keyframes emptyFadeIn {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

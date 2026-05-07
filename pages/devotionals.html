@@ -1,1469 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advent Devotional 2025 - A 4-Week Journey Through Hope, Love, Peace & Joy | FLC Publishing House</title>
-  <meta name="description" content="Experience a transformative 4-week Advent devotional journey by Jarrel Oliveira. Weekly liturgical meditations on the Incarnation of Jesus, exploring themes of Hope, Love, Peace, and Joy. From Freedom Life Church Publishing House.">
-  <meta name="keywords" content="Advent devotional, Christmas devotional, weekly devotional, liturgical meditation, Hope Love Peace Joy, Jarrel Oliveira, Freedom Life Church, FLC Publishing House">
-  <meta name="author" content="Jarrel Oliveira">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://flcpublishinghouse.com/pages/devotionals.html">
-  <meta property="og:title" content="Advent Devotional 2025 - A 4-Week Journey | FLC Publishing House">
-  <meta property="og:description" content="Join us for a 4-week Advent devotional series exploring Hope, Love, Peace, and Joy. Weekly liturgical meditations on the Incarnation of Jesus the Messiah by Jarrel Oliveira.">
-  <meta property="og:image" content="https://flcpublishinghouse.com/assets/images/advent-devotional-og.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="FLC Publishing House">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://flcpublishinghouse.com/pages/devotionals.html">
-  <meta name="twitter:title" content="Advent Devotional 2025 - A 4-Week Journey | FLC Publishing House">
-  <meta name="twitter:description" content="4-week Advent devotional series exploring Hope, Love, Peace, and Joy. Weekly meditations by Jarrel Oliveira from Freedom Life Church.">
-  <meta name="twitter:image" content="https://flcpublishinghouse.com/assets/images/advent-devotional-og.jpg">
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://flcpublishinghouse.com/pages/devotionals.html">
-  
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Book",
-    "name": "FLC Advent Devotional 2025",
-    "author": {
-      "@type": "Person",
-      "name": "Jarrel Oliveira"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "FLC Publishing House",
-      "url": "https://flcpublishinghouse.com"
-    },
-    "description": "A 4-week Advent devotional series featuring weekly liturgical meditations on the Incarnation of Jesus the Messiah, exploring themes of Hope, Love, Peace, and Joy.",
-    "datePublished": "2025-11-30",
-    "inLanguage": "en-US",
-    "numberOfPages": 4,
-    "bookFormat": "https://schema.org/EBook",
-    "genre": ["Religious", "Devotional", "Christianity"],
-    "keywords": "Advent, Christmas, devotional, Hope, Love, Peace, Joy, liturgical meditation",
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "Advent"
-      },
-      {
-        "@type": "Thing",
-        "name": "Christmas"
-      },
-      {
-        "@type": "Thing",
-        "name": "Jesus Christ"
-      },
-      {
-        "@type": "Thing",
-        "name": "Christian Devotional"
-      }
-    ],
-    "hasPart": [
-      {
-        "@type": "Chapter",
-        "name": "Week 1 - Hope",
-        "position": 1,
-        "datePublished": "2025-11-30"
-      },
-      {
-        "@type": "Chapter",
-        "name": "Week 2 - Love",
-        "position": 2,
-        "datePublished": "2025-12-07"
-      },
-      {
-        "@type": "Chapter",
-        "name": "Week 3 - Peace",
-        "position": 3,
-        "datePublished": "2025-12-14"
-      },
-      {
-        "@type": "Chapter",
-        "name": "Week 4 - Joy",
-        "position": 4,
-        "datePublished": "2025-12-21"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "1"
-    }
-  }
-  </script>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Cormorant Garamond'", "Georgia", "serif"],
-            body:    ["'Source Sans Pro'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-          },
-          colors: {
-            flcNavy:     '#1A3A52',
-            flcNavyDark: '#0F2838',
-            flcNavyLight:'#2A4A62',
-            flcGold:     '#9A7B4F',
-            flcGoldLight:'#B8956A',
-            flcCharcoal: '#2C2C2C',
-            flcCream:    '#F5F1E8',
-            flcOffWhite: '#FAFAF8',
-            flcBorder:   '#E8E6E1',
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    /* Page Transition Overlay */
-    .page-transition-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1A3A52 0%, #0F2838 100%);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .page-transition-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    
-    .page-transition-spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(154, 123, 79, 0.2);
-      border-top-color: #9A7B4F;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* Lazy Loading Images */
-    img[data-src] {
-      opacity: 0;
-      transition: opacity 0.6s ease-in-out;
-    }
-    
-    img.lazy-loaded {
-      opacity: 1;
-    }
-    
-    /* Skeleton Loaders */
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 0.5rem;
-    }
-    
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    
-    .skeleton-text {
-      height: 1rem;
-      margin-bottom: 0.5rem;
-      border-radius: 0.25rem;
-    }
-    
-    /* Hide Scrollbar */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    
-    /* Swipe Indicators */
-    .swipe-dot.active {
-      width: 1.5rem;
-      background: #9A7B4F;
-    }
-    
-    /* Jump to Week Nav - Hide on scroll up */
-    #jumpToWeekNav.hidden-nav {
-      transform: translateY(-100%);
-    }
-    
-    /* Mobile Card Snap Scroll */
-    @media (max-width: 768px) {
-      #weekCardsSwiper {
-        -webkit-overflow-scrolling: touch;
-      }
-      
-      .week-card {
-        scroll-snap-align: start;
-      }
-    }
-    
-    .skeleton-title {
-      height: 2rem;
-      width: 60%;
-      margin-bottom: 1rem;
-      border-radius: 0.5rem;
-    }
-    
-    .skeleton-image {
-      width: 100%;
-      height: 200px;
-      border-radius: 0.75rem;
-      margin-bottom: 1rem;
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { overflow-x: hidden; scroll-behavior: smooth; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: linear-gradient(135deg, #FAFAF8 0%, #F5F1E8 50%, #FAFAF8 100%); 
-      overflow-x: hidden; 
-      max-width: 100vw;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    
-    /* Premium Hero Section */
-    .sermon-header { 
-      background: linear-gradient(135deg, #0F2838 0%, #1A3A52 50%, #0F2838 100%); 
-      color: white; 
-      border-radius: 2rem; 
-      padding: 4rem 3rem; 
-      margin-bottom: 4rem; 
-      box-shadow: 0 24px 48px rgba(26, 58, 82, 0.25);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .sermon-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: 
-        radial-gradient(circle at 20% 30%, rgba(154, 123, 79, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(154, 123, 79, 0.08) 0%, transparent 50%);
-      opacity: 0.6;
-    }
-    
-    .sermon-header > * {
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Enhanced Card Design */
-    .content-section { 
-      background: white; 
-      border-radius: 1.5rem; 
-      padding: 2.5rem; 
-      margin-bottom: 2rem; 
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(229, 224, 216, 0.5);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .content-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(154, 123, 79, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      transform: translate(50%, -50%);
-      transition: all 0.6s ease;
-    }
-    
-    .content-section:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 32px rgba(26, 58, 82, 0.12);
-      border-color: rgba(154, 123, 79, 0.3);
-    }
-    
-    .content-section:hover::before {
-      transform: translate(30%, -30%) scale(1.3);
-    }
-    
-    /* Premium Button */
-    .download-btn { 
-      display: inline-flex; 
-      align-items: center; 
-      gap: 0.5rem; 
-      background: linear-gradient(135deg, #9A7B4F, #B8956A); 
-      color: white; 
-      padding: 0.875rem 2rem; 
-      border-radius: 9999px; 
-      font-weight: 600; 
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(154, 123, 79, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .download-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #B8956A, #9A7B4F);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .download-btn:hover::before {
-      opacity: 1;
-    }
-    
-    .download-btn > * {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .download-btn:hover { 
-      transform: translateY(-2px); 
-      box-shadow: 0 8px 24px rgba(154, 123, 79, 0.35);
-    }
-    
-    .download-btn:active {
-      transform: translateY(0);
-    }
-    
-    /* Badge Styling */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    
-    .badge:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Tag Pills */
-    .tag-pill {
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(4px);
-      border-radius: 9999px;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      transition: all 0.3s ease;
-    }
-    
-    .tag-pill:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
-    }
-    
-    /* Navigation Active State */
-    .nav-link.active {
-      text-decoration: underline;
-      text-underline-offset: 6px;
-      text-decoration-thickness: 2px;
-      color: #9A7B4F;
-    }
-    
-    /* Fade-in Animation */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .fade-in {
-      animation: fadeInUp 0.6s ease-out;
-    }
-    
-    .fade-in:nth-child(1) { animation-delay: 0.1s; }
-    .fade-in:nth-child(2) { animation-delay: 0.2s; }
-    .fade-in:nth-child(3) { animation-delay: 0.3s; }
-    .fade-in:nth-child(4) { animation-delay: 0.4s; }
-    
-    /* Navigation Styles */
-    nav {
-      position: relative;
-    }
-    
-    .nav-links {
-      display: flex;
-    }
-    
-    .mobile-menu-btn {
-      display: none;
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.1), rgba(154, 123, 79, 0.05));
-      border: 1px solid rgba(154, 123, 79, 0.2);
-      cursor: pointer;
-      padding: 0.5rem;
-      color: #2C2C2C;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-    }
-    
-    .mobile-menu-btn:hover {
-      background: linear-gradient(135deg, rgba(154, 123, 79, 0.15), rgba(154, 123, 79, 0.08));
-      border-color: rgba(154, 123, 79, 0.3);
-      transform: scale(1.05);
-    }
-    
-    .mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 241, 232, 0.98) 100%);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(154, 123, 79, 0.2);
-      box-shadow: 0 10px 25px rgba(26, 58, 82, 0.1);
-      z-index: 50;
-    }
-    
-    .mobile-menu.active {
-      display: block;
-    }
-    
-    .mobile-menu .nav-link {
-      display: block;
-      padding: 1rem 1.5rem;
-      margin: 0.25rem 1rem;
-    }
-    
-    @media (max-width: 640px) {
-      .sermon-header { padding: 2.5rem 2rem; border-radius: 1.5rem; }
-      .content-section { padding: 2rem; }
-      .download-btn { padding: 0.75rem 1.5rem; }
-      
-      /* Header Layout */
-      nav > div {
-        padding: 0.75rem 1rem !important;
-        gap: 0.5rem !important;
-      }
-      
-      /* Logo Optimization */
-      nav .text-3xl {
-        font-size: 1.125rem;
-        line-height: 1.2;
-        white-space: nowrap;
-      }
-      
-      nav .w-10 {
-        width: 1.75rem;
-        height: 1.75rem;
-        flex-shrink: 0;
-      }
-      
-      /* Hide Search on Mobile */
-      .search-bar {
-        display: none !important;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      
-      .mobile-menu-btn {
-        display: flex !important;
-        min-width: 44px;
-        min-height: 44px;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-    }
-  
-    /* Mobile-first refinements */
-    @media (max-width: 768px){
-      .hero-header{ padding: 2.25rem 1.5rem; border-radius: 1.5rem; }
-      .hero-background{ min-height: auto; }
-      .shell-head{ padding-left: 1.25rem; padding-right: 1.25rem; }
-    }
+ <!-- Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM40N0DYXP"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-CM40N0DYXP');
+ </script>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <title>Advent Devotional 2025 - A 4-Week Journey Through Hope, Love, Peace & Joy | FLC Publishing House</title>
+ <meta name="description" content="Experience a transformative 4-week Advent devotional journey by Jarrel Oliveira. Weekly liturgical meditations on the Incarnation of Jesus, exploring themes of Hope, Love, Peace, and Joy. From Freedom Life Church Publishing House.">
+ <meta name="keywords" content="Advent devotional, Christmas devotional, weekly devotional, liturgical meditation, Hope Love Peace Joy, Jarrel Oliveira, Freedom Life Church, FLC Publishing House">
+ <meta name="author" content="Jarrel Oliveira">
 
-    @media (max-width: 640px){
-      main{ padding-left: 1rem !important; padding-right: 1rem !important; }
-      .hero-header{ padding: 1.75rem 1.25rem; }
-      .hero-title{ text-wrap: balance; }
-      .hero-cta-group{ align-items: stretch; }
-      .devotionals-hero-title{ font-size: 2rem; line-height: 1.1; }
-      .devotionals-hero-lede{ font-size: 1rem; line-height: 1.55; }
-      .mobile-tight{ margin-top: 2rem !important; }
-      .freshness-grid{ grid-template-columns: 1fr; }
-      .download-btn, .btn-primary, .btn-ghost, .btn-premium{ width: 100%; justify-content: center; }
-      .resource-card{ border-radius: 1.25rem; }
-      .stats-card{ padding: 1.25rem; }
-      .search-bar{ padding: 0.75rem 1rem; }
-      .pill{ white-space: normal; }
-      .toc-wrap{ position: static !important; }
-      .essay{ font-size: 1rem; line-height: 1.8; }
-      .week-card, .searchable-card{ padding: 1rem; }
-    }
-  
-    /* Site Polish */
-    body {
-      line-height: 1.7;
-    }
+ <!-- Favicon -->
+ <link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png">
 
-    p {
-      line-height: 1.7;
-    }
+ <!-- Open Graph / Facebook -->
+ <meta property="og:type" content="website">
+ <meta property="og:url" content="https://flcpublishinghouse.com/pages/devotionals.html">
+ <meta property="og:title" content="Advent Devotional 2025 - A 4-Week Journey | FLC Publishing House">
+ <meta property="og:description" content="Join us for a 4-week Advent devotional series exploring Hope, Love, Peace, and Joy. Weekly liturgical meditations on the Incarnation of Jesus the Messiah by Jarrel Oliveira.">
+ <meta property="og:image" content="https://flcpublishinghouse.com/assets/images/advent-devotional-og.jpg">
+ <meta property="og:image:width" content="1200">
+ <meta property="og:image:height" content="630">
+ <meta property="og:site_name" content="FLC Publishing House">
+ <meta property="og:locale" content="en_US">
 
-    .content-section {
-      border-color: rgba(154, 123, 79, 0.12);
-    }
+ <!-- Twitter Card -->
+ <meta name="twitter:card" content="summary_large_image">
+ <meta name="twitter:url" content="https://flcpublishinghouse.com/pages/devotionals.html">
+ <meta name="twitter:title" content="Advent Devotional 2025 - A 4-Week Journey | FLC Publishing House">
+ <meta name="twitter:description" content="4-week Advent devotional series exploring Hope, Love, Peace, and Joy. Weekly meditations by Jarrel Oliveira from Freedom Life Church.">
+ <meta name="twitter:image" content="https://flcpublishinghouse.com/assets/images/advent-devotional-og.jpg">
 
-    .content-section h2,
-    .content-section h3 {
-      margin-top: 0.2rem;
-    }
+ <!-- Canonical URL -->
+ <link rel="canonical" href="https://flcpublishinghouse.com/pages/devotionals.html">
 
-    .download-btn,
-    .btn-primary,
-    .btn-premium,
-    .btn-ghost {
-      border-radius: 0.875rem;
-    }
+ <!-- Structured Data (JSON-LD) -->
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "Book",
+ "name": "FLC Advent Devotional 2025",
+ "author": {
+ "@type": "Person",
+ "name": "Jarrel Oliveira"
+ },
+ "publisher": {
+ "@type": "Organization",
+ "name": "FLC Publishing House",
+ "url": "https://flcpublishinghouse.com"
+ },
+ "description": "A 4-week Advent devotional series featuring weekly liturgical meditations on the Incarnation of Jesus the Messiah, exploring themes of Hope, Love, Peace, and Joy.",
+ "datePublished": "2025-11-30",
+ "inLanguage": "en-US",
+ "numberOfPages": 4,
+ "bookFormat": "https://schema.org/EBook",
+ "genre": ["Religious", "Devotional", "Christianity"],
+ "keywords": "Advent, Christmas, devotional, Hope, Love, Peace, Joy, liturgical meditation",
+ "about": [
+ {
+ "@type": "Thing",
+ "name": "Advent"
+ },
+ {
+ "@type": "Thing",
+ "name": "Christmas"
+ },
+ {
+ "@type": "Thing",
+ "name": "Jesus Christ"
+ },
+ {
+ "@type": "Thing",
+ "name": "Christian Devotional"
+ }
+ ],
+ "hasPart": [
+ {
+ "@type": "Chapter",
+ "name": "Week 1 - Hope",
+ "position": 1,
+ "datePublished": "2025-11-30"
+ },
+ {
+ "@type": "Chapter",
+ "name": "Week 2 - Love",
+ "position": 2,
+ "datePublished": "2025-12-07"
+ },
+ {
+ "@type": "Chapter",
+ "name": "Week 3 - Peace",
+ "position": 3,
+ "datePublished": "2025-12-14"
+ },
+ {
+ "@type": "Chapter",
+ "name": "Week 4 - Joy",
+ "position": 4,
+ "datePublished": "2025-12-21"
+ }
+ ],
+ "aggregateRating": {
+ "@type": "AggregateRating",
+ "ratingValue": "5.0",
+ "reviewCount": "1"
+ }
+ }
+ </script>
 
-    .resource-card,
-    .week-card,
-    .searchable-card,
-    .book-panel,
-    .content-section {
-      box-shadow: 0 8px 28px rgba(26, 58, 82, 0.08);
-    }
+ <!-- Tailwind CSS -->
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="../assets/js/tailwind-config.js"></script>
 
-    #footerContainer {
-      margin-top: 3rem;
-    }
+ <!-- Google Fonts -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
 
-    #footerContainer::before {
-      content: '';
-      display: block;
-      height: 1px;
-      margin: 0 0 2rem 0;
-      background: linear-gradient(90deg, transparent, rgba(154, 123, 79, 0.35), transparent);
-    }
-  </style>
-  <link rel="stylesheet" href="../assets/css/site-theme.css" />
+ <style>
+ /* Hide Scrollbar */
+ .scrollbar-hide {
+ -ms-overflow-style: none;
+ scrollbar-width: none;
+ }
+
+ .scrollbar-hide::-webkit-scrollbar {
+ display: none;
+ }
+ </style>
+ <style>body{opacity:0}body.pt-ready{opacity:1}</style>
+ <link rel="stylesheet" href="../assets/css/base.css" />
+ <link rel="stylesheet" href="../assets/css/layout.css" />
+ <link rel="stylesheet" href="../assets/css/typography.css" />
+ <link rel="stylesheet" href="../assets/css/utilities.css" />
+ <link rel="stylesheet" href="../assets/css/consolidated-styles.css" />
+ <link rel="stylesheet" href="../assets/css/components.css" />
+ <link rel="stylesheet" href="../assets/css/animations.css" />
 </head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  <!-- Page Transition Overlay -->
-  <div class="page-transition-overlay" id="pageTransition">
-    <div class="page-transition-spinner"></div>
-  </div>
-  
-  <!-- Static Header -->
-  <header id="mainNav" class="sticky top-0 z-50 bg-white/98 backdrop-blur-lg border-b border-flcBorder shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-18 lg:h-20">
-        <!-- Logo -->
-        <a href="../index.html" class="flex items-center group flex-shrink-0">
-          <img src="../assets/images/Logo.png" alt="FLC Publishing House" class="w-auto h-[105px] group-hover:scale-105 transition-all duration-300" style="object-fit: contain;">
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center gap-1">
-          <a href="../index.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Home</a>
-          <a href="sermons.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Sermons</a>
-          <a href="resources.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Resources</a>
-          <a href="reading-library.html" class="px-4 py-2 text-flcNavy/80 hover:text-flcGold font-medium text-sm lg:text-base transition-all duration-200">Reading Library</a>
-          <a href="devotionals.html" class="px-4 py-2 text-flcGold font-semibold text-sm lg:text-base transition-all duration-200">Devotionals</a>
-          <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-flcNavy/70 hover:text-flcGold font-semibold text-sm lg:text-base transition-all duration-200 inline-flex items-center gap-1.5">
-            Church
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          </a>
-        </nav>
-        
-        <!-- Right Actions -->
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <!-- Search Button -->
-          <button id="searchBtn" class="hidden md:block p-2 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Search">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-          
-          <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="lg:hidden relative p-2.5 text-flcNavy hover:text-flcGold rounded-xl transition-all duration-200" aria-label="Toggle menu" aria-expanded="false">
-            <svg class="w-6 h-6 absolute inset-0 transition-all duration-200" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <svg class="w-6 h-6 absolute inset-0 opacity-0 rotate-90 transition-all duration-200" id="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden lg:hidden border-t border-flcBorder bg-flcOffWhite/95 backdrop-blur-xl">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-2">
-        <a href="../index.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Home</a>
-        <a href="sermons.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Sermons</a>
-        <a href="resources.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Resources</a>
-        <a href="reading-library.html" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Reading Library</a>
-        <a href="devotionals.html" class="block py-3 px-4 text-flcGold font-semibold rounded-lg transition-all duration-200 font-medium">Devotionals</a>
-        <a href="https://freedomlifechurch.ca/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-flcNavy hover:bg-flcGold/10 rounded-lg transition-all duration-200 font-medium">Church</a>
-        
-        <!-- Mobile Search -->
-        <div class="pt-4 mt-4 border-t border-flcBorder">
-          <div class="relative">
-            <input
-              type="text"
-              id="mobileSearchInput"
-              placeholder="Search..."
-              class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder bg-white focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-sm text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <!-- Search Modal -->
-  <div id="searchModal" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="searchModalBackdrop"></div>
-    <div class="relative max-w-2xl mx-auto mt-20 px-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="p-4">
-          <div class="relative">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search resources..."
-              class="w-full px-4 py-3 pl-12 rounded-xl border border-flcBorder bg-flcOffWhite focus:outline-none focus:border-flcGold focus:ring-1 focus:ring-flcGold/20 text-lg text-flcCharcoal placeholder:text-flcCharcoal/50 transition-all duration-200"
-              autofocus
-            />
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-flcCharcoal/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-flcCharcoal/40 hover:text-flcNavy hover:scale-110 transition-all duration-200" aria-label="Close search">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div id="searchResults" class="max-h-96 overflow-y-auto p-4 border-t border-flcBorder">
-          <p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+ <a href="#main-content" class="skip-link">Skip to content</a>
+ <div id="headerContainer" data-current-page="devotionals" data-base-path=".."></div> <!-- Search Modal Command Palette -->
+ <div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+ <div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+ <div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4">
+ <div class="bg-white rounded-2xl shadow-elevated overflow-hidden search-modal-enter border border-flcBorder/40">
+ <div class="p-4 pb-3">
+ <div class="relative">
+ <input type="text" id="searchInput" placeholder="Search sermons, devotionals, resources..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40 motion-fast" autofocus autocomplete="off" aria-describedby="searchHint" />
+ <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+ <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+ <kbd class="hidden sm:inline-block text-[0.65rem] text-flcCharcoal/35 bg-flcOffWhite border border-flcBorder/60 rounded px-1.5 py-0.5 font-mono">Esc</kbd>
+ <button id="closeSearch" class="p-1.5 text-flcCharcoal/35 hover:text-flcNavy motion-fast rounded-lg hover:bg-flcOffWhite" aria-label="Close search"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+ </div>
+ </div>
+ <p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Use <kbd class="font-mono"></kbd> to navigate, <kbd class="font-mono">Enter</kbd> to select</p>
+ </div>
+ <div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox">
+ <p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <!-- Main Content -->
-  <main id="main-content" class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
-    <!-- Hero Section - Immersive Visual Design -->
-    <header class="sermon-header relative overflow-hidden min-h-[550px] lg:min-h-[620px] mt-6 sm:mt-8 lg:mt-10">
-      <!-- Dynamic Background with Depth -->
-      <div class="absolute inset-0">
-        <!-- Base Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[#0d2338] via-[#1A3A52] to-[#0a1921]"></div>
-        
-        <!-- Animated Glow Orbs -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-flcGold/20 rounded-full blur-[120px] animate-pulse" style="animation-duration: 4s;"></div>
-        <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-400/15 rounded-full blur-[100px] animate-pulse" style="animation-duration: 5s; animation-delay: 1s;"></div>
-        
-        <!-- Layered Texture -->
-        <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239A7B4F\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-      </div>
-      
-      <!-- Content Wrapper -->
-      <div class="relative z-10 h-full">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
-          
-          <!-- Mobile/Tablet Centered Layout -->
-          <div class="lg:hidden text-center space-y-6">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold/20 backdrop-blur-xl rounded-full border border-flcGold/40 shadow-2xl">
-              <svg class="w-4 h-4 text-flcGold" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <span class="text-flcGold text-xs font-bold uppercase tracking-widest">Advent Series</span>
-            </div>
-            
-            <h1 class="devotionals-hero-title text-4xl sm:text-5xl font-heading font-bold text-white leading-tight">
-              FLC Advent<br/><span class="text-flcGold">Devotional</span>
-            </h1>
-            
-            <p class="devotionals-hero-lede text-white/80 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-              Four weekly reflections exploring Hope, Love, Peace, and Joy through Scripture, prayer, and Christ's transformative incarnation.
-            </p>
-            
-            <div class="flex items-center justify-center gap-2 text-flcGold font-semibold">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-              </svg>
-              <span>by Jarrel Oliveira</span>
-            </div>
-            
-            <!-- Mobile Theme Tags -->
-            <div class="flex flex-wrap justify-center gap-2 pt-4">
-              <span class="px-3 py-1.5 bg-blue-500/20 border border-blue-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">? Hope</span>
-              <span class="px-3 py-1.5 bg-pink-500/20 border border-pink-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">?? Love</span>
-              <span class="px-3 py-1.5 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">??? Peace</span>
-              <span class="px-3 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full text-white text-xs font-semibold backdrop-blur-sm">?? Joy</span>
-            </div>
-          </div>
-          
-          <!-- Desktop Split Layout with Visual Impact -->
-          <div class="hidden lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
-            
-            <!-- Left Column: Content (7 cols) -->
-            <div class="lg:col-span-7 space-y-7">
-              <!-- Badge -->
-              <div class="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-flcGold/25 to-flcGold/15 backdrop-blur-xl rounded-full border border-flcGold/50 shadow-2xl hover:shadow-flcGold/20 hover:border-flcGold/70 transition-all duration-300 group">
-                <svg class="w-5 h-5 text-flcGold group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                </svg>
-                <span class="text-flcGold text-[13px] font-extrabold uppercase tracking-[0.25em] group-hover:tracking-[0.3em] transition-all">Advent Devotional</span>
-              </div>
-              
-              <!-- Title -->
-              <div class="space-y-4">
-                <h1 class="devotionals-hero-title text-[2.65rem] xl:text-[3.2rem] 2xl:text-[3.6rem] font-heading font-black text-white leading-[1.02] tracking-tight">
-                  FLC Advent<br/>
-                  <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a870] via-flcGold to-[#7d6038] inline-block mt-1">Devotional</span>
-                </h1>
-                <div class="flex items-center gap-3">
-                  <div class="w-16 h-1 bg-gradient-to-r from-flcGold via-flcGoldLight to-transparent rounded-full"></div>
-                  <div class="w-2 h-2 bg-flcGold rounded-full animate-pulse"></div>
-                </div>
-              </div>
-              
-              <!-- Description -->
-              <p class="devotionals-hero-lede text-white/85 text-base xl:text-lg leading-relaxed font-light max-w-xl tracking-wide">
-                Four weekly reflections exploring Hope, Love, Peace, and Joy through Scripture, prayer, and Christ's transformative incarnation.
-              </p>
-              
-              <!-- Author & Meta -->
-              <div class="flex items-center gap-5 xl:gap-7">
-                <div class="flex items-center gap-3 group cursor-pointer">
-                  <div class="w-12 h-12 bg-gradient-to-br from-flcGold/25 to-flcGold/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-flcGold/40 group-hover:border-flcGold/60 transition-all shadow-lg group-hover:shadow-flcGold/20">
-                    <svg class="w-6 h-6 text-flcGold group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-bold mb-0.5">Author</p>
-                    <p class="text-flcGold font-bold text-[15px] tracking-wide">Jarrel Oliveira</p>
-                  </div>
-                </div>
-                
-                <div class="h-12 w-px bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
-                
-                <div class="flex items-center gap-3 group cursor-pointer">
-                  <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:border-white/40 transition-all shadow-lg">
-                    <svg class="w-6 h-6 text-white/90 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-white/50 text-[10px] uppercase tracking-wider font-bold mb-0.5">Duration</p>
-                    <p class="text-white font-bold text-sm">Nov 30 - Dec 28</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Theme Tags -->
-              <div class="flex items-center gap-2.5">
-                <div class="group relative px-3.5 py-1.5 bg-gradient-to-br from-blue-500/30 to-blue-600/20 backdrop-blur-xl rounded-full border border-blue-400/50 hover:border-blue-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-blue-500/20">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">?</span>
-                    <span class="text-white font-semibold text-xs tracking-wide">Hope</span>
-                  </div>
-                  <div class="absolute inset-0 bg-blue-400/0 group-hover:bg-blue-400/10 rounded-full transition-colors"></div>
-                </div>
-                <div class="group relative px-4 py-2 bg-gradient-to-br from-pink-500/30 to-red-500/20 backdrop-blur-xl rounded-full border border-pink-400/50 hover:border-pink-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-pink-500/20">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">??</span>
-                    <span class="text-white font-semibold text-xs tracking-wide">Love</span>
-                  </div>
-                  <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/10 rounded-full transition-colors"></div>
-                </div>
-                <div class="group relative px-4 py-2 bg-gradient-to-br from-cyan-500/30 to-teal-500/20 backdrop-blur-xl rounded-full border border-cyan-400/50 hover:border-cyan-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-cyan-500/20">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">???</span>
-                    <span class="text-white font-semibold text-xs tracking-wide">Peace</span>
-                  </div>
-                  <div class="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 rounded-full transition-colors"></div>
-                </div>
-                <div class="group relative px-4 py-2 bg-gradient-to-br from-amber-500/30 to-yellow-500/20 backdrop-blur-xl rounded-full border border-amber-400/50 hover:border-amber-300/70 transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg hover:shadow-amber-500/20">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm group-hover:scale-110 transition-transform">??</span>
-                    <span class="text-white font-semibold text-xs tracking-wide">Joy</span>
-                  </div>
-                  <div class="absolute inset-0 bg-amber-400/0 group-hover:bg-amber-400/10 rounded-full transition-colors"></div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Right Column: Visual Feature (5 cols) -->
-            <div class="lg:col-span-5 relative">
-              <!-- Hero Visual Card -->
-              <div class="relative group">
-                <!-- Main Card -->
-                <div class="relative bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-3xl rounded-[24px] border-2 border-white/20 p-8 shadow-2xl overflow-hidden hover:scale-[1.02] hover:border-white/30 transition-all duration-500">
-                  <!-- Glow Effect -->
-                  <div class="absolute inset-0 bg-gradient-to-br from-flcGold/20 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <!-- Content -->
-                  <div class="relative z-10 space-y-6">
-                    <!-- Icon -->
-                    <div class="w-16 h-16 bg-gradient-to-br from-flcGold/40 to-flcGold/10 rounded-2xl flex items-center justify-center border-2 border-flcGold/50 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                      </svg>
-                    </div>
-                    
-                    <!-- Stats -->
-                    <div class="space-y-4">
-                      <div class="flex items-center justify-between">
-                        <span class="text-white/70 text-[15px] font-semibold tracking-wide">Total Weeks</span>
-                        <span class="text-white text-3xl font-black tracking-tight">4</span>
-                      </div>
-                      <div class="w-full h-3 bg-white/10 rounded-full overflow-hidden shadow-inner">
-                        <div class="h-full bg-gradient-to-r from-flcGold via-flcGoldLight to-flcGold rounded-full transition-all duration-1000 shadow-lg" style="width: 0%"></div>
-                      </div>
-                      <div class="flex items-center justify-between text-[15px]">
-                        <span class="text-white/70 font-medium">Weekly Readings</span>
-                        <span class="text-flcGold font-bold tracking-wide">0/4 Complete</span>
-                      </div>
-                    </div>
-                    
-                    <!-- Divider -->
-                    <div class="relative h-px">
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-flcGold/20 to-transparent blur-sm"></div>
-                    </div>
-                    
-                    <!-- Quick Info -->
-                    <div class="grid grid-cols-2 gap-5 text-center">
-                      <div class="space-y-2 p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <p class="text-white text-3xl font-black tracking-tight">28</p>
-                        <p class="text-white/60 text-[11px] uppercase tracking-[0.15em] font-bold">Days Total</p>
-                      </div>
-                      <div class="space-y-2 p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <p class="text-white text-3xl font-black tracking-tight">7</p>
-                        <p class="text-white/60 text-[11px] uppercase tracking-[0.15em] font-bold">Per Week</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Floating Accent Elements -->
-                <div class="absolute -top-6 -right-6 w-32 h-32 bg-flcGold/25 rounded-full blur-3xl animate-pulse" style="animation-duration: 3s;"></div>
-                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s; animation-delay: 0.5s;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Bottom Accent -->
-      <div class="absolute bottom-0 left-0 right-0">
-        <div class="h-px bg-gradient-to-r from-transparent via-flcGold/60 to-transparent"></div>
-        <div class="h-32 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-      </div>
-    </header>
+ <!-- Main Content -->
+ <main id="main-content" class="min-h-screen">
+ <!-- Hero Section -->
+ <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden">
+ <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+ <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+ <p class="section-kicker mb-4">Devotionals</p>
+ <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
+ FLC Advent Devotional
+ </h1>
+ <p class="text-lg text-flcCharcoal/70 mb-8">
+ Four weekly reflections exploring Hope, Love, Peace, and Joy through Scripture, prayer, and Christ's transformative incarnation.
+ </p>
+ <div class="flex items-center justify-center gap-3 text-flcGold font-semibold mb-4">
+ <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+ </svg>
+ <span>by Jarrel Oliveira</span>
+ </div>
+ </div>
+ </section>
 
-    <section class="mobile-tight mt-8 sm:mt-10">
-      <div class="freshness-grid grid gap-4 md:grid-cols-4">
-        <article class="bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Freshness</p>
-          <p class="text-sm sm:text-base text-flcNavy font-semibold">Last updated: February 2026</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Week cards and progress tools are actively maintained.</p>
-        </article>
-        <a href="../devotionals-pages/devotional-week1-hope.html" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Week</p>
-          <p class="text-sm sm:text-base text-flcNavy font-semibold">Week 1 - Hope</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Start your Advent journey</p>
-        </a>
-        <a href="../devotionals-pages/devotional-week4-joy.html" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Finale</p>
-          <p class="text-sm sm:text-base text-flcNavy font-semibold">Week 4 - Joy</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Celebrate the season</p>
-        </a>
-        <a href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="card-link bg-white rounded-2xl border border-flcBorder p-4 sm:p-5 shadow-soft block">
-          <p class="text-xs uppercase tracking-[0.14em] text-flcGold font-semibold mb-2">Featured Download</p>
-          <p class="text-sm sm:text-base text-flcNavy font-semibold">Hope Handout PDF</p>
-          <p class="text-xs text-flcCharcoal/70 mt-1">Printable companion guide</p>
-        </a>
-      </div>
-    </section>
-    
-    <!-- Progress Tracker Section -->
-    <div class="mobile-tight bg-gradient-to-b from-flcNavy/5 to-transparent py-8 sm:py-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-      <div>
-        <!-- Progress Header -->
-        <div class="flex items-center justify-between mb-6">
-          <div>
-            <h2 class="text-2xl font-heading font-bold text-flcNavy mb-1">Your Journey</h2>
-            <p class="text-flcCharcoal/70 text-sm">Track your progress through the Advent devotional</p>
-          </div>
-          <button onclick="resetProgress()" class="text-flcGold hover:text-flcGoldDark text-sm font-semibold transition-colors flex items-center gap-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-            </svg>
-            Reset
-          </button>
-        </div>
-        
-        <!-- Progress Bar -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-sm font-semibold text-flcNavy" id="progressText">0 of 4 weeks completed</span>
-            <span class="text-2xl font-bold text-flcGold" id="progressPercent">0%</span>
-          </div>
-          <div class="w-full bg-flcCream rounded-full h-3 overflow-hidden">
-            <div id="progressBar" class="h-full bg-gradient-to-r from-flcGold to-flcGoldLight rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
-          </div>
-        </div>
-        
-        <!-- Week Progress Indicators -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          <div class="week-indicator bg-white rounded-xl shadow-md p-4 border-2 border-transparent transition-all" data-week="1">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 1</span>
-              <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-sm font-bold text-flcNavy">Hope</p>
-          </div>
-          <div class="week-indicator bg-white rounded-xl shadow-md p-4 border-2 border-transparent transition-all" data-week="2">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 2</span>
-              <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-sm font-bold text-flcNavy">Love</p>
-          </div>
-          <div class="week-indicator bg-white rounded-xl shadow-md p-4 border-2 border-transparent transition-all" data-week="3">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 3</span>
-              <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-sm font-bold text-flcNavy">Peace</p>
-          </div>
-          <div class="week-indicator bg-white rounded-xl shadow-md p-4 border-2 border-transparent transition-all" data-week="4">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 4</span>
-              <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center transition-all">
-                <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-sm font-bold text-flcNavy">Joy</p>
-          </div>
-        </div>
-        
-        <!-- Continue Reading CTA -->
-        <div id="continueReadingCTA" class="hidden bg-gradient-to-br from-flcGold via-flcGoldLight to-flcGold rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-8 text-center relative overflow-hidden">
-          <!-- Decorative elements -->
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.15),transparent_50%)]"></div>
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.1),transparent_50%)]"></div>
-          
-          <div class="relative z-10">
-            <div class="flex items-center justify-center gap-2 mb-2 sm:mb-3">
-              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-              </svg>
-              <h3 class="text-lg sm:text-xl font-heading font-bold text-white">Continue Your Journey</h3>
-            </div>
-            <p class="text-white/95 text-sm sm:text-base mb-4 sm:mb-5 font-medium" id="continueReadingText">Pick up where you left off</p>
-            <a href="#" id="continueReadingLink" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-flcNavy font-bold text-sm sm:text-base rounded-full hover:shadow-2xl transition-all hover:scale-105 active:scale-95">
-              <span>Continue Reading</span>
-              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    
-    <!-- Sticky Jump to Week Navigation (Mobile) -->
-    <div id="jumpToWeekNav" class="sticky top-20 z-40 bg-gradient-to-r from-white via-flcCream/30 to-white backdrop-blur-md shadow-lg border-b border-flcGold/30 md:hidden transition-transform duration-300">
-      <div class="px-4 py-3">
-        <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-          <span class="text-xs font-bold text-flcNavy/70 whitespace-nowrap uppercase tracking-wider">Jump to:</span>
-          <button class="jump-to-week-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-flcGold/10 text-flcGold border border-flcGold/20 hover:bg-flcGold hover:text-white hover:border-flcGold transition-all active:scale-95 shadow-sm" data-week="1">Week 1</button>
-          <button class="jump-to-week-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-flcGold/10 text-flcGold border border-flcGold/20 hover:bg-flcGold hover:text-white hover:border-flcGold transition-all active:scale-95 shadow-sm" data-week="2">Week 2</button>
-          <button class="jump-to-week-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-flcGold/10 text-flcGold border border-flcGold/20 hover:bg-flcGold hover:text-white hover:border-flcGold transition-all active:scale-95 shadow-sm" data-week="3">Week 3</button>
-          <button class="jump-to-week-btn flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold bg-flcGold/10 text-flcGold border border-flcGold/20 hover:bg-flcGold hover:text-white hover:border-flcGold transition-all active:scale-95 shadow-sm" data-week="4">Week 4</button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Content Section -->
-    <div class="pt-6 sm:pt-8">
-      <!-- Mobile Swipeable Container -->
-      <div class="md:hidden mb-12 relative">
-        <div id="weekCardsSwiper" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 scrollbar-hide" style="scroll-behavior: smooth;">
-          <!-- Week cards will be here on mobile -->
-      <!-- Week 1 Card -->
-      <div class="content-section flex flex-col justify-between fade-in week-card snap-start flex-shrink-0 w-full" data-week="1">
-        <div>
-          <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
-            <img src="../assets/images/Light of Hope.webp" alt="The Light of Hope" class="w-full h-full object-contain" loading="lazy">
-            <div class="absolute top-3 right-3 week-completed-badge hidden">
-              <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Completed
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3 mb-3">
-            <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 1 " Hope</h2>
-              <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Nov 30-Dec 6</p>
-            </div>
-          </div>
-          <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Titus 1:1"3</p>
-          </div>
-          <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">God's plan for hope began before time itself. In Christ, hope is embodied and the promise of eternal life is fulfilled. This week explores how hope meets us in our fears and leads us to courage.</p>
-        </div>
-        <a href="../devotionals-pages/devotional-week1-hope.html" class="download-btn mt-6 self-start week-read-btn">
-          <span class="btn-text">Start Reading</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-      <!-- Week 2 Card -->
-      <div class="content-section flex flex-col justify-between fade-in week-card snap-start flex-shrink-0 w-full" data-week="2">
-        <div>
-          <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
-            <img src="../assets/images/Light of Love.webp" alt="The Light of Love" class="w-full h-full object-contain" loading="lazy">
-            <div class="absolute top-3 right-3 week-completed-badge hidden">
-              <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Completed
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3 mb-3">
-            <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 2 " Love</h2>
-              <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 7-Dec 13</p>
-            </div>
-          </div>
-          <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: John 3:16</p>
-          </div>
-          <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">God's love is both incomprehensible and deeply personal. Advent invites us to receive this love with humility and reflect it outward in sacrificial ways. This week centers on the incarnation as the ultimate act of love.</p>
-        </div>
-        <a href="../devotionals-pages/devotional-week2-love.html" class="download-btn mt-6 self-start week-read-btn">
-          <span class="btn-text">Start Reading</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-      <!-- Week 3 Card -->
-      <div class="content-section flex flex-col justify-between fade-in week-card snap-start flex-shrink-0 w-full" data-week="3">
-        <div>
-          <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
-            <img src="../assets/images/Light of Peace.webp" alt="The Light of Peace" class="w-full h-full object-contain" loading="lazy">
-            <div class="absolute top-3 right-3 week-completed-badge hidden">
-              <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Completed
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3 mb-3">
-            <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 3 " Peace</h2>
-              <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 14-Dec 20</p>
-            </div>
-          </div>
-          <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Isaiah 9:6</p>
-          </div>
-          <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">Christ, the Prince of Peace, restores what was broken by sin and transforms the chaos of our hearts. This week focuses on reconciliation, forgiveness, and the personal and communal peace Christ brings.</p>
-        </div>
-        <a href="../devotionals-pages/devotional-week3-peace.html" class="download-btn mt-6 self-start week-read-btn">
-          <span class="btn-text">Start Reading</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-      <!-- Week 4 Card -->
-      <div class="content-section flex flex-col justify-between fade-in week-card snap-start flex-shrink-0 w-full" data-week="4">
-        <div>
-          <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
-            <img src="../assets/images/Light of Joy.webp" alt="The Light of Joy" class="w-full h-full object-contain" loading="lazy">
-            <div class="absolute top-3 right-3 week-completed-badge hidden">
-              <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Completed
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-3 mb-3">
-            <div>
-              <h2 class="text-2xl font-heading font-bold text-flcNavy mb-0.5">Week 4 " Joy</h2>
-              <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider">Dec 21-Dec 28</p>
-            </div>
-          </div>
-          <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
-            <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Luke 2:8"11</p>
-          </div>
-          <p class="text-flcCharcoal/75 leading-relaxed text-[15px]">The good news of Christ's birth brings deep, enduring gladness rooted in God's faithfulness. This week explores how joy is a lived experience, shaping our words, actions, and outlook.</p>
-        </div>
-        <a href="../devotionals-pages/devotional-week4-joy.html" class="download-btn mt-6 self-start week-read-btn">
-          <span class="btn-text">Start Reading</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-        </div>
-        
-        <!-- Swipe Indicators (Mobile) -->
-        <div class="flex justify-center gap-2 mt-4">
-          <div class="swipe-dot w-2 h-2 rounded-full bg-flcGold transition-all" data-week="1"></div>
-          <div class="swipe-dot w-2 h-2 rounded-full bg-flcGold/30 transition-all" data-week="2"></div>
-          <div class="swipe-dot w-2 h-2 rounded-full bg-flcGold/30 transition-all" data-week="3"></div>
-          <div class="swipe-dot w-2 h-2 rounded-full bg-flcGold/30 transition-all" data-week="4"></div>
-        </div>
-      </div>
-      
-      <!-- Tablet/Desktop Grid Layout -->
-      <div id="weekCardsDesktop" class="hidden md:grid md:grid-cols-2 gap-6 mb-12">
-        <!-- Tablet/Desktop cards are clones of mobile cards, managed by JS -->
-      </div>
-    </div>
+ <!-- How to Use This Devotional -->
+ <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+ <div class="bg-white rounded-2xl p-6 sm:p-8 border border-flcBorder shadow-lg">
+ <div class="flex items-center gap-3 mb-6">
+ <div class="w-10 h-10 rounded-xl bg-flcGold flex items-center justify-center shadow-editorial">
+ <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+ </svg>
+ </div>
+ <h2 class="text-2xl sm:text-3xl font-heading font-bold text-flcNavy">How to Use This Devotional</h2>
+ </div>
+ <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+ <div class="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-flcCream/30 border border-flcGold/10">
+ <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
+ <span class="text-flcNavy font-bold text-base sm:text-lg">1</span>
+ </div>
+ <div>
+ <h3 class="font-semibold text-flcNavy mb-1 sm:mb-2 text-sm sm:text-base">Set Aside Time Daily</h3>
+ <p class="text-xs sm:text-sm text-flcCharcoal/70 leading-relaxed">Choose a consistent time each day for your devotional reading—morning, lunch, or evening.</p>
+ </div>
+ </div>
+ <div class="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-flcCream/30 border border-flcGold/10">
+ <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
+ <span class="text-flcNavy font-bold text-base sm:text-lg">2</span>
+ </div>
+ <div>
+ <h3 class="font-semibold text-flcNavy mb-1 sm:mb-2 text-sm sm:text-base">Read the Scripture</h3>
+ <p class="text-xs sm:text-sm text-flcCharcoal/70 leading-relaxed">Start with the daily scripture passage and let God's Word speak to your heart.</p>
+ </div>
+ </div>
+ <div class="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-flcCream/30 border border-flcGold/10">
+ <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
+ <span class="text-flcNavy font-bold text-base sm:text-lg">3</span>
+ </div>
+ <div>
+ <h3 class="font-semibold text-flcNavy mb-1 sm:mb-2 text-sm sm:text-base">Reflect & Journal</h3>
+ <p class="text-xs sm:text-sm text-flcCharcoal/70 leading-relaxed">Use the reflection questions and journal prompts to deepen your understanding.</p>
+ </div>
+ </div>
+ <div class="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-flcCream/30 border border-flcGold/10">
+ <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
+ <span class="text-flcNavy font-bold text-base sm:text-lg">4</span>
+ </div>
+ <div>
+ <h3 class="font-semibold text-flcNavy mb-1 sm:mb-2 text-sm sm:text-base">Apply & Pray</h3>
+ <p class="text-xs sm:text-sm text-flcCharcoal/70 leading-relaxed">End with the daily prayer and consider how to apply what you've learned.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-    <!-- How to Use This Devotional -->
-    <section class="relative overflow-hidden bg-white rounded-2xl p-8 sm:p-10 mb-8 border border-flcBorder shadow-lg">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-flcGold/5 to-transparent rounded-full -mr-32 -mt-32"></div>
-      <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-flcNavy/5 to-transparent rounded-full -ml-24 -mb-24"></div>
-      <div class="relative">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-flcGold to-flcGoldLight flex items-center justify-center shadow-md">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          </div>
-          <h2 class="text-3xl font-heading font-bold text-flcNavy">How to Use This Devotional</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="flex gap-4 p-4 rounded-xl bg-flcCream/30 border border-flcGold/10 hover:border-flcGold/30 transition-all">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
-              <span class="text-flcNavy font-bold text-lg">1</span>
-            </div>
-            <div>
-              <h3 class="font-semibold text-flcNavy mb-2 text-base">Set Aside Time Daily</h3>
-              <p class="text-sm text-flcCharcoal/70 leading-relaxed">Choose a consistent time each day for your devotional reading"morning, lunch, or evening.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 p-4 rounded-xl bg-flcCream/30 border border-flcGold/10 hover:border-flcGold/30 transition-all">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
-              <span class="text-flcNavy font-bold text-lg">2</span>
-            </div>
-            <div>
-              <h3 class="font-semibold text-flcNavy mb-2 text-base">Read the Scripture</h3>
-              <p class="text-sm text-flcCharcoal/70 leading-relaxed">Start with the daily scripture passage and let God's Word speak to your heart.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 p-4 rounded-xl bg-flcCream/30 border border-flcGold/10 hover:border-flcGold/30 transition-all">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
-              <span class="text-flcNavy font-bold text-lg">3</span>
-            </div>
-            <div>
-              <h3 class="font-semibold text-flcNavy mb-2 text-base">Reflect & Journal</h3>
-              <p class="text-sm text-flcCharcoal/70 leading-relaxed">Use the reflection questions and journal prompts to deepen your understanding.</p>
-            </div>
-          </div>
-          <div class="flex gap-4 p-4 rounded-xl bg-flcCream/30 border border-flcGold/10 hover:border-flcGold/30 transition-all">
-            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-flcGold/30 to-flcGold/20 flex items-center justify-center border border-flcGold/20">
-              <span class="text-flcNavy font-bold text-lg">4</span>
-            </div>
-            <div>
-              <h3 class="font-semibold text-flcNavy mb-2 text-base">Apply & Pray</h3>
-              <p class="text-sm text-flcCharcoal/70 leading-relaxed">End with the daily prayer and consider how to apply what you've learned.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+ <!-- Progress Tracker Section -->
+ <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+ <div>
+ <!-- Progress Header -->
+ <div class="flex items-center justify-between mb-6">
+ <div>
+ <h2 class="text-2xl font-heading font-bold text-flcNavy mb-1">Your Journey</h2>
+ <p class="text-flcCharcoal/70 text-sm">Track your progress through the Advent devotional</p>
+ </div>
+ <button onclick="resetProgress()" class="text-flcGold hover:text-flcGoldDark text-sm font-semibold motion-fast flex items-center gap-1">
+ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+ </svg>
+ Reset
+ </button>
+ </div>
 
-    <!-- ...existing code for any additional content... -->
-  </main>
+ <!-- Progress Bar -->
+ <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+ <div class="flex items-center justify-between mb-3">
+ <span class="text-sm font-semibold text-flcNavy" id="progressText">0 of 4 weeks completed</span>
+ <span class="text-2xl font-bold text-flcGold" id="progressPercent">0%</span>
+ </div>
+ <div class="w-full bg-flcCream rounded-full h-3 overflow-hidden">
+ <div id="progressBar" class="h-full bg-gradient-to-r from-flcGold to-flcGoldLight rounded-full motion-smooth" style="width: 0%"></div>
+ </div>
+ </div>
 
-  <!-- Footer Container -->
-  <div id="footerContainer"
-       data-config='{"currentPage":"devotionals","basePath":"..","logoPath":"../assets/images/Logo.png","homePath":"../index.html","libraryPath":"../pages/resources.html","devotionalsPath":"../pages/devotionals.html","resourcesPath":"../pages/resources.html","logoHeight":"105px"}'></div>
-  
-  <!-- Load Footer Component -->
-  <script src="../assets/js/footer-component.js"></script>
+ <!-- Week Progress Indicators -->
+ <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+ <div class="week-indicator bg-white rounded-xl shadow-editorial p-4 border-2 border-transparent motion-smooth hover:border-flcGold/30" data-week="1">
+ <div class="flex items-center justify-between mb-2">
+ <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 1</span>
+ <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center motion-smooth">
+ <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+ </svg>
+ </div>
+ </div>
+ <p class="text-sm font-bold text-flcNavy">Hope</p>
+ </div>
+ <div class="week-indicator bg-white rounded-xl shadow-editorial p-4 border-2 border-transparent motion-smooth hover:border-flcGold/30" data-week="2">
+ <div class="flex items-center justify-between mb-2">
+ <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 2</span>
+ <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center motion-smooth">
+ <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+ </svg>
+ </div>
+ </div>
+ <p class="text-sm font-bold text-flcNavy">Love</p>
+ </div>
+ <div class="week-indicator bg-white rounded-xl shadow-editorial p-4 border-2 border-transparent motion-smooth hover:border-flcGold/30" data-week="3">
+ <div class="flex items-center justify-between mb-2">
+ <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 3</span>
+ <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center motion-smooth">
+ <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+ </svg>
+ </div>
+ </div>
+ <p class="text-sm font-bold text-flcNavy">Peace</p>
+ </div>
+ <div class="week-indicator bg-white rounded-xl shadow-editorial p-4 border-2 border-transparent motion-smooth hover:border-flcGold/30" data-week="4">
+ <div class="flex items-center justify-between mb-2">
+ <span class="text-xs font-semibold text-flcCharcoal/60 uppercase tracking-wider">Week 4</span>
+ <div class="completion-check w-6 h-6 rounded-full border-2 border-flcGold/30 flex items-center justify-center motion-smooth">
+ <svg class="w-4 h-4 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+ </svg>
+ </div>
+ </div>
+ <p class="text-sm font-bold text-flcNavy">Joy</p>
+ </div>
+ </div>
 
-  <script>
-    // ========================================
-    // NAVIGATION
-    // ========================================
-    // ...existing code...
-  </script>
+ <!-- Continue Reading CTA -->
+ <div id="continueReadingCTA" class="hidden bg-gradient-to-br from-flcGold via-flcGoldLight to-flcGold rounded-2xl sm:rounded-3xl shadow-elevated p-5 sm:p-8 text-center relative overflow-hidden">
+ <!-- Decorative elements -->
+ <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.15),transparent_50%)]"></div>
+ <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.1),transparent_50%)]"></div>
 
-  <!-- Subscription Modal -->
-  <div class="modal-overlay" id="subscriptionModal" style="display:none;">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" aria-label="Close modal">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <div class="text-center mb-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-flcNavy/10 to-flcGold/10 rounded-full mb-4">
-          <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-          </svg>
-        </div>
-        <h3 class="text-2xl font-heading font-bold text-flcNavy mb-2">Never Miss a Sermon</h3>
-        <p class="text-flcCharcoal/70">Get notified when new sermon notes and Bible studies are published</p>
-      </div>
-      <form id="subscriptionForm" class="space-y-4">
-        <div>
-          <label for="subName" class="block text-sm font-medium text-flcCharcoal mb-2">Full Name</label>
-          <input type="text" id="subName" name="name" required class="form-input" placeholder="John Doe">
-        </div>
-        <div>
-          <label for="subEmail" class="block text-sm font-medium text-flcCharcoal mb-2">Email Address</label>
-          <input type="email" id="subEmail" name="email" required class="form-input" placeholder="john@example.com">
-        </div>
-        <div class="space-y-2">
-          <p class="text-sm font-medium text-flcCharcoal mb-2">Notification Preferences</p>
-          <label class="checkbox-label">
-            <input type="checkbox" name="newSermon" checked>
-            <span>New sermon notes published</span>
-          </label>
-          <label class="checkbox-label">
-            <input type="checkbox" name="weeklyDigest" checked>
-            <span>Weekly digest of resources</span>
-          </label>
-        </div>
-        <button type="submit" class="w-full btn-premium ripple px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-semibold tracking-widePlus uppercase text-sm hover:from-flcNavyLight hover:to-flcNavy shadow-md hover:shadow-lg">
-          Subscribe Now
-        </button>
-        <p class="text-xs text-center text-flcCharcoal/50 mt-4">
-          We respect your privacy. Unsubscribe anytime.
-        </p>
-      </form>
-    </div>
-  </div>
+ <div class="relative z-10">
+ <div class="flex items-center justify-center gap-2 mb-2 sm:mb-3">
+ <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+ </svg>
+ <h3 class="text-lg sm:text-xl font-heading font-bold text-white">Continue Your Journey</h3>
+ </div>
+ <p class="text-white/95 text-sm sm:text-base mb-4 sm:mb-5 font-medium" id="continueReadingText">Pick up where you left off</p>
+ <a href="#" id="continueReadingLink" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-flcNavy font-bold text-sm sm:text-base rounded-full hover:shadow-elevated motion-smooth hover:scale-105 active:scale-95">
+ <span>Continue Reading</span>
+ <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+ </svg>
+ </a>
+ </div>
+ </div>
+ </div>
+ </section>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var subscriptionModal = document.getElementById('subscriptionModal');
-    var navSubscribeBtn = document.getElementById('navSubscribe');
-    if (navSubscribeBtn && subscriptionModal) {
-      navSubscribeBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        subscriptionModal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-    
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeIcon = document.getElementById('closeIcon');
-    
-    if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
-      mobileMenuBtn.addEventListener('click', function() {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-        
-        if (isOpen) {
-          menuIcon.classList.remove('opacity-0');
-          closeIcon.classList.add('opacity-0');
-        } else {
-          menuIcon.classList.add('opacity-0');
-          closeIcon.classList.remove('opacity-0');
-        }
-      });
-      
-      // Close menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          mobileMenuBtn.setAttribute('aria-expanded', 'false');
-          menuIcon.classList.remove('opacity-0');
-          closeIcon.classList.add('opacity-0');
-        });
-      });
-    }
-    
-    // Search modal
-    const searchBtn = document.getElementById('searchBtn');
-    const searchModal = document.getElementById('searchModal');
-    const closeSearch = document.getElementById('closeSearch');
-    const searchModalBackdrop = document.getElementById('searchModalBackdrop');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    
-    // Search index
-    const searchIndex = [
-      { title: 'Home', href: '../index.html', type: 'Page' },
-      { title: 'Sermons', href: 'sermons.html', type: 'Page' },
-      { title: 'Resources', href: 'resources.html', type: 'Page' },
-      { title: 'Reading Library', href: 'reading-library.html', type: 'Page' },
-      { title: 'Devotionals', href: 'devotionals.html', type: 'Page' },
-      { title: 'Spiritual Detox', href: 'spiritual-detox.html', type: 'Page' },
-      { title: 'Freedom Life Church', href: 'https://freedomlifechurch.ca/', type: 'External' }
-    ];
-    
-    function openSearch() {
-      searchModal.classList.remove('hidden');
-      setTimeout(() => searchInput.focus(), 100);
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeSearchModal() {
-      searchModal.classList.add('hidden');
-      document.body.style.overflow = '';
-      searchInput.value = '';
-      if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-    }
-    
-    function performSearch(query) {
-      if (!query || query.trim() === '') {
-        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">Type to search...</p>';
-        return;
-      }
-      
-      const q = query.toLowerCase().trim();
-      const results = searchIndex.filter(item => 
-        item.title.toLowerCase().includes(q) || 
-        item.type.toLowerCase().includes(q)
-      );
-      
-      if (results.length === 0) {
-        if (searchResults) searchResults.innerHTML = '<p class="text-sm text-flcCharcoal/60 text-center py-8">No results found.</p>';
-        return;
-      }
-      
-      const html = results.map(item => `
-        <a href="${item.href}" ${item.type === 'External' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block p-3 rounded-lg hover:bg-flcGold/5 transition-colors">
-          <div class="font-medium text-flcNavy">${item.title}</div>
-          <div class="text-xs text-flcCharcoal/50 mt-1">${item.type}</div>
-        </a>
-      `).join('');
-      
-      if (searchResults) searchResults.innerHTML = html;
-    }
-    
-    if (searchBtn) {
-      searchBtn.addEventListener('click', openSearch);
-    }
-    
-    if (closeSearch) {
-      closeSearch.addEventListener('click', closeSearchModal);
-    }
-    
-    if (searchModalBackdrop) {
-      searchModalBackdrop.addEventListener('click', closeSearchModal);
-    }
-    
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        performSearch(this.value);
-      });
-    }
-    
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-        closeSearchModal();
-      }
-    });
-  });
+ <!-- Week Cards Section -->
+ <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+ <div class="flex items-center justify-between mb-6">
+ <h2 class="text-2xl font-heading font-bold text-flcNavy">Weekly Devotionals</h2>
+ <a href="../assets/pdfs/Advent%20-%20Hope%20Handout.pdf" class="inline-flex items-center gap-2 px-4 py-2 bg-flcGold hover:bg-flcGoldLight text-white text-sm font-semibold rounded-lg motion-fast">
+ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+ </svg>
+ Download PDF
+ </a>
+ </div>
+ <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+ <!-- Week 1 Card -->
+ <a href="../devotionals-pages/devotional-week1-hope.html" class="bg-white rounded-2xl border border-flcBorder p-5 shadow-soft hover:-translate-y-1 motion-fast block">
+ <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
+ <img src="../assets/images/Light of Hope.webp" alt="The Light of Hope" class="w-full h-full object-contain" loading="lazy">
+ </div>
+ <h2 class="text-xl font-heading font-bold text-flcNavy mb-1">Week 1 - Hope</h2>
+ <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider mb-3">Nov 30-Dec 6</p>
+ <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
+ <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Titus 1:1-3</p>
+ </div>
+ <p class="text-flcCharcoal/75 leading-relaxed text-sm">God's plan for hope began before time itself. In Christ, hope is embodied and the promise of eternal life is fulfilled.</p>
+ </a>
+ <!-- Week 2 Card -->
+ <a href="../devotionals-pages/devotional-week2-love.html" class="bg-white rounded-2xl border border-flcBorder p-5 shadow-soft hover:-translate-y-1 motion-fast block">
+ <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
+ <img src="../assets/images/Light of Love.webp" alt="The Light of Love" class="w-full h-full object-contain" loading="lazy">
+ </div>
+ <h2 class="text-xl font-heading font-bold text-flcNavy mb-1">Week 2 - Love</h2>
+ <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider mb-3">Dec 7-Dec 13</p>
+ <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
+ <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: John 3:16</p>
+ </div>
+ <p class="text-flcCharcoal/75 leading-relaxed text-sm">God's love is both incomprehensible and deeply personal. Advent invites us to receive this love with humility.</p>
+ </a>
+ <!-- Week 3 Card -->
+ <a href="../devotionals-pages/devotional-week3-peace.html" class="bg-white rounded-2xl border border-flcBorder p-5 shadow-soft hover:-translate-y-1 motion-fast block">
+ <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
+ <img src="../assets/images/Light of Peace.webp" alt="The Light of Peace" class="w-full h-full object-contain" loading="lazy">
+ </div>
+ <h2 class="text-xl font-heading font-bold text-flcNavy mb-1">Week 3 - Peace</h2>
+ <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider mb-3">Dec 14-Dec 20</p>
+ <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
+ <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Isaiah 9:6</p>
+ </div>
+ <p class="text-flcCharcoal/75 leading-relaxed text-sm">Christ, the Prince of Peace, restores what was broken by sin and transforms the chaos of our hearts.</p>
+ </a>
+ <!-- Week 4 Card -->
+ <a href="../devotionals-pages/devotional-week4-joy.html" class="bg-white rounded-2xl border border-flcBorder p-5 shadow-soft hover:-translate-y-1 motion-fast block">
+ <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-flcGold/5 to-flcNavy/5 flex items-center justify-center relative" style="min-height: 180px; max-height: 200px;">
+ <img src="../assets/images/Light of Joy.webp" alt="The Light of Joy" class="w-full h-full object-contain" loading="lazy">
+ </div>
+ <h2 class="text-xl font-heading font-bold text-flcNavy mb-1">Week 4 - Joy</h2>
+ <p class="text-flcGold/80 text-xs font-semibold uppercase tracking-wider mb-3">Dec 21-Dec 28</p>
+ <div class="border-l-2 border-flcGold/30 pl-4 mb-3">
+ <p class="text-flcCharcoal/70 mb-1 text-sm font-medium">Scripture: Luke 2:8-11</p>
+ </div>
+ <p class="text-flcCharcoal/75 leading-relaxed text-sm">The good news of Christ's birth brings deep, enduring gladness rooted in God's faithfulness.</p>
+ </a>
+ </div>
+ </section>
+ </main>
+
+ <!-- Footer Container -->
+ <div id="footerContainer" data-current-page="devotionals" data-base-path=".."></div>
+
+ <script>
+ // ========================================
+ // JOURNEY PROGRESS TRACKING
+ // ========================================
+
+ // Initialize progress tracking
+ document.addEventListener('DOMContentLoaded', function() {
+ loadProgress();
+ });
+
+ // Load progress from localStorage
+ function loadProgress() {
+ const progress = JSON.parse(localStorage.getItem('devotionalProgress')) || {};
+ const completedWeeks = Object.keys(progress).filter(key => progress[key]).length;
+ const totalWeeks = 4;
+ const percent = Math.round((completedWeeks / totalWeeks) * 100);
+
+ // Update progress bar
+ const progressBar = document.getElementById('progressBar');
+ const progressText = document.getElementById('progressText');
+ const progressPercent = document.getElementById('progressPercent');
+
+ if (progressBar) progressBar.style.width = percent + '%';
+ if (progressText) progressText.textContent = `${completedWeeks} of ${totalWeeks} weeks completed`;
+ if (progressPercent) progressPercent.textContent = percent + '%';
+
+ // Update week indicators
+ const weekIndicators = document.querySelectorAll('.week-indicator');
+ weekIndicators.forEach(indicator => {
+ const week = indicator.getAttribute('data-week');
+ const isCompleted = progress[week];
+ const check = indicator.querySelector('.completion-check');
+
+ if (isCompleted && check) {
+ check.classList.add('bg-flcGold', 'border-flcGold');
+ check.classList.remove('border-flcGold/30');
+ check.querySelector('svg').classList.remove('opacity-0');
+ } else if (check) {
+ check.classList.remove('bg-flcGold', 'border-flcGold');
+ check.classList.add('border-flcGold/30');
+ check.querySelector('svg').classList.add('opacity-0');
+ }
+ });
+
+ // Update continue reading CTA
+ updateContinueReading(progress, totalWeeks);
+ }
+
+ // Save progress to localStorage
+ function saveProgress(week, completed) {
+ const progress = JSON.parse(localStorage.getItem('devotionalProgress')) || {};
+ progress[week] = completed;
+ localStorage.setItem('devotionalProgress', JSON.stringify(progress));
+ loadProgress();
+ }
+
+ // Toggle week completion
+ function toggleWeek(week) {
+ const progress = JSON.parse(localStorage.getItem('devotionalProgress')) || {};
+
+ // Check if trying to complete a week out of order
+ if (!progress[week] && week > 1 && !progress[week - 1]) {
+ // Cannot complete this week yet
+ return;
+ }
+
+ // Toggle the week
+ if (progress[week]) {
+ // Uncomplete this week and all subsequent weeks
+ progress[week] = false;
+ for (let i = week + 1; i <= 4; i++) {
+ progress[i] = false;
+ }
+ } else {
+ // Complete this week
+ progress[week] = true;
+ }
+
+ localStorage.setItem('devotionalProgress', JSON.stringify(progress));
+ loadProgress();
+ }
+
+ // Reset progress
+ function resetProgress() {
+ if (confirm('Are you sure you want to reset your progress? This cannot be undone.')) {
+ localStorage.removeItem('devotionalProgress');
+ loadProgress();
+ }
+ }
+
+ // Update continue reading CTA
+ function updateContinueReading(progress, totalWeeks) {
+ const cta = document.getElementById('continueReadingCTA');
+ const ctaLink = document.getElementById('continueReadingLink');
+ const ctaText = document.getElementById('continueReadingText');
+
+ if (!cta) return;
+
+ // Find first uncompleted week
+ let nextWeek = null;
+ for (let i = 1; i <= totalWeeks; i++) {
+ if (!progress[i]) {
+ nextWeek = i;
+ break;
+ }
+ }
+
+ if (nextWeek) {
+ cta.classList.remove('hidden');
+ const weekUrls = {
+ 1: '../devotionals-pages/devotional-week1-hope.html',
+ 2: '../devotionals-pages/devotional-week2-love.html',
+ 3: '../devotionals-pages/devotional-week3-peace.html',
+ 4: '../devotionals-pages/devotional-week4-joy.html'
+ };
+ const weekNames = {
+ 1: 'Hope',
+ 2: 'Love',
+ 3: 'Peace',
+ 4: 'Joy'
+ };
+
+ if (ctaLink) ctaLink.href = weekUrls[nextWeek];
+ if (ctaText) ctaText.textContent = `Continue with Week ${nextWeek} - ${weekNames[nextWeek]}`;
+ } else {
+ cta.classList.add('hidden');
+ }
+ }
+
+ // ========================================
+ // NAVIGATION
+ // ========================================
+ const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+ const mobileMenu = document.getElementById('mobileMenu');
+ const menuIcon = document.getElementById('menuIcon');
+ const closeIcon = document.getElementById('closeIcon');
+
+ if (mobileMenuBtn && mobileMenu) {
+ mobileMenuBtn.addEventListener('click', function() {
+ const isExpanded = this.getAttribute('aria-expanded') === 'true';
+ this.setAttribute('aria-expanded', !isExpanded);
+ mobileMenu.classList.toggle('hidden');
+
+ if (menuIcon && closeIcon) {
+ menuIcon.classList.toggle('opacity-0', !isExpanded);
+ menuIcon.classList.toggle('rotate-90', !isExpanded);
+ closeIcon.classList.toggle('opacity-0', isExpanded);
+ closeIcon.classList.toggle('rotate-90', isExpanded);
+ }
+ });
+ }
+
+ // Search functionality is handled by header-component.js and animations.js
+ </script>
+
+ <!-- Subscription Modal -->
+ <div class="modal-overlay" id="subscriptionModal" style="display:none;">
+ <div class="modal-content">
+ <button class="modal-close" id="modalClose" aria-label="Close modal">
+ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+ </svg>
+ </button>
+ <div class="text-center mb-6">
+ <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-flcNavy/10 to-flcGold/10 rounded-full mb-4">
+ <svg class="w-8 h-8 text-flcGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+ </svg>
+ </div>
+ <h3 class="text-2xl font-heading font-bold text-flcNavy mb-2">Stay Updated</h3>
+ <p class="text-flcCharcoal/70">Get notified when new content and resources are published</p>
+ </div>
+ <form id="subscriptionForm" class="space-y-4">
+ <div>
+ <label for="subName" class="block text-sm font-medium text-flcCharcoal mb-2">Full Name</label>
+ <input type="text" id="subName" name="name" required class="form-input" placeholder="John Doe">
+ </div>
+ <div>
+ <label for="subEmail" class="block text-sm font-medium text-flcCharcoal mb-2">Email Address</label>
+ <input type="email" id="subEmail" name="email" required class="form-input" placeholder="john@example.com">
+ </div>
+ <div class="space-y-2">
+ <p class="text-sm font-medium text-flcCharcoal mb-2">Notification Preferences</p>
+ <label class="checkbox-label">
+ <input type="checkbox" name="newSermon" checked>
+ <span>New sermon notes published</span>
+ </label>
+ <label class="checkbox-label">
+ <input type="checkbox" name="weeklyDigest" checked>
+ <span>Weekly digest of resources</span>
+ </label>
+ </div>
+ <button type="submit" class="w-full btn-premium ripple px-6 py-3 rounded-full bg-gradient-to-r from-flcNavy to-flcNavyLight text-white font-semibold tracking-widePlus uppercase text-sm hover:from-flcNavyLight hover:to-flcNavy shadow-editorial hover:shadow-lg">
+ Subscribe Now
+ </button>
+ <p class="text-xs text-center text-flcCharcoal/50 mt-4">
+ We respect your privacy. Unsubscribe anytime.
+ </p>
+ </form>
+ </div>
+ </div>
+
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+ var subscriptionModal = document.getElementById('subscriptionModal');
+ var navSubscribeBtn = document.getElementById('navSubscribe');
+ if (navSubscribeBtn && subscriptionModal) {
+ navSubscribeBtn.addEventListener('click', function(e) {
+ e.preventDefault();
+ subscriptionModal.classList.add('show');
+ document.body.style.overflow = 'hidden';
+ });
+ }
+ });
 </script>
 
-  <script src="../assets/js/site-theme.js"></script>
+ <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>
-

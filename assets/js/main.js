@@ -1,20 +1,28 @@
 // main.js - Entry point that initializes everything
 
 import './config.js';
-import { initHero } from './modules/hero.js';
+import { initHeader } from './header.js';
+import { initFooter } from './footer.js';
+import { initNavigation } from './navigation.js';
 import { initFeaturedPosts } from './modules/featured.js';
 import { initDevotionals } from './modules/devotionals.js';
-import { initScrollAnimations } from './modules/animations.js';
+import { initScrollAnimations, initSearchModal, initPageTransition } from './modules/animations.js';
 import { initScrollTop } from './modules/scrollTop.js';
 import { initForm } from './modules/form.js';
+import { initSearch } from './modules/search.js';
 
 // Initialize all modules when DOM is ready
-function initApp() {
+async function initApp() {
   try {
-    initHero();
+    await initHeader();
+    await initFooter();
+    initNavigation();
     initFeaturedPosts();
     initDevotionals();
     initScrollAnimations();
+    initSearchModal();
+    await initSearch();
+    initPageTransition();
     initScrollTop();
     initForm();
   } catch (error) {

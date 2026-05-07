@@ -253,18 +253,86 @@ async function loadPost() {
       }
       
       if (videoId) {
+        const videoTitle = entry.fields.title || 'Sermon Video';
+        const thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
         youtubeContainer.innerHTML = `
           <div class="youtube-video-container relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)]">
             <iframe 
-              src="https://www.youtube.com/embed/${videoId}" 
-              title="${entry.fields.title || 'Sermon Video'}"
+              id="ytEmbed"
+              src="https://www.youtube-nocookie.com/embed/${videoId}" 
+              title="${videoTitle}"
               class="w-full aspect-video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
             </iframe>
           </div>
+          <div class="flex items-center justify-center gap-2 mt-4">
+            <a href="${watchUrl}" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 text-sm text-flcCharcoal/50 hover:text-flcGold font-medium transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="white"/>
+              </svg>
+              Having trouble? Watch directly on YouTube
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
         `;
         youtubeContainer.classList.remove('hidden');
+
+        // Fallback: detect "Video unavailable" via postMessage from YouTube iframe
+        const showFallback = () => {
+          youtubeContainer.innerHTML = `
+            <a href="${watchUrl}" target="_blank" rel="noopener noreferrer"
+               class="youtube-fallback group block relative rounded-[20px] overflow-hidden shadow-[0_32px_96px_rgba(26,58,82,0.12)]">
+              <img src="${thumbUrl}" alt="${videoTitle}"
+                   class="w-full aspect-video object-cover"
+                   onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'" />
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-3">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <span class="text-white text-sm sm:text-base font-semibold bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
+                  Watch on YouTube
+                </span>
+              </div>
+            </a>
+          `;
+        };
+
+        // Detect embed failure: YouTube iframes that fail still fire "load",
+        // so we listen for the YouTube Iframe API error message via postMessage.
+        // Also set a timer: if the iframe shows "Video unavailable", the
+        // YouTube player posts an "onError" state via postMessage.
+        const onMsg = (e) => {
+          if (e.origin.includes('youtube') && typeof e.data === 'string') {
+            try {
+              const d = JSON.parse(e.data);
+              // YouTube iframe API sends error code 101 or 150 for embed-blocked
+              if (d.event === 'onError' || 
+                  (d.info && [101, 150].includes(d.info))) {
+                window.removeEventListener('message', onMsg);
+                showFallback();
+              }
+            } catch(_) { /* not JSON — ignore */ }
+          }
+        };
+        window.addEventListener('message', onMsg);
+
+        // Enable the YouTube JS API so we receive postMessage events
+        const iframe = youtubeContainer.querySelector('#ytEmbed');
+        if (iframe) {
+          iframe.src += (iframe.src.includes('?') ? '&' : '?') + 'enablejsapi=1&origin=' + encodeURIComponent(window.location.origin);
+        }
+
+        // Safety net: remove listener after 15s to avoid memory leaks
+        setTimeout(() => window.removeEventListener('message', onMsg), 15000);
       } else {
         youtubeContainer.classList.add('hidden');
       }
@@ -278,9 +346,12 @@ async function loadPost() {
         postBody.innerHTML = bodyHtml || 'No content available.';
         updateReadingStats(bodyHtml.replace(/<[^>]*>/g, ' '));
       } else if (typeof bodyField === 'string' && bodyField.trim()) {
-        postBody.innerHTML = typeof marked !== 'undefined'
-          ? marked.parse(bodyField)
-          : `<p>${bodyField.replace(/\n\n/g, '</p><p>')}</p>`;
+        const parseMd = (str) => {
+          const m = window.marked;
+          if (m) return typeof m.parse === 'function' ? m.parse(str) : m(str);
+          return `<p>${str.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`;
+        };
+        postBody.innerHTML = parseMd(bodyField);
         updateReadingStats(bodyField);
       } else {
         postBody.innerHTML = 'No content available.';
