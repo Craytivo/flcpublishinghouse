@@ -810,6 +810,8 @@ function initReadingLibrary() {
   document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 }
 
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 async function initReadingLibraryPage() {
   try {
     await initHeader();
@@ -818,10 +820,11 @@ async function initReadingLibraryPage() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initReadingLibrary();
   } catch (error) {
     console.error('Error initializing reading-library page:', error);
+  } finally {
+    initPageTransition();
   }
 }
 

@@ -9,6 +9,8 @@ import { initScrollTop } from '../modules/scrollTop.js';
 import { initSearch } from '../modules/search.js';
 import { initSermons } from '../modules/sermons.js';
 
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 // Initialize all modules when DOM is ready
 async function initSermonsPage() {
   try {
@@ -18,11 +20,12 @@ async function initSermonsPage() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initScrollTop();
     initSermons();
   } catch (error) {
     console.error('Error initializing sermons page:', error);
+  } finally {
+    initPageTransition();
   }
 }
 

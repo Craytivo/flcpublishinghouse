@@ -8,6 +8,8 @@ import { initScrollAnimations, initSearchModal, initPageTransition } from '../mo
 import { initScrollTop } from '../modules/scrollTop.js';
 import { initSearch } from '../modules/search.js';
 
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 // Initialize all modules when DOM is ready
 async function initSpiritualDetoxPage() {
   try {
@@ -17,10 +19,11 @@ async function initSpiritualDetoxPage() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initScrollTop();
   } catch (error) {
     console.error('Error initializing spiritual-detox page:', error);
+  } finally {
+    initPageTransition();
   }
 }
 

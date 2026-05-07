@@ -11,6 +11,9 @@ import { initScrollTop } from './modules/scrollTop.js';
 import { initForm } from './modules/form.js';
 import { initSearch } from './modules/search.js';
 
+// Safety: never leave the page invisible for more than 3 seconds
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 // Initialize all modules when DOM is ready
 async function initApp() {
   try {
@@ -22,11 +25,12 @@ async function initApp() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initScrollTop();
     initForm();
   } catch (error) {
     console.error('Error initializing app:', error);
+  } finally {
+    initPageTransition();
   }
 }
 

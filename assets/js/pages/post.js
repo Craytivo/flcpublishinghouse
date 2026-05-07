@@ -9,6 +9,8 @@ import { initScrollTop } from '../modules/scrollTop.js';
 import { initSearch } from '../modules/search.js';
 import { initPostFeatures } from '../modules/post-content.js';
 
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 // Initialize all modules when DOM is ready
 async function initPostPage() {
   try {
@@ -18,11 +20,12 @@ async function initPostPage() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initScrollTop();
     initPostFeatures();
   } catch (error) {
     console.error('Error initializing post page:', error);
+  } finally {
+    initPageTransition();
   }
 }
 

@@ -13,6 +13,8 @@ import { initScrollTop } from '../modules/scrollTop.js';
 import { initSearch } from '../modules/search.js';
 import { initResourcesSearch } from '../modules/resources-search.js';
 
+setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
+
 // Initialize all modules when DOM is ready
 async function initResourcesPage() {
   try {
@@ -30,11 +32,12 @@ async function initResourcesPage() {
     initScrollAnimations();
     initSearchModal();
     await initSearch();
-    initPageTransition();
     initScrollTop();
     initResourcesSearch();
   } catch (e) {
     console.error('Page init error:', e);
+  } finally {
+    initPageTransition();
   }
 }
 
