@@ -42,6 +42,8 @@ export async function initBibleStudies() {
     const cfg = window.FLC_CONTENTFUL || {};
     const contentfulData = await getBibleStudyEntries();
     
+    console.log('Contentful Bible Studies data:', contentfulData);
+    
     let bibleStudies = [];
     
     if (contentfulData && contentfulData.items && contentfulData.items.length > 0) {
@@ -52,6 +54,8 @@ export async function initBibleStudies() {
           const postPagePath = cfg.postPagePath || '/pages/post.html';
           const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
           const titleSlug = slugify(title);
+          
+          console.log('Processing Bible Study:', title, 'fields:', item.fields);
           
           return {
             id: item.sys.id,
@@ -66,6 +70,7 @@ export async function initBibleStudies() {
         .filter((item) => item.title && item.url);
     }
 
+    console.log('Final Bible Studies array:', bibleStudies);
     allBibleStudies = bibleStudies;
 
     if (allBibleStudies.length) {
