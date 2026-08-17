@@ -25,15 +25,18 @@ function stripMarkdown(str) {
 function buildCard(item, postPagePath) {
   const f = item.fields;
   const title = escapeHTML((f.title || 'Untitled').trim());
-  const bodyRaw = f.body || f.content || f.summary || '';
+  const bodyRaw = f.description || f.body || f.content || f.studyContent || f.lesson || f.summary || '';
   const summaryText = typeof bodyRaw === 'string' ? stripMarkdown(bodyRaw) : stripRichTextToPlain(bodyRaw);
   const summary = summaryText
     ? escapeHTML(summaryText.slice(0, 160)) + (summaryText.length > 160 ? '...' : '')
     : 'Freshly published teaching notes and resources from Freedom Life Church.';
-  const isDetox = !!(f.weekNumber || f.detoxWeek);
-  const isDevotional = !!(f.startDate || f.endDate || f.devotionalGuide);
-  const kicker = isDetox ? 'Detox' : isDevotional ? 'Devotional' : 'Sermon';
-  const dateText = formatDateSafe(f.date || f.startDate);
+  const cfg = window.FLC_CONTENTFUL || {};
+  const contentTypeId = item.sys?.contentType?.sys?.id || '';
+  const isBibleStudy = contentTypeId === cfg.bibleStudyContentType || !!(f.bibleStudy || f.studyGuide);
+  const isDetox = contentTypeId === cfg.detoxContentType || !!(f.weekNumber || f.detoxWeek);
+  const isDevotional = contentTypeId === cfg.devotionalGuideContentType || !!(f.startDate || f.endDate || f.devotionalGuide);
+  const kicker = isBibleStudy ? 'Bible Study' : isDetox ? 'Detox' : isDevotional ? 'Devotional' : 'Sermon';
+  const dateText = formatDateSafe(f.date || f.startDate || f.publishDate || f.publishedDate);
   const byline = escapeHTML(f.pastor || f.pastorName || f.preacher || f.speaker || 'FLC Team');
   const titleSlug = slugify(f.title || '');
   const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;

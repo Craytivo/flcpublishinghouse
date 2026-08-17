@@ -18,7 +18,7 @@ export async function initHero() {
       ? summaryRaw
       : stripRichTextToPlain(summaryRaw);
     if (!summary) {
-      const bodyRaw = f.body || f.content || f.summary || '';
+      const bodyRaw = f.body || f.content || f.studyContent || f.lesson || f.summary || '';
       summary = typeof bodyRaw === 'string'
         ? bodyRaw
         : stripRichTextToPlain(bodyRaw);
@@ -28,7 +28,7 @@ export async function initHero() {
       : 'Freshly published teaching notes and resources.';
 
     const title = (f.title || 'Untitled').trim();
-    const dateLabel = formatDateSafe(f.date || f.startDate);
+    const dateLabel = formatDateSafe(f.date || f.startDate || f.publishDate || f.publishedDate);
     const byline = f.pastor || f.pastorName || f.preacher || f.speaker || '';
     const titleSlug = slugify(title);
     const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
@@ -53,4 +53,3 @@ export async function initHero() {
     console.error('Error loading hero content:', error);
   }
 }
-

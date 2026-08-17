@@ -7,6 +7,9 @@
 // uppercase category <span> text inside the card).  Items without a
 // matching card still appear in suggestions and link out directly.
 
+import { getBibleStudyEntries } from '../services/contentful.js';
+import { slugify } from '../utils/slugify.js';
+
 function getBasePath() {
   const c = document.getElementById('headerContainer');
   return c?.dataset.basePath || c?.dataset.base || '.';
@@ -85,7 +88,7 @@ export function initResourcesSearch() {
   });
 
   // Resolve hrefs for collection items
-  const items = COLLECTION_ITEMS.map(entry => ({
+  let items = COLLECTION_ITEMS.map(entry => ({
     ...entry,
     resolvedHref: entry.href === '#' ? '#' : withBase(entry.href)
   }));
@@ -110,6 +113,43 @@ export function initResourcesSearch() {
     if (!q) return true;
     const haystack = `${item.title} ${item.type} ${item.tags.join(' ')}`.toLowerCase();
     return haystack.includes(q);
+  }
+
+  async function loadDynamicBibleStudies() {
+    try {
+      const cfg = window.FLC_CONTENTFUL || {};
+      const { items: bibleStudyItems } = await getBibleStudyEntries();
+      const staticTitles = new Set(COLLECTION_ITEMS.map(item => item.title.toLowerCase()));
+      const postPagePath = cfg.postPagePath || '/pages/post.html';
+      const dynamicItems = (bibleStudyItems || [])
+        .filter((item) => item && item.fields && item.sys)
+        .map((item) => {
+          const f = item.fields || {};
+          const title = typeof f.title === 'string' ? f.title.trim() : '';
+          if (!title || staticTitles.has(title.toLowerCase())) return null;
+          const tags = Array.isArray(f.tags) ? f.tags : [f.tags].filter(Boolean);
+          const href = `${postPagePath}?title=${encodeURIComponent(slugify(title))}`;
+          return {
+            title,
+            type: 'Bible Study',
+            href,
+            tags: ['bible study', ...tags, f.subtitle || '', f.speaker || ''].map(tag => String(tag).toLowerCase()).filter(Boolean),
+            cardCategory: 'Bible Study'
+          };
+        })
+        .filter(Boolean);
+
+      if (!dynamicItems.length) return;
+
+      items = [...COLLECTION_ITEMS, ...dynamicItems].map(entry => ({
+        ...entry,
+        resolvedHref: entry.href === '#' ? '#' : withBase(entry.href)
+      }));
+      update();
+      if (activeQuery.trim()) renderSuggestions(activeQuery);
+    } catch (_) {
+      // Static collection search still works.
+    }
   }
 
   // --- Filter cards + update counts ---
@@ -289,4 +329,5 @@ export function initResourcesSearch() {
 
   // Initial count
   update();
+  loadDynamicBibleStudies();
 }

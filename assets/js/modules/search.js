@@ -60,6 +60,10 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
+function normalizeTags(tags) {
+  return Array.isArray(tags) ? tags : [tags].filter(Boolean);
+}
+
 function highlightMatch(text, query) {
   if (!query) return text;
   const esc = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -85,14 +89,15 @@ export async function initSearch() {
       const env = cfg.environment || 'master';
       const types = [
         { ct: cfg.contentType, label: 'Sermon', dateField: 'date' },
-        { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' }
+        { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' },
+        { ct: cfg.bibleStudyContentType, label: 'Bible Study', order: '-sys.updatedAt' }
       ].filter(t => t.ct);
 
       const results = await Promise.all(types.map(t =>
         fetch(`https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
           access_token: cfg.accessToken,
           content_type: t.ct,
-          order: `-fields.${t.dateField}`,
+          order: t.order || `-fields.${t.dateField}`,
           limit: '20'
         })}`, { headers: { Accept: 'application/json' } })
           .then(r => r.ok ? r.json() : { items: [] })
@@ -106,7 +111,7 @@ export async function initSearch() {
         if (!title || searchIndex.find(e => e.title === title)) return;
         const titleSlug = slugify(title);
         const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
-        const tags = [label.toLowerCase(), ...(f.tags || []), f.pastor || '', f.speaker || ''].map(t => String(t).toLowerCase()).filter(Boolean);
+        const tags = [label.toLowerCase(), ...normalizeTags(f.tags), f.pastor || '', f.speaker || ''].map(t => String(t).toLowerCase()).filter(Boolean);
         searchIndex.push({ title, type: label, href, tags });
       });
     }

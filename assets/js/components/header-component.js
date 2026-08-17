@@ -456,6 +456,10 @@ document.addEventListener('DOMContentLoaded', function() {
       { title: 'Bible Study — Advent Hope', type: 'Bible Study', href: computedBibleStudyPath, tags: ['bible study', 'advent', 'hope'] }
     ];
 
+    function normalizeTags(tags) {
+      return Array.isArray(tags) ? tags : [tags].filter(Boolean);
+    }
+
     // Fetch dynamic Contentful entries and append to searchIndex
     (async function loadDynamicEntries() {
       const cfg = window.FLC_CONTENTFUL || {};
@@ -463,7 +467,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const env = cfg.environment || 'master';
       const types = [
         { ct: cfg.contentType, label: 'Sermon', dateField: 'date' },
-        { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' }
+        { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' },
+        { ct: cfg.bibleStudyContentType, label: 'Bible Study', order: '-sys.updatedAt' }
       ].filter(t => t.ct);
 
       try {
@@ -471,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
           fetch(`https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
             access_token: cfg.accessToken,
             content_type: t.ct,
-            order: `-fields.${t.dateField}`,
+            order: t.order || `-fields.${t.dateField}`,
             limit: '20'
           })}`, { headers: { Accept: 'application/json' } })
             .then(r => r.ok ? r.json() : { items: [] })
@@ -487,7 +492,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const href = `${computedPostPagePath}?title=${encodeURIComponent(titleSlug)}`;
           const existing = searchIndex.find(e => e.title === title);
           if (!existing) {
-            const tags = [label.toLowerCase(), ...(f.tags || []), f.pastor || '', f.speaker || ''].map(t => String(t).toLowerCase()).filter(Boolean);
+            const tags = [label.toLowerCase(), ...normalizeTags(f.tags), f.pastor || '', f.speaker || ''].map(t => String(t).toLowerCase()).filter(Boolean);
             searchIndex.push({ title, type: label, href, tags });
           }
         });
@@ -619,9 +624,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getSortTime(entry) {
-      const sermonDate = entry && entry.fields ? entry.fields.date : '';
-      const sermonMs = sermonDate ? Date.parse(sermonDate) : NaN;
-      if (!Number.isNaN(sermonMs)) return sermonMs;
+      const contentDate = entry && entry.fields
+        ? entry.fields.date || entry.fields.startDate || entry.fields.publishDate || entry.fields.publishedDate
+        : '';
+      const contentMs = contentDate ? Date.parse(contentDate) : NaN;
+      if (!Number.isNaN(contentMs)) return contentMs;
       const updatedAt = entry && entry.sys ? entry.sys.updatedAt : '';
       const updatedMs = updatedAt ? Date.parse(updatedAt) : NaN;
       return Number.isNaN(updatedMs) ? 0 : updatedMs;
@@ -658,7 +665,8 @@ document.addEventListener('DOMContentLoaded', function() {
         environment: 'master',
         accessToken: 'pLj1jC1-l70jtAmGBWhrexrKWRbaLwKVtOHjpMVXzLw',
         contentType: 'blogPage',
-        devotionalGuideContentType: 'devotionalGuide'
+        devotionalGuideContentType: 'devotionalGuide',
+        bibleStudyContentType: 'bibleStudy'
       };
 
       if (!contentfulCfg.enabled || !contentfulCfg.spaceId || !contentfulCfg.accessToken) return;
@@ -666,8 +674,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const env = contentfulCfg.environment || 'master';
 
       try {
-        // Fetch both sermons and devotional guides
-        const [sermonsResponse, devotionalsResponse] = await Promise.all([
+        // Fetch sermons, devotional guides, and Bible studies.
+        const [sermonsResponse, devotionalsResponse, bibleStudiesResponse] = await Promise.all([
           fetch(`https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
             access_token: contentfulCfg.accessToken,
             content_type: contentfulCfg.contentType || 'blogPage',
@@ -679,19 +687,27 @@ document.addEventListener('DOMContentLoaded', function() {
             content_type: contentfulCfg.devotionalGuideContentType || 'devotionalGuide',
             order: '-fields.startDate',
             limit: '6'
+          })}`, { headers: { Accept: 'application/json' } }),
+          fetch(`https://cdn.contentful.com/spaces/${contentfulCfg.spaceId}/environments/${env}/entries?${new URLSearchParams({
+            access_token: contentfulCfg.accessToken,
+            content_type: contentfulCfg.bibleStudyContentType || 'bibleStudy',
+            order: '-sys.updatedAt',
+            limit: '6'
           })}`, { headers: { Accept: 'application/json' } })
         ]);
 
         const sermonsPayload = sermonsResponse.ok ? await sermonsResponse.json() : { items: [] };
         const devotionalsPayload = devotionalsResponse.ok ? await devotionalsResponse.json() : { items: [] };
+        const bibleStudiesPayload = bibleStudiesResponse.ok ? await bibleStudiesResponse.json() : { items: [] };
 
         const sermons = Array.isArray(sermonsPayload.items) ? sermonsPayload.items : [];
         const devotionals = Array.isArray(devotionalsPayload.items) ? devotionalsPayload.items : [];
+        const bibleStudies = Array.isArray(bibleStudiesPayload.items) ? bibleStudiesPayload.items : [];
 
         // Combine and sort by date
-        const allItems = [...sermons, ...devotionals].map(item => ({
+        const allItems = [...sermons, ...devotionals, ...bibleStudies].map(item => ({
           ...item,
-          sortDate: item.fields.date || item.fields.startDate || item.sys.updatedAt
+          sortDate: item.fields.date || item.fields.startDate || item.fields.publishDate || item.fields.publishedDate || item.sys.updatedAt
         })).sort((a, b) => new Date(b.sortDate) - new Date(a.sortDate));
 
         const top = allItems
@@ -702,7 +718,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const renderHtml = top.map((item) => {
           const title = escapeHtml(String(item.fields.title).trim());
-          const dateLabel = formatDateLabel(item.fields.date || item.fields.startDate);
+          const dateLabel = formatDateLabel(item.fields.date || item.fields.startDate || item.fields.publishDate || item.fields.publishedDate);
           const titleSlug = slugify(item.fields.title || '');
           const href = `${computedPostPagePath}?title=${encodeURIComponent(titleSlug)}`;
           return `

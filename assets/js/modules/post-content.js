@@ -1,7 +1,7 @@
 // modules/post-content.js - Contentful post loading logic for post page
 
 import { getEntryById, getEntryByTitle } from '../services/contentful.js';
-import { getLatestSermonEntries } from '../services/contentful.js';
+import { getAllLatestEntries } from '../services/contentful.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText, generateSrcset } from '../utils/images.js';
@@ -135,8 +135,11 @@ async function loadPost() {
 
     // Determine content type to set appropriate CTA
     // Don't use 'speaker' in isSermon - devotional guides also have speakers
-    const isDevotionalGuide = entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide;
-    const isSermon = !isDevotionalGuide && (entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon);
+    const cfg = window.FLC_CONTENTFUL || {};
+    const contentTypeId = entry.sys?.contentType?.sys?.id || '';
+    const isBibleStudy = contentTypeId === cfg.bibleStudyContentType || entry.fields.bibleStudy || entry.fields.studyGuide;
+    const isDevotionalGuide = !isBibleStudy && (entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide);
+    const isSermon = !isBibleStudy && !isDevotionalGuide && (entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon);
 
     // Display pastor/preacher for sermons only (not devotional guides)
     if (postPastor) {
@@ -157,8 +160,9 @@ async function loadPost() {
     }
 
     // Display date if available and not a date-range content
-    if (postDate && entry.fields.date && !hasDateRange) {
-      postDate.textContent = formatDateSafe(entry.fields.date);
+    const singleDate = entry.fields.date || entry.fields.publishDate || entry.fields.publishedDate;
+    if (postDate && singleDate && !hasDateRange) {
+      postDate.textContent = formatDateSafe(singleDate);
     } else if (postDate) {
       postDate.style.display = 'none';
     }
@@ -168,7 +172,11 @@ async function loadPost() {
     const ctaLink = document.getElementById('ctaLink');
     const ctaText = document.getElementById('ctaText');
     
-    if (isDevotionalGuide) {
+    if (isBibleStudy) {
+      if (ctaTitle) ctaTitle.textContent = 'More Bible Studies';
+      if (ctaLink) ctaLink.href = '../pages/resources.html#collections';
+      if (ctaText) ctaText.textContent = 'Back to Bible Studies';
+    } else if (isDevotionalGuide) {
       if (ctaTitle) ctaTitle.textContent = 'More Devotionals';
       if (ctaLink) ctaLink.href = '../pages/devotionals.html';
       if (ctaText) ctaText.textContent = 'Back to All Devotionals';
@@ -186,13 +194,17 @@ async function loadPost() {
       // Try description field first (note: Contentful has typo "descrition")
       if (entry.fields.descrition) {
         const descriptionRaw = entry.fields.descrition;
-        const descPlain = descriptionRaw ? stripRichTextToPlain(descriptionRaw).trim() : '';
+        const descPlain = typeof descriptionRaw === 'string'
+          ? descriptionRaw.trim()
+          : stripRichTextToPlain(descriptionRaw).trim();
         summary = descPlain.length > 0 ? descPlain.slice(0, 200) + (descPlain.length > 200 ? '...' : '') : '';
       } else {
         // Fall back to summary/body/content, but strip headings
-        const summaryRaw = entry.fields.summary || entry.fields.body || entry.fields.content || '';
+        const summaryRaw = entry.fields.summary || entry.fields.description || entry.fields.body || entry.fields.content || entry.fields.studyContent || entry.fields.lesson || '';
         if (summaryRaw) {
-          let plainText = stripRichTextToPlain(summaryRaw);
+          let plainText = typeof summaryRaw === 'string'
+            ? summaryRaw
+            : stripRichTextToPlain(summaryRaw);
           // Strip headings (lines that are all caps or start with common heading patterns)
           plainText = plainText.split('\n')
             .filter(line => {
@@ -339,7 +351,7 @@ async function loadPost() {
     }
 
     if (postBody) {
-      const bodyField = entry.fields.content || entry.fields.body || entry.fields.summary || '';
+      const bodyField = entry.fields.content || entry.fields.body || entry.fields.studyContent || entry.fields.lesson || entry.fields.summary || '';
 
       if (bodyField && typeof bodyField === 'object' && bodyField.nodeType) {
         const bodyHtml = renderRichText(bodyField);
@@ -459,7 +471,7 @@ async function loadRecommendedPosts(currentEntryId, currentTitle) {
   if (!sidebarRecommended) return;
 
   try {
-    const contentfulData = await getLatestSermonEntries();
+    const contentfulData = await getAllLatestEntries(6);
     if (!contentfulData || !contentfulData.items || !contentfulData.items.length) return;
 
     const cfg = window.FLC_CONTENTFUL || {};

@@ -3,9 +3,19 @@
 const cache = {};
 
 function sortTime(entry) {
-  const d = entry?.fields?.date || entry?.fields?.startDate || entry?.sys?.updatedAt || '';
+  const d = entry?.fields?.date || entry?.fields?.startDate || entry?.fields?.publishDate || entry?.fields?.publishedDate || entry?.sys?.updatedAt || '';
   const ms = d ? Date.parse(d) : NaN;
   return Number.isNaN(ms) ? 0 : ms;
+}
+
+function getConfiguredContentTypes() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  return [
+    cfg.contentType,
+    cfg.devotionalGuideContentType,
+    cfg.detoxContentType,
+    cfg.bibleStudyContentType
+  ].filter(Boolean);
 }
 
 function fetchEntries(params) {
@@ -52,11 +62,28 @@ export async function getDevotionalGuideEntries() {
   return cache.devotionals;
 }
 
+export async function getBibleStudyEntries() {
+  if (cache.bibleStudies) return cache.bibleStudies;
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.bibleStudyContentType) {
+    cache.bibleStudies = { items: [], includes: {} };
+    return cache.bibleStudies;
+  }
+  cache.bibleStudies = fetchEntries({ content_type: cfg.bibleStudyContentType, order: '-sys.updatedAt', limit: '24' })
+    .then(payload => {
+      const items = (payload.items || [])
+        .filter(i => i?.fields?.status !== 'draft' && i?.fields?.published !== false)
+        .sort((a, b) => sortTime(b) - sortTime(a));
+      return { items, includes: payload.includes || {} };
+    });
+  return cache.bibleStudies;
+}
+
 export async function getLatestAnyEntry() {
   const cfg = window.FLC_CONTENTFUL || {};
   if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return null;
 
-  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
+  const types = getConfiguredContentTypes();
   const results = await Promise.all(
     types.map(ct => fetchEntries({ content_type: ct, order: '-sys.updatedAt', limit: '1' }))
   );
@@ -72,7 +99,7 @@ export async function getAllLatestEntries(limit = 24) {
   const cfg = window.FLC_CONTENTFUL || {};
   if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) { cache.allLatest = { items: [], includes: {} }; return cache.allLatest; }
 
-  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
+  const types = getConfiguredContentTypes();
   cache.allLatest = Promise.all(
     types.map(ct => fetchEntries({ content_type: ct, order: '-sys.updatedAt', limit: String(limit) }))
   ).then(results => {
@@ -134,7 +161,7 @@ export async function getEntryByTitle(titleSlug) {
   if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken || !titleSlug) return null;
   
   const env = cfg.environment || 'master';
-  const types = [cfg.contentType, cfg.devotionalGuideContentType, cfg.detoxContentType].filter(Boolean);
+  const types = getConfiguredContentTypes();
   
   for (const contentType of types) {
     const qs = new URLSearchParams({ 
@@ -153,6 +180,8 @@ export async function getEntryByTitle(titleSlug) {
       // Find matching entry by comparing slugified titles
       const match = items.find(item => {
         const title = item?.fields?.title;
+        const slug = item?.fields?.slug;
+        if (slug && slugify(slug) === titleSlug) return true;
         if (!title) return false;
         return slugify(title) === titleSlug;
       });

@@ -8,6 +8,7 @@ const FLC_CONTENTFUL = {
   contentType: "blogPage",
   detoxContentType: "detoxPost",
   devotionalGuideContentType: "devotionalGuide",
+  bibleStudyContentType: "bibleStudy",
   postPagePath: "/pages/post.html"
 };
 
