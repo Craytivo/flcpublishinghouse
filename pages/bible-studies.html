@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM40N0DYXP"></script>
+ <script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-CM40N0DYXP');
+ </script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ <title>Bible Studies - FLC Publishing House</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="../assets/js/tailwind-config.js"></script>
+
+ <style>
+ /* Skip Link */
+ .skip-link {
+ position: absolute;
+ top: -40px;
+ left: 0;
+ background: #1A3A52;
+ color: white;
+ padding: 8px 16px;
+ z-index: 100;
+ transition: top 0.3s;
+ }
+ .skip-link:focus {
+ top: 0;
+ }
+
+ /* Pattern Dots */
+ .pattern-dots {
+ background-image: radial-gradient(circle, #E5E0D8 1px, transparent 1px);
+ background-size: 24px 24px;
+ }
+
+ /* Fade In Up Animation */
+ .fade-in-up {
+ opacity: 0;
+ transform: translateY(20px);
+ transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+ }
+
+ .fade-in-up.visible {
+ opacity: 1;
+ transform: translateY(0);
+ }
+
+ @media (prefers-reduced-motion: reduce) {
+ .fade-in-up {
+ opacity: 1;
+ transform: translateY(0);
+ }
+ }
+
+ .section-kicker {
+ font-size: 0.72rem;
+ font-weight: 700;
+ letter-spacing: 0.16em;
+ text-transform: uppercase;
+ color: #9A7B4F;
+ }
+
+ .skeleton {
+ background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+ background-size: 200% 100%;
+ animation: skeleton-loading 1.5s infinite;
+ }
+
+ @keyframes skeleton-loading {
+ 0% { background-position: 200% 0; }
+ 100% { background-position: -200% 0; }
+ }
+ </style>
+<style>body{opacity:0}body.pt-ready{opacity:1}</style>
+<link rel="stylesheet" href="../assets/css/base.css" />
+<link rel="stylesheet" href="../assets/css/layout.css" />
+<link rel="stylesheet" href="../assets/css/typography.css" />
+<link rel="stylesheet" href="../assets/css/utilities.css" />
+<link rel="stylesheet" href="../assets/css/consolidated-styles.css" />
+<link rel="stylesheet" href="../assets/css/components.css" />
+<link rel="stylesheet" href="../assets/css/animations.css" />
+</head>
+
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+ <a href="#main-content" class="skip-link">Skip to content</a>
+ <div id="headerContainer" data-current-page="bible-studies" data-base-path=".."></div> <!-- Search Modal Command Palette -->
+ <div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+ <div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+ <div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4">
+ <div class="bg-white rounded-2xl shadow-elevated overflow-hidden search-modal-enter border border-flcBorder/40">
+ <div class="p-4 pb-3">
+ <div class="relative">
+ <input type="text" id="searchInput" placeholder="Search sermons, devotionals, resources..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40 motion-fast" autofocus autocomplete="off" aria-describedby="searchHint" />
+ <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-flcCharcoal/35" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+ <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+ <kbd class="hidden sm:inline-block text-[0.65rem] text-flcCharcoal/35 bg-flcOffWhite border border-flcBorder/60 rounded px-1.5 py-0.5 font-mono">Esc</kbd>
+ <button id="closeSearch" class="p-1.5 text-flcCharcoal/35 hover:text-flcNavy motion-fast rounded-lg hover:bg-flcOffWhite" aria-label="Close search"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+ </div>
+ </div>
+ <p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Use <kbd class="font-mono"></kbd> to navigate, <kbd class="font-mono">Enter</kbd> to select</p>
+ </div>
+ <div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox">
+ <p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <script type="module" src="../assets/js/config.js"></script>
+ <script type="module" src="../assets/js/pages/bible-studies.js"></script>
+ 
+ <main id="main-content" class="min-h-screen">
+ <!-- Hero Section -->
+ <section class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden">
+ <div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+ <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+ <p class="section-kicker mb-4">Bible Studies</p>
+ <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl text-flcNavy leading-tight mb-6">
+ Bible Study Resources
+ </h1>
+ <p class="text-lg text-flcCharcoal/70 mb-4">
+ Access Bible study notes, handouts, and downloadable resources for personal study and group preparation.
+ </p>
+ <p class="text-sm text-flcCharcoal/60 mb-8">
+ Our Bible study resources are designed to help you dive deeper into Scripture with comprehensive notes, discussion questions, and practical application guides.
+ </p>
+ <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+ <a href="#bible-study-list" class="inline-flex items-center justify-center px-6 py-3 bg-flcNavy text-white font-semibold rounded-xl hover:bg-flcGold motion-smooth transform hover:-translate-y-0.5 shadow-editorial hover:shadow-lg text-sm">
+ Browse All Studies
+ <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- ═══ SCRIPTURE BAND ═══ -->
+ <section class="bg-flcNavyDark py-12 sm:py-16">
+ <div class="max-w-3xl mx-auto px-6 text-center">
+ <div class="w-8 h-px bg-flcGold mx-auto mb-6"></div>
+ <blockquote class="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-[1.35] italic mb-4">
+ &ldquo;Do your best to present yourself to God as one approved, a worker who does not need to be ashamed and who correctly handles the word of truth.&rdquo;
+ </blockquote>
+ <p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase">2 Timothy 2:15</p>
+ <div class="w-8 h-px bg-flcGold mx-auto mt-6"></div>
+ </div>
+ </section>
+
+ <!-- ═══ BIBLE STUDY LIST ═══ -->
+ <section id="bible-study-list" class="py-10 sm:py-12">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div id="bibleStudyLabel" class="flex items-center gap-4 mb-7">
+ <p class="section-kicker" id="bibleStudyLabelText">All Bible Studies</p>
+ <div class="flex-1 h-px bg-flcBorder"></div>
+ </div>
+ <div class="mt-4 flex items-center gap-2">
+ <p id="bibleStudyCount" class="text-xs font-medium tracking-wide" style="color:rgba(44,44,44,0.5);"></p>
+ </div>
+
+ <div id="bibleStudyGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
+ <div id="loadingState" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ <div class="bg-white rounded-xl overflow-hidden shadow-sm p-6 hidden lg:block">
+ <div class="flex items-start gap-5 mb-4">
+ <div class="aspect-[2/3] w-20 flex-shrink-0 bg-flcOffWhite rounded-lg skeleton"></div>
+ <div class="flex-1">
+ <div class="h-4 w-3/4 bg-flcOffWhite rounded skeleton mb-2"></div>
+ <div class="h-3 w-1/2 bg-flcOffWhite rounded skeleton"></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div id="emptyState" class="hidden text-center py-20">
+ <p class="font-heading text-2xl text-flcNavy mb-2">No Bible studies found.</p>
+ <p class="text-sm" style="color:rgba(44,44,44,0.6);">Check back soon for new studies.</p>
+ </div>
+ </div>
+ </section>
+ </main>
+
+ <!-- Footer Container -->
+ <div id="footerContainer" data-current-page="bible-studies" data-base-path=".."></div>
+</body>
+</html>

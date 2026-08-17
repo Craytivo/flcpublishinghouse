@@ -7,7 +7,6 @@ import { initNavigation } from '../navigation.js';
 import { initResourcesSermons } from '../modules/resources-sermons.js';
 import { initResourcesDetox } from '../modules/resources-detox.js';
 import { initResourcesDevotionals } from '../modules/resources-devotionals.js';
-import { initResourcesBibleStudies } from '../modules/resources-bible-studies.js';
 import { initResourcesModal } from '../modules/resources-modal.js';
 import { initScrollAnimations, initSearchModal, initPageTransition } from '../modules/animations.js';
 import { initScrollTop } from '../modules/scrollTop.js';
@@ -29,7 +28,6 @@ async function initResourcesPage() {
     initResourcesSermons();
     initResourcesDetox();
     initResourcesDevotionals();
-    initResourcesBibleStudies();
     initResourcesModal();
     initScrollAnimations();
     initSearchModal();
