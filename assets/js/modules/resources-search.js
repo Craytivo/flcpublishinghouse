@@ -46,7 +46,7 @@ const COLLECTION_ITEMS = [
   { title: 'Spiritual Detox — Week 3', type: 'Spiritual Detox', href: 'pages/spiritual-detox-week3.html', tags: ['detox', 'week 3'], cardCategory: 'Spiritual Detox' },
 
   // Bible Study
-  { title: 'Advent Hope Study', type: 'Bible Study', href: 'bible-studies/bible-study-advent-hope.html', tags: ['bible study', 'advent', 'hope', 'handout'], cardCategory: 'Bible Study' },
+  { title: 'Bible Studies', type: 'Bible Study', href: 'pages/bible-studies.html', tags: ['bible study', 'studies', 'notes', 'resources'], cardCategory: 'Bible Study' },
 
   // Announcements
   { title: 'Vision 2026', type: 'Announcement', href: 'assets/pdfs/Vision%202026.pdf', tags: ['vision', '2026', 'building', 'campaign', 'leadership', 'pdf', 'download'], cardCategory: 'Announcement' },
