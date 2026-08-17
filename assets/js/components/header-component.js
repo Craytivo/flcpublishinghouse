@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const computedDevotionalWeek2Path = withBase('devotionals-pages/devotional-week2-love.html');
     const computedDevotionalWeek3Path = withBase('devotionals-pages/devotional-week3-peace.html');
     const computedDevotionalWeek4Path = withBase('devotionals-pages/devotional-week4-joy.html');
-    const computedBibleStudyPath = withBase('bible-studies/bible-study-advent-hope.html');
+    const computedBibleStudyPath = withBase('pages/bible-studies.html');
     const computedResourcesBooksPath = `${computedSermonsPath}#books`;
     const computedReadingLibraryPath = withBase('pages/reading-library.html');
     const computedPostPagePath = withBase('pages/post.html');
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { title: 'Devotional — Week 2 (Love)', type: 'Seasonal Devotional', href: computedDevotionalWeek2Path, tags: ['devotional', 'seasonal', 'advent', 'love'] },
       { title: 'Devotional — Week 3 (Peace)', type: 'Seasonal Devotional', href: computedDevotionalWeek3Path, tags: ['devotional', 'seasonal', 'advent', 'peace'] },
       { title: 'Devotional — Week 4 (Joy)', type: 'Seasonal Devotional', href: computedDevotionalWeek4Path, tags: ['devotional', 'seasonal', 'advent', 'joy'] },
-      { title: 'Bible Study — Advent Hope', type: 'Bible Study', href: computedBibleStudyPath, tags: ['bible study', 'advent', 'hope'] }
+      { title: 'Bible Studies', type: 'Bible Study', href: computedBibleStudyPath, tags: ['bible study', 'studies', 'notes', 'resources'] }
     ];
 
     function normalizeTags(tags) {
