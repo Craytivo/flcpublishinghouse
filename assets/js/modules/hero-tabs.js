@@ -1,13 +1,79 @@
 // modules/hero-tabs.js - Category tabs with latest content for hero section
 
-import { getLatestSermonEntries } from '../services/contentful.js';
-import { getDevotionalGuideEntries } from '../services/contentful.js';
+console.log('hero-tabs.js: Module loading...');
+
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText } from '../utils/images.js';
 import { slugify } from '../utils/slugify.js';
 
-// Inline Bible Study fetch to bypass caching issues
+console.log('hero-tabs.js: All imports loaded successfully');
+
+// Inline all Contentful fetches to bypass caching issues
+async function getLatestSermonEntries() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return { items: [], includes: {} };
+  if (!cfg.contentType) return { items: [], includes: {} };
+  
+  const env = cfg.environment || 'master';
+  const qs = new URLSearchParams({ 
+    access_token: cfg.accessToken, 
+    content_type: cfg.contentType,
+    order: '-fields.date',
+    limit: '3',
+    include: '2'
+  });
+  const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
+  
+  try {
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) return { items: [], includes: {} };
+    const payload = await r.json();
+    const items = (payload.items || [])
+      .filter(i => i?.fields?.status !== 'draft' && i?.fields?.published !== false)
+      .sort((a, b) => {
+        const dateA = a?.fields?.date || a?.sys?.updatedAt || '';
+        const dateB = b?.fields?.date || b?.sys?.updatedAt || '';
+        return new Date(dateB || 0) - new Date(dateA || 0);
+      });
+    return { items, includes: payload.includes || {} };
+  } catch {
+    return { items: [], includes: {} };
+  }
+}
+
+async function getDevotionalGuideEntries() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return [];
+  if (!cfg.devotionalGuideContentType) return [];
+  
+  const env = cfg.environment || 'master';
+  const qs = new URLSearchParams({ 
+    access_token: cfg.accessToken, 
+    content_type: cfg.devotionalGuideContentType,
+    order: '-fields.startDate',
+    limit: '3',
+    include: '2'
+  });
+  const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
+  
+  try {
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) return [];
+    const payload = await r.json();
+    const items = (payload.items || [])
+      .filter(i => i?.fields?.status !== 'draft' && i?.fields?.published !== false)
+      .sort((a, b) => {
+        const dateA = a?.fields?.startDate || a?.sys?.updatedAt || '';
+        const dateB = b?.fields?.startDate || b?.sys?.updatedAt || '';
+        return new Date(dateB || 0) - new Date(dateA || 0);
+      });
+    return items;
+  } catch {
+    return [];
+  }
+}
+
 async function getBibleStudyEntries() {
   const cfg = window.FLC_CONTENTFUL || {};
   if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return { items: [], includes: {} };
@@ -76,8 +142,10 @@ function renderCard(item, category, contentfulData) {
   const colors = categoryColors[category] || categoryColors.sermons;
   const categoryLabel = category === 'sermons' ? 'Sermon' : category === 'devotionals' ? 'Devotional' : 'Bible Study';
   
+  console.log('Rendering card for:', title, 'Category:', category, 'Has image:', !!imageUrl);
+  
   return `
-    <a href="${href}" class="group bg-white/95 rounded-xl border border-flcBorder/50 overflow-hidden card-hover block">
+    <a href="${href}" class="hero-tab-card group bg-white/95 rounded-xl border border-flcBorder/50 overflow-hidden card-hover block">
       <div class="p-5 sm:p-6">
         <div class="flex items-start gap-4">
           ${imageUrl ? `
@@ -119,6 +187,7 @@ async function loadCategoryContent(category) {
       items = contentfulData?.items || [];
     }
     
+    console.log(`Loaded ${category}:`, items.length, 'items');
     return { items, includes: contentfulData?.includes || {} };
   } catch (error) {
     console.error(`Failed to load ${category}:`, error);
@@ -142,10 +211,14 @@ async function renderCategoryContent(category) {
   const { items, includes } = await loadCategoryContent(category);
   categoryData[category] = { items, includes };
   
+  console.log('Category data for', category, ':', { itemCount: items.length, includesKeys: Object.keys(includes || {}) });
+  
   // Hide loading
   if (loadingState) loadingState.classList.add('hidden');
   
   if (items && items.length > 0) {
+    console.log('First item fields:', items[0].fields);
+    console.log('Includes:', includes);
     const cardsHtml = items.slice(0, 3).map(item => renderCard(item, category, { includes })).join('');
     container.innerHTML = cardsHtml;
     container.classList.remove('hidden');
@@ -182,7 +255,12 @@ function updateTabStyles(activeCategory) {
 
 export async function initHeroTabs() {
   const tabsContainer = document.getElementById('heroTabsContainer');
-  if (!tabsContainer) return;
+  if (!tabsContainer) {
+    console.log('Hero tabs container not found');
+    return;
+  }
+  
+  console.log('Initializing hero tabs...');
   
   // Setup tab click handlers
   tabsContainer.addEventListener('click', async (e) => {
@@ -198,6 +276,7 @@ export async function initHeroTabs() {
   });
   
   // Load initial category
+  console.log('Loading initial category:', currentCategory);
   await renderCategoryContent(currentCategory);
   updateTabStyles(currentCategory);
 }

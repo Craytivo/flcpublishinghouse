@@ -1,16 +1,16 @@
 // main.js - Entry point that initializes everything
 
-import './config.js';
-import { initHeader } from './header.js';
-import { initFooter } from './footer.js';
-import { initNavigation } from './navigation.js';
-import { initFeaturedPosts } from './modules/featured.js';
-import { initDevotionals } from './modules/devotionals.js';
-import { initHeroTabs } from './modules/hero-tabs.js';
-import { initScrollAnimations, initSearchModal, initPageTransition } from './modules/animations.js';
-import { initScrollTop } from './modules/scrollTop.js';
-import { initForm } from './modules/form.js';
-import { initSearch } from './modules/search.js';
+import './config.js?v=1.0.2';
+import { initHeader } from './header.js?v=1.0.2';
+import { initFooter } from './footer.js?v=1.0.2';
+import { initNavigation } from './navigation.js?v=1.0.2';
+import { initFeaturedPosts } from './modules/featured.js?v=1.0.2';
+import { initDevotionals } from './modules/devotionals.js?v=1.0.2';
+import { initHeroTabs } from './modules/hero-tabs.js?v=1.0.2';
+import { initScrollAnimations, initSearchModal, initPageTransition } from './modules/animations.js?v=1.0.2';
+import { initScrollTop } from './modules/scrollTop.js?v=1.0.2';
+import { initForm } from './modules/form.js?v=1.0.2';
+import { initSearch } from './modules/search.js?v=1.0.2';
 
 // Safety: never leave the page invisible for more than 3 seconds
 setTimeout(() => { document.body.classList.add('pt-ready'); }, 3000);
