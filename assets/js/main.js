@@ -6,6 +6,7 @@ import { initFooter } from './footer.js';
 import { initNavigation } from './navigation.js';
 import { initFeaturedPosts } from './modules/featured.js';
 import { initDevotionals } from './modules/devotionals.js';
+import { initHeroTabs } from './modules/hero-tabs.js';
 import { initScrollAnimations, initSearchModal, initPageTransition } from './modules/animations.js';
 import { initScrollTop } from './modules/scrollTop.js';
 import { initForm } from './modules/form.js';
@@ -22,6 +23,7 @@ async function initApp() {
     initNavigation();
     initFeaturedPosts();
     initDevotionals();
+    initHeroTabs();
     initScrollAnimations();
     initSearchModal();
     await initSearch();
