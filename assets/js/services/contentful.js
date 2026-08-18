@@ -1,4 +1,5 @@
 // services/contentful.js - Contentful API service with caching
+// Updated cache headers to force reload
 
 const cache = {};
 

@@ -1,10 +1,42 @@
 // modules/bible-studies.js - Bible Study loading logic for bible-studies page
 
-import { getBibleStudyEntries } from '../services/contentful.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { getImageUrl, getImageAltText } from '../utils/images.js';
 import { slugify } from '../utils/slugify.js';
+
+// Temporary inline function to bypass caching issues
+async function getBibleStudyEntries() {
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.enabled || !cfg.spaceId || !cfg.accessToken) return { items: [], includes: {} };
+  if (!cfg.bibleStudyContentType) return { items: [], includes: {} };
+  
+  const env = cfg.environment || 'master';
+  const qs = new URLSearchParams({ 
+    access_token: cfg.accessToken, 
+    content_type: cfg.bibleStudyContentType,
+    order: '-sys.updatedAt',
+    limit: '24',
+    include: '2'
+  });
+  const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
+  
+  try {
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) return { items: [], includes: {} };
+    const payload = await r.json();
+    const items = (payload.items || [])
+      .filter(i => i?.fields?.status !== 'draft' && i?.fields?.published !== false)
+      .sort((a, b) => {
+        const dateA = a?.fields?.date || a?.fields?.startDate || a?.sys?.updatedAt || '';
+        const dateB = b?.fields?.date || b?.fields?.startDate || b?.sys?.updatedAt || '';
+        return new Date(dateB || 0) - new Date(dateA || 0);
+      });
+    return { items, includes: payload.includes || {} };
+  } catch {
+    return { items: [], includes: {} };
+  }
+}
 
 let allBibleStudies = [];
 let currentFilter = 'all';
