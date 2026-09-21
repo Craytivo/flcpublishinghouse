@@ -15,7 +15,8 @@ function getConfiguredContentTypes() {
     cfg.contentType,
     cfg.devotionalGuideContentType,
     cfg.detoxContentType,
-    cfg.bibleStudyContentType
+    cfg.bibleStudyContentType,
+    cfg.poetryProseContentType
   ].filter(Boolean);
 }
 
@@ -78,6 +79,26 @@ export async function getBibleStudyEntries() {
       return { items, includes: payload.includes || {} };
     });
   return cache.bibleStudies;
+}
+
+export async function getPoetryProseEntries() {
+  if (cache.poetryProse) return cache.poetryProse;
+  const cfg = window.FLC_CONTENTFUL || {};
+  if (!cfg.poetryProseContentType) {
+    cache.poetryProse = { items: [], includes: {} };
+    return cache.poetryProse;
+  }
+  cache.poetryProse = fetchEntries({
+    content_type: cfg.poetryProseContentType,
+    order: '-sys.updatedAt',
+    limit: '24'
+  }).then(payload => {
+    const items = (payload.items || [])
+      .filter(i => i?.fields?.status !== 'draft' && i?.fields?.published !== false)
+      .sort((a, b) => sortTime(b) - sortTime(a));
+    return { items, includes: payload.includes || {} };
+  });
+  return cache.poetryProse;
 }
 
 export async function getLatestAnyEntry() {
