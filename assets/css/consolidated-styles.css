@@ -806,3 +806,319 @@ body::after {
     padding: 0.625rem 1rem;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLC UI REFINEMENT — unified editorial system
+   A restrained visual layer for consistent hierarchy, spacing and interaction.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --ui-ink: #17344a;
+  --ui-ink-soft: rgba(44, 44, 44, 0.68);
+  --ui-muted: rgba(44, 44, 44, 0.48);
+  --ui-paper: #fbfaf7;
+  --ui-surface: #ffffff;
+  --ui-line: #e5e1da;
+  --ui-accent: #9a7b4f;
+  --ui-accent-soft: rgba(154, 123, 79, 0.09);
+  --ui-radius: 14px;
+  --ui-radius-sm: 10px;
+  --ui-shadow: 0 1px 2px rgba(15, 40, 56, 0.03), 0 10px 30px rgba(15, 40, 56, 0.055);
+  --ui-shadow-hover: 0 2px 4px rgba(15, 40, 56, 0.04), 0 18px 42px rgba(15, 40, 56, 0.09);
+}
+
+/* Calm canvas: let typography and content establish the hierarchy. */
+body {
+  background: var(--ui-paper);
+  color: #2c2c2c;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+#mainNav.site-header {
+  background: rgba(251, 250, 247, 0.94) !important;
+  border-bottom: 1px solid rgba(23, 52, 74, 0.09) !important;
+  box-shadow: 0 1px 12px rgba(15, 40, 56, 0.035) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.site-header__inner {
+  min-height: 4.25rem;
+  gap: 1rem;
+}
+
+.site-header__logo {
+  height: 3.15rem;
+}
+
+.site-header__nav {
+  gap: 0.1rem;
+}
+
+.site-nav-link {
+  min-height: 2.3rem;
+  padding: 0 0.72rem;
+  border-radius: 8px;
+  color: rgba(23, 52, 74, 0.72);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus-visible {
+  color: var(--ui-ink);
+  background: rgba(23, 52, 74, 0.045);
+}
+
+.site-nav-link.is-active {
+  color: var(--ui-ink);
+  background: transparent;
+}
+
+.site-nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0.72rem;
+  right: 0.72rem;
+  bottom: 0.15rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ui-accent);
+}
+
+.site-icon-btn,
+.site-menu-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid transparent;
+}
+
+.site-icon-btn:hover,
+.site-menu-btn:hover {
+  color: var(--ui-ink);
+  background: rgba(23, 52, 74, 0.045);
+  border-color: rgba(23, 52, 74, 0.08);
+}
+
+/* ── Global type rhythm ───────────────────────────────────────────────── */
+.section-kicker,
+.site-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+h1, h2, h3, h4 {
+  color: var(--ui-ink);
+  text-wrap: balance;
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* ── Buttons and links ────────────────────────────────────────────────── */
+.btn-primary,
+.btn-secondary,
+.btn,
+.download-btn,
+a[class*="btn"] {
+  border-radius: var(--ui-radius-sm);
+  min-height: 2.7rem;
+}
+
+.btn-primary {
+  background: var(--ui-ink);
+  box-shadow: 0 5px 16px rgba(23, 52, 74, 0.12);
+}
+
+.btn-primary:hover {
+  background: var(--ui-accent);
+}
+
+.btn-secondary {
+  border-color: rgba(23, 52, 74, 0.15);
+}
+
+/* Avoid oversized pill treatment for utility controls. */
+button,
+input,
+textarea,
+select {
+  border-radius: var(--ui-radius-sm);
+}
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+.card,
+.surface-card,
+.resource-card,
+.week-card,
+.searchable-card,
+.book-panel,
+.devotional-card,
+.study-card {
+  border-radius: var(--ui-radius) !important;
+  border-color: var(--ui-line) !important;
+  box-shadow: var(--ui-shadow);
+}
+
+.card:hover,
+.surface-card:hover,
+.resource-card:hover,
+.week-card:hover,
+.searchable-card:hover,
+.book-panel:hover,
+.devotional-card:hover,
+.study-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(154, 123, 79, 0.26) !important;
+  box-shadow: var(--ui-shadow-hover);
+}
+
+/* ── Editorial sections ───────────────────────────────────────────────── */
+.page-hero,
+.hero-surface {
+  position: relative;
+}
+
+.section-divider {
+  background: linear-gradient(90deg, transparent, rgba(23, 52, 74, 0.13), transparent);
+}
+
+.pattern-dots {
+  opacity: 0.32;
+}
+
+/* ── Search ───────────────────────────────────────────────────────────── */
+#searchModal .search-modal-enter,
+#searchModal > div > div {
+  border: 1px solid rgba(23, 52, 74, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(15, 40, 56, 0.16);
+}
+
+#searchInput {
+  min-height: 3rem;
+  border-radius: var(--ui-radius-sm);
+  background: #fff;
+}
+
+/* ── Forms ────────────────────────────────────────────────────────────── */
+input,
+textarea,
+select,
+.form-input {
+  border-color: var(--ui-line);
+  box-shadow: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-input:focus {
+  border-color: rgba(154, 123, 79, 0.55);
+  box-shadow: 0 0 0 3px rgba(154, 123, 79, 0.08);
+}
+
+/* ── Poetry & Prose / archive controls ───────────────────────────────── */
+.filter-btn {
+  border-radius: 999px;
+  border-color: var(--ui-line);
+  background: var(--ui-surface);
+  color: rgba(23, 52, 74, 0.68);
+  padding: 0.48rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  border-color: rgba(154, 123, 79, 0.45);
+  color: var(--ui-ink);
+  background: var(--ui-accent-soft);
+}
+
+.filter-btn.active {
+  border-color: var(--ui-ink);
+  background: var(--ui-ink);
+  color: #fff;
+}
+
+/* Contentful cards: consistent image treatment and quieter metadata. */
+#poetryProseGrid > a {
+  border-radius: var(--ui-radius) !important;
+  border-color: var(--ui-line) !important;
+  box-shadow: var(--ui-shadow) !important;
+}
+
+#poetryProseGrid > a:hover {
+  box-shadow: var(--ui-shadow-hover) !important;
+  transform: translateY(-3px);
+}
+
+#poetryProseGrid > a > div:first-child {
+  background: #f1eee8;
+}
+
+#poetryProseGrid > a img {
+  transition: transform 500ms var(--ease-editorial), filter 500ms var(--ease-editorial);
+}
+
+#poetryProseGrid > a:hover img {
+  transform: scale(1.025);
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .site-header__inner {
+    min-height: 4rem;
+  }
+
+  .site-header__logo {
+    height: 2.85rem;
+  }
+
+  .site-mobile-drawer {
+    background: rgba(251, 250, 247, 0.98);
+    border-top-color: rgba(23, 52, 74, 0.08);
+  }
+
+  .site-mobile-link {
+    min-height: 2.9rem;
+    border-radius: var(--ui-radius-sm);
+    font-size: 0.95rem;
+  }
+
+  .site-mobile-link.is-active {
+    color: var(--ui-ink);
+    background: var(--ui-accent-soft);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header__inner {
+    min-height: 3.75rem;
+  }
+
+  .site-header__logo {
+    height: 2.65rem;
+  }
+
+  .section-kicker,
+  .site-kicker {
+    font-size: 0.64rem;
+  }
+
+  #poetryProseGrid > a {
+    border-radius: 12px !important;
+  }
+}
+
+/* Respect reduced motion while keeping the interface fully usable. */
+@media (prefers-reduced-motion: reduce) {
+  #poetryProseGrid > a:hover {
+    transform: none;
+  }
+}
