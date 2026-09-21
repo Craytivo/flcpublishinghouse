@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Poetry & Prose - FLC Publishing House</title>
+<meta name="description" content="Elegant theological essays, literary and scripture criticism, poetry, prose, and reflective creative writing from FLC Publishing House.">
+<link rel="icon" type="image/png" href="../assets/images/Dark_Logo-removebg-preview.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/js/tailwind-config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+.skip-link{position:absolute;top:-40px;left:0;background:#1A3A52;color:white;padding:8px 16px;z-index:100}.skip-link:focus{top:0}
+.pattern-dots{background-image:radial-gradient(circle,#E5E0D8 1px,transparent 1px);background-size:24px 24px}
+.section-kicker{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9A7B4F}
+.filter-btn{padding:.5rem 1rem;font-size:.875rem;font-weight:500;border-radius:.5rem;border:1px solid #E8E6E1;background:white;color:rgba(44,44,44,.7);cursor:pointer;transition:all .2s ease;white-space:nowrap}.filter-btn:hover{border-color:#9A7B4F;color:#9A7B4F}.filter-btn.active{border-color:#9A7B4F;background:rgba(154,123,79,.1);color:#9A7B4F;font-weight:600}
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite}@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
+<style>body{opacity:0}body.pt-ready{opacity:1}</style>
+<link rel="stylesheet" href="../assets/css/base.css"><link rel="stylesheet" href="../assets/css/layout.css"><link rel="stylesheet" href="../assets/css/typography.css"><link rel="stylesheet" href="../assets/css/utilities.css"><link rel="stylesheet" href="../assets/css/consolidated-styles.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css">
+</head>
+<body class="bg-flcOffWhite text-flcCharcoal font-body antialiased">
+<a href="#main-content" class="skip-link">Skip to content</a>
+<div id="headerContainer" data-current-page="poetry-prose" data-base-path=".."></div>
+<div id="searchModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-label="Search resources">
+<div class="absolute inset-0 bg-flcNavyDark/35 backdrop-blur-md" id="searchModalBackdrop"></div>
+<div class="relative max-w-xl mx-auto mt-[12vh] sm:mt-[16vh] px-4"><div class="bg-white rounded-2xl shadow-elevated overflow-hidden border border-flcBorder/40">
+<div class="p-4 pb-3"><div class="relative"><input type="text" id="searchInput" placeholder="Search sermons, devotionals, Poetry & Prose..." class="w-full px-4 py-3 pl-11 rounded-xl border border-flcBorder/60 bg-flcOffWhite focus:outline-none focus:border-flcGold/40 focus:ring-2 focus:ring-flcGold/10 text-base text-flcCharcoal placeholder:text-flcCharcoal/40" autocomplete="off" aria-describedby="searchHint"><button id="closeSearch" class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-flcCharcoal/35 hover:text-flcNavy rounded-lg" aria-label="Close search">×</button></div><p id="searchHint" class="text-[0.65rem] text-flcCharcoal/30 mt-2 ml-1">Search by title, category, author, or topic.</p></div>
+<div id="searchResults" class="max-h-[50vh] overflow-y-auto px-3 pb-3 border-t border-flcBorder/30" role="listbox"><p class="text-base font-medium text-flcCharcoal/50 text-center py-10">Type to search...</p></div>
+</div></div></div>
+<main id="main-content" class="min-h-screen">
+<section class="relative pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24 overflow-hidden"><div class="absolute inset-0 pattern-dots opacity-40 pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><p class="section-kicker mb-4">Poetry &amp; Prose</p><h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-flcNavy leading-tight mb-6">Writing that invites you to linger.</h1><p class="text-lg sm:text-xl leading-relaxed text-flcCharcoal/70">Elegant theological essays, sharp literary and scripture criticism, poetry, prose, and deeply reflective creative writing—crafted to inform, delight, inspire, and elevate your spiritual journey through stylistic beauty and artistic expression.</p></div></section>
+<section class="bg-flcNavyDark py-10 sm:py-12"><div class="max-w-3xl mx-auto px-6 text-center"><div class="w-8 h-px bg-flcGold mx-auto mb-6"></div><p class="font-heading text-xl sm:text-2xl lg:text-3xl text-white leading-[1.35] italic">Words can do more than explain an idea; they can make us stop, see, and wonder.</p><p class="text-flcGold text-xs font-semibold tracking-[0.14em] uppercase mt-4">Poetry &amp; Prose</p><div class="w-8 h-px bg-flcGold mx-auto mt-6"></div></div></section>
+<section class="py-12 sm:py-16"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex items-center gap-4 mb-6"><p class="section-kicker">The Collection</p><div class="flex-1 h-px bg-flcBorder"></div></div>
+<div id="filterTabs" class="flex gap-2 overflow-x-auto pb-2 mb-4"></div><p id="poetryProseCount" class="text-xs font-medium tracking-wide text-flcCharcoal/50 mb-6"></p>
+<div id="loadingState" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-white rounded-2xl overflow-hidden border border-flcBorder/50 shadow-sm"><div class="aspect-[16/9] skeleton"></div><div class="p-6"><div class="h-4 w-1/3 skeleton rounded mb-4"></div><div class="h-7 w-4/5 skeleton rounded mb-3"></div><div class="h-4 w-full skeleton rounded"></div><div class="h-4 w-2/3 skeleton rounded mt-2"></div></div></div><div class="bg-white rounded-2xl overflow-hidden border border-flcBorder/50 shadow-sm"><div class="aspect-[16/9] skeleton"></div><div class="p-6"><div class="h-4 w-1/3 skeleton rounded mb-4"></div><div class="h-7 w-4/5 skeleton rounded mb-3"></div><div class="h-4 w-full skeleton rounded"></div><div class="h-4 w-2/3 skeleton rounded mt-2"></div></div></div><div class="bg-white rounded-2xl overflow-hidden border border-flcBorder/50 shadow-sm"><div class="aspect-[16/9] skeleton"></div><div class="p-6"><div class="h-4 w-1/3 skeleton rounded mb-4"></div><div class="h-7 w-4/5 skeleton rounded mb-3"></div><div class="h-4 w-full skeleton rounded"></div><div class="h-4 w-2/3 skeleton rounded mt-2"></div></div></div></div>
+<div id="poetryProseGrid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"></div>
+<div id="emptyState" class="hidden text-center py-20"><p class="section-kicker mb-3">Coming Soon</p><h2 class="font-heading text-3xl text-flcNavy mb-3">The collection is being prepared.</h2><p class="text-flcCharcoal/60 max-w-xl mx-auto">New theological essays, criticism, poetry, prose, and reflective writing will appear here as they are published.</p></div>
+</div></section></main>
+<div id="footerContainer" data-base-path=".."></div>
+<script type="module" src="../assets/js/pages/poetry-prose.js"></script>
+</body></html>
