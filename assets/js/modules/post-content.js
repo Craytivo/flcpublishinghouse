@@ -100,6 +100,7 @@ async function loadPost() {
     // Render post content
     const postCategory = document.getElementById('postCategory');
     const postReadingTime = document.getElementById('postReadingTime');
+    const cfg = window.FLC_CONTENTFUL || {};
     const contentTypeId = entry.sys?.contentType?.sys?.id || '';
     const categoryMap = {
       [cfg.bibleStudyContentType]: 'Bible Study',
@@ -152,7 +153,6 @@ async function loadPost() {
 
     // Determine content type to set appropriate CTA
     // Don't use 'speaker' in isSermon - devotional guides also have speakers
-    const cfg = window.FLC_CONTENTFUL || {};
     const isBibleStudy = contentTypeId === cfg.bibleStudyContentType || entry.fields.bibleStudy || entry.fields.studyGuide;
     const isDevotionalGuide = !isBibleStudy && (entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide);
     const isSermon = !isBibleStudy && !isDevotionalGuide && (entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon);
@@ -188,6 +188,7 @@ async function loadPost() {
     const ctaLink = document.getElementById('ctaLink');
     const ctaText = document.getElementById('ctaText');
     
+    const isPoetryProse = contentTypeId === cfg.poetryProseContentType || inferredCategory === 'Poetry & Prose';
     if (isBibleStudy) {
       if (ctaTitle) ctaTitle.textContent = 'More Bible Studies';
       if (ctaLink) ctaLink.href = '../pages/resources.html#collections';
@@ -196,6 +197,10 @@ async function loadPost() {
       if (ctaTitle) ctaTitle.textContent = 'More Devotionals';
       if (ctaLink) ctaLink.href = '../pages/devotionals.html';
       if (ctaText) ctaText.textContent = 'Back to All Devotionals';
+    } else if (isPoetryProse) {
+      if (ctaTitle) ctaTitle.textContent = 'More Poetry & Prose';
+      if (ctaLink) ctaLink.href = '../pages/poetry-prose.html';
+      if (ctaText) ctaText.textContent = 'Back to Poetry & Prose';
     } else {
       // Default to sermons
       if (ctaTitle) ctaTitle.textContent = 'More Sermons';
