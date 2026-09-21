@@ -9,6 +9,7 @@ const FLC_CONTENTFUL = {
   detoxContentType: "detoxPost",
   devotionalGuideContentType: "devotionalGuide",
   bibleStudyContentType: "bibleStudy",
+  poetryProseContentType: "poetryProse",
   postPagePath: "/pages/post.html"
 };
 
