@@ -5,6 +5,7 @@ import { escapeHTML } from '../utils/sanitize.js';
 import { formatDateSafe } from '../utils/format.js';
 import { stripRichTextToPlain } from '../utils/richText.js';
 import { slugify } from '../utils/slugify.js';
+import { getImageUrl, getImageAltText } from '../utils/images.js';
 
 function stripMarkdown(str) {
   return str
@@ -22,7 +23,7 @@ function stripMarkdown(str) {
     .trim();
 }
 
-function buildCard(item, postPagePath) {
+function buildCard(item, postPagePath, includes = {}) {
   const f = item.fields;
   const title = escapeHTML((f.title || 'Untitled').trim());
   const bodyRaw = f.description || f.body || f.content || f.studyContent || f.lesson || f.summary || '';
@@ -40,21 +41,29 @@ function buildCard(item, postPagePath) {
   const byline = escapeHTML(f.pastor || f.pastorName || f.preacher || f.speaker || 'FLC Team');
   const titleSlug = slugify(f.title || '');
   const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
-  return { title, summary, kicker, dateText, byline, href };
+  const image = getImageUrl(item, includes, 'featuredImage') || getImageUrl(item, includes, 'image');
+  const imageAlt = escapeHTML(getImageAltText(item, 'featuredImage') || getImageAltText(item, 'image') || f.title || 'FLC Publishing House');
+  return { title, summary, kicker, dateText, byline, href, image, imageAlt };
 }
 
 const chevronSm = `<svg class="w-3 h-3 group-hover:translate-x-0.5 motion-fast" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
 
 function renderFeatured(c) {
   return `
-    <article class="group relative bg-white/90 rounded-2xl border border-flcBorder/50 overflow-hidden p-7 sm:p-8 card-hover">
-      <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-flcGold to-flcGold/10 rounded-full"></div>
-      <div class="pl-4">
-        <p class="text-[0.6rem] font-semibold tracking-[0.16em] text-flcGold/80 uppercase mb-2">${c.kicker}</p>
-        <h3 class="font-heading text-xl sm:text-2xl text-flcNavy leading-snug mb-3">${c.title}</h3>
-        <p class="text-sm text-flcCharcoal/55 leading-relaxed line-clamp-3 mb-4">${c.summary}</p>
-        <p class="text-xs text-flcCharcoal/35 mb-5">${c.dateText} &middot; ${c.byline}</p>
-        <a href="${c.href}" class="inline-flex items-center gap-1 text-flcNavy/60 font-medium text-sm group-hover:text-flcGold motion-fast">Read now${chevronSm}</a>
+    <article class="group relative bg-white rounded-2xl border border-flcBorder/55 overflow-hidden card-hover">
+      ${c.image ? `<div class="aspect-[16/8] overflow-hidden bg-flcOffWhite"><img src="${c.image}" alt="${c.imageAlt}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" loading="lazy"></div>` : ''}
+      <div class="p-7 sm:p-8 lg:p-9">
+        <div class="flex items-center gap-3 mb-3">
+          <p class="text-[0.6rem] font-semibold tracking-[0.16em] text-flcGold uppercase">${c.kicker}</p>
+          <span class="h-px w-8 bg-flcGold/35"></span>
+          <p class="text-[0.65rem] text-flcCharcoal/35">${c.dateText}</p>
+        </div>
+        <h3 class="font-heading text-2xl sm:text-3xl lg:text-[2.15rem] text-flcNavy leading-[1.08] mb-3 max-w-2xl">${c.title}</h3>
+        <p class="text-sm sm:text-base text-flcCharcoal/60 leading-[1.7] line-clamp-3 mb-5 max-w-2xl">${c.summary}</p>
+        <div class="flex items-center justify-between gap-4">
+          <p class="text-xs text-flcCharcoal/40">${c.byline}</p>
+          <a href="${c.href}" class="inline-flex items-center gap-1.5 text-flcNavy font-semibold text-sm group-hover:text-flcGold motion-fast">Read piece${chevronSm}</a>
+        </div>
       </div>
     </article>`;
 }
@@ -85,7 +94,7 @@ export async function initFeaturedPosts() {
     }
 
     const postPagePath = cfg.postPagePath || '/pages/post.html';
-    const cards = items.map((item) => buildCard(item, postPagePath));
+    const cards = items.map((item) => buildCard(item, postPagePath, contentfulData.includes || {}));
 
     const featured = renderFeatured(cards[0]);
     const secondary = cards.slice(1).map(c => renderSecondary(c)).join('');
