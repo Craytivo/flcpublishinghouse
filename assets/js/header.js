@@ -2,6 +2,7 @@ const DEFAULT_LINKS = {
   home: 'index.html',
   sermons: 'pages/sermons.html',
   resources: 'pages/resources.html',
+  poetryProse: 'pages/poetry-prose.html',
   readingLibrary: 'pages/reading-library.html',
   devotionals: 'pages/devotionals.html',
   detox: 'pages/spiritual-detox.html',
