@@ -1,113 +1,207 @@
-// utils/richTextRenderer.js - Simple Contentful rich text to HTML renderer
+// utils/richTextRenderer.js - Editorial Contentful Rich Text renderer
 
-/**
- * Render Contentful rich text to HTML
- * @param {Object} richText - Contentful rich text object
- * @returns {string} HTML string
- */
-export function renderRichText(richText) {
+export function renderRichText(richText, includes = {}) {
   if (!richText) return '';
-  
-  // If it's already a string, return it
-  if (typeof richText === 'string') {
-    return richText;
-  }
-  
-  // If it's a rich text object with nodeType
-  if (richText.nodeType === 'document') {
-    return richText.content ? renderRichTextNodes(richText.content) : '';
-  }
-  
-  // Handle other node types
-  return renderRichTextNode(richText);
+  if (typeof richText === 'string') return richText;
+  if (richText.nodeType === 'document') return renderRichTextNodes(richText.content || [], includes);
+  return renderRichTextNode(richText, includes);
 }
 
-function renderRichTextNodes(nodes) {
+function renderRichTextNodes(nodes, includes) {
   if (!Array.isArray(nodes)) return '';
-  
-  return nodes.map(node => renderRichTextNode(node)).join('');
+  return nodes.map(node => renderRichTextNode(node, includes)).join('');
 }
 
-function renderRichTextNode(node) {
+function renderRichTextNode(node, includes) {
   if (!node || !node.nodeType) return '';
-  
+  const content = node.content ? renderRichTextNodes(node.content, includes) : '';
+
   switch (node.nodeType) {
-    case 'paragraph':
-      const content = node.content ? renderRichTextNodes(node.content) : '';
-      return `<p class="mb-7 leading-[1.8]">${content}</p>`;
-    
-    case 'heading-1':
-      return `<h1 class="font-heading text-2xl font-bold text-flcNavy mb-6 mt-10 tracking-tight leading-[1.2]">${node.content ? renderRichTextNodes(node.content) : ''}</h1>`;
-    
-    case 'heading-2':
-      return `<h2 class="font-heading text-xl font-bold text-flcNavy mb-5 mt-10 tracking-tight leading-[1.25]">${node.content ? renderRichTextNodes(node.content) : ''}</h2>`;
-    
-    case 'heading-3':
-      return `<h3 class="font-heading text-lg font-bold text-flcNavy mb-4 mt-8 tracking-tight leading-[1.3]">${node.content ? renderRichTextNodes(node.content) : ''}</h3>`;
-    
-    case 'heading-4':
-      return `<h4 class="font-heading text-base font-bold text-flcNavy mb-4 mt-6 tracking-tight leading-[1.35]">${node.content ? renderRichTextNodes(node.content) : ''}</h4>`;
-    
-    case 'heading-5':
-      return `<h5 class="font-heading text-sm font-bold text-flcNavy mb-3 mt-6 tracking-tight">${node.content ? renderRichTextNodes(node.content) : ''}</h5>`;
-    
-    case 'heading-6':
-      return `<h6 class="font-heading text-xs font-bold text-flcNavy mb-3 mt-6 tracking-tight">${node.content ? renderRichTextNodes(node.content) : ''}</h6>`;
-    
-    case 'text':
-      let textValue = node.value || '';
-      // Apply marks (bold, italic, underline, code)
-      if (node.marks && Array.isArray(node.marks)) {
-        node.marks.forEach(mark => {
-          if (mark.type === 'bold') {
-            textValue = `<strong class="font-bold text-flcNavy">${textValue}</strong>`;
-          } else if (mark.type === 'italic') {
-            textValue = `<em class="italic">${textValue}</em>`;
-          } else if (mark.type === 'underline') {
-            textValue = `<u class="underline decoration-2 underline-offset-3">${textValue}</u>`;
-          } else if (mark.type === 'code') {
-            textValue = `<code class="bg-flcCream/80 px-2 py-1 rounded text-sm font-mono text-flcNavy">${textValue}</code>`;
-          }
-        });
-      }
-      return textValue;
-    
-    case 'bold':
-      return `<strong class="font-bold text-flcNavy">${node.content ? renderRichTextNodes(node.content) : ''}</strong>`;
-    
-    case 'italic':
-      return `<em class="italic">${node.content ? renderRichTextNodes(node.content) : ''}</em>`;
-    
-    case 'underline':
-      return `<u class="underline decoration-2 underline-offset-3">${node.content ? renderRichTextNodes(node.content) : ''}</u>`;
-    
-    case 'code':
-      return `<code class="bg-flcCream/80 px-2 py-1 rounded text-sm font-mono text-flcNavy">${node.content ? renderRichTextNodes(node.content) : ''}</code>`;
-    
+    case 'document': return content;
+    case 'paragraph': return `<p>${content}</p>`;
+    // Keep H1 as H2 inside an article because the page already has one H1 title.
+    case 'heading-1': return `<h2 class="rich-heading rich-heading-1">${content}</h2>`;
+    case 'heading-2': return `<h2 class="rich-heading rich-heading-2">${content}</h2>`;
+    case 'heading-3': return `<h3 class="rich-heading rich-heading-3">${content}</h3>`;
+    case 'heading-4': return `<h4 class="rich-heading rich-heading-4">${content}</h4>`;
+    case 'heading-5': return `<h5 class="rich-heading rich-heading-5">${content}</h5>`;
+    case 'heading-6': return `<h6 class="rich-heading rich-heading-6">${content}</h6>`;
+    case 'text': return renderTextNode(node);
     case 'blockquote':
-      return `<blockquote class="border-l-3 border-flcGold pl-7 italic text-flcCharcoal/85 my-10 text-lg leading-[1.75]">${node.content ? renderRichTextNodes(node.content) : ''}</blockquote>`;
-    
-    case 'unordered-list':
-      return `<ul class="mb-7 space-y-3 pl-6">${node.content ? renderRichTextNodes(node.content) : ''}</ul>`;
-    
-    case 'ordered-list':
-      return `<ol class="mb-7 space-y-3 pl-6">${node.content ? renderRichTextNodes(node.content) : ''}</ol>`;
-    
-    case 'list-item':
-      return `<li class="leading-[1.8] pl-1">${node.content ? renderRichTextNodes(node.content) : ''}</li>`;
-    
-    case 'hyperlink':
-      const href = node.data?.uri || '#';
-      return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-flcGold hover:text-flcNavy underline decoration-2 underline-offset-3 transition-all duration-200">${node.content ? renderRichTextNodes(node.content) : ''}</a>`;
-    
-    case 'hr':
-      return '<hr class="my-12 border-flcBorder/50">';
-    
-    default:
-      // For unknown node types, try to render content
-      if (node.content) {
-        return renderRichTextNodes(node.content);
-      }
-      return '';
+    case 'quote': return renderQuote(node, includes);
+    case 'unordered-list': return `<ul>${content}</ul>`;
+    case 'ordered-list': return `<ol>${content}</ol>`;
+    case 'list-item': return `<li>${content}</li>`;
+    case 'hyperlink': return renderExternalLink(node, content);
+    case 'entry-hyperlink': return renderEntryLink(node, content, includes);
+    case 'asset-hyperlink': return renderAssetLink(node, content, includes);
+    case 'resource-hyperlink': return renderEntryLink(node, content, includes);
+    case 'embedded-asset-block':
+    case 'embedded-resource-block': return renderEmbeddedAsset(node, includes);
+    case 'embedded-entry-block': return renderEmbeddedEntry(node, includes);
+    case 'embedded-entry-inline':
+    case 'embedded-resource-inline': return renderInlineEntry(node, includes, content);
+    case 'hr': return '<hr>';
+    case 'table': return `<div class="rich-table-wrap"><table>${content}</table></div>`;
+    case 'table-row': return `<tr>${content}</tr>`;
+    case 'table-header-cell': return `<th scope="col">${content}</th>`;
+    case 'table-cell': return `<td>${content}</td>`;
+    default: return content;
   }
+}
+
+function renderTextNode(node) {
+  let value = escapeHtml(node.value || '');
+  for (const mark of node.marks || []) {
+    switch (mark?.type) {
+      case 'bold': value = `<strong>${value}</strong>`; break;
+      case 'italic': value = `<em>${value}</em>`; break;
+      case 'underline': value = `<u>${value}</u>`; break;
+      case 'code': value = `<code>${value}</code>`; break;
+      case 'superscript': value = `<sup>${value}</sup>`; break;
+      case 'subscript': value = `<sub>${value}</sub>`; break;
+      default: break;
+    }
+  }
+  return value;
+}
+
+function renderQuote(node, includes) {
+  const inner = renderRichTextNodes(node.content || [], includes);
+  const plain = stripMarkup(inner).trim();
+  const data = node.data || {};
+  const citation = data.citation || data.source || data.attribution || data.author || '';
+  const scripture = data.type === 'scripture' || data.variant === 'scripture' || looksLikeScriptureReference(plain);
+  const classes = scripture ? 'rich-quote rich-scripture' : 'rich-quote';
+  const label = scripture ? 'Scripture' : 'Reflection';
+
+  return `<figure class="${classes}">
+    <div class="rich-quote-label">${label}</div>
+    <blockquote>${inner}</blockquote>
+    ${citation ? `<figcaption>— ${escapeHtml(String(citation))}</figcaption>` : ''}
+  </figure>`;
+}
+
+function renderExternalLink(node, content) {
+  const href = safeHref(node.data?.uri);
+  if (!href) return content;
+  const external = /^https?:\/\//i.test(href);
+  return `<a href="${escapeAttribute(href)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${content}</a>`;
+}
+
+function renderEntryLink(node, content, includes) {
+  const target = resolveReference(node, includes, 'Entry');
+  const slug = target?.fields?.slug;
+  if (!slug) return content;
+  const href = `../pages/post.html?title=${encodeURIComponent(slug)}`;
+  return `<a href="${escapeAttribute(href)}">${content}</a>`;
+}
+
+function renderAssetLink(node, content, includes) {
+  const asset = resolveReference(node, includes, 'Asset');
+  const url = assetUrl(asset);
+  if (!url) return content;
+  return `<a href="${escapeAttribute(withHttps(url))}" target="_blank" rel="noopener noreferrer">${content}</a>`;
+}
+
+function renderEmbeddedAsset(node, includes) {
+  const asset = resolveReference(node, includes, 'Asset');
+  const url = assetUrl(asset);
+  if (!url) return '<div class="rich-embed-missing" role="note">Embedded image unavailable.</div>';
+
+  const fields = asset.fields || {};
+  const file = fields.file || {};
+  const details = file.details?.image || {};
+  const alt = fields.description || fields.title || 'Embedded image';
+  const caption = fields.description || fields.title || '';
+  const width = Number(details.width) || null;
+  const height = Number(details.height) || null;
+
+  return `<figure class="rich-embed-image">
+    <img src="${escapeAttribute(withHttps(url))}" alt="${escapeAttribute(alt)}"
+      ${width ? `width="${width}"` : ''} ${height ? `height="${height}"` : ''}
+      loading="lazy" decoding="async">
+    ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ''}
+  </figure>`;
+}
+
+function renderEmbeddedEntry(node, includes) {
+  const entry = resolveReference(node, includes, 'Entry');
+  if (!entry) return '<div class="rich-embed-missing" role="note">Embedded content unavailable.</div>';
+
+  const fields = entry.fields || {};
+  const title = fields.title || fields.name || '';
+  const description = fields.subtitle || fields.description || fields.summary || '';
+  const slug = fields.slug;
+  if (!title && !description) return '';
+
+  const body = `
+    ${title ? `<h3>${escapeHtml(title)}</h3>` : ''}
+    ${description ? `<p>${escapeHtml(plainField(description))}</p>` : ''}
+  `;
+  if (!slug) return `<aside class="rich-embedded-entry">${body}</aside>`;
+
+  const href = `../pages/post.html?title=${encodeURIComponent(slug)}`;
+  return `<aside class="rich-embedded-entry"><a href="${escapeAttribute(href)}">${body}<span class="rich-embedded-entry-link">Read piece →</span></a></aside>`;
+}
+
+function renderInlineEntry(node, includes, content) {
+  const entry = resolveReference(node, includes, 'Entry');
+  const title = entry?.fields?.title || entry?.fields?.name;
+  if (!title) return content;
+  const slug = entry.fields?.slug;
+  if (!slug) return escapeHtml(title);
+  const href = `../pages/post.html?title=${encodeURIComponent(slug)}`;
+  return `<a class="rich-inline-entry" href="${escapeAttribute(href)}" title="${escapeAttribute(title)}">${content || escapeHtml(title)}</a>`;
+}
+
+function resolveReference(node, includes, expectedType) {
+  const target = node?.data?.target;
+  if (!target) return null;
+  if (target.fields) return target;
+  const id = target.sys?.id;
+  if (!id) return null;
+  const collection = includes?.[expectedType];
+  return Array.isArray(collection) ? collection.find(item => item?.sys?.id === id) || null : null;
+}
+
+function assetUrl(asset) {
+  return asset?.fields?.file?.url || asset?.fields?.url || '';
+}
+
+function withHttps(url) {
+  return url?.startsWith('//') ? `https:${url}` : (url || '');
+}
+
+function safeHref(value) {
+  if (!value || typeof value !== 'string') return '';
+  const href = value.trim();
+  if (/^(javascript|vbscript|data):/i.test(href)) return '';
+  if (/^(https?:|mailto:|tel:)/i.test(href)) return href;
+  if (/^(\/|\.|#|\?)/.test(href)) return href;
+  return '';
+}
+
+function plainField(value) {
+  if (typeof value === 'string') return value;
+  if (value?.nodeType === 'document') return stripMarkup(renderRichText(value));
+  return '';
+}
+
+function stripMarkup(html) {
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  return (temp.textContent || '').replace(/\s+/g, ' ');
+}
+
+function looksLikeScriptureReference(text) {
+  return /(?:[1-3]\s*)?(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|1\s*Samuel|2\s*Samuel|1\s*Kings|2\s*Kings|1\s*Chronicles|2\s*Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Song of Solomon|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|1\s*Corinthians|2\s*Corinthians|Galatians|Ephesians|Philippians|Colossians|1\s*Thessalonians|2\s*Thessalonians|1\s*Timothy|2\s*Timothy|Titus|Philemon|Hebrews|James|1\s*Peter|2\s*Peter|1\s*John|2\s*John|3\s*John|Jude|Revelation)\s+\d{1,3}(?::\d{1,3}(?:[-–—]\d{1,3})?(?:,\s*\d{1,3}(?:[-–—]\d{1,3})?)*)?\s*$/i.test(text);
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function escapeAttribute(value) {
+  return escapeHtml(value);
 }
