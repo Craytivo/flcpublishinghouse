@@ -1122,3 +1122,195 @@ select:focus,
     transform: none;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLC ARTICLE EXPERIENCE — premium reading layout
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#postContent #heroSection {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+#postContent #heroSection > .max-w-7xl {
+  max-width: 1180px;
+}
+
+#postContent #postBody {
+  max-width: 66ch;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.08rem;
+  line-height: 1.86;
+  letter-spacing: 0;
+}
+
+#postContent #postBody p,
+#postContent #postBody li {
+  color: rgba(44, 44, 44, 0.82);
+}
+
+#postContent #postBody p {
+  margin-bottom: 1.65rem;
+}
+
+#postContent #postBody > p:first-child::first-letter {
+  float: left;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 4.7rem;
+  line-height: 0.78;
+  font-weight: 700;
+  color: var(--ui-ink);
+  padding-right: 0.55rem;
+  margin-top: 0.22rem;
+}
+
+#postContent #postBody h2 {
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  margin-top: 3.6rem;
+  margin-bottom: 1rem;
+}
+
+#postContent #postBody h3 {
+  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+  line-height: 1.25;
+  margin-top: 2.8rem;
+  margin-bottom: 0.8rem;
+}
+
+#postContent #postBody h4 {
+  font-size: 1.2rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.7rem;
+}
+
+#postContent #postBody ul,
+#postContent #postBody ol {
+  margin: 1.5rem 0 2rem;
+  padding-left: 1.35rem;
+}
+
+#postContent #postBody li {
+  padding-left: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+
+#postContent #postBody blockquote {
+  margin: 3.2rem -4rem;
+  padding: 1.8rem 2.5rem;
+  background: transparent;
+  border-left: 2px solid var(--ui-accent);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--ui-ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  line-height: 1.45;
+}
+
+#postContent #postBody blockquote::before {
+  display: none;
+}
+
+#postContent #postBody img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.75rem auto;
+  border-radius: 12px;
+}
+
+#postContent #postBody hr {
+  width: 5rem;
+  margin: 3.5rem auto;
+  border: 0;
+  border-top: 1px solid rgba(154, 123, 79, 0.45);
+}
+
+#postContent #postBody code {
+  font-size: 0.9em;
+  background: #f1eee8;
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+#postContent #postBody pre {
+  overflow-x: auto;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  background: var(--ui-ink);
+  color: #fff;
+  border-radius: 10px;
+}
+
+#postContent #postImageContainer {
+  max-width: 980px;
+}
+
+#postContent #postImageContainer img {
+  max-height: 620px;
+  object-fit: cover;
+}
+
+#postContent #postCategory {
+  min-height: 1rem;
+}
+
+.related-card {
+  box-shadow: var(--ui-shadow);
+  border-color: var(--ui-line) !important;
+}
+
+.related-card:hover {
+  box-shadow: var(--ui-shadow-hover);
+  border-color: rgba(154, 123, 79, 0.28) !important;
+}
+
+#sidebarRecommendedPosts a {
+  border-bottom: 1px solid rgba(23, 52, 74, 0.07);
+  padding-bottom: 0.9rem;
+}
+
+#sidebarRecommendedPosts a:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 1280px) {
+  #postContent .post-content {
+    max-width: 66ch;
+  }
+
+  #postContent > .max-w-5xl {
+    max-width: 1180px;
+  }
+}
+
+@media (max-width: 767px) {
+  #postContent #postBody {
+    font-size: 1.03rem;
+    line-height: 1.82;
+  }
+
+  #postContent #postBody blockquote {
+    margin: 2.5rem 0;
+    padding: 1.35rem 1.25rem;
+    font-size: 1.4rem;
+  }
+
+  #postContent #postBody > p:first-child::first-letter {
+    font-size: 3.7rem;
+  }
+
+  #postContent #postImageContainer {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .related-card:hover {
+    transform: none !important;
+  }
+}
