@@ -175,7 +175,7 @@
  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
  <script type="module" src="../assets/js/pages/post.js"></script>
  
- <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+ <main id="main-content" class="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
  <!-- Loading State -->
  <div id="loadingState" class="fade-in-up">
  <div class="h-8 w-32 skeleton rounded mb-4"></div>
@@ -207,9 +207,11 @@
  <!-- Left Column - Meta Line -->
  <div class="lg:w-1/4 lg:pt-8">
  <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 mb-6 sm:mb-8 lg:flex-col lg:items-start lg:gap-x-0 lg:gap-y-3">
+ <p class="text-[0.68rem] uppercase tracking-[0.16em] text-flcGold font-semibold" id="postCategory"></p>
  <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcGold/70 font-medium" id="postPastor"></p>
  <span class="text-flcGold/30 lg:hidden" id="metaSeparator">•</span>
  <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium" id="postDate"></p>
+ <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/45 font-medium hidden" id="postReadingTime"></p>
  <!-- Devotional Guide specific fields -->
  <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postStartDate"></p>
  <p class="text-[0.75rem] uppercase tracking-[0.12em] text-flcCharcoal/50 font-medium hidden" id="postEndDate"></p>
@@ -220,13 +222,13 @@
  <!-- Right Column - Title, Excerpt, Image, Video -->
  <div class="lg:w-3/4 text-center lg:text-left">
  <!-- Title -->
- <h1 class="font-heading font-bold text-[clamp(1.75rem,5vw,4rem)] text-flcNavy leading-[1.1] tracking-[-0.025em] mb-4 break-words" id="postTitle"></h1>
+ <h1 class="font-heading font-bold text-[clamp(2.35rem,6vw,5.5rem)] text-flcNavy leading-[0.98] tracking-[-0.035em] mb-5 break-words" id="postTitle"></h1>
  
  <!-- Subtitle -->
- <p class="text-xl lg:text-2xl text-flcCharcoal/60 font-heading tracking-tight mb-3 hidden" id="postSubtitle"></p>
+ <p class="text-xl lg:text-2xl text-flcCharcoal/60 font-heading tracking-tight leading-[1.4] mb-5 hidden" id="postSubtitle"></p>
  
  <!-- Optional excerpt -->
- <p class="text-base sm:text-[1.15rem] text-flcCharcoal/70 leading-[1.7] sm:leading-[1.8] max-w-[70ch] mb-8 sm:mb-12 break-words" id="postExcerpt"></p>
+ <p class="text-base sm:text-[1.15rem] text-flcCharcoal/68 leading-[1.8] max-w-[62ch] mb-9 sm:mb-12 break-words" id="postExcerpt"></p>
  
  <!-- Featured Image -->
  <div id="postImageContainer" class="max-w-4xl mx-auto lg:mx-0 mb-8 sm:mb-12 hidden">
@@ -246,12 +248,29 @@
  </section>
 
  <!-- Main Content -->
- <div class="relative px-0 sm:px-6 lg:px-8">
+ <div class="relative mx-auto w-full max-w-[720px] px-0">
  <!-- Post Body -->
  <div class="post-content fade-in-up" id="postBody">
  <!-- Content will be loaded here -->
  </div>
  </div>
+
+ <!-- Related Reading -->
+ <section id="relatedSection" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 mb-12 fade-in-up hidden">
+   <div class="border-t border-flcBorder/50 pt-8 sm:pt-10">
+     <div class="flex items-end justify-between gap-6 mb-7">
+       <div>
+         <p class="text-[0.68rem] uppercase tracking-[0.18em] text-flcGold font-semibold mb-2">Continue reading</p>
+         <h2 class="font-heading text-3xl sm:text-4xl text-flcNavy leading-tight">More from the library</h2>
+       </div>
+       <a id="relatedViewAll" href="../pages/reading-library.html" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-flcNavy hover:text-flcGold transition-colors">
+         View library
+         <span aria-hidden="true">→</span>
+       </a>
+     </div>
+     <div id="relatedPosts" class="grid md:grid-cols-3 gap-5"></div>
+   </div>
+ </section>
 
  <!-- Mobile Sidebar Toggle -->
  <button id="mobileSidebarToggle" class="xl:hidden fixed bottom-6 left-6 w-12 h-12 sm:w-14 sm:h-14 bg-flcNavy text-white rounded-full shadow-lg z-50 flex items-center justify-center" style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px))">
