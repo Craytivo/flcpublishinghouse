@@ -98,6 +98,23 @@ async function loadPost() {
     }
 
     // Render post content
+    const postCategory = document.getElementById('postCategory');
+    const postReadingTime = document.getElementById('postReadingTime');
+    const contentTypeId = entry.sys?.contentType?.sys?.id || '';
+    const categoryMap = {
+      [cfg.bibleStudyContentType]: 'Bible Study',
+      [cfg.devotionalGuideContentType]: 'Devotional',
+      [cfg.detoxContentType]: 'Detox',
+      [cfg.poetryProseContentType]: 'Poetry & Prose',
+      [cfg.contentType]: 'Sermon'
+    };
+    const inferredCategory = categoryMap[contentTypeId] ||
+      (entry.fields.category || (entry.fields.poetryProse ? 'Poetry & Prose' : 'Resource'));
+    if (postCategory && inferredCategory) {
+      postCategory.textContent = inferredCategory;
+    }
+
+    // Render post content
     if (postTitle) {
       postTitle.textContent = entry.fields.title || 'Untitled Post';
     }
@@ -136,7 +153,6 @@ async function loadPost() {
     // Determine content type to set appropriate CTA
     // Don't use 'speaker' in isSermon - devotional guides also have speakers
     const cfg = window.FLC_CONTENTFUL || {};
-    const contentTypeId = entry.sys?.contentType?.sys?.id || '';
     const isBibleStudy = contentTypeId === cfg.bibleStudyContentType || entry.fields.bibleStudy || entry.fields.studyGuide;
     const isDevotionalGuide = !isBibleStudy && (entry.fields.startDate || entry.fields.endDate || entry.fields.devotionalGuide);
     const isSermon = !isBibleStudy && !isDevotionalGuide && (entry.fields.pastor || entry.fields.pastorName || entry.fields.preacher || entry.fields.sermon);
@@ -356,7 +372,9 @@ async function loadPost() {
       if (bodyField && typeof bodyField === 'object' && bodyField.nodeType) {
         const bodyHtml = renderRichText(bodyField);
         postBody.innerHTML = bodyHtml || 'No content available.';
-        updateReadingStats(bodyHtml.replace(/<[^>]*>/g, ' '));
+        const cleanBody = bodyHtml.replace(/<[^>]*>/g, ' ');
+        updateReadingStats(cleanBody);
+        if (postReadingTime) { postReadingTime.textContent = `${Math.ceil(cleanBody.trim().split(/\s+/).filter(Boolean).length / 225)} min read`; postReadingTime.classList.remove('hidden'); }
       } else if (typeof bodyField === 'string' && bodyField.trim()) {
         const parseMd = (str) => {
           const m = window.marked;
@@ -365,6 +383,7 @@ async function loadPost() {
         };
         postBody.innerHTML = parseMd(bodyField);
         updateReadingStats(bodyField);
+        if (postReadingTime) { postReadingTime.textContent = `${Math.ceil(bodyField.trim().split(/\s+/).filter(Boolean).length / 225)} min read`; postReadingTime.classList.remove('hidden'); }
       } else {
         postBody.innerHTML = 'No content available.';
       }
@@ -408,8 +427,8 @@ async function loadPost() {
       });
     }
 
-    // Load recommended posts
-    loadRecommendedPosts(entry.sys.id, entry.fields.title);
+    // Load related posts
+    loadRecommendedPosts(entry.sys.id, entry.fields.title, inferredCategory);
 
     // Initialize sidebar progress
     initSidebarProgress();
@@ -466,61 +485,85 @@ function showError() {
   if (errorState) errorState.classList.remove('hidden');
 }
 
-async function loadRecommendedPosts(currentEntryId, currentTitle) {
+async function loadRecommendedPosts(currentEntryId, currentTitle, currentCategory = '') {
   const sidebarRecommended = document.getElementById('sidebarRecommendedPosts');
-  if (!sidebarRecommended) return;
+  const relatedSection = document.getElementById('relatedSection');
+  const relatedPosts = document.getElementById('relatedPosts');
+  if (!sidebarRecommended && !relatedPosts) return;
 
   try {
-    const contentfulData = await getAllLatestEntries(6);
-    if (!contentfulData || !contentfulData.items || !contentfulData.items.length) return;
+    const contentfulData = await getAllLatestEntries(12);
+    const items = contentfulData?.items || [];
+    if (!items.length) return;
 
     const cfg = window.FLC_CONTENTFUL || {};
-    const postPagePath = cfg.postPagePath || "pages/post.html";
+    const postPagePath = cfg.postPagePath || '../pages/post.html';
+    const currentType = currentCategory.toLowerCase();
 
-    // Filter out current post and limit to 2 recommendations
-    const recommended = contentfulData.items
+    const score = (item) => {
+      if (item.sys.id === currentEntryId) return -100;
+      const f = item.fields || {};
+      const typeId = item.sys?.contentType?.sys?.id || '';
+      let value = 0;
+      if (currentType && String(f.category || '').toLowerCase() === currentType) value += 5;
+      if (typeId && typeId === currentType) value += 3;
+      if (f.featuredImage || f.image) value += 1;
+      return value;
+    };
+
+    const recommended = items
       .filter(item => item.sys.id !== currentEntryId)
-      .slice(0, 2);
+      .sort((a,b) => score(b) - score(a))
+      .slice(0, 3);
 
-    if (!recommended.length) {
-      sidebarRecommended.innerHTML = '<p class="text-flcCharcoal/60 text-xs">No recommendations available.</p>';
-      return;
-    }
+    if (!recommended.length) return;
 
-    sidebarRecommended.innerHTML = recommended.map(item => {
+    const cards = recommended.map(item => {
       const title = (item.fields.title || 'Untitled').trim();
-      const summaryRaw = item.fields.body || item.fields.content || item.fields.summary || '';
-      const summary = summaryRaw ? stripRichTextToPlain(summaryRaw).slice(0, 60) + '...' : '';
-      const imageUrl = getImageUrl(item, contentfulData.includes, 'image') || getImageUrl(item, contentfulData.includes, 'featuredImage');
+      const summaryRaw = item.fields.description || item.fields.summary || item.fields.body || item.fields.content || '';
+      const summary = (typeof summaryRaw === 'string' ? summaryRaw : stripRichTextToPlain(summaryRaw))
+        .replace(/\s+/g, ' ').trim().slice(0, 105);
+      const imageUrl = getImageUrl(item, contentfulData.includes, 'featuredImage') || getImageUrl(item, contentfulData.includes, 'image');
+      const alt = getImageAltText(item, 'featuredImage') || getImageAltText(item, 'image') || title;
       const titleSlug = slugify(title);
       const href = `${postPagePath}?title=${encodeURIComponent(titleSlug)}`;
+      const date = formatDateSafe(item.fields.date || item.fields.startDate || item.fields.publishDate || item.sys.updatedAt);
 
-      const postHtml = `
-        <a href="${href}" class="block group">
-          <div class="flex items-start gap-3">
-            ${imageUrl ? `
-              <div class="w-16 h-16 flex-shrink-0 bg-flcCream/60 rounded-lg overflow-hidden">
-                <img src="${imageUrl}" alt="${title}" class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300" loading="lazy" />
-              </div>
-            ` : ''}
-            <div class="flex-1 min-w-0">
-              <h4 class="font-heading text-sm font-bold text-flcNavy mb-1 group-hover:text-flcGold transition-colors duration-300 tracking-tight line-clamp-2">${title}</h4>
-              <p class="text-xs text-flcCharcoal/60 line-clamp-1">${summary}</p>
-            </div>
+      return `
+        <a href="${href}" class="related-card group block bg-white rounded-xl border border-flcBorder/50 overflow-hidden hover:-translate-y-1 transition-all duration-300">
+          ${imageUrl ? `<div class="aspect-[16/9] overflow-hidden bg-flcCream/40"><img src="${imageUrl}" alt="${alt}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy"></div>` : ''}
+          <div class="p-5">
+            <p class="text-[0.62rem] uppercase tracking-[0.16em] text-flcGold font-semibold mb-2">${currentCategory || 'FLC Library'}</p>
+            <h3 class="font-heading text-xl text-flcNavy leading-tight group-hover:text-flcGold transition-colors line-clamp-2">${title}</h3>
+            ${summary ? `<p class="mt-3 text-sm text-flcCharcoal/55 leading-relaxed line-clamp-2">${summary}</p>` : ''}
+            <p class="mt-4 text-xs text-flcCharcoal/35">${date}</p>
           </div>
-        </a>
-      `;
-      
-      return postHtml;
+        </a>`;
     }).join('');
-    
-    // Sync to mobile sidebar
-    const mobileSidebarRecommended = document.getElementById('mobileSidebarRecommendedPosts');
-    if (mobileSidebarRecommended) {
-      mobileSidebarRecommended.innerHTML = sidebarRecommended.innerHTML;
+
+    if (relatedPosts) {
+      relatedPosts.innerHTML = cards;
+      relatedSection?.classList.remove('hidden');
+    }
+
+    if (sidebarRecommended) {
+      sidebarRecommended.innerHTML = recommended.slice(0, 2).map(item => {
+        const title = (item.fields.title || 'Untitled').trim();
+        const href = `${postPagePath}?title=${encodeURIComponent(slugify(title))}`;
+        const imageUrl = getImageUrl(item, contentfulData.includes, 'featuredImage') || getImageUrl(item, contentfulData.includes, 'image');
+        return `
+          <a href="${href}" class="block group">
+            <div class="flex items-start gap-3">
+              ${imageUrl ? `<div class="w-14 h-14 flex-shrink-0 bg-flcCream/60 rounded-lg overflow-hidden"><img src="${imageUrl}" alt="${title}" class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300" loading="lazy"></div>` : ''}
+              <div class="flex-1 min-w-0"><h4 class="font-heading text-sm font-bold text-flcNavy group-hover:text-flcGold transition-colors line-clamp-2">${title}</h4></div>
+            </div>
+          </a>`;
+      }).join('');
+      const mobile = document.getElementById('mobileSidebarRecommendedPosts');
+      if (mobile) mobile.innerHTML = sidebarRecommended.innerHTML;
     }
   } catch (error) {
-    console.error('Failed to load recommended posts:', error);
+    console.error('Failed to load related posts:', error);
   }
 }
 
