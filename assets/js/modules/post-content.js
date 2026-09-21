@@ -375,7 +375,7 @@ async function loadPost() {
       const bodyField = entry.fields.content || entry.fields.body || entry.fields.studyContent || entry.fields.lesson || entry.fields.summary || '';
 
       if (bodyField && typeof bodyField === 'object' && bodyField.nodeType) {
-        const bodyHtml = renderRichText(bodyField);
+        const bodyHtml = renderRichText(bodyField, entry._includes || {});
         postBody.innerHTML = bodyHtml || 'No content available.';
         const cleanBody = bodyHtml.replace(/<[^>]*>/g, ' ');
         updateReadingStats(cleanBody);
