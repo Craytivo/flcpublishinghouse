@@ -1,0 +1,117 @@
+{
+  "id": "poetryProse",
+  "name": "Poetry & Prose",
+  "description": "Dive into a collection of elegant theological essays, sharp literary and scripture criticism, and deeply reflective creative writing. Each piece is crafted not just to inform, but to delight, inspire, and elevate your spiritual journey through stylistic beauty and artistic expression.",
+  "displayField": "title",
+  "fields": [
+    {
+      "id": "title",
+      "name": "Title",
+      "type": "Symbol",
+      "required": true,
+      "localized": false
+    },
+    {
+      "id": "slug",
+      "name": "Slug",
+      "type": "Symbol",
+      "required": true,
+      "localized": false
+    },
+    {
+      "id": "subtitle",
+      "name": "Subtitle",
+      "type": "Text",
+      "required": false,
+      "localized": false
+    },
+    {
+      "id": "description",
+      "name": "Description",
+      "type": "Text",
+      "required": false,
+      "localized": false
+    },
+    {
+      "id": "content",
+      "name": "Content",
+      "type": "RichText",
+      "required": true,
+      "localized": false
+    },
+    {
+      "id": "author",
+      "name": "Author",
+      "type": "Symbol",
+      "required": false,
+      "localized": false
+    },
+    {
+      "id": "category",
+      "name": "Category",
+      "type": "Symbol",
+      "required": false,
+      "localized": false,
+      "validations": [
+        {
+          "in": [
+            "Theological Essay",
+            "Literary Criticism",
+            "Scripture Criticism",
+            "Poetry",
+            "Prose",
+            "Creative Writing",
+            "Reflection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "name": "Publication Date",
+      "type": "Date",
+      "required": false,
+      "localized": false
+    },
+    {
+      "id": "featuredImage",
+      "name": "Featured Image",
+      "type": "Link",
+      "linkType": "Asset",
+      "required": false,
+      "localized": false,
+      "validations": [
+        {
+          "linkMimetypeGroup": [
+            "image"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "name": "Tags",
+      "type": "Array",
+      "required": false,
+      "localized": false,
+      "items": {
+        "type": "Symbol"
+      }
+    },
+    {
+      "id": "status",
+      "name": "Status",
+      "type": "Symbol",
+      "required": false,
+      "localized": false,
+      "validations": [
+        {
+          "in": [
+            "draft",
+            "published"
+          ]
+        }
+      ]
+    }
+  ]
+}
