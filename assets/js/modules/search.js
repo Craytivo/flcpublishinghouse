@@ -90,7 +90,8 @@ export async function initSearch() {
       const types = [
         { ct: cfg.contentType, label: 'Sermon', dateField: 'date' },
         { ct: cfg.devotionalGuideContentType, label: 'Devotional', dateField: 'startDate' },
-        { ct: cfg.bibleStudyContentType, label: 'Bible Study', order: '-sys.updatedAt' }
+        { ct: cfg.bibleStudyContentType, label: 'Bible Study', order: '-sys.updatedAt' },
+        { ct: cfg.poetryProseContentType, label: 'Poetry & Prose', order: '-sys.updatedAt' }
       ].filter(t => t.ct);
 
       const results = await Promise.all(types.map(t =>
