@@ -189,7 +189,8 @@ export async function getEntryByTitle(titleSlug) {
     const qs = new URLSearchParams({ 
       access_token: cfg.accessToken, 
       content_type: contentType,
-      limit: '100'
+      limit: '100',
+      include: '2'
     });
     const url = `https://cdn.contentful.com/spaces/${cfg.spaceId}/environments/${env}/entries?${qs}`;
     
